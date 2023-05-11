@@ -1,0 +1,23 @@
+
+:root{
+    --primary-color: #1B2128;
+    --secondary-color: #6c757d;    
+    --primary-text-color: white;
+    --green: #2ED779;
+    --font-family: 'Hind', sans-serif;
+}
+
+* {
+    font-family: var(--font-family);
+    margin: 0;
+}
+
+body {
+    background-color: var(--primary-color);
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
