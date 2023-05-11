@@ -1,9 +1,12 @@
 
 :root{
     --primary-color: #1B2128;
-    --secondary-color: #6c757d;    
+    --secondary-color: #163949;    
     --primary-text-color: white;
     --green: #2ED779;
+    --second-green: #69F3A7;
+    --white: white;
+    
     --font-family: 'Hind', sans-serif;
 }
 
@@ -14,10 +17,16 @@
 
 body {
     background-color: var(--primary-color);
+    color: var(--primary-text-color);
 }
 
 .center{
     display: flex;
     justify-content: center;
     text-align: center;
+}
+
+.displayVertically{
+    display: flex;
+    flex-direction: column;
 }

@@ -37,3 +37,55 @@
     padding: 10px 20px 10px 20px;
     border-radius: 10px;
 }
+
+.popup{
+
+    position: absolute;
+    right: 40px;
+    top: 60px;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    border: 1px solid var(--white);
+    z-index: 1;
+    width: 300px;
+    
+}
+
+.popupTitle{
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-weight: 800;
+}
+
+.input{
+    margin-bottom: 10px;
+    border-radius: 10px;
+    width: 200px;
+}
+
+.input::placeholder{
+    text-align: center;
+}
+
+.popupLoginSignup{
+    margin-top: 10px;
+    font-size: 10px;
+    text-decoration: underline;
+    cursor: pointer
+}
+
+.popupButton{
+    background-color: var(--green);
+    color: var(--primary-text-color);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid;
+    cursor: pointer;
+    width: 150px;
+    align-self: center;
+}
+
+.loginButton:active{
+    background-color: var(--second-green)
+}
