@@ -10,8 +10,6 @@ import Notification from "../Images/notification.png"
 import Suggest from "../Images/suggest.png"
 import Logout from "../Images/logout.png"
 
-
-
 import "../Styles/NavBar.css"
 
 export default function NavBarUser(){
@@ -43,9 +41,9 @@ export default function NavBarUser(){
 
                 <div className="navBarRighSide">
 
-                    <a href="" className="infoTab"><img src={Info} alt="" /></a>
-                    <a href="" className="loginTab">My Listings</a>
-                    <a href="" className="loginTab">My Tickets</a>
+                    <a href="" className="iconTab"><img src={Info} alt="" /></a>
+                    <a href="" className="tab">My Listings</a>
+                    <a href="" className="tab">My Tickets</a>
                     <a href=""><img className="profileTab" onClick={showOptionsFunction} src={user.profilePic} alt="" /></a>
                     <a href="" className="sellTab">Sell Tickets!</a>
                     

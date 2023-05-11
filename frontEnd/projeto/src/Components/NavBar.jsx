@@ -33,8 +33,8 @@ export default function NavBar(){
 
                 <div className="navBarRighSide">
 
-                    <a href="" className="infoTab"><img src={Info} alt="" /></a>
-                    <a href="" className="loginTab" onClick={showLogin}>Login</a>
+                    <a href="" className="iconTab"><img src={Info} alt="" /></a>
+                    <a href="" className="tab" onClick={showLogin}>Login</a>
                     <a href="" className="sellTab">Sell Tickets!</a>
                     
                 </div>
