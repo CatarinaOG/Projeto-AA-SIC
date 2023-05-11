@@ -21,6 +21,12 @@
     margin-right: 20px;
 }
 
+.profileTab{
+    height: 30px;
+    margin-top: 5px;
+    margin-right: 20px;
+}
+
 .loginTab{
     color: var(--primary-text-color);
     text-decoration: none;
@@ -88,4 +94,32 @@
 
 .loginButton:active{
     background-color: var(--second-green)
+}
+
+
+/*------------------ NavBar User ---------------*/
+
+.popupOptions{
+    position: absolute;
+    right: 60px;
+    top: 60px;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    border: 1px solid var(--white);
+    z-index: 1;
+    width: 250px;
+}
+
+.option{
+    color: var(--primary-text-color);
+    text-decoration: none;
+}
+
+.optionsIcon{
+    height: 18px;
+    margin: 15px;
+}
+
+.optionsName{
+    margin-top: 11px;
 }

@@ -14,16 +14,18 @@ export default function Home(){
             <NavBar />
 
                 <div class="container">
-                <img className="wallpaper" src={Wallpaper} alt="" />
+                    <img className="wallpaper" src={Wallpaper} alt="" />
 
-                <div class="input-wrapper">
-                    <img className="magnifier" src={Magnifier} alt="" />
-                    <input className="inputHome" type="text" placeholder="Where do you want to go?"/>
+                    <div class="input-wrapper">
+                        <img className="magnifier" src={Magnifier} alt="" />
+                        <input className="inputHome" type="text" placeholder="Where do you want to go?"/>
+                        
+                        
+                        
+                    </div>
                 </div>
-            </div>
 
             <Calendar />
-
         </div>
     )
 

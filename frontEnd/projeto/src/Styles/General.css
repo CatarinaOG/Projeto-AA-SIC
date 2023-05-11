@@ -30,3 +30,7 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.displayHorizontally{
+    display: flex;
+}

@@ -9,7 +9,8 @@ export default function NavBar(){
 
     const [showPopup, setShowPopup] = useState("none")
 
-    function showNone(){
+    function showNone(event){
+        event.preventDefault();
         setShowPopup("none")
     }
 
@@ -18,7 +19,8 @@ export default function NavBar(){
         setShowPopup("login")
     }
 
-    function showSignup(){
+    function showSignup(event){
+        event.preventDefault();
         setShowPopup("signup")
     }
 

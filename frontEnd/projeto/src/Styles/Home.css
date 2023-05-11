@@ -16,22 +16,19 @@
     transform: translate(-50%, -50%);
   }
 
-  .inputHome {
-    background-color: var(--primary-color);
-    border-radius: 10px;
-    width: 60vw;
-    max-width: 600px;
-    padding: 10px;
-    color: #fff;
-    border: none;
-  }
+.inputHome {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  width: 60vw;
+  max-width: 600px;
+  padding: 10px;
+  padding-left: 40px;
+  color: #fff;
+  border: none;
+}
 
-  .inputHome::placeholder{
-    padding-left: 25px;
-  }
-
-  .magnifier{
-    position: absolute;
-    margin-top: 5px;
-    margin-left: 10px;
-  }
+.magnifier{
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 10px;
+}

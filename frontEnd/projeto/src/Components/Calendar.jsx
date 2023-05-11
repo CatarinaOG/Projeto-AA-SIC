@@ -49,7 +49,7 @@ export default function Calendar(){
 
     return(
         <div className="center">
-            <div>
+            <div className="calendar">
                 <h1 className="calendarTitle">Events Calendar</h1>
                 
                 <div className="calendarEvents">
