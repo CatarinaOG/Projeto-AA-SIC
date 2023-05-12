@@ -24,6 +24,9 @@ export default function FaseFile(props){
     function handleFileUpload(event) {
         setTicket(oldTicket => ({...oldTicket,file:event.target.files[0]})) 
         setFileSaved(oldValue => !oldValue)
+        if (toTitleRef.current) {
+            toTitleRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
     };
 
     function hanfleConfirm(){
