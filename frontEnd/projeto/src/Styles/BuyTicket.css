@@ -1,6 +1,7 @@
 
 .buyContainer{
     margin-top: 40px;
+    height: 170vh;
 }
 
 
@@ -38,7 +39,7 @@
     margin-bottom: 30px;
 }
 
-.smallEventContainer{
+.blackContainer{
     margin-top: 10px;
     padding: 20px;
     padding-right: 30px;
@@ -48,9 +49,10 @@
     max-width: 600px;
 }
 
-.smallEventSelectedContainer{
+.selectedContainer{
     position: relative;
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 60px;
     padding: 20px;
     padding-right: 30px;
     background-color: var(--third-color);
@@ -64,4 +66,132 @@
     right: 10px;
     top: 5px;
     height: 20px;
+    cursor: pointer;
+}
+
+
+.priceContainer{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.priceInputContainer{
+    width: 40vw;
+    max-width: 400px;
+    position: relative;
+}
+
+.inputPrice{
+    background-color: var(--third-color);
+    padding: 10px;
+    width: 40vw;
+    max-width: 400px;
+    border: none;
+    border-radius: 10px;
+    color: var(--white);
+    text-align: center;
+}
+
+
+.dollarSign{
+    position: absolute;
+    right: -10px;
+    top: 7px;
+}
+
+.inputPrice::-webkit-inner-spin-button,
+.inputPrice::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.maxPrice{
+    margin-left: 50px;
+}
+
+.errorPrice{
+    margin: 20px;
+    color: rgb(223, 101, 101);
+}
+
+.descriptionInput{
+    background-color: var(--third-color);
+    border: none;
+    width: 60vw;
+    max-width: 600px;
+    height: 100px;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    color: var(--white);
+    padding: 20px;
+}
+
+.file-input-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+
+}
+  
+.file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.file-input-label {
+    display: inline-block;
+    padding: 10px;
+    background-color: var(--third-color);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.successContainter{
+    display: flex;
+    width: 60vw;
+    max-width: 600px;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    height: 10vh;
+    position: relative;
+}
+
+.fileSaved{
+    height: 60px;
+    margin: 30px;
+}
+
+.fileSavedSecond{
+    height: 60px;
+    margin-left: 10px;
+}
+
+.successFileMsg{
+    position: absolute;
+    background-color: var(--green);
+    color: black;
+    padding: 10px;
+    width: 40vw;
+    max-width: 400px;
+    border-radius: 10px;
+    margin-left: 20px;
+    right: 0;
+    font-size: 13px;
+    text-align: center;
+}
+
+.buttonHome{
+    
 }

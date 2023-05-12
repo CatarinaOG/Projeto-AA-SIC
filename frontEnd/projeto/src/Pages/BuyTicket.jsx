@@ -1,9 +1,11 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 import NavBarUser from "../Components/NavBar/NavBarUser"
-import SelectEventFase from "../Components/SellTicket/SelectEventFase"
-import SelectTypeFase from "../Components/SellTicket/SelectTypeFase"
-
+import FaseEvent from "../Components/SellTicket/FaseEvent"
+import FaseType from "../Components/SellTicket/FaseType"
+import FasePrice from "../Components/SellTicket/FasePrice"
+import FaseDescription from "../Components/SellTicket/FaseDescription"
+import FaseFile from "../Components/SellTicket/FaseFile"
 
 import "../Styles/BuyTicket.css"
 
@@ -46,17 +48,17 @@ export default function BuyTicket(){
         {
             id: 1,
             description: "2 Day Ticket | 6 & 7th July",
-			price: "198$"
+			price: 198
         },
         {
             id: 2,
             description: "1 Day Ticket | 7th July",
-			price: "88$"
+			price: 88
         },
         {
             id: 3,
             description: "2 Day Ticket | 7 & 8th July",
-			price: "200$"
+			price: 200
         }
     ])
 
@@ -76,16 +78,15 @@ export default function BuyTicket(){
     ])
 
     const [ticket,setTicket] = useState({
-        userID: "0",
-        eventID: "1",
-        typeID: "3",
-        price: "4483.34",
-        description: "nao posso ir"
+        userID: 1,
+        event: null,
+        type: null,
+        price: 0,
+        description: "",
+        file: null
     })
 
     const [fase,setFase] = useState("event") // event / type / price / description / file
-
-    
 
     return(
 
@@ -96,20 +97,38 @@ export default function BuyTicket(){
             <div className="center">
                 <div className="buyContainer">
 
-                    {fase == "event" && 
-                        <SelectEventFase 
+                    {fase === "event" && 
+                        <FaseEvent 
                             events={events} 
                             setTicket={setTicket} 
                             setFase={setFase} 
                             suggested={suggested}/>}
 
-                    {fase == "type" && 
-                        <SelectTypeFase 
-                            events={events} 
+                    {fase === "type" && 
+                        <FaseType 
+                            events={events} // para retirar
                             ticket={ticket}
                             setTicket={setTicket} 
                             setFase={setFase} 
                             types={types}/>}
+
+                    {fase === "price" && 
+                        <FasePrice 
+                            ticket={ticket}
+                            setTicket={setTicket} 
+                            setFase={setFase}/>}
+
+                    {fase === "description" && 
+                        <FaseDescription 
+                            ticket={ticket}
+                            setTicket={setTicket} 
+                            setFase={setFase}/>}
+
+                    {fase === "file" && 
+                        <FaseFile 
+                            ticket={ticket}
+                            setTicket={setTicket} 
+                            setFase={setFase}/>}
                     
                 </div>
             </div>

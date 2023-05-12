@@ -4,6 +4,8 @@
     --secondary-color: #163949;  
     --third-color: #123A47;
     --dark-blue: #161A1E;  
+    --light-blue: #019ACE;
+    --lighter-blue: #4ACAF5;
     --primary-text-color: white;
     --green: #2ED779;
     --second-green: #69F3A7;
@@ -44,4 +46,21 @@ body {
 
 .gray{
     opacity: 0.5;
+}
+
+.button{
+    background-color: var(--light-blue);
+    border: none;
+    width: 150px;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+}
+
+.button:active{
+    background-color: var(--lighter-blue);
 }

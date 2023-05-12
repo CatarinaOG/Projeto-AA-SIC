@@ -2,16 +2,17 @@ import Close from "../../Images/close.png"
 
 export default function SmallEventSelected(props){
 
-    const {events,ticket,setFase} = props
+    const {ticket,setTicket,setFase} = props
 
-    const event = events.find( e => e.id === ticket.eventID)
+    const event = ticket.event
 
     function goToEventFase(){
         setFase("event")
+        setTicket( oldTicket => ({...oldTicket,price:0}))
     }
 
     return(
-        <div className="smallEventSelectedContainer">
+        <div className="selectedContainer">
             <h3>{event.name}</h3>
             <p>{event.dates} | {event.place}</p>
             <img className="smallEventClose" onClick={goToEventFase} src={Close} alt="" />
