@@ -1,7 +1,9 @@
 
 :root{
     --primary-color: #1B2128;
-    --secondary-color: #163949;    
+    --secondary-color: #163949;  
+    --third-color: #123A47;
+    --dark-blue: #161A1E;  
     --primary-text-color: white;
     --green: #2ED779;
     --second-green: #69F3A7;
@@ -20,10 +22,15 @@ body {
     color: var(--primary-text-color);
 }
 
-.center{
+.centerAll{
     display: flex;
     justify-content: center;
     text-align: center;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
 }
 
 .displayVertically{
@@ -33,4 +40,8 @@ body {
 
 .displayHorizontally{
     display: flex;
+}
+
+.gray{
+    opacity: 0.5;
 }

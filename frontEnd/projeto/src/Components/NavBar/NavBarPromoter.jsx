@@ -1,8 +1,8 @@
 
-import Logo from "../Images/logo.png"
-import Logout from "../Images/logout.png"
+import Logo from "../../Images/logo.png"
+import Logout from "../../Images/logout.png"
 
-import "../Styles/NavBar.css"
+import "../../Styles/NavBar.css"
 
 export default function NavBarPromoter(){
 

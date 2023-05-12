@@ -1,18 +1,20 @@
 
 import { useState } from "react"
 
-import Logo from "../Images/logo.png"
-import Info from "../Images/info.png"
-import Saved from "../Images/saved.png"
-import Alert from "../Images/alert.png"
-import Account from "../Images/account.png"
-import Notification from "../Images/notification.png"
-import Suggest from "../Images/suggest.png"
-import Logout from "../Images/logout.png"
+import Logo from "../../Images/logo.png"
+import Info from "../../Images/info.png"
+import Saved from "../../Images/saved.png"
+import Alert from "../../Images/alert.png"
+import Account from "../../Images/account.png"
+import Notification from "../../Images/notification.png"
+import Suggest from "../../Images/suggest.png"
+import Logout from "../../Images/logout.png"
 
-import "../Styles/NavBar.css"
+import "../../Styles/NavBar.css"
 
-export default function NavBarUser(){
+export default function NavBarUser(props){
+
+    const {selected} = props 
 
     const [user,setUser] = useState({
         profilePic: "https://cdn-icons-png.flaticon.com/128/4140/4140047.png"
@@ -28,7 +30,6 @@ export default function NavBarUser(){
     }
 
     function showNone(event){
-        event.preventDefault();
         setShowOptions("none")
     }
 
@@ -42,10 +43,10 @@ export default function NavBarUser(){
                 <div className="navBarRighSide">
 
                     <a href="" className="iconTab"><img src={Info} alt="" /></a>
-                    <a href="" className="tab">My Listings</a>
-                    <a href="" className="tab">My Tickets</a>
+                    <a href="" className={selected == "listings"? "tabSelected" : "tab"}>My Listings</a>
+                    <a href="" className={selected == "tickets"? "tabSelected" : "tab"}>My Tickets</a>
                     <a href=""><img className="profileTab" onClick={showOptionsFunction} src={user.profilePic} alt="" /></a>
-                    <a href="" className="sellTab">Sell Tickets!</a>
+                    <a href="" className={selected == "sellTicket"? "sellTabSelected" : "sellTab"}>Sell Tickets!</a>
                     
                 </div>
 

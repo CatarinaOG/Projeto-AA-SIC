@@ -1,4 +1,4 @@
-import Calendar from "../Images/calendar.png"
+import Calendar from "../../Images/calendar.png"
 
 
 export default function CalendarEvent(props){

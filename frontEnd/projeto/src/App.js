@@ -5,6 +5,7 @@ import Home from './Pages/Home'
 import HomeUser from "./Pages/HomeUser"
 import HomeAdmin from "./Pages/HomeAdmin"
 import HomePromoter from "./Pages/HomePromoter"
+import BuyTicket from "./Pages/BuyTicket"
 
 
 
@@ -25,7 +26,7 @@ function App() {
         }/>
 
         <Route path="/" element={
-          <HomePromoter />
+          <BuyTicket />
         }/>
 
       </Routes>

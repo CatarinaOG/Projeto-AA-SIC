@@ -1,5 +1,5 @@
-import NavBar from "../Components/NavBar"
-import Calendar from "../Components/Calendar"
+import NavBar from "../Components/NavBar/NavBar"
+import Calendar from "../Components/Home/Calendar"
 
 import Wallpaper from "../Images/wallpaper.png"
 import Magnifier from "../Images/magnifier.png"
@@ -19,9 +19,6 @@ export default function Home(){
                     <div class="input-wrapper">
                         <img className="magnifier" src={Magnifier} alt="" />
                         <input className="inputHome" type="text" placeholder="Where do you want to go?"/>
-                        
-                        
-                        
                     </div>
                 </div>
 

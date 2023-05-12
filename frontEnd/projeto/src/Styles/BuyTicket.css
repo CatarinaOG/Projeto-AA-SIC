@@ -1,0 +1,67 @@
+
+.buyContainer{
+    margin-top: 40px;
+}
+
+
+.inputSelectTicket {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: var(--dark-blue);
+    border-radius: 10px;
+    width: 60vw;
+    max-width: 600px;
+    padding: 10px;
+    padding-left: 40px;
+    color: #fff;
+    border: none;
+}
+
+.magnifierSelectTicket{
+    position: absolute;
+    margin-top: 25px;
+    margin-left: 10px;
+}
+
+.graySmaller{
+    opacity: 0.5;
+    font-size: 12px;
+}
+
+.suggestedEvents{
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+
+.searchedEvents{
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+
+.smallEventContainer{
+    margin-top: 10px;
+    padding: 20px;
+    padding-right: 30px;
+    background-color: var(--dark-blue);
+    border-radius: 10px;
+    width: 60vw;
+    max-width: 600px;
+}
+
+.smallEventSelectedContainer{
+    position: relative;
+    margin-top: 10px;
+    padding: 20px;
+    padding-right: 30px;
+    background-color: var(--third-color);
+    border-radius: 10px;
+    width: 60vw;
+    max-width: 600px;
+}
+
+.smallEventClose{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    height: 20px;
+}

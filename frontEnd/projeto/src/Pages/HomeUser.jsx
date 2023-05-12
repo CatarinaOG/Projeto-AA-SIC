@@ -1,5 +1,5 @@
-import Calendar from "../Components/Calendar"
-import NavBarUser from "../Components/NavBarUser"
+import Calendar from "../Components/Home/Calendar"
+import NavBarUser from "../Components/NavBar/NavBarUser"
 
 import Wallpaper from "../Images/wallpaper.png"
 import Magnifier from "../Images/magnifier.png"

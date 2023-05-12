@@ -1,7 +1,8 @@
 import { useState } from "react"
-import "../Styles/Calendar.css"
 
-import CalendarEvent from "../Components/CalendarEvent"
+import "../../Styles/Home.css"
+
+import CalendarEvent from "./CalendarEvent"
 
 export default function Calendar(){
 
@@ -48,7 +49,7 @@ export default function Calendar(){
 
 
     return(
-        <div className="center">
+        <div className="centerAll">
             <div className="calendar">
                 <h1 className="calendarTitle">Events Calendar</h1>
                 

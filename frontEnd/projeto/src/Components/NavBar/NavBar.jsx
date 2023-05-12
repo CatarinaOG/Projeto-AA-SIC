@@ -1,9 +1,9 @@
 import { useState } from "react"
 
-import Logo from "../Images/logo.png"
-import Info from "../Images/info.png"
+import Logo from "../../Images/logo.png"
+import Info from "../../Images/info.png"
 
-import "../Styles/NavBar.css"
+import "../../Styles/NavBar.css"
 
 export default function NavBar(){
 
@@ -43,7 +43,7 @@ export default function NavBar(){
 
             {showPopup == "login" && (
                 <div className="popup">
-                    <div className="center">
+                    <div className="centerAll">
                         <div className="displayVertically">
                             <p className="popupTitle">Login</p>
                             <input className="input" type="text" placeholder="Insert username" />
@@ -58,7 +58,7 @@ export default function NavBar(){
 
             {showPopup == "signup" && (
                 <div className="popup">
-                    <div className="center">
+                    <div className="centerAll">
                         <div className="displayVertically">
                             <p className="popupTitle">Sign up</p>
                             <input className="input" type="text" placeholder="Insert email address" />
