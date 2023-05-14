@@ -44,7 +44,7 @@ export default function NavBarUser(props){
 
                     <a href="" className="iconTab"><img src={Info} alt="" /></a>
                     <a href="" className={selected == "listings"? "tabSelected" : "tab"}>My Listings</a>
-                    <a href="" className={selected == "tickets"? "tabSelected" : "tab"}>My Tickets</a>
+                    <a href="" className={selected == "boughtTickets"? "tabSelected" : "tab"}>My Tickets</a>
                     <a href=""><img className="profileTab" onClick={showOptionsFunction} src={user.profilePic} alt="" /></a>
                     <a href="" className={selected == "sellTicket"? "sellTabSelected" : "sellTab"}>Sell Tickets!</a>
                     

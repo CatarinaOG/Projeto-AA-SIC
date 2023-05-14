@@ -10,6 +10,8 @@
     --green: #2ED779;
     --second-green: #69F3A7;
     --white: white;
+    --black: black;
+    --grey: #E0E0E0;
     
     --font-family: 'Hind', sans-serif;
 }
@@ -44,6 +46,11 @@ body {
     display: flex;
 }
 
+.displayHorizontallyEvenly{
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .gray{
     opacity: 0.5;
 }
@@ -64,3 +71,24 @@ body {
 .button:active{
     background-color: var(--lighter-blue);
 }
+
+.defaultContainer{
+    width: 80vw;
+    max-width: 800px;
+    margin-top: 30px;
+}
+
+.relative{
+    position: relative;
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+

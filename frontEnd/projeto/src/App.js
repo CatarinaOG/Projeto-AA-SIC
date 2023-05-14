@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import BuyTicket from "./Pages/BuyTicket"
+import Profile from "./Pages/Profile"
 
 
 import "./Styles/General.css"
+import "./Styles/Event.css"
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={
-          <BuyTicket />
+          <Profile />
         }/>
       </Routes>
     </BrowserRouter>

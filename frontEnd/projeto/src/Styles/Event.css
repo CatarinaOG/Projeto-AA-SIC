@@ -1,0 +1,24 @@
+
+.eventsContainer{
+    margin-top: 50px;
+}
+
+.event{
+    border: 1px solid var(--white);
+    border-radius: 10px;
+    margin: 20px;
+    padding: 10px;padding-left: 40px;
+    position: relative;
+}
+
+.eventCalendar{
+    position: absolute;
+    left: 7px;
+}
+
+.eventRightSide{
+    position: absolute;
+    right: 20px; /* adjust this value to center the price */
+    top: 50%;
+    transform: translateY(-50%);
+}

@@ -17,6 +17,10 @@ export default function FaseDescription(props){
         }
     }, []);
 
+    function goToFileFase(){
+        setFase("file")
+    }
+
     return(
         <div className="center">
             <div>
@@ -49,6 +53,10 @@ export default function FaseDescription(props){
                 <TicketDescription 
                     setTicket={setTicket}
                     setFase={setFase}/>
+
+                <div className="center">
+                    <button className="button" onClick={goToFileFase}>Next</button>
+                </div>
 
             </div>
         </div>

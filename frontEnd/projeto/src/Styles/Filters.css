@@ -1,0 +1,32 @@
+
+.filter{
+    width: 180px;
+    border: 1px solid var(--white);
+    border-radius: 10px;
+    margin-top: 20px;
+    display: flex;
+}
+
+.filterIcon{
+    margin: 5px 0px 5px 5px;
+    height: 22px;
+}
+
+
+.select{
+    background-color: var(--primary-color);
+    border: none;
+    color: var(--white);
+    text-align: center;
+    font-size: 15px;
+    width: 140px;
+}
+
+select:focus {
+    outline: none;
+}
+
+.filterOption{
+    width: 100%;
+    background-color: var(--secundary-color);
+}

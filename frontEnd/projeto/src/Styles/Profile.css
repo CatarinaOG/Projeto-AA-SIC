@@ -1,0 +1,54 @@
+.profilePic{
+    height: 80px;
+}
+
+.editProfilePicButton{
+    position: absolute;
+    bottom: 5px;
+    transform: translateX(-20px);
+    background: none;
+    border: none;
+    background-image: url("../Images/edit.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.editContainter{
+    width: 500px;
+    height: 30vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--white);
+    text-align: center;
+    border-radius: 15px;
+    z-index: 2;
+}
+
+.editTitle{
+    margin-top: 3vh;
+    color: var(--black);
+}
+
+.editClose{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 15px;
+}
+
+.editInputPicture{
+    background-color: var(--grey);
+    border: none;
+    border-radius: 10px;
+    width: 400px;
+    margin-top: 6vh;
+    text-align: center;
+    margin-bottom: 5vh;
+    bottom: 0px;
+}
+
