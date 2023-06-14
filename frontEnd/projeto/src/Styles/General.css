@@ -100,3 +100,8 @@ body {
     height: 100%;
     z-index: 1;
 }
+
+.marginTop{
+    margin-top: 8vh;
+}
+
