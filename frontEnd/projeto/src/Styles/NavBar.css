@@ -21,18 +21,48 @@
     margin-right: 20px;
 }
 
+.iconTab:hover{
+    margin-top: 5px;
+    margin-right: 20px;
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.2);
+}
+
+
 .profileTab{
     height: 30px;
     margin-top: 5px;
     margin-right: 20px;
 }
 
+.profileTab:hover{
+    height: 30px;
+    margin-top: 5px;
+    margin-right: 20px;
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.2);
+}
+
+
 .tab{
     color: var(--primary-text-color);
     text-decoration: none;
     font-weight: 800;
     margin-right: 20px;
+    padding: 10px;
+    border-radius: 10px;
 }
+
+.tab:hover{
+    color: var(--primary-text-color);
+    text-decoration: none;
+    font-weight: 800;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: var(--secondary-color);
+}
+
 
 .tabSelected{
     color: var(--primary-text-color);
@@ -123,7 +153,6 @@
     right: 60px;
     top: 60px;
     background-color: var(--secondary-color);
-    border-radius: 10px;
     border: 1px solid var(--white);
     z-index: 1;
     width: 250px;
@@ -132,6 +161,12 @@
 .option{
     color: var(--primary-text-color);
     text-decoration: none;
+}
+
+.option:hover{
+    color: var(--primary-text-color);
+    text-decoration: none;
+    background-color: var(--dark-blue);
 }
 
 .optionsIcon{

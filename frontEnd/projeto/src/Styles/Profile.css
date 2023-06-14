@@ -29,6 +29,19 @@
     z-index: 2;
 }
 
+.editContainterPassword{
+    width: 500px;
+    height: 35vh;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--white);
+    text-align: center;
+    border-radius: 15px;
+    z-index: 2;
+}
+
 .editTitle{
     margin-top: 3vh;
     color: var(--black);
@@ -39,16 +52,147 @@
     right: 10px;
     top: 10px;
     height: 15px;
+    cursor: pointer;
 }
 
-.editInputPicture{
+.editClose:hover{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 15px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.2);
+}
+
+.editInput{
     background-color: var(--grey);
     border: none;
     border-radius: 10px;
     width: 400px;
+    height: 30px;
     margin-top: 6vh;
     text-align: center;
-    margin-bottom: 5vh;
     bottom: 0px;
 }
 
+.editInputSecondPassword{
+    background-color: var(--grey);
+    border: none;
+    border-radius: 10px;
+    width: 400px;
+    height: 30px;
+    margin-top: 1vh;
+    text-align: center;
+    bottom: 0px;
+}
+
+.editInputNumber{
+    background-color: var(--grey);
+    border: none;
+    border-radius: 10px;
+    width: 400px;
+    height: 30px;
+    margin-top: 6vh;
+    text-align: center;
+    bottom: 0px;
+}
+
+.editInputNumber::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
+
+.editInputLanguage{
+    margin-top: 6vh;
+    width: 200px;
+    height: 30px;
+    border: 1px solid black;
+}
+
+
+.urlError{
+    color: red;
+    font-size: 14px;
+    margin-bottom: 2vh;
+}
+
+.urlErrorNotVisible{
+    color: red;
+    font-size: 14px;
+    margin-bottom: 2vh;
+    visibility: hidden;
+}
+
+.editInfo{
+    margin-top: 20px;
+    height: 60vh;
+    border: 1px white solid;
+    border-radius: 20px;
+}
+
+.editSection{
+    display: flex;
+    justify-content: start;
+    text-align: start;
+    border-bottom: 1px solid white;
+    height: 15vh;
+    align-items: center;
+}
+
+.lastEditSection{
+    display: flex;
+    justify-content: start;
+    text-align: start;
+    height: 15vh;
+    align-items: center;
+}
+
+.editContent{
+    margin-left: 20px;
+}
+
+
+.editButton{
+    background: none;
+    border: none;
+    background-image: url("../Images/edit.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.editButton:hover{
+    background: none;
+    border: none;
+    background-image: url("../Images/edit.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 20px;
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.2);
+}
+
+.financialTitleContainer{
+    display: flex;
+    justify-content: start;
+    margin-top: 5vh;
+}
+
+.financialInfo{
+    margin-top: 20px;
+    margin-bottom: 5vh;
+    height: 15vh;
+    border: 1px white solid;
+    border-radius: 20px;
+    display: flex;
+    justify-content: start;
+    text-align: start;
+    height: 15vh;
+    align-items: center;
+}

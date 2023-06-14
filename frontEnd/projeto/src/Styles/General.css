@@ -2,7 +2,7 @@
 :root{
     --primary-color: #1B2128;
     --secondary-color: #163949;  
-    --third-color: #123A47;
+    --third-color: #123A47; /* nao usar */
     --dark-blue: #161A1E;  
     --light-blue: #019ACE;
     --lighter-blue: #4ACAF5;
@@ -73,7 +73,7 @@ body {
 }
 
 .defaultContainer{
-    width: 80vw;
+    width: 90vw;
     max-width: 800px;
     margin-top: 30px;
 }
@@ -92,3 +92,11 @@ body {
     z-index: 1;
 }
 
+.clearOverlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}

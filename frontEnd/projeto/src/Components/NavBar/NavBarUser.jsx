@@ -20,17 +20,15 @@ export default function NavBarUser(props){
         profilePic: "https://cdn-icons-png.flaticon.com/128/4140/4140047.png"
     })
 
-    const [showOptions, setShowOptions] = useState("none")
+    const [showOptions, setShowOptions] = useState(false)
 
     function showOptionsFunction(event){
         event.preventDefault();
-
-        if(showOptions == "none") setShowOptions("options")
-        else setShowOptions("none")
+        setShowOptions(old => !old)
     }
 
     function showNone(event){
-        setShowOptions("none")
+        setShowOptions(false)
     }
 
     return(
@@ -52,51 +50,54 @@ export default function NavBarUser(props){
 
             </nav>
 
-            {showOptions == "options" && (
-                <div className="popupOptions">
-                    <div className="displayVertically">
-                        <a href="" className="option">
-                            <div className="displayHorizontally">
-                                <img className="optionsIcon" src={Saved} alt="" />
-                                <p className="optionsName">Saved Events</p>
-                            </div>
-                        </a>
+            {showOptions && (
+                <div>
+                    <div className="clearOverlay" onClick={showNone}></div>
+                    <div className="popupOptions">
+                        <div className="displayVertically">
+                            <a href="" className="option">
+                                <div className="displayHorizontally">
+                                    <img className="optionsIcon" src={Saved} alt="" />
+                                    <p className="optionsName">Saved Events</p>
+                                </div>
+                            </a>
 
-                        <a href="" className="option">
-                            <div className="displayHorizontally">
-                                <img className="optionsIcon" src={Alert} alt="" />
-                                <p className="optionsName">Tickets Alert</p>
-                            </div>
-                        </a>
+                            <a href="" className="option">
+                                <div className="displayHorizontally">
+                                    <img className="optionsIcon" src={Alert} alt="" />
+                                    <p className="optionsName">Tickets Alert</p>
+                                </div>
+                            </a>
 
-                        <a href="" className="option">
-                            <div className="displayHorizontally">
-                                <img className="optionsIcon" src={Account} alt="" />
-                                <p className="optionsName">Account</p>
-                            </div>
-                        </a>
+                            <a href="" className="option">
+                                <div className="displayHorizontally">
+                                    <img className="optionsIcon" src={Account} alt="" />
+                                    <p className="optionsName">Account</p>
+                                </div>
+                            </a>
 
-                        <a href="" className="option">
-                            <div className="displayHorizontally">
-                                <img className="optionsIcon" src={Notification} alt="" />
-                                <p className="optionsName">Notifications</p>
-                            </div>
-                        </a>
+                            <a href="" className="option">
+                                <div className="displayHorizontally">
+                                    <img className="optionsIcon" src={Notification} alt="" />
+                                    <p className="optionsName">Notifications</p>
+                                </div>
+                            </a>
 
-                        <a href="" className="option">
-                            <div className="displayHorizontally">
-                                <img className="optionsIcon" src={Suggest} alt="" />
-                                <p className="optionsName">Suggest Event</p>
-                            </div>
-                        </a>
+                            <a href="" className="option">
+                                <div className="displayHorizontally">
+                                    <img className="optionsIcon" src={Suggest} alt="" />
+                                    <p className="optionsName">Suggest Event</p>
+                                </div>
+                            </a>
 
-                        <a href="" className="option">
-                            <div className="displayHorizontally">
-                                <img className="optionsIcon" src={Logout} alt="" />
-                                <p className="optionsName">Logout</p>
-                            </div>
-                        </a>
+                            <a href="" className="option">
+                                <div className="displayHorizontally">
+                                    <img className="optionsIcon" src={Logout} alt="" />
+                                    <p className="optionsName">Logout</p>
+                                </div>
+                            </a>
 
+                        </div>
                     </div>
                 </div>
             )}
