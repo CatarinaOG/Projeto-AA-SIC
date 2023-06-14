@@ -1,11 +1,10 @@
 import NavBarUser from "../Components/NavBar/NavBarUser";
-import Filters from "../Components/Filters/Filters";
-import ListingElem from "../Components/SellingListing/ListingElem";
 import PopUpRemoveListing from "../Components/SellingListing/PopUpRemoveListing";
+import SavedFollowElem from "../Components/SavedFollowing/SavedFollowElem.jsx";
 
 import { useState } from "react";
 
-export default function SellingListing() {
+export default function SavedEvents() {
   const [events, setEvents] = useState([
     // para ser substituido pelo pedido com base no filtro
     {
@@ -82,24 +81,20 @@ export default function SellingListing() {
   const [popUpTrigger, setPopUpTrigger] = useState(false);
 
   const eventsFiltered = events.map((event) => {
-    return <ListingElem event={event} setPopUpTrigger={setPopUpTrigger} />;
+    return <SavedFollowElem event={event} setPopUpTrigger={setPopUpTrigger} />;
   });
 
   return (
     <div>
-      <NavBarUser selected="listings" />
+      <NavBarUser />
       <PopUpRemoveListing
         trigger={popUpTrigger}
         setPopUpTrigger={setPopUpTrigger}
-        type={"selling"}
+        type={"saved"}
       />
-
       <div className="center">
         <div className="defaultContainer">
-          <h1>Tickets Listed</h1>
-
-          <Filters type="boughtTickets" />
-
+          <h1>Saved Events</h1>
           <div className="eventsContainer">{eventsFiltered}</div>
         </div>
       </div>

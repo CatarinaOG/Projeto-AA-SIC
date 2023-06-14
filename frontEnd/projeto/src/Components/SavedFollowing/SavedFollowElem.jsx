@@ -6,7 +6,7 @@ function clickedClose(setPopUpTrigger) {
   console.log("Clicked");
 }
 
-export default function ListinElem(props) {
+export default function SavedFollowElem(props) {
   const { event, setPopUpTrigger } = props;
 
   return (
@@ -16,11 +16,6 @@ export default function ListinElem(props) {
         <h4>
           {event.dayOfWeek}, {event.month} {event.day} | {event.eventPlace}{" "}
         </h4>
-      </div>
-
-      <div className="listing-elem-2">
-        <h3>{event.ticketType}</h3>
-        <h3>{event.ticketPrice} $</h3>
       </div>
       <div className="listing-elem-3">
         <img

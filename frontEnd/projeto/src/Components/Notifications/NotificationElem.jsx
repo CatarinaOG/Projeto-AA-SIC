@@ -6,7 +6,7 @@ function clickedClose(setPopUpTrigger) {
   console.log("Clicked");
 }
 
-export default function ListinElem(props) {
+export default function BoughtTicket(props) {
   const { event, setPopUpTrigger } = props;
 
   return (
@@ -19,8 +19,7 @@ export default function ListinElem(props) {
       </div>
 
       <div className="listing-elem-2">
-        <h3>{event.ticketType}</h3>
-        <h3>{event.ticketPrice} $</h3>
+        <h3>+ 1 ticket selling</h3>
       </div>
       <div className="listing-elem-3">
         <img
