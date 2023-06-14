@@ -1,0 +1,54 @@
+.listingRightSide {
+  position: absolute;
+  right: 20px; /* adjust this value to center the price */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.listing {
+  border: 1px solid var(--white);
+  border-radius: 10px;
+  margin: 20px;
+  padding: 10px;
+  padding-left: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.listing-elem-1 {
+  flex: 1;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.listing-elem-2 {
+  margin-right: 30px; /* Adjust this value to move it to the left */
+}
+
+.listing-elem-3 {
+  margin-right: 5px; /* Adjust this value to move it to the left */
+}
+
+.closeIcon {
+  transform: scale(0.7); /* Adjust the scaling factor as needed */
+}
+
+.popUpSellingListButton {
+  padding: 10px;
+}
+
+.popUpEventContainter {
+  width: 500px;
+  height: 30vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--white);
+  text-align: center;
+  border-radius: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 2;
+}
