@@ -6,15 +6,15 @@ import BoughtTickets from "./Pages/BoughtTickets";
 
 import "./Styles/General.css";
 import "./Styles/Event.css";
-import BuyTicket from "./Pages/BuyTicket";
-import SellingListing from "./Pages/SellingListing";
-import SavedEvents from "./Pages/SavedEvents";
+import "./Styles/PaymentMethods.css";
+
+import PaymentMethods from "./Pages/PaymentMethods";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SavedEvents />} />
+        <Route path="/" element={<PaymentMethods />} />
       </Routes>
     </BrowserRouter>
   );
