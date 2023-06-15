@@ -1,0 +1,44 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.CreatePromoterContainer {
+  width: 90vw;
+  max-width: 800px;
+  margin-top: 30px;
+  background-color: var(--secondary-color);
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 40px;
+}
+
+.h1CreatePromoter {
+  margin-bottom: 100px;
+}
+.divFormCreatePromoter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-self: center;
+  margin-bottom: 30px;
+  padding: 10;
+}
+
+.h2FormCreatePromoter {
+  margin-right: 10px;
+}
+
+.inputFormCreatePromoter {
+  flex: 1;
+  max-width: 50%;
+  border: 1px solid var(--black);
+  border-radius: 10px;
+  font-size: 22px;
+}
+
+.divButtonCreatePromoter {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  margin-top: 20px; /* Optional margin for spacing */
+}

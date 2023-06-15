@@ -29,7 +29,6 @@ export default function MBWayPopIn({ setPaymentType }) {
               onKeyDown={handleKeyDown}
             />
           </label>
-          <input className="button" type="submit" value="Submit" />
         </form>
       </div>
     </div>
