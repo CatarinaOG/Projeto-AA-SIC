@@ -7,6 +7,7 @@ import VisaPopIn from "../Components/PaymentMethods/VisaPopIn";
 
 export default function PaymentMethods() {
   const [paymentType, setPaymentType] = useState("PayPal");
+
   return (
     <div>
       <NavBarUser />

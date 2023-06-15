@@ -5,6 +5,8 @@ import "./Styles/General.css";
 import "./Styles/Event.css";
 import "./Styles/PaymentMethods.css";
 import "./Styles/CreatePromoter.css";
+import "./Styles/EventsListing.css";
+import "./Styles/CreateEvent.css";
 
 import PaymentMethods from "./Pages/PaymentMethods";
 import Notifications from "./Pages/Notifications";
@@ -20,6 +22,8 @@ import Profile from "./Pages/Profile";
 import SavedEvents from "./Pages/SavedEvents";
 import SellingListing from "./Pages/SellingListing";
 import SellTicket from "./Pages/SellTicket";
+import EventsListing from "./Pages/EventsListing";
+import CreateEvent from "./Pages/CreateEvent";
 
 import "./Styles/General.css";
 import "./Styles/Event.css";
@@ -30,7 +34,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<CreatePromoter></CreatePromoter>} />
+        <Route path="/" element={<CreateEvent></CreateEvent>} />
       </Routes>
     </BrowserRouter>
   );

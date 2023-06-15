@@ -1,0 +1,23 @@
+.headerButtonEventListing {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addIcon {
+  margin-right: 10px;
+  max-height: 45px;
+}
+
+.addPromptContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.h3AddPrompt {
+  text-decoration: underline;
+  color: white;
+}

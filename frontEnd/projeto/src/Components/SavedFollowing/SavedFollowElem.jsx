@@ -19,7 +19,8 @@ export default function SavedFollowElem(props) {
       </div>
       <div className="listing-elem-3">
         <img
-          className="closeIcon"
+          className="closeIc  display: flex;
+          on"
           src={close}
           alt=""
           onClick={() => clickedClose(setPopUpTrigger)}
