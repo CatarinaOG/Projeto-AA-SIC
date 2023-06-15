@@ -19,7 +19,10 @@ export default function Browse(props){
             time: "9:25 PM",
             eventName: "Coldplay - Music Of The Spheres World Tour",
             eventPlace: "Estádio Cidade de Coimbra, Coimbra",
-            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg"
+            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
+            tickets_avaiable: 3,
+            tickets_sold: 4,
+            tickets_wanted: 200,
         },
         {
             dayOfWeek: "Friday",
@@ -28,8 +31,10 @@ export default function Browse(props){
             time: "08:00 PM",
             eventName: "Post Malone - Twelve Carat Tour",
             eventPlace: "Ziggo Dome, Amsterdam",
-            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg"
-            
+            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
+            tickets_avaiable: 3,
+            tickets_sold: 4,
+            tickets_wanted: 200
         },
         {
             dayOfWeek: "Thursday",
@@ -38,8 +43,10 @@ export default function Browse(props){
             time: "03:00 PM",
             eventName: "NOS ALIVE'23",
             eventPlace: "NOS Alive, Algés, Portugal",
-            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg"
-            
+            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
+            tickets_avaiable: 3,
+            tickets_sold: 4,
+            tickets_wanted: 200
         },
         {
             dayOfWeek: "Thursday",
@@ -48,8 +55,10 @@ export default function Browse(props){
             time: "03:00 PM",
             eventName: "NOS ALIVE'23",
             eventPlace: "NOS Alive, Algés, Portugal",
-            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg"
-            
+            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
+            tickets_avaiable: 3,
+            tickets_sold: 4,
+            tickets_wanted: 200
         },
         {
             dayOfWeek: "Thursday",
@@ -58,8 +67,10 @@ export default function Browse(props){
             time: "03:00 PM",
             eventName: "NOS ALIVE'23",
             eventPlace: "NOS Alive, Algés, Portugal",
-            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg"
-            
+            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
+            tickets_avaiable: 3,
+            tickets_sold: 4,
+            tickets_wanted: 200
         },
         {
             dayOfWeek: "Thursday",
@@ -68,8 +79,10 @@ export default function Browse(props){
             time: "03:00 PM",
             eventName: "NOS ALIVE'23",
             eventPlace: "NOS Alive, Algés, Portugal",
-            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg"
-            
+            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
+            tickets_avaiable: 3,
+            tickets_sold: 4,
+            tickets_wanted: 200
         },
         {
             dayOfWeek: "Thursday",
@@ -78,8 +91,10 @@ export default function Browse(props){
             time: "03:00 PM",
             eventName: "NOS ALIVE'23",
             eventPlace: "NOS Alive, Algés, Portugal",
-            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg"
-            
+            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
+            tickets_avaiable: 3,
+            tickets_sold: 4,
+            tickets_wanted: 200
         },
     ])
 

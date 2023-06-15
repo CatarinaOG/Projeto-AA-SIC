@@ -1,1 +1,58 @@
 
+
+.eventsContainer{
+    margin-top: 50px;
+}
+
+.event{
+    border: 1px solid var(--white);
+    border-radius: 10px;
+    margin: 20px;
+    padding: 10px;padding-left: 40px;
+    position: relative;
+}
+
+.eventCalendar{
+    position: absolute;
+    left: 7px;
+}
+
+.eventRightSide{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+.eventClickable{
+    border: 1px solid var(--white);
+    border-radius: 10px;
+    margin: 20px;
+    padding: 10px;padding-left: 40px;
+    position: relative;
+    cursor: pointer;
+}
+
+.eventClickable:hover{
+    border: 1px solid var(--white);
+    border-radius: 10px;
+    margin: 20px;
+    padding: 10px;padding-left: 40px;
+    position: relative;
+    background-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.eventClickable:active{
+    border: 1px solid var(--white);
+    border-radius: 10px;
+    margin: 20px;
+    padding: 10px;padding-left: 40px;
+    position: relative;
+    background-color: var(--secondary-color);
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.1);
+}
+
