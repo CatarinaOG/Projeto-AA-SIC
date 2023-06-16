@@ -32,22 +32,18 @@ import "./Styles/General.css";
 import "./Styles/Event.css";
 
 function App() {
-
-  const [event,setEvent] = useState()
-  const [user,setUser] = useState({
+  const [event, setEvent] = useState();
+  const [user, setUser] = useState({
     name: "catarina",
     id: 1,
-  })
-
+  });
 
   return (
-
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<FollowedEvents></FollowedEvents>} />
+        <Route path="/" element={<CreateEvent></CreateEvent>} />
       </Routes>
     </BrowserRouter>
-
   );
 }
 
