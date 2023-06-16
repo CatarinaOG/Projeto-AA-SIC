@@ -41,7 +41,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<CreateEvent></CreateEvent>} />
+        <Route path="/" element={<AddVenue></AddVenue>} />
       </Routes>
     </BrowserRouter>
   );

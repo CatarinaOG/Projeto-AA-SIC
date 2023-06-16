@@ -11,12 +11,17 @@ export default function CreatePromoter() {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [capacity, setCapacity] = useState("");
+  const [city, setCity] = useState("");
 
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
 
   const handleAddressChange = (event) => {
+    setAddress(event.target.value);
+  };
+
+  const handleCityChange = (event) => {
     setAddress(event.target.value);
   };
 
@@ -59,6 +64,15 @@ export default function CreatePromoter() {
                 className="inputFormCreateVenue"
                 type="text"
                 value={address}
+                onChange={handleAddressChange}
+              ></input>
+            </div>
+            <div className="divFormCreateVenue">
+              <h2 className="h2FormCreateVenue">City</h2>
+              <input
+                className="inputFormCreateVenue"
+                type="text"
+                value={city}
                 onChange={handleAddressChange}
               ></input>
             </div>

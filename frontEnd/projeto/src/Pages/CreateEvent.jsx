@@ -31,24 +31,31 @@ export default function CreateEvent() {
     // para ser substituido pelo pedido com base no filtro
     {
       venueName: "Theatro Circo ",
+      venueCode: 1,
     },
     {
       venueName: "Hard Club Porto",
+      venueCode: 2,
     },
     {
       venueName: "Estádio Cidade Coimbra",
+      venueCode: 3,
     },
     {
       venueName: "Parque da Cidade",
+      venueCode: 4,
     },
     {
       venueName: "Parque da Belavista",
+      venueCode: 5,
     },
     {
       venueName: "Passeio Marítimo Algés",
+      venueCode: 6,
     },
     {
       venueName: "LAV - Lisboa ao Vivo",
+      venueCode: 7,
     },
   ]);
 
@@ -118,7 +125,15 @@ export default function CreateEvent() {
     ) {
       setMessage("There are one or more fields empty");
     } else {
-      console.log(eventName, eventVenue, eventDateStart, eventDateEnd);
+      console.log(
+        eventName,
+        eventVenue,
+        eventDateStart,
+        eventDateEnd,
+        eventCategory,
+        types,
+        artists
+      );
       console.log(eventVenue);
     }
     event.preventDefault();
@@ -188,7 +203,7 @@ export default function CreateEvent() {
                   <option value=""></option>
 
                   {options.map((option, index) => (
-                    <option key={index} value={option.venueName}>
+                    <option key={index} value={option.venueCode}>
                       {option.venueName}
                     </option>
                   ))}
