@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -19,16 +20,24 @@ import SellTicket from "./Pages/SellTicket"
 
 import "./Styles/General.css"
 import "./Styles/Event.css"
+import SuggestEvent from "./Pages/SuggestEvent";
 
 function App() {
 
   const [event,setEvent] = useState()
+  const [user,setUser] = useState({
+    name: "catarina",
+    id: 1,
+  })
+
 
   return (
 
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<PaymentMethods />} />
+        <Route path="/" element={
+          	<SuggestEvent />
+        }/>
       </Routes>
     </BrowserRouter>
 

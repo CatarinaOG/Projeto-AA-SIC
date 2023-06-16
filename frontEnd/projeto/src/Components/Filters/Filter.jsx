@@ -26,7 +26,7 @@ export default function Filter(props){
     }
 
     const optionsList = options.map( option => 
-        (<option className="filterOption" value={option}>{option}</option>) )
+        (<option className="filterOption" key={option} value={option}>{option}</option>) )
 
     return(
         <div className="filter">
