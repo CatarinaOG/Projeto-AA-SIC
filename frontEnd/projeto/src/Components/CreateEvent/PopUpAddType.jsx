@@ -3,13 +3,18 @@ import "../../Styles/Profile.css";
 
 export default function PopUpAddType(props) {
   const [ticketType, setTicketType] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState(null);
+  const [dateStartType, setDateStartType] = useState(null);
+  const [dateEndType, setDateEndType] = useState(null);
+  const [message, setMessage] = useState("");
+  const dateStartCompare = new Date(props.dateStart);
+  const dateEndCompare = new Date(props.dateEnd);
 
   useEffect(() => {
     if (props.trigger) {
       // Clear the form when the popup is triggered
       setTicketType("");
-      setPrice(0);
+      setPrice(null);
     }
   }, [props.trigger]);
 
@@ -21,17 +26,50 @@ export default function PopUpAddType(props) {
     setPrice(event.target.value);
   };
 
+  const handleDateStartChange = (event) => {
+    const dateTemp = new Date(event.target.value);
+    if (dateTemp > dateEndCompare || dateTemp < dateStartCompare) {
+      setMessage("Date's are not possible");
+      setDateStartType("");
+    } else {
+      setMessage("");
+      setDateStartType(event.target.value);
+    }
+  };
+
+  const handleDateEndChange = (event) => {
+    const dateTemp = new Date(event.target.value);
+    if (dateTemp > dateEndCompare || dateTemp < dateStartCompare) {
+      setMessage("Date's are not possible");
+      setDateEndType("");
+    } else {
+      setMessage("");
+      setDateEndType(event.target.value);
+    }
+  };
+
   const submitType = () => {
-    const newType = {
-      typeName: ticketType,
-      price: price,
-    };
-    props.onAddType(newType);
+    if (
+      ticketType === "" ||
+      dateStartType === "" ||
+      dateEndType === "" ||
+      price === null
+    ) {
+      setMessage("One or more fields Incomplete");
+    } else {
+      const newType = {
+        typeName: ticketType,
+        price: price,
+        dateStart: dateStartType,
+        dateEnd: dateStartType,
+      };
+      props.onAddType(newType);
+    }
   };
   return props.trigger ? (
     <div>
       <div className="editContainter">
-        <h3 className="editTitle">Add Ticket Type and Price</h3>
+        <h2 className="editTitle">Add Type Information</h2>
         <form>
           <input
             className="inputPopUpAddType"
@@ -47,7 +85,22 @@ export default function PopUpAddType(props) {
             value={price}
             onChange={handlePriceChange}
           ></input>
+          <div>
+            <input
+              className="addTypeDate"
+              type="date"
+              value={dateStartType}
+              onChange={handleDateStartChange}
+            ></input>
+            <input
+              type="date"
+              className="addTypeDate"
+              value={dateEndType}
+              onChange={handleDateEndChange}
+            ></input>
+          </div>
         </form>
+        <h3 className="redH3">{message}</h3>
         <div className="popUpSellingListButton">
           <button
             className="button"
@@ -56,7 +109,7 @@ export default function PopUpAddType(props) {
               props.setPopUpTrigger(false);
             }}
           >
-            Yes
+            Add
           </button>
           <button
             className="button"

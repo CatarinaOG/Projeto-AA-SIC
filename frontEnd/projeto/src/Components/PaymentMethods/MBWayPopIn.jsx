@@ -1,4 +1,12 @@
-export default function MBWayPopIn({ setPaymentType }) {
+import { useState } from "react";
+
+export default function MBWayPopIn({
+  setPaymentType,
+  setPaymentInfo,
+  setMessage,
+}) {
+  const [number, setNumber] = useState(0);
+
   const handleKeyDown = (event) => {
     const keyCode = event.which || event.keyCode;
     const isValid = keyCode >= 48 && keyCode <= 57;
@@ -7,12 +15,19 @@ export default function MBWayPopIn({ setPaymentType }) {
 
     if ((!isValid && !isBackspace) || (isMaxLengthReached && !isBackspace)) {
       event.preventDefault();
+      setNumber(event.target.value);
     }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setPaymentType("");
+    if (number > 100000000) {
+      setPaymentInfo({ phoneNumber: number });
+      setPaymentType("");
+      setMessage("Success");
+    } else {
+      setMessage("Phone Number isn't valid");
+    }
   };
 
   return (

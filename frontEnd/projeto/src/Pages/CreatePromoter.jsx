@@ -4,13 +4,15 @@ import PaymentMethodElem from "../Components/PaymentMethods/PaymentMethodElem";
 import MBWayPopIn from "../Components/PaymentMethods/MBWayPopIn";
 import PayPalPopIn from "../Components/PaymentMethods/PayPalPopIn";
 import VisaPopIn from "../Components/PaymentMethods/VisaPopIn";
+import PopUpConfirm from "../Components/CreatePromoter/PopUpConfirm";
 
 export default function CreatePromoter() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [employer, setEmployer] = useState("");
+  const [message, setMessage] = useState("");
+  const [popUpTrigger, setPopUpTrigger] = useState(false);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -28,28 +30,37 @@ export default function CreatePromoter() {
 
   const handleConfirmPasswordChange = (event) => {
     const newConfirmPassword = event.target.value;
-    console.log("Confirmed password is:" + confirmPassword);
-    if (password !== newConfirmPassword) {
-      console.log("Passwords don't match BOZO");
-    }
-    if (password === newConfirmPassword) {
-      console.log("Fucking finally bruv");
-    }
     setConfirmPassword(newConfirmPassword);
-  };
-
-  const handleEmployerChange = (event) => {
-    setEmployer(event.target.value);
+    if (password !== newConfirmPassword) {
+      setMessage("Passwords don't match");
+    } else {
+      setMessage("");
+    }
+    console.log("Confirmed password is:" + confirmPassword);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (name === "" || password === "" || confirmPassword === "") {
+      setMessage("One or more fields incomplete");
+    } else {
+      setPopUpTrigger(true);
+    }
+
     // Access the input values here (name, email, password, confirmPassword, employer)
-    console.log(name, email, password, confirmPassword, employer);
+    console.log(name, email, password, confirmPassword);
   };
   return (
     <div>
       <NavBarUser />
+      <PopUpConfirm
+        trigger={popUpTrigger}
+        setPopUpTrigger={setPopUpTrigger}
+        email={email}
+        password={password}
+        name={name}
+      />
+
       <div className="center">
         <div className="CreatePromoterContainer">
           <h1 className="h1CreatePromoter">Create Promoter</h1>
@@ -90,15 +101,13 @@ export default function CreatePromoter() {
                 onChange={handleConfirmPasswordChange}
               ></input>
             </div>
-            <div className="divFormCreatePromoter">
-              <h2 className="h2FormCreatePromoter">Employer</h2>
-              <input
-                className="inputFormCreatePromoter"
-                type="text"
-                value={employer}
-                onChange={handleEmployerChange}
-              ></input>
-            </div>
+            {message !== "" ? (
+              <div className="buttonContainerPayment">
+                <h3 className="redH3">{message}</h3>
+              </div>
+            ) : (
+              ""
+            )}
             <div className="divButtonCreatePromoter">
               <input className="button" type="submit" value="Submit" />
             </div>

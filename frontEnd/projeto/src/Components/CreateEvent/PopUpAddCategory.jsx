@@ -1,39 +1,38 @@
 import { useState, useEffect } from "react";
 import "../../Styles/Profile.css";
 
-export default function PopUpAddArtist(props) {
-  const [artistName, setArtistName] = useState("");
+export default function PopUpAddCategory(props) {
+  const [categoryName, setCategoryName] = useState("");
   const [message, setMessage] = useState("aaaaa");
 
   useEffect(() => {
     if (props.trigger) {
-      setArtistName("");
+      setCategoryName("");
       setMessage("");
     }
   }, [props.trigger]);
 
   const handleArtistChange = (event) => {
-    setArtistName(event.target.value);
+    setCategoryName(event.target.value);
   };
 
   const submitType = () => {
-    if (artistName === "") {
+    if (categoryName === "") {
       setMessage("Invalid artist name");
     } else {
-      props.onAddArtist(artistName);
       props.setPopUpTrigger(false);
     }
   };
   return props.trigger ? (
     <div>
       <div className="editContainter">
-        <h2 className="editTitle">Add Artist Name</h2>
+        <h2 className="editTitle">Add Category</h2>
         <form>
           <input
             className="inputPopUpAddType"
             type="text"
-            placeholder="Artist"
-            value={artistName}
+            placeholder="Category Name"
+            value={categoryName}
             onChange={handleArtistChange}
           ></input>
         </form>

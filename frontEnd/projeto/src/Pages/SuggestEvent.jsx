@@ -9,7 +9,9 @@ export default function SuggestEvent(){
 
     const [eventName, setEventName] = useState('');
     const [place, setPlace] = useState('');
-    const [date, setDate] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+
 
     const [showConfirmation,setShowConfirmation] = useState(false)
 
@@ -37,7 +39,8 @@ export default function SuggestEvent(){
                                 <div>
                                     <p className="suggestEventLabel">Event Name</p>
                                     <p className="suggestEventLabel">Place</p>
-                                    <p className="suggestEventLabel">Date</p>
+                                    <p className="suggestEventLabel">Start Date</p>
+                                    <p className="suggestEventLabel">End Date</p>
                                 </div>
                             </div>
 
@@ -45,7 +48,8 @@ export default function SuggestEvent(){
                                 <div>
                                     <input className="suggestEventInput" type="text" onChange={e => setEventName(e.target.value)}/>
                                     <input className="suggestEventInput" type="text" onChange={e => setPlace(e.target.value)}/>
-                                    <input className="suggestEventInputDate" type="date" onChange={e => setDate(e.target.value)}/>
+                                    <input className="suggestEventInputDate" type="date" onChange={e => setStartDate(e.target.value)}/>
+                                    <input className="suggestEventInputDate" type="date" onChange={e => setEndDate(e.target.value)}/>
                                 </div>
                             </div>
                         </div>

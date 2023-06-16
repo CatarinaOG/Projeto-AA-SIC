@@ -142,3 +142,10 @@
   display: flex;
   justify-content: center;
 }
+
+.redH3 {
+  color: red;
+}
+.greenH3 {
+  color: green;
+}

@@ -145,3 +145,11 @@
   margin: 10px; /* Add margin-bottom for vertical spacing */
   max-width: 20%;
 }
+
+.addTypeDate {
+  border: 1px solid var(--black);
+  border-radius: 10px;
+  font-size: 18px;
+  margin: 10px; /* Add margin-bottom for vertical spacing */
+  max-width: 25%;
+}
