@@ -1,0 +1,56 @@
+
+.smallContainer{
+    margin-top: 5vh;
+    height: 70vh;
+    background-color: var(--dark-blue);
+    border-radius: 15px;
+    border: 1px solid white;
+    text-align: center;
+}
+
+.smallContainerInputs{
+    display: flex;
+    height: 60vh;
+    text-align: start;
+}
+
+.smallContainerLeftSide{
+    flex: 1;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.smallContainerRightSide{
+    align-items: center;
+    flex: 1;
+    display: flex;
+    align-items: center; 
+}
+
+.suggestEventLabel{
+    margin: 20px;
+}
+
+.suggestEventInput{
+    margin: 10px;
+    background-color: var(--grey);
+    border: none;
+    border-radius: 10px;
+    width: 270px;
+    height: 30px;
+    padding-left: 10px;
+}
+
+.suggestEventInputDate{
+    margin: 10px;
+    margin-left: 130px;
+    padding-left: 10px;
+    background-color: var(--grey);
+    border: none;
+    border-radius: 10px;
+    width: 150px;
+    height: 30px;
+}
