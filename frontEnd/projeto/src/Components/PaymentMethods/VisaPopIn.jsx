@@ -1,11 +1,26 @@
 import { useState } from "react";
 
-export default function VisaPopIn({ setPaymentType }) {
-  const [ccv, setCCV] = useState(123);
-  const [number, setNumber] = useState(123456789011);
+export default function VisaPopIn({
+  setPaymentType,
+  setPaymentInfo,
+  setMessage,
+}) {
+  const [ccv, setCCV] = useState("");
+  const [number, setNumber] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    setPaymentType("");
+    if (ccv < 100 && number < 100000000000) {
+      setMessage("Both fields Incomplete");
+    } else if (ccv === "") {
+      setMessage("Incomplete CCV");
+    } else if (number === "") {
+      setMessage("Incomplete Number");
+    } else {
+      setPaymentType("");
+      setPaymentInfo({ number: number, ccv: ccv });
+      setMessage("Success");
+    }
   };
 
   const handleCCVChange = (event) => {
@@ -25,7 +40,7 @@ export default function VisaPopIn({ setPaymentType }) {
   return (
     <div className="VisaPaymentMethod">
       <div className="MBWayHeaderDiv">
-        <h2>Enter your data:</h2>
+        <h2>Enter your card data:</h2>
       </div>
       <div className="listing-elem-3-Payment">
         <form onSubmit={handleSubmit}>

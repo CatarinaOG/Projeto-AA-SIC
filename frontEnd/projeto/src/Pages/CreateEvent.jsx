@@ -10,14 +10,22 @@ import { TypeList } from "../Components/CreateEvent/TypeList"; // Import TypeLis
 import PopUpAddType from "../Components/CreateEvent/PopUpAddType";
 import PopUpAddArtist from "../Components/CreateEvent/PopUpAddArtist";
 import ArtistElem from "../Components/CreateEvent/ArtistElem";
+import PopUpAddCategory from "../Components/CreateEvent/PopUpAddCategory";
 
 export default function CreateEvent() {
   const [eventName, setEventName] = useState("");
-  const [eventVenue, setEventVenue] = useState(""); // Define eventVenue state variable
+  const [eventVenue, setEventVenue] = useState("");
+  const [eventCategory, setEventCategory] = useState("");
+
   const [eventDateStart, setEventDateStart] = useState("");
   const [eventDateEnd, setEventDateEnd] = useState("");
   const [popUpTrigger1, setPopUpTrigger1] = useState(false);
   const [popUpTrigger2, setPopUpTrigger2] = useState(false);
+  const [popUpTrigger3, setPopUpTrigger3] = useState(false);
+  const [types, setTypes] = useState([]);
+  const [artists, setArtists] = useState([]);
+
+  const [message, setMessage] = useState("");
 
   const [options, setOptions] = useState([
     // para ser substituido pelo pedido com base no filtro
@@ -44,8 +52,12 @@ export default function CreateEvent() {
     },
   ]);
 
-  const [types, setTypes] = useState([]);
-  const [artists, setArtists] = useState([]);
+  const [categories, setCategories] = useState([
+    { name: "Music Festival" },
+    { name: "Concert" },
+    { name: "Stand Up Show" },
+    { name: "Stand Up Festival" },
+  ]);
 
   const handleAddType = (newType) => {
     setTypes((prevTypes) => [...prevTypes, newType]);
@@ -71,18 +83,45 @@ export default function CreateEvent() {
     setEventVenue(event.target.value);
   };
 
+  const handleEventCategortChange = (event) => {
+    setEventCategory(event.target.value);
+  };
+
   const handleEventDateStartChange = (event) => {
     setEventDateStart(event.target.value);
   };
 
   const handleEventDateEndChange = (event) => {
+    console.log(event.target.value);
     setEventDateEnd(event.target.value);
   };
 
+  function openPopType() {
+    if (eventDateStart !== "" && eventDateEnd !== "") {
+      setPopUpTrigger1(true);
+      if (message === "Add dates first") {
+        setMessage("");
+      }
+    } else {
+      setMessage("Add dates first");
+    }
+  }
+
   const handleSubmit = (event) => {
+    if (
+      eventName === "" ||
+      eventVenue === "" ||
+      eventDateStart === "" ||
+      eventDateEnd === "" ||
+      types.length === 0 ||
+      artists === 0
+    ) {
+      setMessage("There are one or more fields empty");
+    } else {
+      console.log(eventName, eventVenue, eventDateStart, eventDateEnd);
+      console.log(eventVenue);
+    }
     event.preventDefault();
-    // Access the input values here (name, email, password, confirmPassword, employer)
-    console.log(eventName, eventVenue, eventDateStart, eventDateEnd);
   };
 
   return (
@@ -92,12 +131,18 @@ export default function CreateEvent() {
         trigger={popUpTrigger1}
         setPopUpTrigger={setPopUpTrigger1}
         onAddType={handleAddType}
+        dateStart={eventDateStart}
+        dateEnd={eventDateEnd}
       />
       <PopUpAddArtist
         trigger={popUpTrigger2}
         setPopUpTrigger={setPopUpTrigger2}
         onAddArtist={handleAddArtist}
-      ></PopUpAddArtist>
+      />
+      <PopUpAddCategory
+        trigger={popUpTrigger3}
+        setPopUpTrigger={setPopUpTrigger3}
+      />
       <div className="center">
         <div className="CreateEventContainer">
           <h1 className="h1CreateEvent">Event Information</h1>
@@ -112,6 +157,27 @@ export default function CreateEvent() {
               ></input>
             </div>
             <div className="divFormCreatePromoter">
+              <h2 className="h2FormCreatePromoter">Category</h2>
+              <div className="dateFormContainer">
+                <select
+                  className="inputVenueCreateEvent"
+                  value={eventCategory}
+                  onChange={handleEventCategortChange}
+                >
+                  <option value=""></option>
+
+                  {categories.map((option, index) => (
+                    <option key={index} value={option.name}>
+                      {option.name}
+                    </option>
+                  ))}
+                </select>
+                <h4 className="underlined" onClick={setPopUpTrigger3}>
+                  Add New
+                </h4>
+              </div>
+            </div>
+            <div className="divFormCreatePromoter">
               <h2 className="h2FormCreatePromoter">Venue</h2>
               <div className="dateFormContainer">
                 <select
@@ -119,7 +185,7 @@ export default function CreateEvent() {
                   value={eventVenue}
                   onChange={handleEventVenueChange}
                 >
-                  <option></option>
+                  <option value=""></option>
 
                   {options.map((option, index) => (
                     <option key={index} value={option.venueName}>
@@ -155,7 +221,7 @@ export default function CreateEvent() {
                     src={AddButton}
                     alt=""
                     className="addIcon"
-                    onClick={() => setPopUpTrigger1(true)}
+                    onClick={openPopType}
                   />
                 </div>
                 <div>
@@ -189,6 +255,9 @@ export default function CreateEvent() {
                   ))}
                 </div>
               </div>
+            </div>
+            <div className="divButtonCreatePromoter">
+              <h3 className="redH3">{message}</h3>
             </div>
             <div className="divButtonCreatePromoter">
               <input className="button" type="submit" value="Submit" />

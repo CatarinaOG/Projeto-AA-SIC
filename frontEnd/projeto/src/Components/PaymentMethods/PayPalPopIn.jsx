@@ -1,7 +1,20 @@
-export default function PayPalPopIn({ setPaymentType }) {
+import { useState } from "react";
+
+export default function PayPalPopIn({
+  setPaymentType,
+  setPaymentInfo,
+  setMessage,
+}) {
+  const [email, setEmail] = useState("");
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setPaymentType("");
+    setPaymentInfo({ email: email });
   };
 
   return (
@@ -12,7 +25,11 @@ export default function PayPalPopIn({ setPaymentType }) {
       <div className="listing-elem-3-Payment">
         <form onSubmit={handleSubmit}>
           <label>
-            <input type="email" className="MBWayInput" />
+            <input
+              type="email"
+              className="MBWayInput"
+              onChange={handleEmailChange}
+            />
           </label>
           <input className="button" type="submit" value="Submit" />
         </form>
