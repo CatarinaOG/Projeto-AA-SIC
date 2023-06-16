@@ -2,6 +2,7 @@ package AASIC.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -30,7 +32,7 @@ public class User implements UserDetails {
     private String email;
 
     @Column(name = "phone")
-    private int phone;
+    private String phone;
 
     @Column(name = "password")
     private String password;

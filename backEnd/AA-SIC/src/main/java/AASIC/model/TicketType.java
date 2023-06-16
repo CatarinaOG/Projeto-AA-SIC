@@ -19,7 +19,7 @@ public class TicketType{
     @Column(name = "price")
     private float price;
 
-    @Column(name = "range")
+    @Column(name = "'range'")
     private float range;
 
     /* Getters */
