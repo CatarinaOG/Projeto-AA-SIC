@@ -6,19 +6,8 @@ import { ReactComponent as PayPalLogo } from "../../Images/PayPal.svg";
 import { ReactComponent as VisaLogo } from "../../Images/Visa.svg";
 import { useState } from "react";
 
-function setValues(value, setPaymentType, SetIsSelected, paymentType) {
-  if (value) {
-    SetIsSelected(value);
-    setPaymentType(paymentType);
-  } else {
-    SetIsSelected(value);
-    setPaymentType("");
-  }
-}
-
 export default function PaymentMethodElem(props) {
-  const { type, setPaymentType } = props;
-  const [isSelected, SetIsSelected] = useState(false);
+  const { type, paymentType, setPaymentType } = props;
 
   const types = {
     MBWay: {
@@ -35,37 +24,17 @@ export default function PaymentMethodElem(props) {
     },
   };
 
+  function select() {
+    setPaymentType(type);
+  }
+
   return (
     <div className="listingPaymentMethod">
       <div className="listing-elem-1-Payment">
-        {isSelected ? (
-          <img
-            className="task"
-            src={selected}
-            alt=""
-            onClick={() =>
-              setValues(
-                false,
-                setPaymentType,
-                SetIsSelected,
-                types[type].typeString
-              )
-            }
-          />
+        {paymentType === type ? (
+          <img className="task" src={selected} alt="" />
         ) : (
-          <img
-            className="task"
-            src={unselected}
-            alt=""
-            onClick={() =>
-              setValues(
-                true,
-                setPaymentType,
-                SetIsSelected,
-                types[type].typeString
-              )
-            }
-          />
+          <img className="task" src={unselected} alt="" onClick={select} />
         )}
       </div>
 

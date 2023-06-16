@@ -1,10 +1,24 @@
 package AASIC.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.List;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="user")
-public class User{
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue
@@ -18,44 +32,52 @@ public class User{
     private String email;
 
     @Column(name = "phone")
-    private int phone;
+    private String phone;
 
     @Column(name = "password")
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    /* Getters */
-    public String getEmail() {
-        return email;
-    }
-    public int getId() {
-        return id;
-    }
-    public String getName() {
-        return name;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public int getPhone() {
-        return phone;
+
+    /*
+    * Os Setters e Getters esão definidos com a anotação @Data do lombok
+    * Os construtores também esão definidos pelas anotações do lombok, podemos mudar depois se for preciso
+    * Para se começar a usar o spring security nos video que vi fala na necessidade de definir um objeto userDetails
+    * Uma das coisas que é dito que é boa prática é fazer com que o nosso user implemente o UserDetails
+    * Os próximos métodos referem-se ao userDetails
+    * O Role é necessário para atribuir permissões, para já só existe os roles de USER e ADMIN
+    *
+     */
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(this.role.name()));
     }
 
-    /* Setters */
-    public void setEmail(String email) {
-        this.email = email;
+    @Override
+    public String getUsername() {
+        return this.email;
     }
-    public void setId(int id) {
-        this.id = id;
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
-    public void setName(String name) {
-        this.name = name;
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
-    public void setPassword(String password) {
-        this.password = password;
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
-    public void setPhone(int phone) {
-        this.phone = phone;
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
-    
 }

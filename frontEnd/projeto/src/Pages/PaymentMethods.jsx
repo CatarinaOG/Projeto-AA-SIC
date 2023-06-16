@@ -7,6 +7,7 @@ import VisaPopIn from "../Components/PaymentMethods/VisaPopIn";
 
 export default function PaymentMethods() {
   const [paymentType, setPaymentType] = useState("PayPal");
+
   return (
     <div>
       <NavBarUser />
@@ -16,24 +17,29 @@ export default function PaymentMethods() {
           <div className="eventsContainer">
             <PaymentMethodElem
               type={"MBWay"}
+              paymentType={paymentType}
               setPaymentType={setPaymentType}
-            ></PaymentMethodElem>
+            />
             {paymentType === "MBWay" && (
-              <MBWayPopIn setPaymentType={setPaymentType}></MBWayPopIn>
+              <MBWayPopIn setPaymentType={setPaymentType} />
             )}
+
             <PaymentMethodElem
               type={"PayPal"}
+              paymentType={paymentType}
               setPaymentType={setPaymentType}
-            ></PaymentMethodElem>
+            />
             {paymentType === "PayPal" && (
-              <PayPalPopIn setPaymentType={setPaymentType}></PayPalPopIn>
+              <PayPalPopIn setPaymentType={setPaymentType} />
             )}
+
             <PaymentMethodElem
               type={"Visa"}
+              paymentType={paymentType}
               setPaymentType={setPaymentType}
-            ></PaymentMethodElem>
-            {paymentType === "Debit/Credit" && (
-              <VisaPopIn setPaymentType={setPaymentType}></VisaPopIn>
+            />
+            {paymentType === "Visa" && (
+              <VisaPopIn setPaymentType={setPaymentType} />
             )}
           </div>
           <div className="buttonContainerPayment">

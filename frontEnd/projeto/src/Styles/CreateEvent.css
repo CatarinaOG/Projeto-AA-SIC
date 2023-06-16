@@ -1,0 +1,147 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+.CreateEventContainer {
+  width: 90vw;
+  max-width: 800px;
+  margin-top: 30px;
+  background-color: var(--secondary-color);
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 40px;
+}
+
+.h1CreateEvent {
+  margin-bottom: 100px;
+}
+
+.divFormCreateEvent {
+  display: flex;
+  justify-content: space-between;
+  justify-self: center;
+  margin-bottom: 30px;
+  padding: 10;
+}
+
+.h2FormCreateEvent {
+  margin-right: 10px;
+}
+
+.inputFormCreateEvent {
+  flex: 1;
+  max-width: 50%;
+  border: 1px solid var(--black);
+  border-radius: 10px;
+  font-size: 22px;
+}
+
+.dateFormContainer {
+  flex: 1;
+  max-width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dateFormCreateEvent {
+  flex: 1;
+  margin-right: 10px; /* Add right margin for spacing */
+  border: 1px solid var(--black);
+  border-radius: 10px;
+  font-size: 22px;
+}
+
+.dateFormCreateEvent2 {
+  flex: 1;
+  margin-left: 10px; /* Add right margin for spacing */
+  border: 1px solid var(--black);
+  border-radius: 10px;
+  font-size: 22px;
+}
+
+.divButtonCreatePromoter {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  margin-top: 20px; /* Optional margin for spacing */
+}
+
+.div1CreateEvent {
+  flex: 1;
+  max-width: 50%;
+  align-items: center;
+  flex-direction: column;
+  padding: 10;
+}
+
+.div2CreateEvent {
+  flex: 1;
+  max-width: 50%;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 10;
+}
+
+.divCreateEventTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+}
+
+.typesListing {
+  border: 1px solid var(--white);
+  border-radius: 10px;
+  margin: 20px;
+  padding: 10px;
+  padding-left: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.typesListing-elem-1 {
+  flex: 1;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.typesListing-elem-2 {
+  margin-right: 30px; /* Adjust this value to move it to the left */
+}
+
+.typesListing-elem-3 {
+  margin-right: 5px; /* Adjust this value to move it to the left */
+}
+
+.inputFormCreateEvent {
+  flex: 1;
+  max-width: 50%;
+  border: 1px solid var(--black);
+  border-radius: 10px;
+  font-size: 22px;
+}
+
+.inputVenueCreateEvent {
+  flex: 1;
+  border: 1px solid var(--black);
+  border-radius: 10px;
+  font-size: 22px;
+  padding-right: 15;
+}
+
+.inputPopUpAddType {
+  border: 1px solid var(--black);
+  border-radius: 10px;
+  font-size: 22px;
+  margin: 10px; /* Add margin-bottom for vertical spacing */
+  max-width: 40%;
+}
+
+.inputPopUpAddTypePrice {
+  border: 1px solid var(--black);
+  border-radius: 10px;
+  font-size: 22px;
+  margin: 10px; /* Add margin-bottom for vertical spacing */
+  max-width: 20%;
+}

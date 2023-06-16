@@ -2,6 +2,7 @@ package AASIC.controllers;
 
 //import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,8 @@ import AASIC.repositories.*;
 @RequestMapping(path = "/api/event")
 public class EventController {
 
-
-
+    @GetMapping(value = "testing")
+    public ResponseEntity<String> test(){
+        return ResponseEntity.ok("THIS IS A TEST ");
+    }
 }
