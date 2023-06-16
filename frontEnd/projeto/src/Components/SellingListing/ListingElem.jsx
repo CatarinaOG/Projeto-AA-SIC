@@ -14,25 +14,23 @@ export default function ListinElem(props) {
 
   return (
     <div className="listing">
-      <div className="listing-elem-1">
-        <h2>{event.eventName}</h2>
-        <h4>
-          {event.dayOfWeek}, {event.month} {event.day} | {event.eventPlace}{" "}
-        </h4>
-      </div>
+        <div className="listing-elem-1">
+            <h2>{event.eventName}</h2>
+            <h4>{event.dayOfWeek}, {event.month} {event.day} | {event.eventPlace}{" "}</h4>
+        </div>
 
-      <div className="listing-elem-2">
-        <h3>{event.ticketType}</h3>
-        <h3>{event.ticketPrice} $</h3>
-        {props.event.status === "selling" ? (
-          <img src={selling} alt="" className="soldSellingIcon" />
-        ) : (
-          <img src={sold} alt="" className="soldSellingIcon" />
-        )}
-      </div>
-      <div className="listing-elem-3">
-        <img className="closeIcon" src={close} alt="" onClick={clickedClose} />
-      </div>
+        <div className="listing-elem-2">
+            <h3>{event.ticketType}</h3>
+            <h3>{event.ticketPrice} $</h3>
+            {props.event.status === "selling" ? (
+                <img src={selling} alt="" className="soldSellingIcon" />
+            ) : (
+                <img src={sold} alt="" className="soldSellingIcon" />
+            )}
+        </div>
+        <div className="listing-elem-3">
+            <img className="closeIcon" src={close} alt="" onClick={clickedClose} />
+        </div>
     </div>
   );
 }

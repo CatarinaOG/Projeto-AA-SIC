@@ -4,7 +4,10 @@ import SavedFollowElem from "../Components/SavedFollowing/SavedFollowElem.jsx";
 
 import { useState } from "react";
 
-export default function Notifications() {
+export default function Notifications(props) {
+
+  const {user,setUser} = props
+
   const [events, setEvents] = useState([
     // para ser substituido pelo pedido com base no filtro
     {
@@ -86,7 +89,12 @@ export default function Notifications() {
 
   return (
     <div>
-      <NavBarUser />
+      <NavBarUser 
+        selected="home"
+        user={user}
+        setUser={setUser}
+      />
+
       <PopUpRemoveListing
         trigger={popUpTrigger}
         setPopUpTrigger={setPopUpTrigger}

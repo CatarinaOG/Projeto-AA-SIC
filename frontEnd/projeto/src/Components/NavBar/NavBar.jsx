@@ -1,13 +1,21 @@
 import { useState } from "react"
+import { useNavigate } from 'react-router-dom';
+
 
 import Logo from "../../Images/logo.png"
 import Info from "../../Images/info.png"
 
 import "../../Styles/NavBar.css"
 
-export default function NavBar(){
+export default function NavBar(props){
+
+    const {setUser} = props
 
     const [showPopup, setShowPopup] = useState("none")
+    const [inputs,setInputs] = useState()
+
+    const navigate = useNavigate();
+
 
     function showNone(event){
         event.preventDefault();
@@ -22,6 +30,21 @@ export default function NavBar(){
     function showSignup(event){
         event.preventDefault();
         setShowPopup("signup")
+    }
+
+    function updateUsername(event){
+        setInputs( oldInput => [...oldInput, {email:event.target.value}] )
+    }
+
+    function updatePassword(event){
+        setInputs( oldInput => [...oldInput, {password:event.target.value}] )
+    }
+
+    function login(){
+        // enviar pedido com input.password e input.email
+        // adicionar os erros
+        // verificar tipo de user
+        navigate('/HomeUser')
     }
 
     return(
@@ -46,10 +69,10 @@ export default function NavBar(){
                     <div className="centerAll">
                         <div className="displayVertically">
                             <p className="popupTitle">Login</p>
-                            <input className="input" type="text" placeholder="Insert username" />
-                            <input className="input" type="text" placeholder="Insert password" />
+                            <input className="input" type="text" placeholder="Insert username" onChange={updateUsername} />
+                            <input className="input" type="text" placeholder="Insert password" onChange={updatePassword}/>
                             <p className="popupLoginSignup" onClick={showSignup} >Don't have an account? Sign up here</p>
-                            <button className="popupButton" type="submit">Confirm</button>
+                            <button className="popupButton" onClick={login}>Confirm</button>
                         </div>
                     </div>
                 </div>

@@ -38,6 +38,7 @@ export default function Filters(props){
         <div className="displayHorizontallyEvenly">
             
             <Filter 
+                key="Place"
                 type="Place" 
                 setFilter={setFilter} 
                 getNewFilterResults={getNewFilterResults} 

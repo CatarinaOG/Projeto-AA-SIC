@@ -9,7 +9,7 @@ import BrowseTicket from "../Components/Browse/BrowseTicket"
 
 export default function Browse(props){
 
-    const {setEvent} = props
+    const {setEvent,user,setUser} = props
 
     const [events,setEvents] =useState([ // para ser substituido pelo pedido com base no filtro
         {

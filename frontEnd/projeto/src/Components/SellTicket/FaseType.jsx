@@ -35,7 +35,8 @@ export default function FaseType(props){
                     events={events} 
                     ticket={ticket} 
                     setTicket={setTicket}
-                    setFase={setFase}/>
+                    setFase={setFase}
+                />
 
                 <h1 ref={toTitleRef}>Select Ticket</h1>
                 <p className="gray">What kind of ticket do you have?</p>

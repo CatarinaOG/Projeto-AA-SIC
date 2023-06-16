@@ -7,16 +7,18 @@ import Magnifier from "../Images/magnifier.png"
 import "../Styles/Home.css"
 
 
-export default function Home(){
+export default function Home(props){
+
+    const {setUser} = props
 
     return(
         <div>
-            <NavBar />
+            <NavBar setUser={setUser}/>
 
-                <div class="container">
+                <div className="container">
                     <img className="wallpaper" src={Wallpaper} alt="" />
 
-                    <div class="input-wrapper">
+                    <div className="input-wrapper">
                         <img className="magnifier" src={Magnifier} alt="" />
                         <input className="inputHome" type="text" placeholder="Where do you want to go?"/>
                     </div>

@@ -4,7 +4,10 @@ import SavedFollowElem from "../Components/SavedFollowing/SavedFollowElem.jsx";
 import { useState } from "react";
 import PopUpSaved from "../Components/SavedFollowing/PopUpSaved";
 
-export default function FollowedEvents() {
+export default function FollowedEvents(props) {
+
+  const {user,setUser} = props
+
   const [events, setEvents] = useState([
     // para ser substituido pelo pedido com base no filtro
     {
@@ -87,21 +90,26 @@ export default function FollowedEvents() {
 
   return (
     <div>
-      <NavBarUser />
-      <PopUpSaved
-        trigger={popUpTrigger}
-        setPopUpTrigger={setPopUpTrigger}
-        type={"selling"}
-        popUpID={popUpID}
-        setPopUpID={setPopUpID}
-        onRemove={handleRemoveEvents}
-      />
-      <div className="center">
-        <div className="defaultContainer">
-          <h1>Followed Events</h1>
-          <div className="eventsContainer">{eventsFiltered}</div>
-        </div>
-      </div>
+		<NavBarUser 
+			selected="home"
+			user={user}
+			setUser={setUser}
+		/>
+
+		<PopUpSaved
+			trigger={popUpTrigger}
+			setPopUpTrigger={setPopUpTrigger}
+			type={"selling"}
+			popUpID={popUpID}
+			setPopUpID={setPopUpID}
+			onRemove={handleRemoveEvents}
+		/>
+		<div className="center">
+			<div className="defaultContainer">
+				<h1>Followed Events</h1>
+				<div className="eventsContainer">{eventsFiltered}</div>
+			</div>
+		</div>
     </div>
   );
 }

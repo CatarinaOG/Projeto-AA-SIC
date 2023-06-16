@@ -33,6 +33,12 @@
   transform: scale(0.6);
 }
 
+.closeIcon:hover {
+  transition: transform 0.2s ease-in-out;
+  transform: scale(0.8);
+  cursor: pointer;
+}
+
 .soldSellingIcon {
   display: relative;
   max-width: 40px;

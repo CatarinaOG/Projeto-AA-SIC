@@ -7,9 +7,11 @@ import FasePrice from "../Components/SellTicket/FasePrice"
 import FaseDescription from "../Components/SellTicket/FaseDescription"
 import FaseFile from "../Components/SellTicket/FaseFile"
 
-import "../Styles/BuyTicket.css"
+import "../Styles/SellTicket.css"
 
-export default function BuyTicket(){
+export default function BuyTicket(props){
+
+    const {user,setUser} = props
 
     const [events,setEvents] = useState([
         {
@@ -92,7 +94,11 @@ export default function BuyTicket(){
 
         <div>
 
-            <NavBarUser selected="sellTicket"/>
+            <NavBarUser 
+                selected="sellTicket"
+                user={user}
+                setUser={setUser}
+            />
 
             <div className="center">
                 <div className="buyContainer">
