@@ -1,23 +1,24 @@
+import { useNavigate } from 'react-router-dom';
+
 import Calendar from "../../Images/calendar.png"
 
-import { useNavigate } from 'react-router-dom';
 
 export default function BrowseTicket(props){
 
-    const {event,setEvent} = props
+    const {event,setEventId} = props
     const navigate = useNavigate();
 
     function goToEvent(){
         navigate('/Event')
-        setEvent(event)
+        setEventId(event.id)
     }
 
     return(
         <div className="eventClickable" onClick={goToEvent}>
             <div className="eventLeftSide">
                 <img className="eventCalendar" src={Calendar} alt="" />
-                <h3>{event.dayOfWeek}, {event.month} {event.day} | {event.time} </h3>
-                <p>{event.eventName}</p>
+                <h3>{event.eventName}</h3>
+                <p className='colorGreen'>{event.dayOfWeek}, {event.month} {event.day} | {event.time} </p>
                 <p>{event.eventPlace}</p>
             </div>
         </div>

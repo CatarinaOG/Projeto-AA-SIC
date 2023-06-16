@@ -13,12 +13,31 @@ import Map from "../Components/Event/Map"
 
 export default function Event(props){
 
-    const {event,user} = props
+    const {eventId,user,setUser} = props
 
-    const [show,setShow] = useState("info") // ticket / tickets / ticketsType / info
+    const [show,setShow] = useState("ticketsType") // ticket / tickets / ticketsType / info
 
     const [ticketType,setTicketType] = useState()
     const [ticket,setTicket] = useState()
+
+    const event = {
+        id: 7,
+        dayOfWeek: "Thursday",
+        month: "Jul",
+        day: "7",
+        time: "03:00 PM",
+        eventName: "NOS ALIVE'23",
+        eventPlace: "NOS Alive, Algés, Portugal",
+        image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
+        tickets_avaiable: 3,
+        tickets_sold: 4,
+        tickets_wanted: 200,
+        is_saved: true,
+        is_followed: true,
+        lat: 41.528169,
+        lng: -8.583342,
+        upcoming_events: 2,
+    }
 
     const [ticketTypes,setTicketTypes] = useState([
         {
@@ -133,7 +152,11 @@ export default function Event(props){
 
     return(
         <div>
-            <NavBarUser />
+            <NavBarUser 
+                selected="home"
+                user={user}
+                setUser={setUser}
+            />
             
             <img className="wallpaperBlur" src={event.image} alt="" />
 

@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import NavBar from "../Components/NavBar/NavBar"
 import Calendar from "../Components/Home/Calendar"
 
@@ -11,6 +13,14 @@ export default function Home(props){
 
     const {setUser} = props
 
+    const navigate = useNavigate();
+
+
+    function handleFormSubmit(){
+        navigate("/Browse")
+    }
+
+
     return(
         <div>
             <NavBar setUser={setUser}/>
@@ -20,7 +30,9 @@ export default function Home(props){
 
                     <div className="input-wrapper">
                         <img className="magnifier" src={Magnifier} alt="" />
-                        <input className="inputHome" type="text" placeholder="Where do you want to go?"/>
+                        <form onSubmit={handleFormSubmit}>
+                            <input className="inputHome" type="text" placeholder="Where do you want to go?"/>              
+                        </form>
                     </div>
                 </div>
 

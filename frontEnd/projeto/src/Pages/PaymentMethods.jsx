@@ -1,19 +1,34 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+
 import NavBarUser from "../Components/NavBar/NavBarUser";
 import PaymentMethodElem from "../Components/PaymentMethods/PaymentMethodElem";
 import MBWayPopIn from "../Components/PaymentMethods/MBWayPopIn";
 import PayPalPopIn from "../Components/PaymentMethods/PayPalPopIn";
 import VisaPopIn from "../Components/PaymentMethods/VisaPopIn";
 
-export default function PaymentMethods() {
+export default function PaymentMethods(props) {
+  
+  const {user,setUser} = props
+
   const [paymentType, setPaymentType] = useState("");
   const [paymentInfo, setPaymentInfo] = useState();
   const [message, setMessage] = useState(false);
 
-  console.log(paymentInfo);
+  const navigate = useNavigate();
+
+
+  function goBack(){
+    navigate('/Event')
+  }
+
   return (
     <div>
-      <NavBarUser />
+      <NavBarUser 
+        selected="home"
+        user={user}
+        setUser={setUser}
+      />
 
       <div className="center">
         <div className="defaultContainer">
@@ -64,7 +79,7 @@ export default function PaymentMethods() {
                 <h3 className="redH3">{message}</h3>
               </div>
               <div className="buttonContainerPayment">
-                <button className="button">Go back</button>
+                <button className="button" onClick={goBack}>Go back</button>
               </div>
             </div>
           ) : (

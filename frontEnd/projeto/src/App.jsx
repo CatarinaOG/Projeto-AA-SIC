@@ -45,10 +45,7 @@ function App() {
 		bank_details: "23455667234"
 	});
   
-
-
-
-	const [event, setEvent] = useState();
+	const [eventId, setEventId] = useState();
 
 	return (
 		<BrowserRouter>
@@ -57,7 +54,7 @@ function App() {
 				<Home setUser={setUser}/>
 			}/>
 			<Route path="/HomeUser" element={
-				<HomeUser user={user} setUser={setUser}/>
+				<HomeUser user={user} setUser={setUser} setEventId={setEventId}/>
 			}/>
 			<Route path="/HomePromoter" element={
 				<HomePromoter />
@@ -88,6 +85,15 @@ function App() {
 			}/>
 			<Route path="/Suggestion" element={
 				<SuggestEvent user={user} setUser={setUser}/>
+			}/>
+			<Route path="/Browse" element={
+				<Browse setEventId={setEventId} user={user} setUser={setUser}/>
+			}/>
+			<Route path="/Event" element={
+				<Event eventId={eventId} user={user} setUser={setUser}/>
+			}/>
+			<Route path="/PaymentMethods" element={
+				<PaymentMethods user={user} setUser={setUser}/>
 			}/>
 		</Routes>
 		</BrowserRouter>

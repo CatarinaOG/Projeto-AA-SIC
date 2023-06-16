@@ -4,8 +4,9 @@ import "../../Styles/Home.css"
 
 import CalendarEvent from "./CalendarEvent"
 
-export default function Calendar(){
+export default function Calendar(props){
 
+    const {setEventId} = props
 
     const [events,setEvents] = useState([
         {
@@ -42,7 +43,7 @@ export default function Calendar(){
 
     const showEvents = events.map( event => {
             return (
-                <CalendarEvent key={event.id} event={event} />
+                <CalendarEvent key={event.id} event={event} setEventId={setEventId} />
             )        
         }
     )

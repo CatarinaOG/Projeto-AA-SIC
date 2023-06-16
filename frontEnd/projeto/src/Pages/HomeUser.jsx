@@ -1,15 +1,21 @@
+import { useNavigate } from 'react-router-dom';
+
 import Calendar from "../Components/Home/Calendar"
 import NavBarUser from "../Components/NavBar/NavBarUser"
-
 import Wallpaper from "../Images/wallpaper.png"
 import Magnifier from "../Images/magnifier.png"
 
-import { useState } from "react"
+
+export default function HomeUser(props){
+
+    const {user,setUser,setEventId} = props
+
+    const navigate = useNavigate();
 
 
-export default function Home(props){
-
-    const {user,setUser} = props
+    function handleFormSubmit(){
+        navigate("/Browse")
+    }
 
     return(
         <div>
@@ -25,11 +31,13 @@ export default function Home(props){
 
                 <div className="input-wrapper">
                     <img className="magnifier" src={Magnifier} alt="" />
-                    <input className="inputHome" type="text" placeholder="Where do you want to go?"/>              
+                    <form onSubmit={handleFormSubmit}>
+                        <input className="inputHome" type="text" placeholder="Where do you want to go?"/>              
+                    </form>
                 </div>
             </div>
 
-            <Calendar />
+            <Calendar setEventId={setEventId}/>
 
         </div>
     )
