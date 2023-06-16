@@ -4,6 +4,7 @@ import PaymentMethodElem from "../Components/PaymentMethods/PaymentMethodElem";
 import MBWayPopIn from "../Components/PaymentMethods/MBWayPopIn";
 import PayPalPopIn from "../Components/PaymentMethods/PayPalPopIn";
 import VisaPopIn from "../Components/PaymentMethods/VisaPopIn";
+import PopUpAddVenue from "../Components/AddVenue/PopUpAddVenue";
 
 export default function CreatePromoter() {
   const [name, setName] = useState("");
@@ -12,6 +13,8 @@ export default function CreatePromoter() {
   const [longitude, setLongitude] = useState("");
   const [capacity, setCapacity] = useState("");
   const [city, setCity] = useState("");
+  const [message, setMessage] = useState("");
+  const [popUpTrigger, setPopUpTrigger] = useState(false);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -22,7 +25,7 @@ export default function CreatePromoter() {
   };
 
   const handleCityChange = (event) => {
-    setAddress(event.target.value);
+    setCity(event.target.value);
   };
 
   const handleLatitudeChange = (event) => {
@@ -34,17 +37,39 @@ export default function CreatePromoter() {
   };
 
   const handleCapacityChange = (event) => {
-    setCapacity(event.target.value);
+    const value = event.target.value;
+
+    if (value === "" || /^\d+$/.test(value)) {
+      setCapacity(value);
+      console.log("Correct");
+      setMessage("");
+    } else {
+      console.log("Incorrect");
+
+      setMessage("Capacity values must be positive integers");
+    }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Access the input values here (name, email, password, confirmPassword, employer)
-    console.log(name, address, latitude, longitude, capacity);
+    if (
+      name === "" ||
+      address === "" ||
+      latitude === "" ||
+      longitude === "" ||
+      capacity === "" ||
+      city === ""
+    ) {
+      setMessage("One or More inputs incomplete");
+    } else {
+      setPopUpTrigger(true);
+      console.log(name, address, latitude, longitude, capacity);
+    }
   };
   return (
     <div>
       <NavBarUser />
+      <PopUpAddVenue trigger={popUpTrigger} setPopUpTrigger={setPopUpTrigger} />
       <div className="center">
         <div className="CreateVenueContainer">
           <h1 className="h1CreateVenue">Add a Venue</h1>
@@ -73,7 +98,7 @@ export default function CreatePromoter() {
                 className="inputFormCreateVenue"
                 type="text"
                 value={city}
-                onChange={handleAddressChange}
+                onChange={handleCityChange}
               ></input>
             </div>
             <div className="divFormCreateVenue">
@@ -101,6 +126,9 @@ export default function CreatePromoter() {
                   onChange={handleLongitudeChange}
                 ></input>
               </div>
+            </div>
+            <div className="divButtonCreatePromoter">
+              <h3 className="redH3">{message}</h3>
             </div>
             <div className="divButtonCreatePromoter">
               <input className="button" type="submit" value="Submit" />
