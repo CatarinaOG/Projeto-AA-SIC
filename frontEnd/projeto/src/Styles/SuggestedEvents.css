@@ -1,0 +1,21 @@
+
+
+.suggestedContainer{
+    background-color: var(--dark-blue);
+    border-radius: 15px;
+    margin-top: 20px;
+    width: 70vw;
+    height: 100px;
+    position: relative;
+}
+
+.suggestedInfo{
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+.buttonSuggestedContainer{
+    position: absolute;
+    right: 20px;
+    top: 30%;
+}
