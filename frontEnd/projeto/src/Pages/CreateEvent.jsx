@@ -6,20 +6,69 @@ import PayPalPopIn from "../Components/PaymentMethods/PayPalPopIn";
 import VisaPopIn from "../Components/PaymentMethods/VisaPopIn";
 import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
 import AddButton from "../Images/add.png";
-import TypeList from "../Components/CreateEvent/TypeList";
+import { TypeList } from "../Components/CreateEvent/TypeList"; // Import TypeList component correctly
+import PopUpAddType from "../Components/CreateEvent/PopUpAddType";
+import PopUpAddArtist from "../Components/CreateEvent/PopUpAddArtist";
+import ArtistElem from "../Components/CreateEvent/ArtistElem";
 
 export default function CreateEvent() {
   const [eventName, setEventName] = useState("");
-  const [eventLocation, setEventLocation] = useState("");
+  const [eventVenue, setEventVenue] = useState(""); // Define eventVenue state variable
   const [eventDateStart, setEventDateStart] = useState("");
   const [eventDateEnd, setEventDateEnd] = useState("");
+  const [popUpTrigger1, setPopUpTrigger1] = useState(false);
+  const [popUpTrigger2, setPopUpTrigger2] = useState(false);
+
+  const [options, setOptions] = useState([
+    // para ser substituido pelo pedido com base no filtro
+    {
+      venueName: "Theatro Circo ",
+    },
+    {
+      venueName: "Hard Club Porto",
+    },
+    {
+      venueName: "Estádio Cidade Coimbra",
+    },
+    {
+      venueName: "Parque da Cidade",
+    },
+    {
+      venueName: "Parque da Belavista",
+    },
+    {
+      venueName: "Passeio Marítimo Algés",
+    },
+    {
+      venueName: "LAV - Lisboa ao Vivo",
+    },
+  ]);
+
+  const [types, setTypes] = useState([]);
+  const [artists, setArtists] = useState([]);
+
+  const handleAddType = (newType) => {
+    setTypes((prevTypes) => [...prevTypes, newType]);
+  };
+
+  const handleRemoveType = (type) => {
+    setTypes((prevTypes) => prevTypes.filter((item) => item !== type));
+  };
+
+  const handleAddArtist = (newArtist) => {
+    setArtists((prevArtists) => [...prevArtists, newArtist]);
+  };
+
+  const handleRemoveArtist = (artist) => {
+    setArtists((prevArtists) => prevArtists.filter((item) => item !== artist));
+  };
 
   const handleEventNameChange = (event) => {
     setEventName(event.target.value);
   };
 
-  const handleEventLocationChange = (event) => {
-    setEventLocation(event.target.value);
+  const handleEventVenueChange = (event) => {
+    setEventVenue(event.target.value);
   };
 
   const handleEventDateStartChange = (event) => {
@@ -33,11 +82,22 @@ export default function CreateEvent() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Access the input values here (name, email, password, confirmPassword, employer)
-    console.log(eventName, eventLocation, eventDateStart, eventDateEnd);
+    console.log(eventName, eventVenue, eventDateStart, eventDateEnd);
   };
+
   return (
     <div>
       <NavBarPromoter />
+      <PopUpAddType
+        trigger={popUpTrigger1}
+        setPopUpTrigger={setPopUpTrigger1}
+        onAddType={handleAddType}
+      />
+      <PopUpAddArtist
+        trigger={popUpTrigger2}
+        setPopUpTrigger={setPopUpTrigger2}
+        onAddArtist={handleAddArtist}
+      ></PopUpAddArtist>
       <div className="center">
         <div className="CreateEventContainer">
           <h1 className="h1CreateEvent">Event Information</h1>
@@ -45,26 +105,36 @@ export default function CreateEvent() {
             <div className="divFormCreateEvent">
               <h2 className="h2FormCreateEvent">Event Name</h2>
               <input
-                className="inputFormCreatePromoter"
+                className="inputFormCreateEvent"
                 type="text"
                 value={eventName}
                 onChange={handleEventNameChange}
               ></input>
             </div>
             <div className="divFormCreatePromoter">
-              <h2 className="h2FormCreatePromoter">Location</h2>
-              <input
-                className="inputFormCreatePromoter"
-                type="email"
-                value={eventLocation}
-                onChange={handleEventLocationChange}
-              ></input>
+              <h2 className="h2FormCreatePromoter">Venue</h2>
+              <div className="dateFormContainer">
+                <select
+                  className="inputVenueCreateEvent"
+                  value={eventVenue}
+                  onChange={handleEventVenueChange}
+                >
+                  <option></option>
+
+                  {options.map((option, index) => (
+                    <option key={index} value={option.venueName}>
+                      {option.venueName}
+                    </option>
+                  ))}
+                </select>
+                <h4 className="underlined">Add New</h4>
+              </div>
             </div>
             <div className="divFormCreatePromoter">
-              <h2 className="h2FormCreatePromoter">Date(s)</h2>
+              <h2 className="h2FormCreatePromoter">Date(Start/End)</h2>
               <div className="dateFormContainer">
                 <input
-                  className="dateFormCreateEvent"
+                  className="inputFormCreateEvent"
                   type="date"
                   value={eventDateStart}
                   onChange={handleEventDateStartChange}
@@ -81,21 +151,42 @@ export default function CreateEvent() {
               <div className="div1CreateEvent">
                 <div className="divCreateEventTitle">
                   <h2>Create Ticket Types</h2>
-                  <img src={AddButton} alt="" className="addIcon" />
+                  <img
+                    src={AddButton}
+                    alt=""
+                    className="addIcon"
+                    onClick={() => setPopUpTrigger1(true)}
+                  />
                 </div>
                 <div>
-                  <TypeList></TypeList>
-                  <TypeList></TypeList>
-                  <TypeList></TypeList>
+                  {types.map((value, index) => (
+                    <TypeList
+                      key={index}
+                      type={value}
+                      onRemoveType={handleRemoveType}
+                    ></TypeList>
+                  ))}
                 </div>
               </div>
               <div className="div2CreateEvent">
                 <div className="divCreateEventTitle">
                   <h2>Artist</h2>
-                  <img src={AddButton} alt="" className="addIcon" />
+
+                  <img
+                    src={AddButton}
+                    alt=""
+                    className="addIcon"
+                    onClick={() => setPopUpTrigger2(true)}
+                  />
                 </div>
                 <div>
-                  <TypeList></TypeList>
+                  {artists.map((value, index) => (
+                    <ArtistElem
+                      key={index}
+                      artist={value}
+                      onRemoveArtist={handleRemoveArtist}
+                    ></ArtistElem>
+                  ))}
                 </div>
               </div>
             </div>
