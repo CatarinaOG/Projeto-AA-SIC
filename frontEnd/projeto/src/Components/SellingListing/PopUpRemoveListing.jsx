@@ -1,6 +1,12 @@
 import "../../Styles/Profile.css";
 
 export default function PopUpRemoveListing(props) {
+  const handleRemoveList = () => {
+    props.onRemove(props.popUpID);
+    props.setPopUpTrigger(false);
+    props.setPopUpID("");
+  };
+
   return props.trigger ? (
     <div>
       <div className="editContainter">
@@ -8,10 +14,7 @@ export default function PopUpRemoveListing(props) {
           Are you sure you want to remove the listing?
         </h3>
         <div className="popUpSellingListButton">
-          <button
-            className="button"
-            onClick={() => props.setPopUpTrigger(false)}
-          >
+          <button className="button" onClick={handleRemoveList}>
             {" "}
             Yes
           </button>
