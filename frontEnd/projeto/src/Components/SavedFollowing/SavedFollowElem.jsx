@@ -1,13 +1,14 @@
 import "../../Styles/SellingListing.css";
 import close from "../../Images/close.png";
 
-function clickedClose(setPopUpTrigger) {
-  setPopUpTrigger(true);
-  console.log("Clicked");
-}
-
 export default function SavedFollowElem(props) {
-  const { event, setPopUpTrigger } = props;
+  const { event, setPopUpTrigger, setPopUpID } = props;
+
+  function clickedClose() {
+    setPopUpTrigger(true);
+    setPopUpID(event.id);
+    console.log("Clicked");
+  }
 
   return (
     <div className="listing">
@@ -23,7 +24,7 @@ export default function SavedFollowElem(props) {
           on"
           src={close}
           alt=""
-          onClick={() => clickedClose(setPopUpTrigger)}
+          onClick={clickedClose}
         />
       </div>
     </div>

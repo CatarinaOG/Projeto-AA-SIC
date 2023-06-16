@@ -1,11 +1,10 @@
 import NavBarUser from "../Components/NavBar/NavBarUser";
-import PopUpRemoveListing from "../Components/SellingListing/PopUpRemoveListing";
 import SavedFollowElem from "../Components/SavedFollowing/SavedFollowElem.jsx";
 
 import { useState } from "react";
 import PopUpSaved from "../Components/SavedFollowing/PopUpSaved";
 
-export default function SavedEvents() {
+export default function FollowedEvents() {
   const [events, setEvents] = useState([
     // para ser substituido pelo pedido com base no filtro
     {
@@ -99,7 +98,7 @@ export default function SavedEvents() {
       />
       <div className="center">
         <div className="defaultContainer">
-          <h1>Saved Events</h1>
+          <h1>Followed Events</h1>
           <div className="eventsContainer">{eventsFiltered}</div>
         </div>
       </div>

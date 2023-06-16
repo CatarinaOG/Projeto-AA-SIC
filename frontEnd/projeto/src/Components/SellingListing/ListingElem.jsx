@@ -1,13 +1,16 @@
 import "../../Styles/SellingListing.css";
 import close from "../../Images/close.png";
-
-function clickedClose(setPopUpTrigger) {
-  setPopUpTrigger(true);
-  console.log("Clicked");
-}
+import sold from "../../Images/soldIcon.png";
+import selling from "../../Images/onSaleIcon.png";
 
 export default function ListinElem(props) {
-  const { event, setPopUpTrigger } = props;
+  const { event, setPopUpTrigger, setPopUpID } = props;
+
+  function clickedClose() {
+    setPopUpTrigger(true);
+    setPopUpID(event.id);
+    console.log("Clicked");
+  }
 
   return (
     <div className="listing">
@@ -21,14 +24,14 @@ export default function ListinElem(props) {
       <div className="listing-elem-2">
         <h3>{event.ticketType}</h3>
         <h3>{event.ticketPrice} $</h3>
+        {props.event.status === "selling" ? (
+          <img src={selling} alt="" className="soldSellingIcon" />
+        ) : (
+          <img src={sold} alt="" className="soldSellingIcon" />
+        )}
       </div>
       <div className="listing-elem-3">
-        <img
-          className="closeIcon"
-          src={close}
-          alt=""
-          onClick={() => clickedClose(setPopUpTrigger)}
-        />
+        <img className="closeIcon" src={close} alt="" onClick={clickedClose} />
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -27,6 +26,7 @@ import SellTicket from "./Pages/SellTicket";
 import EventsListing from "./Pages/EventsListing";
 import CreateEvent from "./Pages/CreateEvent";
 import AddVenue from "./Pages/AddVenue";
+import FollowedEvents from "./Pages/FollowedEvents";
 
 import "./Styles/General.css";
 import "./Styles/Event.css";
@@ -37,7 +37,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AddVenue></AddVenue>} />
+        <Route path="/" element={<FollowedEvents></FollowedEvents>} />
       </Routes>
     </BrowserRouter>
   );
