@@ -1,27 +1,43 @@
+import { useNavigate } from 'react-router-dom';
+
 import Calendar from "../Components/Home/Calendar"
 import NavBarUser from "../Components/NavBar/NavBarUser"
-
 import Wallpaper from "../Images/wallpaper.png"
 import Magnifier from "../Images/magnifier.png"
 
 
-export default function Home(){
+export default function HomeUser(props){
+
+    const {user,setUser,setEventId} = props
+
+    const navigate = useNavigate();
+
+
+    function handleFormSubmit(){
+        navigate("/Browse")
+    }
 
     return(
         <div>
 
-            <NavBarUser />
+            <NavBarUser 
+                selected="home"
+                user={user} 
+                setUser={setUser}
+            />
 
-            <div class="container">
+            <div className="container">
                 <img className="wallpaper" src={Wallpaper} alt="" />
 
-                <div class="input-wrapper">
+                <div className="input-wrapper">
                     <img className="magnifier" src={Magnifier} alt="" />
-                    <input className="inputHome" type="text" placeholder="Where do you want to go?"/>              
+                    <form onSubmit={handleFormSubmit}>
+                        <input className="inputHome" type="text" placeholder="Where do you want to go?"/>              
+                    </form>
                 </div>
             </div>
 
-            <Calendar />
+            <Calendar setEventId={setEventId}/>
 
         </div>
     )

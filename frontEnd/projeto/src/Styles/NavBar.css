@@ -70,6 +70,8 @@
     font-weight: 800;
     margin-right: 20px;
     text-decoration: underline;
+    text-underline-offset: 10px;
+    cursor: pointer;
 }
 
 .sellTab{
@@ -91,12 +93,13 @@
     padding: 10px 20px 10px 20px;
     border-radius: 10px;
     text-decoration: underline;
+    text-underline-offset: 10px;
 }
 
 .popup{
 
     position: absolute;
-    right: 40px;
+    right: 55px;
     top: 60px;
     background-color: var(--secondary-color);
     border-radius: 10px;
@@ -114,7 +117,7 @@
 
 .input{
     margin-bottom: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 200px;
 }
 
@@ -129,19 +132,24 @@
     cursor: pointer
 }
 
+.popupLoginSignup:hover{
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.2);
+}
+
 .popupButton{
     background-color: var(--green);
     color: var(--primary-text-color);
     margin-top: 20px;
     margin-bottom: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid;
     cursor: pointer;
     width: 150px;
     align-self: center;
 }
 
-.loginButton:active{
+.popupButton:active{
     background-color: var(--second-green)
 }
 

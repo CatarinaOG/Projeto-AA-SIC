@@ -9,7 +9,7 @@ import BrowseTicket from "../Components/Browse/BrowseTicket"
 
 export default function Browse(props){
 
-    const {setEvent} = props
+    const {setEventId,user,setUser} = props
 
     const [events,setEvents] =useState([ // para ser substituido pelo pedido com base no filtro
         {
@@ -20,17 +20,6 @@ export default function Browse(props){
             time: "9:25 PM",
             eventName: "Coldplay - Music Of The Spheres World Tour",
             eventPlace: "Estádio Cidade de Coimbra, Coimbra",
-            
-            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
-            tickets_avaiable: 3,
-            tickets_sold: 4,
-            tickets_wanted: 200,
-            is_saved: true,
-            is_followed: true,
-            lat: 41.528169,
-            lng: -8.583342,
-            upcoming_events: 2,
-
         },
         {
             id: 2,
@@ -40,16 +29,6 @@ export default function Browse(props){
             time: "08:00 PM",
             eventName: "Post Malone - Twelve Carat Tour",
             eventPlace: "Ziggo Dome, Amsterdam",
-            
-            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
-            tickets_avaiable: 3,
-            tickets_sold: 4,
-            tickets_wanted: 200,
-            is_saved: true,
-            is_followed: true,
-            lat: 41.528169,
-            lng: -8.583342,
-            upcoming_events: 2,
         },
         {
             id: 3,
@@ -59,16 +38,6 @@ export default function Browse(props){
             time: "03:00 PM",
             eventName: "NOS ALIVE'23",
             eventPlace: "NOS Alive, Algés, Portugal",
-            
-            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
-            tickets_avaiable: 3,
-            tickets_sold: 4,
-            tickets_wanted: 200,
-            is_saved: true,
-            is_followed: true,
-            lat: 41.528169,
-            lng: -8.583342,
-            upcoming_events: 2,
         },
         {
             id: 4,
@@ -78,16 +47,6 @@ export default function Browse(props){
             time: "03:00 PM",
             eventName: "NOS ALIVE'23",
             eventPlace: "NOS Alive, Algés, Portugal",
-            
-            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
-            tickets_avaiable: 3,
-            tickets_sold: 4,
-            tickets_wanted: 200,
-            is_saved: true,
-            is_followed: true,
-            lat: 41.528169,
-            lng: -8.583342,
-            upcoming_events: 2,
         },
         {
             id: 5,
@@ -97,16 +56,6 @@ export default function Browse(props){
             time: "03:00 PM",
             eventName: "NOS ALIVE'23",
             eventPlace: "NOS Alive, Algés, Portugal",
-            
-            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
-            tickets_avaiable: 3,
-            tickets_sold: 4,
-            tickets_wanted: 200,
-            is_saved: true,
-            is_followed: true,
-            lat: 41.528169,
-            lng: -8.583342,
-            upcoming_events: 2,
         },
         {
             id: 6,
@@ -116,16 +65,6 @@ export default function Browse(props){
             time: "03:00 PM",
             eventName: "NOS ALIVE'23",
             eventPlace: "NOS Alive, Algés, Portugal",
-            
-            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
-            tickets_avaiable: 3,
-            tickets_sold: 4,
-            tickets_wanted: 200,
-            is_saved: true,
-            is_followed: true,
-            lat: 41.528169,
-            lng: -8.583342,
-            upcoming_events: 2,
         },
         {
             id: 7,
@@ -135,16 +74,6 @@ export default function Browse(props){
             time: "03:00 PM",
             eventName: "NOS ALIVE'23",
             eventPlace: "NOS Alive, Algés, Portugal",
-            
-            image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
-            tickets_avaiable: 3,
-            tickets_sold: 4,
-            tickets_wanted: 200,
-            is_saved: true,
-            is_followed: true,
-            lat: 41.528169,
-            lng: -8.583342,
-            upcoming_events: 2,
         },
     ])
 
@@ -152,7 +81,7 @@ export default function Browse(props){
         <BrowseTicket 
             key={event.id}
             event={event} 
-            setEvent={setEvent}
+            setEventId={setEventId}
         />
     )
 
@@ -160,7 +89,11 @@ export default function Browse(props){
     return(
         <div>
 
-            <NavBarUser />
+            <NavBarUser 
+                selected="home"
+                user={user}
+                setUser={setUser}
+            />
 
             <div className="center">
                 <div className="defaultContainer">

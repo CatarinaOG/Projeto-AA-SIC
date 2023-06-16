@@ -98,7 +98,7 @@ export default function FaseFile(props){
                         </div>
                         
                         <div className="center">
-                            <a href="/" className="button">Home</a>
+                            <a href="/HomeUser" className="button">Home</a>
                         </div>
                     </div>
                 }

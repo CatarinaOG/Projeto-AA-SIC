@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 
 import goBackImg from "../../Images/goBack.png"
 
@@ -5,11 +6,15 @@ export default function FullTicket(props){
 
     const {ticket,ticketType,user,setShow} = props
 
+    const navigate = useNavigate();
+
+
     function goBack(){
         setShow("tickets")
     }
 
     function buyTicket(){
+        navigate('/PaymentMethods')
         // enviar pedido user.id ticket.id
     }
 

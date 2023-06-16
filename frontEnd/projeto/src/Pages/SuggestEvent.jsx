@@ -5,7 +5,9 @@ import BlackClose from "../Images/blackClose.png"
 
 import "../Styles/SuggestEvent.css"
 
-export default function SuggestEvent(){
+export default function SuggestEvent(props){
+
+    const {user,setUser} = props
 
     const [eventName, setEventName] = useState('');
     const [place, setPlace] = useState('');
@@ -27,7 +29,11 @@ export default function SuggestEvent(){
 
     return(
         <div>
-            <NavBarUser />
+            <NavBarUser 
+                selected="home"
+                user={user}
+                setUser={setUser}
+            />
 
             <div className="center">
                 <div className="defaultContainer">

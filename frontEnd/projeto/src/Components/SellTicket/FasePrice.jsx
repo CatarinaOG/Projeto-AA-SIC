@@ -24,6 +24,7 @@ export default function FasePrice(props){
 
                 <SmallEventSelected 
                     ticket={ticket}
+                    setTicket={setTicket}
                     setFase={setFase}/>
 
                 <h1>Select Ticket</h1>
