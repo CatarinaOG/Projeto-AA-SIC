@@ -17,6 +17,8 @@ export default function SellingListing() {
       eventName: "Coldplay - Music Of The Spheres World Tour",
       eventPlace: "Estádio Cidade de Coimbra, Coimbra",
       ticketPrice: "80.56",
+      id: 1,
+      status: "selling",
     },
     {
       dayOfWeek: "Friday",
@@ -27,6 +29,8 @@ export default function SellingListing() {
       eventName: "Post Malone - Twelve Carat Tour",
       eventPlace: "Ziggo Dome, Amsterdam",
       ticketPrice: "109.02",
+      id: 2,
+      status: "selling",
     },
     {
       dayOfWeek: "Thursday",
@@ -37,52 +41,49 @@ export default function SellingListing() {
       eventName: "NOS ALIVE'23",
       eventPlace: "NOS Alive, Algés, Portugal",
       ticketPrice: "91,07",
+      id: 3,
+      status: "sold",
     },
     {
       dayOfWeek: "Thursday",
       month: "Jul",
       day: "7",
       time: "03:00 PM",
-      ticketType: "1 Day Ticket | 7 July",
+      ticketType: "1 Day Ticket | 8 July",
       eventName: "NOS ALIVE'23",
       eventPlace: "NOS Alive, Algés, Portugal",
       ticketPrice: "91,07",
+      id: 4,
+      status: "selling",
     },
     {
       dayOfWeek: "Thursday",
       month: "Jul",
       day: "7",
       time: "03:00 PM",
-      ticketType: "1 Day Ticket | 7 July",
+      ticketType: "1 Day Ticket | 6 July",
       eventName: "NOS ALIVE'23",
       eventPlace: "NOS Alive, Algés, Portugal",
       ticketPrice: "91,07",
-    },
-    {
-      dayOfWeek: "Thursday",
-      month: "Jul",
-      day: "7",
-      time: "03:00 PM",
-      ticketType: "1 Day Ticket | 7 July",
-      eventName: "NOS ALIVE'23",
-      eventPlace: "NOS Alive, Algés, Portugal",
-      ticketPrice: "91,07",
-    },
-    {
-      dayOfWeek: "Thursday",
-      month: "Jul",
-      day: "7",
-      time: "03:00 PM",
-      ticketType: "1 Day Ticket | 7 July",
-      eventName: "NOS ALIVE'23",
-      eventPlace: "NOS Alive, Algés, Portugal",
-      ticketPrice: "91,07",
+      id: 5,
+      status: "sold",
     },
   ]);
   const [popUpTrigger, setPopUpTrigger] = useState(false);
+  const [popUpID, setPopUpID] = useState("");
+
+  const handleRemoveEvents = (id) => {
+    setEvents((prevEvents) => prevEvents.filter((item) => item.id !== id));
+  };
 
   const eventsFiltered = events.map((event) => {
-    return <ListingElem event={event} setPopUpTrigger={setPopUpTrigger} />;
+    return (
+      <ListingElem
+        event={event}
+        setPopUpTrigger={setPopUpTrigger}
+        setPopUpID={setPopUpID}
+      />
+    );
   });
 
   return (
@@ -92,6 +93,9 @@ export default function SellingListing() {
         trigger={popUpTrigger}
         setPopUpTrigger={setPopUpTrigger}
         type={"selling"}
+        popUpID={popUpID}
+        setPopUpID={setPopUpID}
+        onRemove={handleRemoveEvents}
       />
 
       <div className="center">

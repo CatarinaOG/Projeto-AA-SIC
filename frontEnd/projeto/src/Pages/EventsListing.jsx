@@ -98,7 +98,7 @@ export default function EventsListing() {
         <div className="defaultContainer">
           <div className="headerButtonEventListing">
             <h1> Events</h1>
-            <AddPrompt></AddPrompt>
+            <AddPrompt />
           </div>
           <div className="eventsContainer">{eventsFiltered}</div>
         </div>

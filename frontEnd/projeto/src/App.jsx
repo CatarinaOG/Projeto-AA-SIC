@@ -7,6 +7,7 @@ import "./Styles/PaymentMethods.css";
 import "./Styles/CreatePromoter.css";
 import "./Styles/EventsListing.css";
 import "./Styles/CreateEvent.css";
+import "./Styles/AddVenue.css";
 
 import PaymentMethods from "./Pages/PaymentMethods";
 import Notifications from "./Pages/Notifications";
@@ -24,19 +25,29 @@ import SellingListing from "./Pages/SellingListing";
 import SellTicket from "./Pages/SellTicket";
 import EventsListing from "./Pages/EventsListing";
 import CreateEvent from "./Pages/CreateEvent";
+import AddVenue from "./Pages/AddVenue";
+import FollowedEvents from "./Pages/FollowedEvents";
 
 import "./Styles/General.css";
 import "./Styles/Event.css";
 
 function App() {
-  const [event, setEvent] = useState();
+
+  const [event,setEvent] = useState()
+  const [user,setUser] = useState({
+    name: "catarina",
+    id: 1,
+  })
+
 
   return (
+
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<CreateEvent></CreateEvent>} />
+        <Route path="/" element={<FollowedEvents></FollowedEvents>} />
       </Routes>
     </BrowserRouter>
+
   );
 }
 

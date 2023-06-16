@@ -25,7 +25,7 @@
     background-color: var(--white);
     border-radius: 10px;
     color: var(--light-blue);
-    width: 100px;
+    width: 150px;
     cursor: pointer;
 }
 
@@ -43,7 +43,7 @@
     background-color: var(--white);
     border-radius: 10px;
     color: var(--light-blue);
-    width: 100px;
+    width: 150px;
     cursor: pointer;
     animation: moveDown 0.1s;
 }
@@ -76,10 +76,14 @@
 .eventTab:hover{
     text-decoration: underline;
     cursor: pointer;
+    text-decoration-color: var(--light-blue);
+    text-underline-offset: 10px;
 }
 
 .eventTabSelected{
     text-decoration: underline;
+    text-decoration-color: var(--light-blue);
+    text-underline-offset: 10px;
     cursor: pointer;
 }
 
@@ -227,4 +231,112 @@
     margin: 20px;
     position: relative;
     opacity: 0.5;
+}
+
+
+.ticketTypeTitle{
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 50px;
+    text-align: center;
+    position: relative;
+}
+
+.goBackImage{
+    top: 30%;
+    height: 30px;
+    position: absolute;
+    left: 20px;
+    cursor: pointer;
+}
+
+.goBackImage:hover{
+    top: 30%;
+    height: 30px;
+    position: absolute;
+    left: 20px;
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.buySection{
+    margin-top: 40px;
+    height: 100px;
+    width: 50vw;
+    border: 1px solid white;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.userSection{
+    margin-top: 20px;
+    height: 100px;
+    width: 50vw;
+    border: 1px solid white;
+    border-radius: 15px;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.userImageBuySection{
+    position: absolute;
+    height: 60px;
+    top: 15%;
+    left: 10px;
+}
+
+.userInfoSection{
+    margin-top: 20px;
+    margin-left: 80px;
+}
+
+
+
+.artistsSection{
+    margin-top: 8vh;
+    margin-bottom: 50px;
+}
+
+.artistSection{
+    height: 80px;
+    background-color: var(--dark-blue);
+    position: relative;
+    margin-top: 10px;
+    border-radius: 15px;
+}
+
+.artistImage{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    left: 10px;
+    top: 18%;
+}
+
+.artistInfo{
+    margin-left: 80px;
+    padding-top: 10px;
+}
+
+
+.map {
+    height: 40vh;
+    width: 40vw;
+}
+  
+.map-container {
+  height: 100%;
+  width: 100%;
+}
+
+.mapInfo{
+    margin-top: 5px;
+    margin-left: 20px;
 }

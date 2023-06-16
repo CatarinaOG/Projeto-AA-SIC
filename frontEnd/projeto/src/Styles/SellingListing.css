@@ -30,7 +30,13 @@
 }
 
 .closeIcon {
-  transform: scale(0.7); /* Adjust the scaling factor as needed */
+  transform: scale(0.6);
+}
+
+.soldSellingIcon {
+  display: relative;
+  max-width: 40px;
+  filter: invert(100%);
 }
 
 .popUpSellingListButton {

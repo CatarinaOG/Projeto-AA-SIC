@@ -44,12 +44,14 @@ export default function Filters(props){
                 options={placeOptions}/>
 
             <Filter 
+                key="Time"
                 type="Time" 
                 setFilter={setFilter} 
                 getNewFilterResults={getNewFilterResults} 
                 options={timeOptions}/>
 
             <Filter 
+                key="Category"
                 type="Category" 
                 setFilter={setFilter} 
                 getNewFilterResults={getNewFilterResults} 
