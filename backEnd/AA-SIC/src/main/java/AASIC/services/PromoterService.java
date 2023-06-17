@@ -3,9 +3,7 @@ package AASIC.services;
 
 import AASIC.model.*;
 import AASIC.repositories.*;
-import AASIC.requests.AddEventRequest;
-import AASIC.requests.ArtistRequest;
-import AASIC.requests.TicketTypeRequest;
+import AASIC.requests.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +20,7 @@ public class PromoterService {
     private final ArtistInEventRepo artistInEventRepo;
     private final LocationRepo locationRepo;
     private final PromoterRepo promoterRepo;
+    private final CategoryRepo categoryRepo;
 
     public void create_event(AddEventRequest request, String email){
         Event event = new Event();
@@ -75,4 +74,31 @@ public class PromoterService {
         }
     }
 
+
+    public void create_artist(CreateArtistRequest request) {
+        String artis_name = request.getName();
+        Artist artist = new Artist();
+        artist.setName(artis_name);
+        artistRepo.save(artist);
+
+    }
+
+    public void create_category(CreateArtistRequest request) {
+        String categary_name = request.getName();
+        Category category = new Category();
+        category.setName(categary_name);
+        categoryRepo.save(category);
+
+    }
+
+    public void create_location(AddLocalRequest request) {
+        Location location = new Location();
+        location.setName(request.getName());
+        location.setAddress(request.getAddress());
+        location.setLatitude(request.getLatitude());
+        location.setLongitude(request.getLongitude());
+        location.setCapacity(request.getCapacity());
+        location.setCity(request.getCity());
+        locationRepo.save(location);
+    }
 }
