@@ -17,4 +17,5 @@ public class EditProfileRequest {
     private String language;
     private String card_number;
     private String card_cvc;
+    private String picture;
 }

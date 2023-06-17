@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.mapping.Set;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -20,9 +21,9 @@ public class TicketType{
     @Column(name = "type")
     private String type;
     @Column(name = "start_date")
-    private Date start_date;
+    private LocalDateTime start_date;
     @Column(name = "end_date")
-    private Date end_date;
+    private LocalDateTime end_date;
     @Column(name = "price")
     private float price;
     @Column(name = "'range'")
