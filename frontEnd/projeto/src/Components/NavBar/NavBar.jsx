@@ -1,7 +1,7 @@
 import { useState,useContext } from "react"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
+import { Cookies } from "react-cookie";
 import UserContext from "../../Contexts/UserContext"
-
 
 import Logo from "../../Images/logo.png"
 import Info from "../../Images/info.png"
@@ -11,7 +11,6 @@ import "../../Styles/NavBar.css"
 export default function NavBar(){
 
     const { setUser } = useContext(UserContext);
-
 
     const [showError,setShowError] = useState(0)
     const [error,setError] = useState("")
@@ -50,6 +49,8 @@ export default function NavBar(){
 
     function sendLoginRequest(){
 
+		const cookies = new Cookies()
+
         fetch("http://localhost:8080/api/user/login", {
             method: 'POST',
             headers: {
@@ -67,13 +68,16 @@ export default function NavBar(){
             
             switch (userResponse.type){
                 case "user": 
-                    navigate('/HomePromoter')
+                    navigate('/HomeUser')
+				    cookies.set('token',userResponse.token)
                     break
                 case "promoter":
                     navigate('/HomePromoter')
+				    cookies.set('token',userResponse.token)
                     break
                 case "admin":
                     navigate('/HomeAdmin')
+				    cookies.set('token',userResponse.token)
                     break
             }
         })
@@ -135,13 +139,13 @@ export default function NavBar(){
         <div>
             <nav className="navBar">
                 
-                <a href="/"><img className="logoImage" onClick={showNone} src={Logo} alt="" /></a>
+                <Link to="/"><img className="logoImage" onClick={showNone} src={Logo} alt="" /></Link>
 
                 <div className="navBarRighSide">
 
-                    <a href="" className="iconTab"><img src={Info} alt="" /></a>
-                    <a href="" className="tab" onClick={showLogin}>Login</a>
-                    <a href="" className="sellTab" onClick={showLogin}>Sell Tickets!</a>
+                    <Link to="" className="iconTab"><img src={Info} alt="" /></Link>
+                    <Link to="" className="tab" onClick={showLogin}>Login</Link>
+                    <Link to="" className="sellTab" onClick={showLogin}>Sell Tickets!</Link>
                     
                 </div>
 
