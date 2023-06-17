@@ -7,6 +7,8 @@ import PopUpSaved from "../Components/General/PopUpSaved";
 
 export default function SavedEvents(props) {
 
+	const {setEventId} = props
+
 	const [events, setEvents] = useState([
 		// para ser substituido pelo pedido com base no filtro
 		{
@@ -72,7 +74,12 @@ export default function SavedEvents(props) {
 	]);
 
 	const eventsFiltered = events.map((event) =>
-		<EventElem event={event} type="saved"/>
+		<EventElem 
+			key={event.id}
+			event={event} 
+			type="saved" 
+			setEventId={setEventId}
+		/>
 	);
 
 	return (

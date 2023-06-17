@@ -9,6 +9,8 @@ import UserContext from "../Contexts/UserContext"
 import BrowseTicket from "../Components/Browse/BrowseTicket"
 
 import "../Styles/Browse.css"
+import NavBarPromoter from "../Components/NavBar/NavBarPromoter"
+import NavBarAdmin from "../Components/NavBar/NavBarAdmin"
 
 
 export default function Browse(props){
@@ -92,8 +94,10 @@ export default function Browse(props){
 
     return(
         <div>
-            { user.email && <NavBarUser selected="home"/>}
-            { !user.email && <NavBar />}
+            { !user&& <NavBar />}
+            { user.type === "user" && <NavBarUser selected="home"/>}
+            { user.type === "promoter" && <NavBarPromoter selected="home"/>}
+            { user.type === "admin" && <NavBarAdmin selected="home"/>}
 
             <div className="center">
                 <div className="defaultContainer">

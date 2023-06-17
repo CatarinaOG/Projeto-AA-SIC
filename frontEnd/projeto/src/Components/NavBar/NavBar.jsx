@@ -1,5 +1,5 @@
 import { useState,useContext } from "react"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import UserContext from "../../Contexts/UserContext"
 
 
@@ -11,7 +11,6 @@ import "../../Styles/NavBar.css"
 export default function NavBar(){
 
     const { setUser } = useContext(UserContext);
-
 
     const [showError,setShowError] = useState(0)
     const [error,setError] = useState("")
@@ -67,7 +66,7 @@ export default function NavBar(){
             
             switch (userResponse.type){
                 case "user": 
-                    navigate('/HomePromoter')
+                    navigate('/HomeUser')
                     break
                 case "promoter":
                     navigate('/HomePromoter')
@@ -135,13 +134,13 @@ export default function NavBar(){
         <div>
             <nav className="navBar">
                 
-                <a href="/"><img className="logoImage" onClick={showNone} src={Logo} alt="" /></a>
+                <Link to="/"><img className="logoImage" onClick={showNone} src={Logo} alt="" /></Link>
 
                 <div className="navBarRighSide">
 
-                    <a href="" className="iconTab"><img src={Info} alt="" /></a>
-                    <a href="" className="tab" onClick={showLogin}>Login</a>
-                    <a href="" className="sellTab" onClick={showLogin}>Sell Tickets!</a>
+                    <Link to="" className="iconTab"><img src={Info} alt="" /></Link>
+                    <Link to="" className="tab" onClick={showLogin}>Login</Link>
+                    <Link to="" className="sellTab" onClick={showLogin}>Sell Tickets!</Link>
                     
                 </div>
 

@@ -1,4 +1,5 @@
-import {useContext} from "react"
+import { useContext } from "react"
+import { Link } from "react-router-dom"
 import UserContext from "../../Contexts/UserContext"
 
 import Logo from "../../Images/logo.png"
@@ -20,12 +21,12 @@ export default function NavBarAdmin(props){
         <div>
             <nav className="navBar">
                 
-                <a href="/"><img className="logoImage" src={Logo} alt="" /></a>
+                <Link to="/"><img className="logoImage" src={Logo} alt="" /></Link>
 
                 <div className="navBarRighSide">
 
-                    <a href="/Promoters" className={selected === "promoters" ? "tabSelected" : "tab"}>Promoters</a>
-                    <a href="/" className="iconTab" onClick={logout}><img src={Logout} alt="" /></a>
+                    <Link to="/Promoters" className={selected === "promoters" ? "tabSelected" : "tab"}>Promoters</Link>
+                    <Link to="/" className="iconTab" onClick={logout}><img src={Logout} alt="" /></Link>
                     
                 </div>
 

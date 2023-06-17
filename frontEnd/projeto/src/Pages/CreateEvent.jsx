@@ -13,8 +13,6 @@ export default function CreateEvent(props) {
 
   const {suggestedEvent} = props
 
-  console.log(suggestedEvent)
-
   const [eventName, setEventName] = useState("");
   const [eventVenue, setEventVenue] = useState("");
   const [eventCategory, setEventCategory] = useState("");

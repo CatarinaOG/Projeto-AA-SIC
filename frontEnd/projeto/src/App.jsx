@@ -43,6 +43,8 @@ function App() {
   	const [eventId, setEventId] = useState();
 	const [suggestedEvent,setSuggestedEvent] = useState({})
 
+    console.log(user)
+
   	return (
 		<BrowserRouter>
 			<UserContext.Provider value={{ user, setUser }}>
@@ -69,11 +71,11 @@ function App() {
 					/>
 					<Route
 						path="/SavedEvents" element={
-						<SavedEvents />}
+						<SavedEvents setEventId={setEventId}/>}
 					/>
 					<Route
 						path="/FollowedEvents" element={
-						<FollowedEvents />}
+						<FollowedEvents setEventId={setEventId}/>}
 					/>
 					<Route
 						path="/Profile" element={

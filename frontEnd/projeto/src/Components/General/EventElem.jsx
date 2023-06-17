@@ -2,11 +2,14 @@ import "../../Styles/SellingListing.css";
 import BlackClose from "../../Images/blackClose.png";
 import Close from "../../Images/close.png";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function EventElem(props) {
-	const {event,type} = props; // saved / followed
+	const {event,type,setEventId} = props; // saved / followed
 
 	const [showConfirmation,setShowConfirmation] = useState(false)
+
+	const navigate = useNavigate()
 
 	function deleteEvent() {
 		setShowConfirmation(true)
@@ -14,6 +17,11 @@ export default function EventElem(props) {
 
 	function closeConfirmation(){
 		setShowConfirmation(false)
+	}
+
+	function goToEvent(){
+		setEventId(event.id)
+		navigate("/Event")
 	}
 
 	let confirmationStatment = ""
@@ -28,7 +36,7 @@ export default function EventElem(props) {
 	}
 
 	return(
-		<div className="listingEvent">
+		<div className="listingEvent" onClick={goToEvent}>
             <div className="listingEventLeftSide">
                 <h2>{event.eventName}</h2>
 				<h4 className="colorGreen">{event.dayOfWeek}, {event.month} {event.day} | {event.eventPlace}{" "}</h4>
