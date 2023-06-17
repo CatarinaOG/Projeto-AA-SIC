@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "../../Styles/Profile.css";
 
 export default function PopUpAddArtist(props) {
-  const [artistName, setArtistName] = useState("");
+  const [artist, setArtist] = useState(null);
   const [message, setMessage] = useState("aaaaa");
 
   const [artistOptions, setArtistOptions] = useState([
@@ -12,7 +12,7 @@ export default function PopUpAddArtist(props) {
     },
     {
       artist_name: "Architects",
-      artist_code: 13,
+      artist_code: 14,
     },
     {
       artist_name: "Parkway Drive",
@@ -22,20 +22,26 @@ export default function PopUpAddArtist(props) {
 
   useEffect(() => {
     if (props.trigger) {
-      setArtistName("");
+      setArtist();
       setMessage("");
     }
   }, [props.trigger]);
 
   const handleArtistChange = (event) => {
-    setArtistName(event.target.value);
+    const selectedArtist = artistOptions.find(
+      (artist) => artist.artist_name === event.target.value
+    );
+    console.log(selectedArtist.artist_name);
+    setArtist(selectedArtist);
   };
 
+  //ALTERAR MENSAGEM DE ERRO
   const submitType = () => {
-    if (artistName === "") {
+    if (artist === "") {
       setMessage("Invalid artist name");
     } else {
-      props.onAddArtist(artistName);
+      console.log(artist.artist_name);
+      props.onAddArtist(artist);
       props.setPopUpTrigger(false);
     }
   };
@@ -46,15 +52,11 @@ export default function PopUpAddArtist(props) {
         <h2 className="editTitle">Select an Artist Name</h2>
         <form>
           <div>
-            <select
-              className="inputSelectArtist"
-              value={artistName}
-              onChange={handleArtistChange}
-            >
+            <select className="inputSelectArtist" onChange={handleArtistChange}>
               <option value=""></option>
-              {artistOptions.map((option, index) => (
-                <option key={index} value={option.artists_code}>
-                  {option.artist_name}
+              {artistOptions.map((artist) => (
+                <option key={artist.artist_code} value={artist.artist_name}>
+                  {artist.artist_name}
                 </option>
               ))}
             </select>
