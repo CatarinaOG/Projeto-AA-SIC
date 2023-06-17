@@ -158,6 +158,7 @@ public class PromoterService {
         for(Event e : eventsList){
             if (e.getPromoter().getEmail().equals(email)){
                 GetEventsByPromoterResponse aux = new GetEventsByPromoterResponse();
+
                 aux.setEvent_id(e.getId());
                 aux.setName(e.getName());
                 aux.setCity(e.getLocation().getCity());
@@ -171,10 +172,7 @@ public class PromoterService {
 
                 // ---------------------
 
-                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + formattedString);
-
                 aux.setDate(formattedString);
-
                 
                 response.add(aux);
             }

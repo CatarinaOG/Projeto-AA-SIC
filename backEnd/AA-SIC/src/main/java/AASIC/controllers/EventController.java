@@ -1,6 +1,7 @@
 package AASIC.controllers;
 
 //import javax.annotation.Resource;
+import AASIC.responses.GetFullEventRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,4 +21,10 @@ public class EventController {
     public ResponseEntity<String> test(){
         return ResponseEntity.ok("THIS IS A TEST ");
     }
+
+
+    //@PostMapping(value = "/get_full_event")
+    //public ResponseEntity<GetFullEventRequest> get
+
+
 }
