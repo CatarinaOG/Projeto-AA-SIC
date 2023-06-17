@@ -1,6 +1,7 @@
 package AASIC.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -20,9 +21,9 @@ public class Event{
     @Column(name = "name")
     private String name;
     @Column(name = "date_start")
-    private Date date_start;
+    private LocalDateTime date_start;
     @Column(name = "date_end")
-    private Date date_end;
+    private LocalDateTime date_end;
     @Column(name = "accepted")
     private boolean accepted;
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
