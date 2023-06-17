@@ -1,12 +1,12 @@
 package AASIC.services;
 
+import AASIC.model.Ad;
 import AASIC.model.Event;
 import AASIC.model.SuggestedEvent;
 import AASIC.model.User;
-import AASIC.repositories.EventRepo;
-import AASIC.repositories.SuggestedEventRepo;
-import AASIC.repositories.UserRepo;
+import AASIC.repositories.*;
 import AASIC.requests.EditProfileRequest;
+import AASIC.requests.SellTicketRequest;
 import AASIC.requests.SuggestEventRequest;
 import AASIC.responses.GetSuggestedEventsResponse;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +26,8 @@ public class UserService {
     private final UserRepo userRepo;
     private final EventRepo eventRepo;
     private final SuggestedEventRepo suggestedEventRepo;
+    private final TicketTypeRepo ticketTypeRepo;
+    private final AdRepo adRepo;
 
     public void edit_profile(EditProfileRequest request, String email) {
         User user = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
@@ -67,7 +69,7 @@ public class UserService {
 
     }
 
-    public List<GetSuggestedEventsResponse> get_suggested_event(SuggestEventRequest request, String email) {
+    public List<GetSuggestedEventsResponse> get_suggested_events() {
 
         List<SuggestedEvent> suggestedEventList = suggestedEventRepo.findAll();
         List<GetSuggestedEventsResponse> response = new ArrayList<>();
@@ -93,5 +95,22 @@ public class UserService {
             response.add(aux);
         }
         return response;
+    }
+
+    public void sell_ticket(SellTicketRequest request, String email) {
+        User user = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+
+        Ad ad = new Ad();
+        ad.setEvent(eventRepo.findById(request.getEvent_id()).get());
+        ad.setDate(LocalDateTime.now());
+        ad.setUser(user);
+        ad.setTicket_type(ticketTypeRepo.findById(request.getType_id()).get());
+        ad.setPrice(request.getPrice());
+        ad.setTicket(request.getFile());
+        ad.setDescription(request.getDescription());
+        ad.setSold(false);
+
+        adRepo.save(ad);
+
     }
 }

@@ -3,6 +3,7 @@ package AASIC.controllers;
 //import javax.annotation.Resource;
 import AASIC.config.JWTService;
 import AASIC.requests.EditProfileRequest;
+import AASIC.requests.SellTicketRequest;
 import AASIC.requests.SuggestEventRequest;
 import AASIC.responses.GetSuggestedEventsResponse;
 import AASIC.services.AuthenticationService;
@@ -54,14 +55,19 @@ public class UserController {
         var jwt = token.substring(7);
         String email = jwtService.extractUsername(jwt);
         userService.suggest_event(request, email);
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok("Event Created!");
     }
 
-    @GetMapping("get_suggested_events")
-    public ResponseEntity<List<GetSuggestedEventsResponse>> get_suggested_events(@RequestBody SuggestEventRequest request,
-                                                                                 @RequestHeader(name = "Authorization") String token){
+    @GetMapping("/get_suggested_events")
+    public ResponseEntity<List<GetSuggestedEventsResponse>> get_suggested_events(){
+        return ResponseEntity.ok(userService.get_suggested_events());
+    }
+
+    @PostMapping("/sell_ticket")
+    public ResponseEntity<String> sell_ticket(@RequestBody SellTicketRequest request, @RequestHeader(name = "Authorization") String token){
         var jwt = token.substring(7);
         String email = jwtService.extractUsername(jwt);
-        return ResponseEntity.ok(userService.get_suggested_event(request, email));
+        userService.sell_ticket(request, email);
+        return ResponseEntity.ok("\"confirmed\" : \"true\"");
     }
 }

@@ -1,6 +1,8 @@
 package AASIC.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -14,13 +16,15 @@ public class Ad{
     @Column(name = "id")
     private int id;
     @Column(name = "date")
-    private Timestamp date;
+    private LocalDateTime date;
     @Column(name = "ticket")
     private String ticket;
     @Column(name="price")
     private float price;
     @Column(name = "sold")
     private boolean sold;
+    @Column(name = "description")
+    private String description;
 
     @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName = "id")

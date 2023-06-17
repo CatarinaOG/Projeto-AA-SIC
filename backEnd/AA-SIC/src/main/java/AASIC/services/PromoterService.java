@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ public class PromoterService {
         event.setName(request.getEvent_name());
         try{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + request.getEvent_date_start());
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + request.getEvent_date_end());
 
             LocalDateTime start_time = LocalDateTime.parse(request.getEvent_date_start(), formatter);
             LocalDateTime end_time = LocalDateTime.parse(request.getEvent_date_end(), formatter);
@@ -59,8 +62,11 @@ public class PromoterService {
             tt.setType(ttr.getTicket_type());
             tt.setPrice(ttr.getPrice());
             try{
-                tt.setStart_date(new SimpleDateFormat("dd/MM/yyyy").parse(ttr.getType_date_start()));
-                tt.setEnd_date(new SimpleDateFormat("dd/MM/yyyy").parse(ttr.getType_date_end()));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+
+                tt.setStart_date(LocalDateTime.parse(ttr.getType_date_start(),formatter));
+                tt.setEnd_date(LocalDateTime.parse(ttr.getType_date_end(), formatter));
             }
             catch (Exception e){
                 System.out.println("Date Format Incorrect!");
