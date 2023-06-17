@@ -66,6 +66,39 @@ export default function CreatePromoter() {
       console.log(name, address, latitude, longitude, capacity);
     }
   };
+
+  
+  function postVenue(){
+    const input ={
+      name : {name},
+      address : {address},
+      latitude : {latitude},
+      longitude : {longitude},
+      capacity : {capacity},
+      city : {city}
+    }
+    
+    fetch("http://localhost:8080/api/promoter/register", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(input)
+    })
+    .then(response => {
+        if(response.ok){
+         setPopUpTrigger(false);
+        }
+    })
+    .catch(error => {
+        setMessage(error)
+    });
+  }
+
+
+
+
+  
   return (
     <div>
       <NavBarUser />

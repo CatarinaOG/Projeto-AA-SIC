@@ -20,6 +20,23 @@ export default function PopUpAddArtist(props) {
     },
   ]);
 
+  function getArtists(){
+    fetch("http://localhost:8080/api/promoter/get_artists", {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer `
+        }
+    })
+    .then(response => {
+        if(response.ok)
+          setArtistOptions()
+    })
+    .catch(error => {
+        console.log(error)
+    });
+  }
+
   useEffect(() => {
     if (props.trigger) {
       setArtist();
@@ -35,10 +52,9 @@ export default function PopUpAddArtist(props) {
     setArtist(selectedArtist);
   };
 
-  //ALTERAR MENSAGEM DE ERRO
   const submitType = () => {
     if (artist === "") {
-      setMessage("Invalid artist name");
+      setMessage("Please select a option");
     } else {
       console.log(artist.artist_name);
       props.onAddArtist(artist);

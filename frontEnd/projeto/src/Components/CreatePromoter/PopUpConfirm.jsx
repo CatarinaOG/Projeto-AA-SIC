@@ -1,19 +1,48 @@
 import { useState } from "react";
 import "../../Styles/Profile.css";
 
-export default function PopUpConfirm(props) {
+export default function PopUpConfirm({trigger,setPopUpTrigger,email,password,name}) {
   const [phase, setPhase] = useState(1);
 
+
   function handleClick() {
-    console.log(props.email, props.name, props.password);
-    setPhase(2);
+    console.log(email, name, password);
+    sendCreateRequest();
   }
 
   function toHome() {
-    props.setPopUpTrigger(false);
+    setPopUpTrigger(false);
     setPhase(1);
   }
-  return props.trigger ? (
+
+  const inputs = {
+    name : {name},
+    email : {email}, 
+    password : {password}
+  }
+
+  function sendCreateRequest(){
+
+    fetch("http://localhost:8080/api/promoter/register", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(inputs)
+    })
+    .then(response => response.json())
+    .then(message => {
+      setPhase(2);
+    })
+    .catch(error => {
+      
+    });
+}
+
+
+
+
+  return trigger ? (
     <div className="editContainter">
       {phase === 1 ? (
         <div>
@@ -27,7 +56,7 @@ export default function PopUpConfirm(props) {
           <div className="popUpSellingListButton">
             <button
               className="button"
-              onClick={() => props.setPopUpTrigger(false)}
+              onClick={() => setPopUpTrigger(false)}
             >
               {" "}
               No

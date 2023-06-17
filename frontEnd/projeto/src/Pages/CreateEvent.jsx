@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TypeList } from "../Components/CreateEvent/TypeList"; // Import TypeList component correctly
 
 import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
@@ -18,9 +18,10 @@ export default function CreateEvent(props) {
   const [eventName, setEventName] = useState("");
   const [eventVenue, setEventVenue] = useState("");
   const [eventCategory, setEventCategory] = useState("");
-
   const [eventDateStart, setEventDateStart] = useState("");
   const [eventDateEnd, setEventDateEnd] = useState("");
+  const [eventTimeStart,setEventTimeStart] = useState("");
+  const [eventTimeEnd,setEventTimeEnd] = useState("");
   const [popUpTrigger1, setPopUpTrigger1] = useState(false);
   const [popUpTrigger2, setPopUpTrigger2] = useState(false);
   const [popUpTrigger3, setPopUpTrigger3] = useState(false);
@@ -63,12 +64,61 @@ export default function CreateEvent(props) {
     },
   ]);
 
+  
   const [categories, setCategories] = useState([
     { name: "Music Festival" },
     { name: "Concert" },
     { name: "Stand Up Show" },
     { name: "Stand Up Festival" },
   ]);
+
+  useEffect(() => {
+    if (suggestedEvent) {
+      setEventName(suggestedEvent.event_name);
+      setEventDateStart(suggestedEvent.start_date);
+      setEventDateEnd(suggestedEvent.end_date);
+      setEventTimeStart(suggestedEvent.start_time);
+      setEventTimeEnd(suggestedEvent.end_time);
+    }
+  }, []);
+
+  function getCategories(){
+    fetch("http://localhost:8080/api/promoter/get_categories", {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer `
+        }
+    })
+    .then(response => {
+        if(response.ok)
+            setCategories()
+    })
+    .catch(error => {
+        console.log(error)
+    });
+  }
+
+  function getVenues(){
+    fetch("http://localhost:8080/api/promoter/get_venues", {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer `
+        }
+    })
+    .then(response => {
+        if(response.ok)
+            setOptions()
+    })
+    .catch(error => {
+        console.log(error)
+    });
+  }
+
+
+
+
 
   function handleAddType(newType) {
     setTypes((prevTypes) => [...prevTypes, newType]);
@@ -108,6 +158,16 @@ export default function CreateEvent(props) {
     console.log(event.target.value);
     setEventDateEnd(event.target.value);
   }
+
+  function handleEventTimeStartChange(event) {
+    setEventTimeStart(event.target.value);
+  }
+
+  function handleEventTimeEndChange(event) {
+    console.log(event.target.value);
+    setEventTimeEnd(event.target.value);
+  }
+
 
   function openPopType() {
     if (eventDateStart !== "" && eventDateEnd !== "") {
@@ -232,6 +292,23 @@ export default function CreateEvent(props) {
                   type="date"
                   value={eventDateEnd}
                   onChange={handleEventDateEndChange}
+                />
+              </div>
+            </div>
+            <div className="divFormCreatePromoter">
+              <h2 className="h2FormCreatePromoter">Time(Start/End)</h2>
+              <div className="dateFormContainer">
+                <input
+                  className="inputFormCreateEvent"
+                  type="time"
+                  value={eventTimeStart}
+                  onChange={handleEventTimeStartChange}
+                />
+                <input
+                  className="dateFormCreateEvent2"
+                  type="time"
+                  value={eventTimeEnd}
+                  onChange={handleEventTimeEndChange}
                 />
               </div>
             </div>
