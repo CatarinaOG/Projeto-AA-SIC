@@ -95,6 +95,7 @@ public class AuthenticationService {
          */
         return AuthenticationResponse.builder()
                 .token(jwt)
+                .name(promoter.getName())
                 .build();
     }
 

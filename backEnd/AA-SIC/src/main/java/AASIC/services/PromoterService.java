@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.List;
@@ -34,8 +36,13 @@ public class PromoterService {
 
         event.setName(request.getEvent_name());
         try{
-            event.setDate_start(new SimpleDateFormat("dd/MM/yyyy").parse(request.getEvent_date_end()));
-            event.setDate_end(new SimpleDateFormat("dd/MM/yyyy").parse(request.getEvent_date_start()));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+            LocalDateTime start_time = LocalDateTime.parse(request.getEvent_date_start(), formatter);
+            LocalDateTime end_time = LocalDateTime.parse(request.getEvent_date_end(), formatter);
+
+            event.setDate_start(start_time);
+            event.setDate_end(end_time);
         }
         catch (Exception e){
             System.out.println("Date Format Incorrect!");
@@ -155,9 +162,20 @@ public class PromoterService {
                 aux.setName(e.getName());
                 aux.setCity(e.getLocation().getCity());
                 aux.setVenue_name(e.getLocation().getName());
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                String strDate = dateFormat.format(e.getDate_start());
-                aux.setDate(e.getDate_start().toString());
+
+                // -- formatting Date --
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+                LocalDateTime ldt = e.getDate_start();
+                String formattedString = ldt.format(formatter);  //12/12/2018 18:25:58
+
+                // ---------------------
+
+                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + formattedString);
+
+                aux.setDate(formattedString);
+
+                
                 response.add(aux);
             }
         }
