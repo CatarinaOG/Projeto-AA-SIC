@@ -1,47 +1,39 @@
-.listingRightSide {
-  position: absolute;
-  right: 20px; /* adjust this value to center the price */
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.listing {
+.listingEvent {
   border: 1px solid var(--white);
   border-radius: 10px;
   margin: 20px;
   padding: 10px;
-  padding-left: 40px;
+  padding-left: 20px;
   display: flex;
-  flex-direction: row;
+  position: relative;
   justify-content: space-between;
+  align-items: center;
 }
 
-.listing-elem-1 {
-  flex: 1;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.listing-elem-2 {
-  margin-right: 30px; /* Adjust this value to move it to the left */
+
+.listingEventRightSide{
+  margin-right: 30px;
+  text-align: center;
 }
 
-.listing-elem-3 {
-  margin-right: 5px; /* Adjust this value to move it to the left */
+.listingElemClose{
+  position: absolute;
+  top: 0;
+  right: 5px;
 }
 
 .closeIcon {
   transform: scale(0.6);
+  cursor: pointer;
 }
 
 .closeIcon:hover {
   transition: transform 0.2s ease-in-out;
   transform: scale(0.8);
-  cursor: pointer;
 }
 
 .soldSellingIcon {
-  display: relative;
-  max-width: 40px;
+  width: 40px;
   filter: invert(100%);
 }
 
@@ -64,3 +56,4 @@
   flex-direction: column;
   z-index: 2;
 }
+
