@@ -150,3 +150,41 @@ body {
     margin-bottom: 5px;
     visibility: hidden;
 }
+
+
+
+
+
+.listingElemClose{
+    position: absolute;
+    top: 0;
+    right: 5px;
+  }
+  
+.closeIcon {
+    transform: scale(0.6);
+    cursor: pointer;
+}
+
+.closeIcon:hover {
+    transition: transform 0.2s ease-in-out;
+    transform: scale(0.8);
+}
+
+
+
+
+
+  
+.smallCloseIcon {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    transform: scale(0.6);
+    cursor: pointer;
+}
+
+.smallCloseIcon:hover{
+    transition: transform 0.2s ease-in-out;
+    transform: scale(0.8);
+}

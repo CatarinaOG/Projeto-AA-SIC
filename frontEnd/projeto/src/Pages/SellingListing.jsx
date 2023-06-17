@@ -7,6 +7,12 @@ import { useState } from "react";
 
 export default function SellingListing() {
 
+	const [filters,setFilters] = useState({
+        filter_place: "",
+        filter_time: "",
+        filter_category: "",
+    })
+
 	const [events, setEvents] = useState([
 		// para ser substituido pelo pedido com base no filtro
 		{
@@ -98,7 +104,8 @@ export default function SellingListing() {
 			<div className="center">
 				<div className="defaultContainer">
 					<h1>Tickets Listed</h1>
-					<Filters type="boughtTickets" />
+					<Filters setFilters={setFilters}/>
+					
 					<div className="eventsContainer">
 						{eventsFiltered}
 					</div>

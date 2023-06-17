@@ -68,7 +68,7 @@ export default function NavBar(){
             
             switch (userResponse.type){
                 case "user": 
-                    navigate('/HomeUser')
+                    navigate('/HomePromoter')
 				    cookies.set('token',userResponse.token)
                     break
                 case "promoter":

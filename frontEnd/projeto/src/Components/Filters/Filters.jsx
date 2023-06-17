@@ -5,13 +5,7 @@ import { useState } from "react"
 
 export default function Filters(props){
 
-    const {type,userID} = props // ambos vao ser usados
-
-    const [filter,setFilter] = useState({
-        Place: "",
-        Time: "",
-        Category: ""
-    })
+    const {setFilters} = props // ambos vao ser usados
 
     const [placeOptions,setPlaceOptions] = useState([
         "Lisboa","Porto"
@@ -25,37 +19,26 @@ export default function Filters(props){
         "Concert","Festival"
     ])
 
-    function getNewFilterResults(){
-        /*
-        if(type == "boughtTickets")
-            // dar set as novas listas + mandar id
-        else
-            // dar set as novas listas
-        */
-    }
 
     return(
         <div className="displayHorizontallyEvenly">
             
             <Filter 
                 key="Place"
-                type="Place" 
-                setFilter={setFilter} 
-                getNewFilterResults={getNewFilterResults} 
+                type="filter_place" 
+                setFilters={setFilters} 
                 options={placeOptions}/>
 
             <Filter 
                 key="Time"
-                type="Time" 
-                setFilter={setFilter} 
-                getNewFilterResults={getNewFilterResults} 
+                type="filter_time" 
+                setFilters={setFilters} 
                 options={timeOptions}/>
 
             <Filter 
                 key="Category"
-                type="Category" 
-                setFilter={setFilter} 
-                getNewFilterResults={getNewFilterResults} 
+                type="filter_category" 
+                setFilters={setFilters} 
                 options={categoryOptions}/>
 
         </div>

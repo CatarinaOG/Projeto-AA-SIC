@@ -1,10 +1,12 @@
-
-import { useState } from "react"
+import { useState,useContext } from "react"
+import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
 
 export default function EditBankDetails(props){
 
-    const {setUser,setEditInfo} = props
+    const {setEditInfo} = props
+    const { user } = useContext(UserContext);
+
 
     const [temp,setTemp] = useState("")
     const [temp2,setTemp2] = useState("")
@@ -27,6 +29,29 @@ export default function EditBankDetails(props){
         setEditInfo("none")
     }
 
+    function sendEditInfoRequest(){
+
+        fetch("http://localhost:8080/api/user/profile_edit", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+                card_number: temp,
+                card_cvc: temp2,
+            })
+        })
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        });
+
+    }
+
+
     function changeBankDetails(event){
         event.preventDefault();    // talvez depois retirar para meter como pedido para a back end
         if(temp !== "" && temp2 !== ""){
@@ -36,7 +61,7 @@ export default function EditBankDetails(props){
                 setError("Insert a valid bank account number")
             }
             else{
-                setUser(oldUser => ({...oldUser,bank_details:temp}))
+                sendEditInfoRequest()
                 setEditInfo("none")
             }
         }

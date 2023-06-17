@@ -1,17 +1,41 @@
-
+import { useState,useContext } from "react"
+import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
 
 export default function EditLanguage(props){
 
-    const {user,setUser,setEditInfo} = props
+    const {setEditInfo} = props
+    const { user } = useContext(UserContext);
 
     function closeEdit(){
         setEditInfo("none")
     }
 
+    function sendEditInfoRequest(lng){
+
+        fetch("http://localhost:8080/api/user/profile_edit", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+                language: lng,
+            })
+        })
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        });
+
+    }
+
+
     function handleOptionChange(event){
-        event.preventDefault();    // talvez depois retirar para meter como pedido para a back end
-        setUser(oldUser => ({...oldUser,language:event.target.value}))
+        event.preventDefault();
+        sendEditInfoRequest(event.target.value)
         setEditInfo("none")
     }
 

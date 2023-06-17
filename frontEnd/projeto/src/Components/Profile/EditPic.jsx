@@ -5,9 +5,8 @@ import BlackClose from "../../Images/blackClose.png"
 
 export default function EditPic(props){
 
-    const {setEditInfo} = props
+    const {setEditInfo,setInfo} = props
     const {user,setUser} = useContext(UserContext);
-
 
     const [temp,setTemp] = useState("")
     const [emptyURLError,setEmptyURLError] = useState(false)

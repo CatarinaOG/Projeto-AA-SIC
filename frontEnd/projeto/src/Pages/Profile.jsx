@@ -19,7 +19,7 @@ export default function Profile(){
 
     const [editInfo,setEditInfo] = useState("none") // picture / phone /password / language / bank_details
     const [addInfo,setAddInfo] = useState("none") // phone / bank_details
-    
+
     const profile_pic = user.profile_pic? user.profile_pic : "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
 
 
@@ -50,6 +50,7 @@ export default function Profile(){
     function addCard(){
         setAddInfo("bank_details")
     }
+
 
     return(
 
@@ -159,12 +160,6 @@ export default function Profile(){
                 <div>
                     <div className="overlay"></div>
                     <EditLanguage user={user} setEditInfo={setEditInfo}/>
-                </div>
-            }
-            { editInfo === "bank_details" && 
-                <div>
-                    <div className="overlay"></div>
-                    <EditBankDetails setEditInfo={setEditInfo}/>
                 </div>
             }
             { editInfo === "bank_details" && 

@@ -5,15 +5,20 @@ import Category from "../../Images/category.png"
 
 export default function Filter(props){
 
-    const {type,setFilter,getNewFilterResults,options} = props
+    const {type,setFilters,options} = props
+
+    let showFilter = ""
 
     function getIcon(){
         switch(type){
-            case "Place":
+            case "filter_place":
+                showFilter = "Place"
                 return <img className="filterIcon" src={Place} alt="Place" />;
-            case "Time":
+            case "filter_time":
+                showFilter = "Time"
                 return <img className="filterIcon" src={Calendar} alt="Calendar" />;
-            case "Category":
+            case "filter_category":
+                showFilter = "Category"
                 return <img className="filterIcon" src={Category} alt="Category" />;
             default:
                 return null;
@@ -21,8 +26,7 @@ export default function Filter(props){
     }
 
     function handleSelectChange(event){
-        setFilter(oldFilter => ({...oldFilter,type:event.target.value}))
-        getNewFilterResults()
+        setFilters(oldFilter => ({...oldFilter,[type]:event.target.value}))
     }
 
     const optionsList = options.map( option => 
@@ -33,7 +37,7 @@ export default function Filter(props){
             {getIcon()}
 
             <select className="select" onChange={handleSelectChange}>
-                <option value="">{type}</option>
+                <option value="">{showFilter}</option>
                 {optionsList}
             </select>
         </div>

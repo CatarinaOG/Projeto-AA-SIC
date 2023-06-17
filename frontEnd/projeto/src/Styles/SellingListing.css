@@ -21,21 +21,9 @@
   text-align: center;
 }
 
-.listingElemClose{
-  position: absolute;
-  top: 0;
-  right: 5px;
-}
 
-.closeIcon {
-  transform: scale(0.6);
-  cursor: pointer;
-}
 
-.closeIcon:hover {
-  transition: transform 0.2s ease-in-out;
-  transform: scale(0.8);
-}
+
 
 .soldSellingIcon {
   width: 40px;

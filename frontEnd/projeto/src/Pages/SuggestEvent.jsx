@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 
 import NavBarUser from "../Components/NavBar/NavBarUser"
 import BlackClose from "../Images/blackClose.png"
+import UserContext from "../Contexts/UserContext"
 
 import "../Styles/SuggestEvent.css"
 
 export default function SuggestEvent(props){
+
+    const {user} = useContext(UserContext);
 
 
     const [inputs,setInputs] = useState({
@@ -22,7 +25,39 @@ export default function SuggestEvent(props){
     const navigate = useNavigate();
     const [showConfirmation,setShowConfirmation] = useState(false)
 
+
+    function sendSuggestEventRequest(){
+
+        const fullStartDate = inputs.start_date + " " + inputs.start_time
+        const fullEndDate = inputs.end_date + " " + inputs.end_time
+
+        fetch("http://localhost:8080/api/user/suggest_event", {
+            mode: 'no-cors',
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+                event_name: inputs.event_name,
+                address: inputs.address,
+                start_date: fullStartDate,
+                end_date: fullEndDate,
+            })
+        })
+        .then(response => response.json())
+        .then(userResponse => {
+            console.log(userResponse)
+        })
+        .catch(error => {
+            console.log(error)
+        });
+
+    }
+
+
     function suggestTheEvent(){
+        sendSuggestEventRequest()
         setShowConfirmation(true)
     }
 
@@ -63,7 +98,7 @@ export default function SuggestEvent(props){
                                     <input className="suggestEventInput" type="text" name="address" onChange={updateInputs}/>
                                     <div className="suggestDateContainer">
                                         <input className="suggestEventInputDate" type="date" name="start_date" onChange={updateInputs}/>
-                                        <input className="suggestEventInputTime" type="time" name="satart_time" onChange={updateInputs}/>
+                                        <input className="suggestEventInputTime" type="time" name="start_time" onChange={updateInputs}/>
                                     </div>
                                     <div className="suggestDateContainer">
                                         <input className="suggestEventInputDate" type="date" name="end_date" onChange={updateInputs}/>

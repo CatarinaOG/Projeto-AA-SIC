@@ -1,14 +1,24 @@
 import NavBarUser from "../Components/NavBar/NavBarUser"
 import Filters from "../Components/Filters/Filters"
 import BoughtTicket from "../Components/BoughtTickets/BoughtTicket"
+import UserContext from "../Contexts/UserContext"
 
-import { useState } from "react"
+
+import { useState,useContext } from "react"
 
 export default function BoughtTickets(){
 
+    const {user} = useContext(UserContext);
+    const [filters,setFilters] = useState({
+        filter_place: "",
+        filter_time: "",
+        filter_category: "",
+    })
 
-    const [events,setEvents] =useState([ // para ser substituido pelo pedido com base no filtro
+
+    const [events,setEvents] =useState([
         {
+            id: 1,
             dayOfWeek: "Wednesday",
             month: "May",
             day: "8",
@@ -19,6 +29,7 @@ export default function BoughtTickets(){
             ticketPrice: "80.56"
         },
         {
+            id: 2,
             dayOfWeek: "Friday",
             month: "May",
             day: "19",
@@ -28,61 +39,37 @@ export default function BoughtTickets(){
             eventPlace: "Ziggo Dome, Amsterdam",
             ticketPrice: "109.02"
         },
-        {
-            dayOfWeek: "Thursday",
-            month: "Jul",
-            day: "7",
-            time: "03:00 PM",
-            ticketType: "1 Day Ticket | 7 July",
-            eventName: "NOS ALIVE'23",
-            eventPlace: "NOS Alive, Algés, Portugal",
-            ticketPrice: "91,07"
-        },
-        {
-            dayOfWeek: "Thursday",
-            month: "Jul",
-            day: "7",
-            time: "03:00 PM",
-            ticketType: "1 Day Ticket | 7 July",
-            eventName: "NOS ALIVE'23",
-            eventPlace: "NOS Alive, Algés, Portugal",
-            ticketPrice: "91,07"
-        },
-        {
-            dayOfWeek: "Thursday",
-            month: "Jul",
-            day: "7",
-            time: "03:00 PM",
-            ticketType: "1 Day Ticket | 7 July",
-            eventName: "NOS ALIVE'23",
-            eventPlace: "NOS Alive, Algés, Portugal",
-            ticketPrice: "91,07"
-        },
-        {
-            dayOfWeek: "Thursday",
-            month: "Jul",
-            day: "7",
-            time: "03:00 PM",
-            ticketType: "1 Day Ticket | 7 July",
-            eventName: "NOS ALIVE'23",
-            eventPlace: "NOS Alive, Algés, Portugal",
-            ticketPrice: "91,07"
-        },
-        {
-            dayOfWeek: "Thursday",
-            month: "Jul",
-            day: "7",
-            time: "03:00 PM",
-            ticketType: "1 Day Ticket | 7 July",
-            eventName: "NOS ALIVE'23",
-            eventPlace: "NOS Alive, Algés, Portugal",
-            ticketPrice: "91,07"
-        },
     ])
+
+    function sendGetBoughtTicketsRequest(){
+
+        fetch("http://localhost:8080/", {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+                filter_place: filters.filter_place,
+                filter_time: filters.filter_time,
+                ilter_category: filters.filter_category,
+            })
+        })
+        .then(response => response.json())
+        .then(userResponse => {
+            console.log(userResponse)
+        })
+        .catch(error => {
+            console.log(error)
+        });
+    }
+
 
     const eventsFiltered = events.map( event => 
         <BoughtTicket key={event.id} event={event}/>
     )
+
+    console.log(filters)
 
 
     return(
@@ -93,7 +80,7 @@ export default function BoughtTickets(){
                 <div className="defaultContainer">
                     <h1>Bought Tickets</h1>
 
-                    <Filters type="boughtTickets"/>
+                    <Filters type="boughtTickets" setFilters={setFilters}/>
 
                     <div className="eventsContainer">
                         {eventsFiltered}

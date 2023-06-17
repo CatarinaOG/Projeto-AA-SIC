@@ -1,10 +1,11 @@
-
-import { useState } from "react"
+import { useState,useContext } from "react"
+import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
 
 export default function EditPassword(props){
 
-    const {setUser,setEditInfo} = props
+    const {setEditInfo} = props
+    const { user } = useContext(UserContext);
 
     const [temp,setTemp] = useState("")
     const [temp2,setTemp2] = useState("")
@@ -27,6 +28,28 @@ export default function EditPassword(props){
         setEditInfo("none")
     }
 
+    function sendEditInfoRequest(){
+
+        fetch("http://localhost:8080/api/user/profile_edit", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+                password: temp,
+            })
+        })
+        .then(response => {
+            console.log(response) 
+        })
+        .catch(error => {
+            console.log(error)
+        });
+
+    }
+
+
     function changePassword(event){
         event.preventDefault();    // talvez depois retirar para meter como pedido para a back end
         
@@ -37,7 +60,7 @@ export default function EditPassword(props){
                 setError("Passwords don't match")
             }
             else{
-                setUser(oldUser => ({...oldUser,password:temp}))
+                sendEditInfoRequest()
                 setEditInfo("none")
             }
         }
