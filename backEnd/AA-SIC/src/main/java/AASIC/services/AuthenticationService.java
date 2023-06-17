@@ -34,6 +34,14 @@ public class AuthenticationService {
      * @return
      */
     public AuthenticationResponse register_user(RegisterRequest request) {
+        if (userRepo.findUserByEmail(request.getEmail()).isPresent()){
+            /**
+             * Aqui vamos devolver uma mensagem de erro para avisar que o email já está registado
+             */
+            return AuthenticationResponse.builder()
+                    .token("Email já utilizado")
+                    .build();
+        }
         var user = User.builder()
                 .name(request.getName())
                 .email(request.getEmail())
@@ -41,6 +49,7 @@ public class AuthenticationService {
                 .language("English")
                 .role(Role.USER)
                 .build();
+
         userRepo.save(user);
         var jwt = jwtService.generateToken(user);
 
@@ -51,6 +60,7 @@ public class AuthenticationService {
                 .token(jwt)
                 .name(user.getName())
                 .build();
+
     }
 
     public AuthenticationResponse login_user(AuthenticationRequest request) {
@@ -81,6 +91,14 @@ public class AuthenticationService {
      * @return
      */
     public AuthenticationResponse register_promoter(RegisterRequest request) {
+        if (promoterRepo.findPromoterByEmail(request.getEmail()).isPresent()){
+            /**
+             * Aqui vamos devolver uma mensagem de erro para avisar que o email já está registado
+             */
+            return AuthenticationResponse.builder()
+                    .token("Email já utilizado")
+                    .build();
+        }
         var promoter = Promoter.builder()
                 .name(request.getName())
                 .email(request.getEmail())
