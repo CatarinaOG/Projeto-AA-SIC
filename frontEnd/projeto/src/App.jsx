@@ -37,17 +37,9 @@ import AddVenue from "./Pages/AddVenue";
 import "./Styles/General.css";
 
 function App() {
-	const [user, setUser] = useState({
-		name: "Catarina Gonçalves",
-		profile_pic: "https://cdn-icons-png.flaticon.com/128/4140/4140047.png",
-		email: "catarina.oliveira.41@hotmail.com",
-		password: "hello",
-		phone: 933066325,
-		language: "English",
-		bank_details: "23455667234",
-	});
-
+	const [user, setUser] = useState({});
   	const [eventId, setEventId] = useState();
+	
 
   	return (
 		<BrowserRouter>

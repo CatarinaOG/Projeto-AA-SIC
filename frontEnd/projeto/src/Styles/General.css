@@ -137,3 +137,16 @@ body {
 .colorGreen{
     color: var(--green);
 }
+
+.error{
+    color: red;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.errorNotVisible{
+    color: red;
+    font-size: 14px;
+    margin-bottom: 5px;
+    visibility: hidden;
+}
