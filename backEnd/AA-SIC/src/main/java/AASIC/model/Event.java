@@ -1,85 +1,57 @@
 package AASIC.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.mapping.Set;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
+import java.util.Date;
 
 @Entity
+@Data
 @Table(name = "event")
 public class Event{
-
-
     @Id
     @GeneratedValue
     @Column(name = "id")
     private int id;
-
     @Column(name = "name")
     private String name;
-
-    @Column(name = "date")
-    private Timestamp date;
-
-    @Column(name = "duration")
-    private String duration;
-
-    @Column(name = "location")
-    private String location;
-
+    @Column(name = "date_start")
+    private Date date_start;
+    @Column(name = "date_end")
+    private Date date_end;
     @Column(name = "accepted")
     private boolean accepted;
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<EventWanted> users;
 
+    @OneToMany(mappedBy = "event" , cascade = CascadeType.ALL)
+    private List<Ad> ads;
 
-    /* Getters */
-    public Timestamp getDate() {
-        return date;
-    }
-    public String getDuration() {
-        return duration;
-    }
-    public int getId() {
-        return id;
-    }
-    public String getLocation() {
-        return location;
-    }
-    public String getName() {
-        return name;
-    }
-    public boolean getAccepted() {
-        return accepted;
-    }
+    @ManyToOne
+    @JoinColumn(name = "location_id", referencedColumnName = "id")
+    private Location location;
 
+    @ManyToOne
+    @JoinColumn(name = "admin_id", referencedColumnName = "id")
+    private Admin admin;
 
+    @ManyToOne
+    @JoinColumn(name = "promoter_id", referencedColumnName = "id")
+    private Promoter promoter;
 
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<TicketType> ticket_type_list;
 
-    /* Setters */
-    public void setAccepted(boolean accepted) {
-        this.accepted = accepted;
-    }
-    public void setDate(Timestamp date) {
-        this.date = date;
-    }
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public void setLocation(String location) {
-        this.location = location;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
+    @ManyToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    private Category category;
 
-
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<ArtistInEvent> artist_list;
 
 
 }
