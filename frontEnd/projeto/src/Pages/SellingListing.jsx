@@ -95,11 +95,7 @@ export default function SellingListing(props) {
 
 	return (
 		<div>
-			<NavBarUser 
-				selected="listings" 
-				user={user} 
-				setUser={setUser}
-			/>
+			<NavBarUser selected="listings" />
 
 			<div className="center">
 				<div className="defaultContainer">

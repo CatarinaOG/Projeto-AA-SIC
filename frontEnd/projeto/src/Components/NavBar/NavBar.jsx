@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useState,useContext } from "react"
 import { useNavigate } from 'react-router-dom';
+import UserContext from "../../Contexts/UserContext"
 
 
 import Logo from "../../Images/logo.png"
@@ -9,7 +10,8 @@ import "../../Styles/NavBar.css"
 
 export default function NavBar(props){
 
-    const {setUser} = props
+    const { user, setUser } = useContext(UserContext);
+
 
     const [showError,setShowError] = useState(0)
     const [error,setError] = useState("")
@@ -27,6 +29,7 @@ export default function NavBar(props){
     function showNone(event){
         event.preventDefault();
         setShowPopup("none")
+        setShowError(0)
     }
 
     function showLogin(event){
@@ -58,10 +61,11 @@ export default function NavBar(props){
             })
         })
         .then(response => response.json())
-        .then(user => {
-            setUser(user)
+        .then(userResponse => {
+
+            setUser({...userResponse,email: inputs.email})
             
-            switch (user.type){
+            switch (userResponse.type){
                 case "user": 
                     navigate('/HomeUser')
                     break
@@ -89,8 +93,8 @@ export default function NavBar(props){
             body: JSON.stringify(inputs)
         })
         .then(response => response.json())
-        .then(user => {
-            setUser(user)
+        .then(userResponse => {
+            setUser({...userResponse,email: inputs.email})
             navigate('/HomeUser')
         })
         .catch(error => {

@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState,useContext } from "react"
+import UserContext from "../Contexts/UserContext"
 
 import NavBarUser from "../Components/NavBar/NavBarUser"
 import EditPic from "../Components/Profile/EditPic"
@@ -7,15 +8,20 @@ import EditPhone from "../Components/Profile/EditPhone"
 import EditPassword from "../Components/Profile/EditPassword"
 import EditLanguage from "../Components/Profile/EditLanguage"
 import EditBankDetails from "../Components/Profile/EditBankDetails"
+import AddPhone from "../Components/Profile/AddPhone"
+import AddBankDetails from "../Components/Profile/AddBankDetails"
+import Plus from "../Images/plus.png"
 
 import "../Styles/Profile.css"
 
 
-export default function Profile(props){
-
-    const {user,setUser} = props
+export default function Profile(){
+    const { user } = useContext(UserContext);
 
     const [editInfo,setEditInfo] = useState("none") // picture / email / phone /password / language / bank_details
+    const [addInfo,setAddInfo] = useState("none") // phone / bank_details
+    
+    const profile_pic = user.profile_pic? user.profile_pic : "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
 
 
     function editProfilePic(){
@@ -38,19 +44,27 @@ export default function Profile(props){
         setEditInfo("language")
     }
 
+    function editBackDetails(){
+        setEditInfo("bank_details")
+    }
+
+    function addPhoneNumber(){
+        setAddInfo("phone")
+    }
+
+    function addCard(){
+        setAddInfo("bank_details")
+    }
+
     return(
 
         <div>
-            <NavBarUser 
-                selected="home"
-                user={user}
-                setUser={setUser}
-            />
+            <NavBarUser selected="home"/>
 
             <div className="centerAll">
                 <div className="defaultContainer">
                     <div className="relative">
-                        <img className="profilePic" src={user.profile_pic} alt="" />
+                        <img className="profilePic" src={profile_pic} alt="" />
                         <button className="editProfilePicButton" onClick={editProfilePic}></button>
                     </div>
                     <h2>{user.name}</h2>
@@ -69,10 +83,17 @@ export default function Profile(props){
 
                         <div className="editSection">
                             <div className="editContent">
-                                <h3>Phone Number</h3>
                                 <div className="displayHorizontally">
-                                    <p>{user.phone}</p>
-                                    <button className="editButton" onClick={editPhoneNumber}></button>
+                                    <h3>Phone Number</h3>
+                                    { !user.phone && <img className="plusButton" onClick={addPhoneNumber} src={Plus} alt="" />}
+                                </div>
+                                <div className="displayHorizontally">
+                                    { user.phone &&
+                                        <div>
+                                            <p>{user.phone}</p>
+                                            <button className="editButton" onClick={editPhoneNumber}></button>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -81,7 +102,7 @@ export default function Profile(props){
                             <div className="editContent">
                                 <h3>Password</h3>
                                 <div className="displayHorizontally">
-                                    <p>{user.password.replace(/./g, '*')}</p>
+                                    <p>**********</p>
                                     <button className="editButton" onClick={editPassword}></button>
                                 </div>
                             </div>
@@ -91,8 +112,12 @@ export default function Profile(props){
                             <div className="editContent">
                                 <h3>Language</h3>
                                 <div className="displayHorizontally">
-                                    <p>{user.language}</p>
-                                    <button className="editButton" onClick={editLanguage}></button>
+                                    { false && // para tirar pq vem sempre uma
+                                        <div>
+                                            <p>{user.language}</p>
+                                            <button className="editButton" onClick={editLanguage}></button>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -104,10 +129,17 @@ export default function Profile(props){
 
                     <div className="financialInfo">
                         <div className="editContent">
-                            <h3>Bank Details</h3>
                             <div className="displayHorizontally">
-                                <p>{"*".repeat(user.bank_details.length - 4) + user.bank_details.slice(-4)}</p>
-                                <button className="editButton" onClick={editLanguage}></button>
+                                <h3>Bank Details</h3>
+                                { !user.card_number && <img className="plusButton" onClick={addCard} src={Plus} alt="" />}
+                            </div>
+                            <div className="displayHorizontally">
+                                { user.card_number &&
+                                    <div>
+                                        <p>{"*".repeat(user.card_number.length - 4) + user.card_number.slice(-4)}</p>
+                                        <button className="editButton" onClick={editBackDetails}></button>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
@@ -117,37 +149,55 @@ export default function Profile(props){
             { editInfo === "picture" && 
                 <div>
                     <div className="overlay"></div>
-                    <EditPic setUser={setUser} setEditInfo={setEditInfo}/>
+                    <EditPic setEditInfo={setEditInfo}/>
                 </div>
             }
             { editInfo === "email" && 
                 <div>
                     <div className="overlay"></div>
-                    <EditEmail setUser={setUser} setEditInfo={setEditInfo}/>
+                    <EditEmail setEditInfo={setEditInfo}/>
                 </div>
             }
             { editInfo === "phone" && 
                 <div>
                     <div className="overlay"></div>
-                    <EditPhone setUser={setUser} setEditInfo={setEditInfo}/>
+                    <EditPhone setEditInfo={setEditInfo}/>
+                </div>
+            }
+            { addInfo === "phone" && 
+                <div>
+                    <div className="overlay"></div>
+                    <AddPhone setAddInfo={setAddInfo}/>
                 </div>
             }
             { editInfo === "password" && 
                 <div>
                     <div className="overlay"></div>
-                    <EditPassword setUser={setUser} setEditInfo={setEditInfo}/>
+                    <EditPassword setEditInfo={setEditInfo}/>
                 </div>
             }
             { editInfo === "language" && 
                 <div>
                     <div className="overlay"></div>
-                    <EditLanguage user={user} setUser={setUser} setEditInfo={setEditInfo}/>
+                    <EditLanguage user={user} setEditInfo={setEditInfo}/>
                 </div>
             }
             { editInfo === "bank_details" && 
                 <div>
                     <div className="overlay"></div>
-                    <EditBankDetails setUser={setUser} setEditInfo={setEditInfo}/>
+                    <EditBankDetails setEditInfo={setEditInfo}/>
+                </div>
+            }
+            { editInfo === "bank_details" && 
+                <div>
+                    <div className="overlay"></div>
+                    <EditBankDetails setEditInfo={setEditInfo}/>
+                </div>
+            }
+            { addInfo === "bank_details" && 
+                <div>
+                    <div className="overlay"></div>
+                    <AddBankDetails setEditInfo={setEditInfo}/>
                 </div>
             }
 

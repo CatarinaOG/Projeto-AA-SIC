@@ -88,11 +88,7 @@ export default function BoughtTickets(props){
 
     return(
         <div>
-            <NavBarUser 
-                selected="boughtTickets"
-                user={user} 
-				setUser={setUser}
-            />
+            <NavBarUser selected="boughtTickets" />
             
             <div className="center">
                 <div className="defaultContainer">

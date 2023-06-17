@@ -20,11 +20,7 @@ export default function HomeUser(props){
     return(
         <div>
 
-            <NavBarUser 
-                selected="home"
-                user={user} 
-                setUser={setUser}
-            />
+            <NavBarUser selected="home"/>
 
             <div className="container">
                 <img className="wallpaper" src={Wallpaper} alt="" />

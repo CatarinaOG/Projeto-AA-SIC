@@ -2,7 +2,7 @@
 import { useState } from "react"
 import BlackClose from "../../Images/blackClose.png"
 
-export default function EditBankDetails(props){
+export default function AddBankDetails(props){
 
     const {setUser,setEditInfo} = props
 
@@ -45,7 +45,7 @@ export default function EditBankDetails(props){
         <div>
             <div className="editContainter">
                 <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
-                <h3 className="editTitle">Change Bank Details</h3>
+                <h3 className="editTitle">Add Bank Details</h3>
                 <form action="/submit" onSubmit={changeEmail}>
                     <div className="center">
                         <div className="bankInputContainer">
@@ -53,6 +53,7 @@ export default function EditBankDetails(props){
                             <input className="editInputCVC" onChange={saveIntTemp} onFocus={setErrorToFalse} placeholder="CVC" type="text"/>
                         </div>
                     </div>
+                    <p className={emptyURLError? "urlError" : "urlErrorNotVisible"}>{error}</p>
                     <button className="button" type="submit">Confirm</button>
                 </form>
             </div>

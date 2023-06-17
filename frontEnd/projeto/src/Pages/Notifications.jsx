@@ -89,11 +89,7 @@ export default function Notifications(props) {
 
   return (
     <div>
-      <NavBarUser 
-        selected="home"
-        user={user}
-        setUser={setUser}
-      />
+      <NavBarUser selected="home"/>
 
       <PopUpRemoveListing
         trigger={popUpTrigger}

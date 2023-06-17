@@ -29,11 +29,7 @@ export default function SuggestEvent(props){
 
     return(
         <div>
-            <NavBarUser 
-                selected="home"
-                user={user}
-                setUser={setUser}
-            />
+            <NavBarUser selected="home"/>
 
             <div className="center">
                 <div className="defaultContainer">

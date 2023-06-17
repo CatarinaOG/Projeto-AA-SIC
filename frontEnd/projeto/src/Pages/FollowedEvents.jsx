@@ -90,11 +90,7 @@ export default function FollowedEvents(props) {
 
   return (
     <div>
-		<NavBarUser 
-			selected="home"
-			user={user}
-			setUser={setUser}
-		/>
+		<NavBarUser selected="home"/>
 
 		<PopUpSaved
 			trigger={popUpTrigger}
