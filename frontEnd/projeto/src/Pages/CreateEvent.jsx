@@ -79,8 +79,10 @@ export default function CreateEvent(props) {
     setArtists((prevArtists) => [...prevArtists, newArtist]);
   }
 
-  function handleRemoveArtist(artist) {
-    setArtists((prevArtists) => prevArtists.filter((item) => item !== artist));
+  function handleRemoveArtist(name) {
+    setArtists((prevArtists) =>
+      prevArtists.filter((item) => item.artist_name !== name)
+    );
   }
 
   function handleEventNameChange(event) {
@@ -265,7 +267,7 @@ export default function CreateEvent(props) {
                   {artists.map((value, index) => (
                     <ArtistElem
                       key={index}
-                      artist={value}
+                      artist={value.artist_name}
                       onRemoveArtist={handleRemoveArtist}
                     />
                   ))}
