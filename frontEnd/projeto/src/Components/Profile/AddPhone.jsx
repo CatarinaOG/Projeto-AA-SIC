@@ -10,7 +10,7 @@ export default function AddPhone(props){
     const [emptyURLError,setEmptyURLError] = useState(false)
     const [error,setError] = useState("Insert a phone number before confirming")
 
-    function saveIntTemp(event){
+    function saveTemp(event){
         setTemp(event.target.value)
     }
 
@@ -22,11 +22,9 @@ export default function AddPhone(props){
         setAddInfo("none")
     }
 
-    function changePhone(event){
+    function addPhone(event){
         event.preventDefault();    // talvez depois retirar para meter como pedido para a back end
         if(temp !== ""){
-
-            console.log(temp)
 
             if(temp.length !== 9){
                 setEmptyURLError(old => !old);
@@ -48,8 +46,8 @@ export default function AddPhone(props){
             <div className="editContainter">
                 <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
                 <h3 className="editTitle">Add Phone Number</h3>
-                <form action="/submit" onSubmit={changePhone}>
-                    <input className="editInputNumber" onChange={saveIntTemp} onFocus={setErrorToFalse} placeholder="Insert your new phone number" type="number"/>
+                <form action="/submit" onSubmit={addPhone}>
+                    <input className="editInputNumber" onChange={saveTemp} onFocus={setErrorToFalse} placeholder="Insert your new phone number" type="number"/>
                     <p className={emptyURLError? "urlError" : "urlErrorNotVisible"}>{error}</p>
                     <button className="button" type="submit">Confirm</button>
                 </form>

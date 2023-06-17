@@ -9,15 +9,17 @@ export default function EventElem(props) {
 		setPopUpID(event.id);
 	}
 
-	return (
-		<div className="listing">
-			<div className="listing-elem-1">
-				<h2>{event.eventName}</h2>
+	return(
+		<div className="listingEvent">
+            <div className="listingEventLeftSide">
+                <h2>{event.eventName}</h2>
 				<h4 className="colorGreen">{event.dayOfWeek}, {event.month} {event.day} | {event.eventPlace}{" "}</h4>
-			</div>
-			<div className="listing-elem-3">
-				<img className="closeIcon" src={close} alt="" onClick={clickedClose}/>
+				<div className="listingElemClose">
+					<img className="closeIcon" src={close} alt="" onClick={clickedClose}/>
+				</div>
 			</div>
 		</div>
-	);
+	)
+
+
 }
