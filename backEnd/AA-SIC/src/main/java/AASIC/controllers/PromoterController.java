@@ -5,6 +5,10 @@ import AASIC.requests.AddEventRequest;
 import AASIC.requests.AddLocalRequest;
 import AASIC.requests.CreateArtistRequest;
 import AASIC.requests.EditProfileRequest;
+import AASIC.responses.GetArtistsResponse;
+import AASIC.responses.GetCategoriesResponse;
+import AASIC.responses.GetEventsByPromoterResponse;
+import AASIC.responses.GetVenuesResponse;
 import AASIC.services.AuthenticationService;
 import AASIC.services.PromoterService;
 import AASIC.services.UserService;
@@ -13,10 +17,12 @@ import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value ="/api/promoter")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class PromoterController {
 
 
@@ -75,4 +81,25 @@ public class PromoterController {
         return ResponseEntity.ok("\"confirmed\" : \"true\"");
     }
 
+    @GetMapping("/get_categories")
+    public ResponseEntity<List<GetCategoriesResponse>> get_categories() {
+        return ResponseEntity.ok(promoterService.get_categories());
+    }
+
+    @GetMapping("/get_venues")
+    public ResponseEntity<List<GetVenuesResponse>> get_venues(){
+        return ResponseEntity.ok(promoterService.get_venues());
+    }
+
+    @GetMapping("/get_artists")
+    public ResponseEntity<List<GetArtistsResponse>> get_artists(){
+        return ResponseEntity.ok(promoterService.get_artists());
+    }
+
+    @GetMapping("get_events_by_promoter")
+    public ResponseEntity<List<GetEventsByPromoterResponse>> get_events_by_promoter(@RequestHeader(name="Authorization") String token){
+        var jwt = token.substring(7);
+        String email = jwtService.extractUsername(jwt);
+        return ResponseEntity.ok(promoterService.get_events_by_promoter(email));
+    }
 }

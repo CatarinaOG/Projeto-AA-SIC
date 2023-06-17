@@ -29,6 +29,7 @@ public class AuthenticationService {
     /**
      * Com os dados recebidos no request vamos construir um novo utilizador
      * A este novo utilizador vamos atribuir a Role de User
+     * TODO -> verificar se já existe algum email igual a este
      * @param request
      * @return
      */
@@ -37,6 +38,7 @@ public class AuthenticationService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .language("English")
                 .role(Role.USER)
                 .build();
         userRepo.save(user);
@@ -47,6 +49,7 @@ public class AuthenticationService {
          */
         return AuthenticationResponse.builder()
                 .token(jwt)
+                .name(user.getName())
                 .build();
     }
 
@@ -72,6 +75,11 @@ public class AuthenticationService {
                 .build();
     }
 
+    /**
+     * TODO -> verificar se existe algum promoter com este email
+     * @param request
+     * @return
+     */
     public AuthenticationResponse register_promoter(RegisterRequest request) {
         var promoter = Promoter.builder()
                 .name(request.getName())
