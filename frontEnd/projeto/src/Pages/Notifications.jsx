@@ -1,6 +1,6 @@
 import NavBarUser from "../Components/NavBar/NavBarUser";
 import PopUpRemoveListing from "../Components/SellingListing/PopUpRemoveListing";
-import SavedFollowElem from "../Components/SavedFollowing/SavedFollowElem.jsx";
+import SavedFollowElem from "../Components/General/EventElem.jsx";
 
 import { useState } from "react";
 

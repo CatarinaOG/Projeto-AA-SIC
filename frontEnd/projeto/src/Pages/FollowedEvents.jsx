@@ -1,8 +1,8 @@
 import NavBarUser from "../Components/NavBar/NavBarUser";
-import SavedFollowElem from "../Components/SavedFollowing/SavedFollowElem.jsx";
+import SavedFollowElem from "../Components/General/EventElem.jsx";
 
 import { useState } from "react";
-import PopUpSaved from "../Components/SavedFollowing/PopUpSaved";
+import PopUpSaved from "../Components/General/PopUpSaved";
 
 export default function FollowedEvents(props) {
 

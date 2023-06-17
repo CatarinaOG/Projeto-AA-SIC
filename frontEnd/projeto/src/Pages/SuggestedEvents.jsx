@@ -1,11 +1,13 @@
 import { useState } from "react";
 
-import NavBarUser from "../Components/NavBar/NavBarUser";
+import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
 import SuggestedEvent from "../Components/SuggestedEvents/SuggestedEvent"
 
 import "../Styles/SuggestedEvents.css"
 
-export default function SuggestedEvents(){
+export default function SuggestedEvents(props){
+
+    const {setUser} = props
 
     const [suggestedEvents,setSuggestedEvents] = useState([
         {
@@ -29,7 +31,9 @@ export default function SuggestedEvents(){
     return(
         <div>
 
-            <NavBarUser />
+            <NavBarPromoter 
+                selected="suggestions"
+            />
 
             <div className="center">
                 <div className="defaultContainer">

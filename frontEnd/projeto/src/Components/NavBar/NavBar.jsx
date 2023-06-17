@@ -44,7 +44,7 @@ export default function NavBar(props){
         // enviar pedido com input.password e input.email
         // adicionar os erros
         // verificar tipo de user
-        navigate('/HomeUser')
+        navigate('/HomePromoter')
     }
 
     return(
@@ -65,14 +65,17 @@ export default function NavBar(props){
             </nav>
 
             {showPopup == "login" && (
-                <div className="popup">
-                    <div className="centerAll">
-                        <div className="displayVertically">
-                            <p className="popupTitle">Login</p>
-                            <input className="input" type="text" placeholder="Insert username" onChange={updateUsername} />
-                            <input className="input" type="text" placeholder="Insert password" onChange={updatePassword}/>
-                            <p className="popupLoginSignup" onClick={showSignup} >Don't have an account? Sign up here</p>
-                            <button className="popupButton" onClick={login}>Confirm</button>
+                <div>
+                    <div className="clearOverlay" onClick={showNone}></div>
+                    <div className="popup">
+                        <div className="centerAll">
+                            <div className="displayVertically">
+                                <p className="popupTitle">Login</p>
+                                <input className="input" type="text" placeholder="Insert username" onChange={updateUsername} />
+                                <input className="input" type="text" placeholder="Insert password" onChange={updatePassword}/>
+                                <p className="popupLoginSignup" onClick={showSignup} >Don't have an account? Sign up here</p>
+                                <button className="popupButton" onClick={login}>Confirm</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -80,18 +83,22 @@ export default function NavBar(props){
 
 
             {showPopup == "signup" && (
-                <div className="popup">
-                    <div className="centerAll">
-                        <div className="displayVertically">
-                            <p className="popupTitle">Sign up</p>
-                            <input className="input" type="text" placeholder="Insert email address" />
-                            <input className="input" type="text" placeholder="Insert username" />
-                            <input className="input" type="text" placeholder="Insert password" />
-                            <input className="input" type="text" placeholder="Confirm password" />
-                            <button className="popupButton" type="submit">Confirm</button>
+                <div>
+                    <div className="clearOverlay" onClick={showNone}></div>
+                    <div className="popup">
+                        <div className="centerAll">
+                            <div className="displayVertically">
+                                <p className="popupTitle">Sign up</p>
+                                <input className="input" type="text" placeholder="Insert email address" />
+                                <input className="input" type="text" placeholder="Insert username" />
+                                <input className="input" type="text" placeholder="Insert password" />
+                                <input className="input" type="text" placeholder="Confirm password" />
+                                <button className="popupButton" type="submit">Confirm</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             )}
 
         </div>

@@ -11,7 +11,6 @@ import "./Styles/AddVenue.css";
 
 import Home from "./Pages/Home";
 import HomeAdmin from "./Pages/HomeAdmin";
-import HomePromoter from "./Pages/HomePromoter";
 import HomeUser from "./Pages/HomeUser";
 import SellingListing from "./Pages/SellingListing";
 import BoughtTickets from "./Pages/BoughtTickets";
@@ -21,12 +20,16 @@ import FollowedEvents from "./Pages/FollowedEvents";
 import Profile from "./Pages/Profile";
 import Notifications from "./Pages/Notifications";
 import SuggestEvent from "./Pages/SuggestEvent";
-
-import PaymentMethods from "./Pages/PaymentMethods";
-import CreatePromoter from "./Pages/CreatePromoter";
 import Browse from "./Pages/Browse";
 import Event from "./Pages/Event";
+import PaymentMethods from "./Pages/PaymentMethods";
+
+import HomePromoter from "./Pages/HomePromoter";
+import SuggestedEvents from "./Pages/SuggestedEvents"
 import EventsListing from "./Pages/EventsListing";
+
+
+import CreatePromoter from "./Pages/CreatePromoter";
 import CreateEvent from "./Pages/CreateEvent";
 import AddVenue from "./Pages/AddVenue";
 
@@ -51,58 +54,68 @@ function App() {
       <Routes>
         <Route path="/" element={<Home setUser={setUser} />} />
         <Route
-          path="/HomeUser"
-          element={
-            <HomeUser user={user} setUser={setUser} setEventId={setEventId} />
-          }
+			path="/HomeUser" element={
+			<HomeUser user={user} setUser={setUser} setEventId={setEventId} />}
         />
-        <Route path="/HomePromoter" element={<HomePromoter />} />
-        <Route path="/HomeAdmin" element={<HomeAdmin />} />
+        <Route path="/HomeAdmin" element={
+			<HomeAdmin />} 
+		/>
         <Route
-          path="/Listings"
-          element={<SellingListing user={user} setUser={setUser} />}
-        />
-        <Route
-          path="/MyTickets"
-          element={<BoughtTickets user={user} setUser={setUser} />}
+			path="/Listings"element={
+			<SellingListing user={user} setUser={setUser} />}
         />
         <Route
-          path="/SellTicket"
-          element={<SellTicket user={user} setUser={setUser} />}
+			path="/MyTickets"element={
+			<BoughtTickets user={user} setUser={setUser} />}
         />
         <Route
-          path="/SavedEvents"
-          element={<SavedEvents user={user} setUser={setUser} />}
+			path="/SellTicket"element={
+			<SellTicket user={user} setUser={setUser} />}
         />
         <Route
-          path="/FollowedEvents"
-          element={<FollowedEvents user={user} setUser={setUser} />}
+			path="/SavedEvents"element={
+			<SavedEvents user={user} setUser={setUser} />}
         />
         <Route
-          path="/Profile"
-          element={<Profile user={user} setUser={setUser} />}
+          	path="/FollowedEvents"element={
+			<FollowedEvents user={user} setUser={setUser} />}
         />
         <Route
-          path="/Notifications"
-          element={<Notifications user={user} setUser={setUser} />}
+          	path="/Profile"element={
+			<Profile user={user} setUser={setUser} />}
         />
         <Route
-          path="/Suggestion"
-          element={<SuggestEvent user={user} setUser={setUser} />}
+          	path="/Notifications"element={
+			<Notifications user={user} setUser={setUser} />}
         />
         <Route
-          path="/Browse"
-          element={
-            <Browse setEventId={setEventId} user={user} setUser={setUser} />
-          }
+          	path="/Suggestion"element={
+			<SuggestEvent user={user} setUser={setUser} />}
         />
         <Route
-          path="/Event"
-          element={<Event eventId={eventId} user={user} setUser={setUser} />}
+          	path="/Browse" element={
+			<Browse setEventId={setEventId} user={user} setUser={setUser} />}
         />
         <Route
-          path="/PaymentMethods"
-          element={<PaymentMethods user={user} setUser={setUser} />}
+          	path="/Event"element={
+			<Event eventId={eventId} user={user} setUser={setUser} />}
+        />
+        <Route
+          	path="/PaymentMethods"element={
+			<PaymentMethods user={user} setUser={setUser} />}
+        />
+
+
+        <Route path="/HomePromoter" element={
+          	<HomePromoter />} 
+        />
+        <Route
+			path="/Suggestions" element={
+			<SuggestedEvents setUser={setUser} />}
+        />
+		<Route
+			path="/Events" element={
+			<EventsListing setUser={setUser} />}
         />
       </Routes>
     </BrowserRouter>

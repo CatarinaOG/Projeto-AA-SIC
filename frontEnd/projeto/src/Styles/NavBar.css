@@ -71,6 +71,7 @@
     margin-right: 20px;
     text-decoration: underline;
     text-underline-offset: 10px;
+    text-decoration-color: var(--light-blue);
     cursor: pointer;
 }
 
@@ -93,6 +94,7 @@
     padding: 10px 20px 10px 20px;
     border-radius: 10px;
     text-decoration: underline;
+    text-decoration-color: var(--light-blue);
     text-underline-offset: 10px;
 }
 
