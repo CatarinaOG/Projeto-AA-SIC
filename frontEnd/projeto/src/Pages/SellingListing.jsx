@@ -1,7 +1,7 @@
 import NavBarUser from "../Components/NavBar/NavBarUser";
 import Filters from "../Components/Filters/Filters";
 import ListingElem from "../Components/SellingListing/ListingElem";
-import PopUpRemoveListing from "../Components/SellingListing/PopUpRemoveListing";
+import BlackClose from "../Images/blackClose.png"
 
 import { useState } from "react";
 
@@ -80,6 +80,10 @@ export default function SellingListing(props) {
 		setEvents((prevEvents) => prevEvents.filter((item) => item.id !== id));
 	};
 
+	function closeConfirmation(){
+		setPopUpTrigger(false)
+	}
+
 	const eventsFiltered = events.map((event) =>
 		<ListingElem
 			key={event.id}
@@ -97,22 +101,33 @@ export default function SellingListing(props) {
 				setUser={setUser}
 			/>
 
-			<PopUpRemoveListing
-				trigger={popUpTrigger}
-				setPopUpTrigger={setPopUpTrigger}
-				type={"selling"}
-				popUpID={popUpID}
-				setPopUpID={setPopUpID}
-				onRemove={handleRemoveEvents}
-			/>
-
 			<div className="center">
 				<div className="defaultContainer">
 					<h1>Tickets Listed</h1>
 					<Filters type="boughtTickets" />
-					<div className="eventsContainer">{eventsFiltered}</div>
+					<div className="eventsContainer">
+						{eventsFiltered}
+					</div>
 				</div>
 			</div>
+
+			{popUpTrigger &&
+				<div>
+					<div className="overlay"></div>
+					<div className="popUpContainer">
+						<img src={BlackClose} className="editClose" alt="" onClick={closeConfirmation} />
+						<h3 className="popUpInfoWithButtons">Are you sure you want to remove this ticket from listings?</h3>
+						<div className="center">
+							<div className="promoterButtons">
+								<button className="button">Yes</button>
+								<button className="button">No</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			}
+
 		</div>
 	);
 }

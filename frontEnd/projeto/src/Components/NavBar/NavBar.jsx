@@ -40,11 +40,38 @@ export default function NavBar(props){
         setInputs( oldInput => [...oldInput, {password:event.target.value}] )
     }
 
+    function sendLoginRequest(){
+
+        const url = "http://localhost/api/user/login"
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(inputs)
+        })
+        .then(response => {
+            if (response.ok) {
+            // POST request was successful
+            console.log('POST request successful');
+            } else {
+            // Error handling for unsuccessful request
+            console.error('POST request failed');
+            }
+        })
+        .catch(error => {
+            // Error handling for network errors
+            console.error('Error:', error);
+        });
+    }
+
     function login(){
+        sendLoginRequest()
         // enviar pedido com input.password e input.email
         // adicionar os erros
         // verificar tipo de user
-        navigate('/HomeAdmin')
+        navigate('/HomeUser')
     }
 
     return(
