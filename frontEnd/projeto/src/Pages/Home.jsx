@@ -11,7 +11,7 @@ import "../Styles/Home.css"
 
 export default function Home(props){
 
-    const {setUser} = props
+    const {setUser,setEventId} = props
 
     const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ export default function Home(props){
                     </div>
                 </div>
 
-            <Calendar />
+            <Calendar setEventId={setEventId}/>
         </div>
     )
 

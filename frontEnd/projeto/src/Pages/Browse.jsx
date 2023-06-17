@@ -1,5 +1,7 @@
 import Filters from "../Components/Filters/Filters"
 import NavBarUser from "../Components/NavBar/NavBarUser"
+import NavBar from "../Components/NavBar/NavBar"
+
 
 import { useState } from "react"
 
@@ -85,15 +87,22 @@ export default function Browse(props){
         />
     )
 
-
     return(
         <div>
-
-            <NavBarUser 
-                selected="home"
-                user={user}
-                setUser={setUser}
-            />
+            { user.email && 
+                <NavBarUser 
+                    selected="home"
+                    user={user}
+                    setUser={setUser}
+                />
+            }
+            
+            { !user.email && 
+                <NavBar 
+                    selected="home"
+                    setUser={setUser}
+                />
+            }
 
             <div className="center">
                 <div className="defaultContainer">

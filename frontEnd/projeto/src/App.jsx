@@ -37,88 +37,96 @@ import "./Styles/General.css";
 import "./Styles/Event.css";
 
 function App() {
-  const [user, setUser] = useState({
-    name: "Catarina Gonçalves",
-    profile_pic: "https://cdn-icons-png.flaticon.com/128/4140/4140047.png",
-    email: "catarina.oliveira.41@hotmail.com",
-    password: "hello",
-    phone: 933066325,
-    language: "English",
-    bank_details: "23455667234",
-  });
+	const [user, setUser] = useState({
+		name: "Catarina Gonçalves",
+		profile_pic: "https://cdn-icons-png.flaticon.com/128/4140/4140047.png",
+		email: "catarina.oliveira.41@hotmail.com",
+		password: "hello",
+		phone: 933066325,
+		language: "English",
+		bank_details: "23455667234",
+	});
 
-  const [eventId, setEventId] = useState();
+  	const [eventId, setEventId] = useState();
 
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home setUser={setUser} />} />
-        <Route
-			path="/HomeUser" element={
-			<HomeUser user={user} setUser={setUser} setEventId={setEventId} />}
-        />
-        <Route path="/HomeAdmin" element={
-			<HomeAdmin />} 
-		/>
-        <Route
-			path="/Listings"element={
-			<SellingListing user={user} setUser={setUser} />}
-        />
-        <Route
-			path="/MyTickets"element={
-			<BoughtTickets user={user} setUser={setUser} />}
-        />
-        <Route
-			path="/SellTicket"element={
-			<SellTicket user={user} setUser={setUser} />}
-        />
-        <Route
-			path="/SavedEvents"element={
-			<SavedEvents user={user} setUser={setUser} />}
-        />
-        <Route
-          	path="/FollowedEvents"element={
-			<FollowedEvents user={user} setUser={setUser} />}
-        />
-        <Route
-          	path="/Profile"element={
-			<Profile user={user} setUser={setUser} />}
-        />
-        <Route
-          	path="/Notifications"element={
-			<Notifications user={user} setUser={setUser} />}
-        />
-        <Route
-          	path="/Suggestion"element={
-			<SuggestEvent user={user} setUser={setUser} />}
-        />
-        <Route
-          	path="/Browse" element={
-			<Browse setEventId={setEventId} user={user} setUser={setUser} />}
-        />
-        <Route
-          	path="/Event"element={
-			<Event eventId={eventId} user={user} setUser={setUser} />}
-        />
-        <Route
-          	path="/PaymentMethods"element={
-			<PaymentMethods user={user} setUser={setUser} />}
-        />
+  	return (
+		<BrowserRouter>
+		<Routes>
+			<Route path="/" element={
+				<Home setUser={setUser} setEventId={setEventId} />} 
+			/>
 
 
-        <Route path="/HomePromoter" element={
-          	<HomePromoter />} 
-        />
-        <Route
-			path="/Suggestions" element={
-			<SuggestedEvents setUser={setUser} />}
-        />
-		<Route
-			path="/Events" element={
-			<EventsListing setUser={setUser} />}
-        />
-      </Routes>
-    </BrowserRouter>
+			<Route
+				path="/HomeUser" element={
+				<HomeUser user={user} setUser={setUser} setEventId={setEventId} />}
+			/>
+			<Route path="/HomeAdmin" element={
+				<HomeAdmin eventId={eventId}/>} 
+			/>
+			<Route
+				path="/Listings"element={
+				<SellingListing user={user} setUser={setUser} />}
+			/>
+			<Route
+				path="/MyTickets"element={
+				<BoughtTickets user={user} setUser={setUser} />}
+			/>
+			<Route
+				path="/SellTicket"element={
+				<SellTicket user={user} setUser={setUser} />}
+			/>
+			<Route
+				path="/SavedEvents"element={
+				<SavedEvents user={user} setUser={setUser} />}
+			/>
+			<Route
+				path="/FollowedEvents"element={
+				<FollowedEvents user={user} setUser={setUser} />}
+			/>
+			<Route
+				path="/Profile"element={
+				<Profile user={user} setUser={setUser} />}
+			/>
+			<Route
+				path="/Notifications"element={
+				<Notifications user={user} setUser={setUser} />}
+			/>
+			<Route
+				path="/Suggestion"element={
+				<SuggestEvent user={user} setUser={setUser} />}
+			/>
+			<Route
+				path="/Browse" element={
+				<Browse setEventId={setEventId} user={user} setUser={setUser} />}
+			/>
+			<Route
+				path="/Event"element={
+				<Event eventId={eventId} user={user} setUser={setUser} />}
+			/>
+			<Route
+				path="/PaymentMethods"element={
+				<PaymentMethods user={user} setUser={setUser} />}
+			/>
+
+
+			<Route path="/HomePromoter" element={
+				<HomePromoter setUser={setUser} setEventId={setEventId}/>} 
+			/>
+			<Route
+				path="/Suggestions" element={
+				<SuggestedEvents setUser={setUser} />}
+			/>
+			<Route
+				path="/Events" element={
+				<EventsListing setUser={setUser} />}
+			/>
+			<Route
+				path="/AddEvent" element={
+				<CreateEvent setUser={setUser} />}
+			/>
+		</Routes>
+		</BrowserRouter>
   );
 }
 

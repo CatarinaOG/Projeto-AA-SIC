@@ -1,8 +1,8 @@
 
 import { useState } from "react"
 import NavBarUser from "../Components/NavBar/NavBarUser"
+import NavBar from "../Components/NavBar/NavBar"
 import TicketAlert from "../Components/Event/TicketAlert"
-
 import TicketType from "../Components/Event/TicketType"
 import Ticket from "../Components/Event/Ticket"
 import TicketSold from "../Components/Event/TicketSold"
@@ -152,11 +152,20 @@ export default function Event(props){
 
     return(
         <div>
-            <NavBarUser 
-                selected="home"
-                user={user}
-                setUser={setUser}
-            />
+            { user.email && 
+                <NavBarUser 
+                    selected="home"
+                    user={user}
+                    setUser={setUser}
+                />
+            }
+            
+            { !user.email && 
+                <NavBar 
+                    selected="home"
+                    setUser={setUser}
+                />
+            }
             
             <img className="wallpaperBlur" src={event.image} alt="" />
 

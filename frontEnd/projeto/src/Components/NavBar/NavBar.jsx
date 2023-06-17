@@ -58,7 +58,7 @@ export default function NavBar(props){
 
                     <a href="" className="iconTab"><img src={Info} alt="" /></a>
                     <a href="" className="tab" onClick={showLogin}>Login</a>
-                    <a href="" className="sellTab">Sell Tickets!</a>
+                    <a href="" className="sellTab" onClick={showLogin}>Sell Tickets!</a>
                     
                 </div>
 
