@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
 import PopUpRemoveListing from "../Components/SellingListing/PopUpRemoveListing";
-import SavedFollowElem from "../Components/General/EventElem.jsx";
+import EventElem from "../Components/General/EventElem.jsx";
 
 import AddPrompt from "../Components/EventsListing/AddPrompt";
 
@@ -87,15 +87,12 @@ export default function EventsListing(props) {
 	const [popUpTrigger, setPopUpTrigger] = useState(false);
 
 	const showEvents = events.map((event) =>
-		<SavedFollowElem event={event} setPopUpTrigger={setPopUpTrigger} />
+		<EventElem event={event} setPopUpTrigger={setPopUpTrigger} />
 	);
 
 	return (
 		<div>
-			<NavBarPromoter 
-				selected="events"
-				setUser={setUser}
-			/>
+			<NavBarPromoter selected="events"/>
 
 			<PopUpRemoveListing
 				trigger={popUpTrigger}

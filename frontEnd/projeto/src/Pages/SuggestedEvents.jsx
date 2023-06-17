@@ -31,9 +31,7 @@ export default function SuggestedEvents(props){
     return(
         <div>
 
-            <NavBarPromoter 
-                selected="suggestions"
-            />
+            <NavBarPromoter selected="suggestions" />
 
             <div className="center">
                 <div className="defaultContainer">

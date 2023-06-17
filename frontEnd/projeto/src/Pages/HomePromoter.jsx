@@ -12,10 +12,7 @@ export default function HomePromoter(props){
     return(
         <div>
 
-            <NavBarPromoter 
-                selected="home"
-                setUser={setUser}
-            />
+            <NavBarPromoter selected="home" />
 
             <div class="container">
                 <img className="wallpaper" src={Wallpaper} alt="" />

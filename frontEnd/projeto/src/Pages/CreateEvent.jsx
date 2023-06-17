@@ -133,7 +133,7 @@ export default function CreateEvent(props) {
 
   return (
     <div>
-      <NavBarPromoter selected="events" setUser={setUser} />
+      <NavBarPromoter selected="events"/>
       <PopUpAddType
         trigger={popUpTrigger1}
         setPopUpTrigger={setPopUpTrigger1}

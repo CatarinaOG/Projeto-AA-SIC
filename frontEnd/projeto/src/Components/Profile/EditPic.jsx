@@ -12,7 +12,7 @@ export default function EditPic(props){
     const [temp,setTemp] = useState("")
     const [emptyURLError,setEmptyURLError] = useState(false)
 
-    function saveIntTemp(event){
+    function saveTemp(event){
         setTemp(event.target.value)
     }
 
@@ -48,6 +48,7 @@ export default function EditPic(props){
 
     function changePicture(event){
         event.preventDefault();
+        
         if(temp !== ""){
             sendEditInfoRequest()
             setEditInfo("none")
@@ -63,7 +64,7 @@ export default function EditPic(props){
                 <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
                 <h3 className="editTitle">Change profile Picture</h3>
                 <form action="/submit" onSubmit={changePicture}>
-                    <input className="editInput" onChange={saveIntTemp} onFocus={setErrorToFalse} placeholder="Insert the url for your new profile picture" type="text"/>
+                    <input className="editInput" onChange={saveTemp} onFocus={setErrorToFalse} placeholder="Insert the url for your new profile picture" type="text"/>
                     <p className={emptyURLError? "urlError" : "urlErrorNotVisible"}>Insert an URL before confirming</p>
                     <button className="button" type="submit">Confirm</button>
                 </form>

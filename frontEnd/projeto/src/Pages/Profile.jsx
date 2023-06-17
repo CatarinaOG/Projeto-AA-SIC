@@ -3,7 +3,6 @@ import UserContext from "../Contexts/UserContext"
 
 import NavBarUser from "../Components/NavBar/NavBarUser"
 import EditPic from "../Components/Profile/EditPic"
-import EditEmail from "../Components/Profile/EditEmail"
 import EditPhone from "../Components/Profile/EditPhone"
 import EditPassword from "../Components/Profile/EditPassword"
 import EditLanguage from "../Components/Profile/EditLanguage"
@@ -18,7 +17,7 @@ import "../Styles/Profile.css"
 export default function Profile(){
     const { user } = useContext(UserContext);
 
-    const [editInfo,setEditInfo] = useState("none") // picture / email / phone /password / language / bank_details
+    const [editInfo,setEditInfo] = useState("none") // picture / phone /password / language / bank_details
     const [addInfo,setAddInfo] = useState("none") // phone / bank_details
     
     const profile_pic = user.profile_pic? user.profile_pic : "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
@@ -26,10 +25,6 @@ export default function Profile(){
 
     function editProfilePic(){
         setEditInfo("picture")
-    }
-
-    function editEmailAddress(){
-        setEditInfo("email")
     }
 
     function editPhoneNumber(){
@@ -70,16 +65,6 @@ export default function Profile(){
                     <h2>{user.name}</h2>
 
                     <div className="editInfo">
-
-                        <div className="editSection">
-                            <div className="editContent">
-                                <h3>Email Address</h3>
-                                <div className="displayHorizontally">
-                                    <p>{user.email}</p>
-                                    <button className="editButton" onClick={editEmailAddress}></button>
-                                </div>
-                            </div>
-                        </div>
 
                         <div className="editSection">
                             <div className="editContent">
@@ -152,12 +137,6 @@ export default function Profile(){
                     <EditPic setEditInfo={setEditInfo}/>
                 </div>
             }
-            { editInfo === "email" && 
-                <div>
-                    <div className="overlay"></div>
-                    <EditEmail setEditInfo={setEditInfo}/>
-                </div>
-            }
             { editInfo === "phone" && 
                 <div>
                     <div className="overlay"></div>
@@ -197,7 +176,7 @@ export default function Profile(){
             { addInfo === "bank_details" && 
                 <div>
                     <div className="overlay"></div>
-                    <AddBankDetails setEditInfo={setEditInfo}/>
+                    <AddBankDetails setAddInfo={setAddInfo}/>
                 </div>
             }
 
