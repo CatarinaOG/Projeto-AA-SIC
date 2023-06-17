@@ -1,10 +1,13 @@
+import { useNavigate } from "react-router-dom"
 
 export default function SuggestedEvent(props){
 
-    const {event} = props
+    const {event,setSuggestedEvent} = props
+    const navigate = useNavigate()
 
     function addSuggestedEvent(){
-        // meter no estado da app
+        setSuggestedEvent(event)
+        navigate("/AddEvent")
     }
 
     return(
@@ -13,7 +16,7 @@ export default function SuggestedEvent(props){
                 <div className="suggestedInfo">
                     <h3>{event.name}</h3>
                     <p>{event.place}</p>
-                    <p>{event.start_date}-{event.end_date}</p>
+                    <p>{event.start_date} ({event.start_time}) - {event.end_date} ({event.end_time})</p>
                     <div className="buttonSuggestedContainer">
                         <button className="button" onClick={addSuggestedEvent}>Add</button>
                     </div>

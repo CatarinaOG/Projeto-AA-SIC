@@ -67,7 +67,7 @@ export default function NavBar(){
             
             switch (userResponse.type){
                 case "user": 
-                    navigate('/HomeUser')
+                    navigate('/HomePromoter')
                     break
                 case "promoter":
                     navigate('/HomePromoter')

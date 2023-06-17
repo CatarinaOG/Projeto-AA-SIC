@@ -41,7 +41,7 @@ import "./Styles/General.css";
 function App() {
 	const [user, setUser] = useState({});
   	const [eventId, setEventId] = useState();
-
+	const [suggestedEvent,setSuggestedEvent] = useState({})
 
   	return (
 		<BrowserRouter>
@@ -106,7 +106,7 @@ function App() {
 					/>
 					<Route
 						path="/Suggestions" element={
-						<SuggestedEvents />}
+						<SuggestedEvents setSuggestedEvent={setSuggestedEvent}/>}
 					/>
 					<Route
 						path="/Events" element={
@@ -114,7 +114,7 @@ function App() {
 					/>
 					<Route
 						path="/AddEvent" element={
-						<CreateEvent />}
+						<CreateEvent suggestedEvent={suggestedEvent}/>}
 					/>
 
 
