@@ -3,9 +3,11 @@ package AASIC.controllers;
 //import javax.annotation.Resource;
 import AASIC.config.JWTService;
 import AASIC.requests.EditProfileRequest;
+import AASIC.requests.SuggestEventRequest;
 import AASIC.services.AuthenticationService;
 import AASIC.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,5 +44,13 @@ public class UserController {
         String email = jwtService.extractUsername(jwt);
         userService.edit_profile(request, email);
         return ResponseEntity.ok(email);
+    }
+
+    @PostMapping("/suggest_event")
+    public ResponseEntity<String> suggest_event(@RequestBody SuggestEventRequest request, @RequestHeader(name = "Authorization") String token){
+        var jwt = token.substring(7);
+        String email = jwtService.extractUsername(jwt);
+        userService.suggest_event(request, email);
+        return ResponseEntity.ok("");
     }
 }
