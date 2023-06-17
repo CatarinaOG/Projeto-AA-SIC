@@ -26,6 +26,8 @@ public class Location{
     private String latitude;
     @Column(name="longitude")
     private String longitude;
+    @Column(name="city")
+    private String city;
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     private List<Event> events;
 
