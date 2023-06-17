@@ -47,7 +47,7 @@ function App() {
 	const [user, setUser] = useState({});
   	const [eventId, setEventId] = useState();
 	const [suggestedEvent,setSuggestedEvent] = useState({})
-
+	const [addEventInfo,setAddEventInfo] = useState({})
 
 
   	return (
@@ -121,7 +121,7 @@ function App() {
 					/>
 					<Route
 						path="/AddEvent" element={
-						<CreateEvent suggestedEvent={suggestedEvent}/>}
+						<CreateEvent suggestedEvent={suggestedEvent} addEventInfo={addEventInfo} setAddEventInfo={setAddEventInfo}/>}
 					/>
 
 
