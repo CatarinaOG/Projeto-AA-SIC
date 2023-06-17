@@ -11,19 +11,12 @@ import EditBankDetails from "../Components/Profile/EditBankDetails"
 import "../Styles/Profile.css"
 
 
-export default function Profile(){
+export default function Profile(props){
 
-    const [editInfo,setEditInfo] = useState("bank_details") // picture / email / phone /password / language / bank_details
+    const {user,setUser} = props
 
-    const [user,setUser] = useState({
-        name: "Catarina Gonçalves",
-        profile_pic: "https://cdn-icons-png.flaticon.com/128/4140/4140047.png",
-        email: "catarina.oliveira.41@hotmail.com",
-        password: "hello",
-        phone: 933066325,
-        language: "English",
-        bank_details: "23455667234"
-    })
+    const [editInfo,setEditInfo] = useState("none") // picture / email / phone /password / language / bank_details
+
 
     function editProfilePic(){
         setEditInfo("picture")
@@ -48,7 +41,11 @@ export default function Profile(){
     return(
 
         <div>
-            <NavBarUser />
+            <NavBarUser 
+                selected="home"
+                user={user}
+                setUser={setUser}
+            />
 
             <div className="centerAll">
                 <div className="defaultContainer">

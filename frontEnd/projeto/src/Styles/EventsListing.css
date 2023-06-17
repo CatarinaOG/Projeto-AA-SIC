@@ -8,6 +8,7 @@
 .addIcon {
   margin-right: 10px;
   max-height: 45px;
+  height: 20px;
 }
 
 .addPromptContainer {
@@ -15,9 +16,15 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 }
 
 .h3AddPrompt {
   text-decoration: underline;
-  color: white;
+  text-underline-offset: 5px;
+  color: var(--light-blue);
+}
+
+.h3AddPrompt:active {
+  color: var(--lighter-blue);
 }

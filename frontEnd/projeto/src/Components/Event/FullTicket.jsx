@@ -1,16 +1,33 @@
+import { useNavigate } from 'react-router-dom';
 
 import goBackImg from "../../Images/goBack.png"
+import BlackClose from "../../Images/blackClose.png"
+import { useState } from 'react';
 
 export default function FullTicket(props){
 
     const {ticket,ticketType,user,setShow} = props
+
+    const [loginMandatory,setLoginMandatory] = useState(false)
+
+    const navigate = useNavigate();
+
 
     function goBack(){
         setShow("tickets")
     }
 
     function buyTicket(){
-        // enviar pedido user.id ticket.id
+
+        if(!user.email)
+            setLoginMandatory(true)
+        else
+            navigate('/PaymentMethods')
+            // enviar pedido user.id ticket.id
+    }
+
+    function closeEdit(){
+        setLoginMandatory(false)
     }
 
     return(
@@ -35,6 +52,17 @@ export default function FullTicket(props){
                     </div>
                 </div>
             </div>
+
+            { loginMandatory &&
+
+                <div>
+                    <div className="overlay"></div>
+                    <div className="popUpContainer">
+                        <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
+                        <h3 className="popUpInfo">Sign in to buy a ticket!</h3>
+                    </div>
+                </div>
+            }
 
         </div>
     )

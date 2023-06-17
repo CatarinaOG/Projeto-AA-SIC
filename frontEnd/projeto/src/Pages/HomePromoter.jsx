@@ -5,12 +5,17 @@ import Wallpaper from "../Images/wallpaper.png"
 import Magnifier from "../Images/magnifier.png"
 
 
-export default function HomePromoter(){
+export default function HomePromoter(props){
+
+    const {setEventId,setUser} = props
 
     return(
         <div>
 
-            <NavBarPromoter />
+            <NavBarPromoter 
+                selected="home"
+                setUser={setUser}
+            />
 
             <div class="container">
                 <img className="wallpaper" src={Wallpaper} alt="" />
@@ -21,7 +26,7 @@ export default function HomePromoter(){
                 </div>
             </div>
 
-            <Calendar />
+            <Calendar setEventId={setEventId}/>
 
         </div>
     )

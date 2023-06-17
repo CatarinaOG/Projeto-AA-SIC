@@ -5,7 +5,9 @@ import Wallpaper from "../Images/wallpaper.png"
 import Magnifier from "../Images/magnifier.png"
 
 
-export default function Home(){
+export default function Home(props){
+
+    const {setEventId} = props
 
     return(
         <div>
@@ -21,7 +23,7 @@ export default function Home(){
                 </div>
             </div>
 
-            <Calendar />
+            <Calendar setEventId={setEventId}/>
 
         </div>
     )

@@ -4,7 +4,9 @@ import BoughtEvent from "../Components/BoughtTickets/BoughtTicket"
 
 import { useState } from "react"
 
-export default function BoughtTickets(){
+export default function BoughtTickets(props){
+
+    const {user,setUser} = props
 
     const [events,setEvents] =useState([ // para ser substituido pelo pedido com base no filtro
         {
@@ -86,7 +88,11 @@ export default function BoughtTickets(){
 
     return(
         <div>
-            <NavBarUser selected="boughtTickets"/>
+            <NavBarUser 
+                selected="boughtTickets"
+                user={user} 
+				setUser={setUser}
+            />
             
             <div className="center">
                 <div className="defaultContainer">

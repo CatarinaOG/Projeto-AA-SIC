@@ -8,9 +8,9 @@ export default function BoughtTicket(props){
         <div className="event">
             <div className="eventLeftSide">
                 <img className="eventCalendar" src={Calendar} alt="" />
-                <h3>{event.dayOfWeek}, {event.month} {event.day} | {event.time} </h3>
+                <h3>{event.eventName}</h3>
                 <h3>{event.ticketType}</h3>
-                <p>{event.eventName}</p>
+                <p className="colorGreen">{event.dayOfWeek}, {event.month} {event.day} | {event.time} </p>
                 <p>{event.eventPlace}</p>
             </div>
 

@@ -1,10 +1,16 @@
 
 import Logo from "../../Images/logo.png"
-import Logout from "../../Images/logout.png"
+import Out from "../../Images/logout.png"
 
 import "../../Styles/NavBar.css"
 
-export default function NavBarPromoter(){
+export default function NavBarPromoter(props){
+
+    const {selected,setUser} = props
+
+    function logout(){
+        setUser({})
+    }
 
     return(
 
@@ -15,9 +21,9 @@ export default function NavBarPromoter(){
 
                 <div className="navBarRighSide">
 
-                    <a href="" className="tab">Suggestions</a>
-                    <a href="" className="tab">Events</a>
-                    <a href="" className="iconTab"><img src={Logout} alt="" /></a>
+                    <a href="/Suggestions" className={selected === "suggestions" ? "tabSelected" : "tab"}>Suggestions</a>
+                    <a href="/Events" className={selected === "events" ? "tabSelected" : "tab"}>Events</a>
+                    <a href="/" className="iconTab"><img src={Out} alt="" onClick={logout} /></a>
 
                 </div>
 
