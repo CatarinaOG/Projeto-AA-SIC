@@ -69,7 +69,7 @@ function App() {
 					/>
 					<Route
 						path="/SavedEvents"element={
-						<SavedEvents user={user} setUser={setUser} />}
+						<SavedEvents />}
 					/>
 					<Route
 						path="/FollowedEvents"element={
