@@ -53,79 +53,79 @@ function App() {
 
 					<Route
 						path="/HomeUser" element={
-						<HomeUser user={user} setUser={setUser} setEventId={setEventId} />}
+						<HomeUser setEventId={setEventId} />}
 					/>
 					<Route
-						path="/Listings"element={
-						<SellingListing user={user} setUser={setUser} />}
+						path="/Listings" element={
+						<SellingListing />}
 					/>
 					<Route
-						path="/MyTickets"element={
-						<BoughtTickets user={user} setUser={setUser} />}
+						path="/MyTickets" element={
+						<BoughtTickets />}
 					/>
 					<Route
-						path="/SellTicket"element={
-						<SellTicket user={user} setUser={setUser} />}
+						path="/SellTicket" element={
+						<SellTicket />}
 					/>
 					<Route
-						path="/SavedEvents"element={
+						path="/SavedEvents" element={
 						<SavedEvents />}
 					/>
 					<Route
-						path="/FollowedEvents"element={
-						<FollowedEvents user={user} setUser={setUser} />}
+						path="/FollowedEvents" element={
+						<FollowedEvents />}
 					/>
 					<Route
-						path="/Profile"element={
+						path="/Profile" element={
 						<Profile />}
 					/>
 					<Route
-						path="/Notifications"element={
-						<Notifications user={user} setUser={setUser} />}
+						path="/Notifications" element={
+						<Notifications />}
 					/>
 					<Route
-						path="/Suggestion"element={
-						<SuggestEvent user={user} setUser={setUser} />}
+						path="/Suggestion" element={
+						<SuggestEvent />}
 					/>
 					<Route
 						path="/Browse" element={
-						<Browse setEventId={setEventId} user={user} setUser={setUser} />}
+						<Browse setEventId={setEventId}/>}
 					/>
 					<Route
 						path="/Event"element={
-						<Event eventId={eventId} user={user} setUser={setUser} />}
+						<Event eventId={eventId} />}
 					/>
 					<Route
 						path="/PaymentMethods"element={
-						<PaymentMethods user={user} setUser={setUser} />}
+						<PaymentMethods />}
 					/>
 
 
 					<Route path="/HomePromoter" element={
-						<HomePromoter setUser={setUser} setEventId={setEventId}/>} 
+						<HomePromoter setEventId={setEventId}/>} 
 					/>
 					<Route
 						path="/Suggestions" element={
-						<SuggestedEvents setUser={setUser} />}
+						<SuggestedEvents />}
 					/>
 					<Route
 						path="/Events" element={
-						<EventsListing setUser={setUser} />}
+						<EventsListing />}
 					/>
 					<Route
 						path="/AddEvent" element={
-						<CreateEvent setUser={setUser} />}
+						<CreateEvent />}
 					/>
 
 
 					<Route path="/HomeAdmin" element={
-						<HomeAdmin setUser={setUser} setEventId={setEventId}/>} 
+						<HomeAdmin setEventId={setEventId}/>} 
 					/>
 					<Route path="/Promoters" element={
-						<PromotersListing setUser={setUser}/>} 
+						<PromotersListing />} 
 					/>
 					<Route path="/CreatePromoter" element={
-						<CreatePromoter setUser={setUser}/>} 
+						<CreatePromoter/>} 
 					/>
 
 

@@ -1,29 +1,40 @@
-import NavBarUser from "../Components/NavBar/NavBarUser"
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
+import NavBarUser from "../Components/NavBar/NavBarUser"
 import BlackClose from "../Images/blackClose.png"
 
 import "../Styles/SuggestEvent.css"
 
 export default function SuggestEvent(props){
 
-    const {user,setUser} = props
 
-    const [eventName, setEventName] = useState('');
-    const [place, setPlace] = useState('');
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
+    const [inputs,setInputs] = useState({
+        event_name: "",
+        address: "",
+        start_date: "",
+        start_time: "",
+        end_date: "",
+        end_time: ""
+    })
 
 
+    const navigate = useNavigate();
     const [showConfirmation,setShowConfirmation] = useState(false)
 
     function suggestTheEvent(){
-        //enviar pedido
         setShowConfirmation(true)
     }
 
-    function closeEdit(){
-        // enviar para tras
+    function closeConfirmation(){
+        navigate("/HomeUser")
+    }
+
+    function updateInputs(event){
+
+        const {name,value} = event.target
+        setInputs(oldInputs => ({...oldInputs,[name]:value}))
+
     }
 
 
@@ -48,10 +59,16 @@ export default function SuggestEvent(props){
 
                             <div className="smallContainerRightSide">
                                 <div>
-                                    <input className="suggestEventInput" type="text" onChange={e => setEventName(e.target.value)}/>
-                                    <input className="suggestEventInput" type="text" onChange={e => setPlace(e.target.value)}/>
-                                    <input className="suggestEventInputDate" type="date" onChange={e => setStartDate(e.target.value)}/>
-                                    <input className="suggestEventInputDate" type="date" onChange={e => setEndDate(e.target.value)}/>
+                                    <input className="suggestEventInput" type="text" name="event_name" onChange={updateInputs}/>
+                                    <input className="suggestEventInput" type="text" name="address" onChange={updateInputs}/>
+                                    <div className="suggestDateContainer">
+                                        <input className="suggestEventInputDate" type="date" name="start_date" onChange={updateInputs}/>
+                                        <input className="suggestEventInputTime" type="time" name="satart_time" onChange={updateInputs}/>
+                                    </div>
+                                    <div className="suggestDateContainer">
+                                        <input className="suggestEventInputDate" type="date" name="end_date" onChange={updateInputs}/>
+                                        <input className="suggestEventInputTime" type="time" name="end_time" onChange={updateInputs}/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -63,17 +80,14 @@ export default function SuggestEvent(props){
             </div>
 
             { showConfirmation &&
-
                 <div>
                     <div className="overlay"></div>
                     <div className="popUpContainer">
-                        <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
-                        <h3 className="popUpInfo">Your suggested has been sent!</h3>
+                        <img src={BlackClose} className="editClose" alt="" onClick={closeConfirmation} />
+                        <h3 className="popUpInfo">Your suggestion has been sent!</h3>
                     </div>
                 </div>
             }
-
-
         </div>
     )
 }

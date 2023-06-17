@@ -9,8 +9,7 @@ import ArtistElem from "../Components/CreateEvent/ArtistElem";
 import PopUpAddCategory from "../Components/CreateEvent/PopUpAddCategory";
 import PopUpCreateArtist from "../Components/CreateEvent/PopUpCreateArtist";
 
-export default function CreateEvent(props) {
-  const { setUser } = props;
+export default function CreateEvent() {
 
   const [eventName, setEventName] = useState("");
   const [eventVenue, setEventVenue] = useState("");

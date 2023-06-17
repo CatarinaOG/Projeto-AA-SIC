@@ -3,15 +3,18 @@ import NavBarUser from "../Components/NavBar/NavBarUser"
 import NavBar from "../Components/NavBar/NavBar"
 
 
-import { useState } from "react"
+import { useState,useContext } from "react"
+
+import UserContext from "../Contexts/UserContext"
+import BrowseTicket from "../Components/Browse/BrowseTicket"
 
 import "../Styles/Browse.css"
-import BrowseTicket from "../Components/Browse/BrowseTicket"
 
 
 export default function Browse(props){
 
-    const {setEventId,user,setUser} = props
+    const {setEventId} = props
+    const {user} = useContext(UserContext);
 
     const [events,setEvents] =useState([ // para ser substituido pelo pedido com base no filtro
         {
@@ -90,13 +93,7 @@ export default function Browse(props){
     return(
         <div>
             { user.email && <NavBarUser selected="home"/>}
-            
-            { !user.email && 
-                <NavBar 
-                    selected="home"
-                    setUser={setUser}
-                />
-            }
+            { !user.email && <NavBar />}
 
             <div className="center">
                 <div className="defaultContainer">

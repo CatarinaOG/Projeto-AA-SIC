@@ -6,9 +6,7 @@ import EventElem from "../Components/General/EventElem.jsx";
 
 import AddPrompt from "../Components/EventsListing/AddPrompt";
 
-export default function EventsListing(props) {
-
-	const {setUser} = props
+export default function EventsListing() {
 
 	const [events, setEvents] = useState([
 		// para ser substituido pelo pedido com base no filtro

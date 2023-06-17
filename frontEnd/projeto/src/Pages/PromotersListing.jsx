@@ -8,9 +8,7 @@ import add from "../Images/plus.png"
 
 import "../Styles/PromotersListing.css"
 
-export default function PromotersListing(props){
-
-    const {setUser} = props
+export default function PromotersListing(){
 
     const navigate = useNavigate();
 
@@ -44,10 +42,7 @@ export default function PromotersListing(props){
     return(
         <div>
 
-            <NavBarAdmin 
-                selected="promoters"
-                setUser={setUser}
-            />
+            <NavBarAdmin selected="promoters"/>
 
             <div className="center">
                 <div className="defaultContainer">

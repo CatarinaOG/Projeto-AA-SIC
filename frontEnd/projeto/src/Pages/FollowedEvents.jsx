@@ -4,9 +4,7 @@ import SavedFollowElem from "../Components/General/EventElem.jsx";
 import { useState } from "react";
 import PopUpSaved from "../Components/General/PopUpSaved";
 
-export default function FollowedEvents(props) {
-
-  const {user,setUser} = props
+export default function FollowedEvents() {
 
   const [events, setEvents] = useState([
     // para ser substituido pelo pedido com base no filtro

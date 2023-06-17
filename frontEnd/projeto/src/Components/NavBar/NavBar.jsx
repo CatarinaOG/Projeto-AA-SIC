@@ -8,9 +8,9 @@ import Info from "../../Images/info.png"
 
 import "../../Styles/NavBar.css"
 
-export default function NavBar(props){
+export default function NavBar(){
 
-    const { user, setUser } = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
 
 
     const [showError,setShowError] = useState(0)

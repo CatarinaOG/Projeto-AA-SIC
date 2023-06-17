@@ -1,3 +1,5 @@
+import {useContext} from "react"
+import UserContext from "../../Contexts/UserContext"
 
 import Logo from "../../Images/logo.png"
 import Logout from "../../Images/logout.png"
@@ -6,7 +8,8 @@ import "../../Styles/NavBar.css"
 
 export default function NavBarAdmin(props){
 
-    const {selected,setUser} = props
+    const {selected} = props
+    const {setUser} = useContext(UserContext);
 
     function logout(){
         setUser({})

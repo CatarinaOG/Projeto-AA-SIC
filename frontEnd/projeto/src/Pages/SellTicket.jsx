@@ -9,9 +9,7 @@ import FaseFile from "../Components/SellTicket/FaseFile"
 
 import "../Styles/SellTicket.css"
 
-export default function BuyTicket(props){
-
-    const {user,setUser} = props
+export default function SellTicket(){
 
     const [events,setEvents] = useState([
         {

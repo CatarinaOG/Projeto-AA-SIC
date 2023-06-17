@@ -4,9 +4,8 @@ import BoughtEvent from "../Components/BoughtTickets/BoughtTicket"
 
 import { useState } from "react"
 
-export default function BoughtTickets(props){
+export default function BoughtTickets(){
 
-    const {user,setUser} = props
 
     const [events,setEvents] =useState([ // para ser substituido pelo pedido com base no filtro
         {

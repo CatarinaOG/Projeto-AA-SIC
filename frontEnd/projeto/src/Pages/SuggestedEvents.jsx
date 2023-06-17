@@ -5,9 +5,7 @@ import SuggestedEvent from "../Components/SuggestedEvents/SuggestedEvent"
 
 import "../Styles/SuggestedEvents.css"
 
-export default function SuggestedEvents(props){
-
-    const {setUser} = props
+export default function SuggestedEvents(){
 
     const [suggestedEvents,setSuggestedEvents] = useState([
         {

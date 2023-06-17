@@ -7,7 +7,7 @@ import Magnifier from "../Images/magnifier.png"
 
 export default function HomePromoter(props){
 
-    const {setEventId,setUser} = props
+    const {setEventId} = props
 
     return(
         <div>

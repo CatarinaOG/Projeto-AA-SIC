@@ -5,9 +5,7 @@ import BlackClose from "../Images/blackClose.png"
 
 import { useState } from "react";
 
-export default function SellingListing(props) {
-
-	const {user,setUser} = props
+export default function SellingListing() {
 
 	const [events, setEvents] = useState([
 		// para ser substituido pelo pedido com base no filtro

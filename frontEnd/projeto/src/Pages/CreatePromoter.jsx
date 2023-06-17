@@ -2,9 +2,7 @@ import { useState } from "react";
 import NavBarAdmin from "../Components/NavBar/NavBarAdmin";
 import PopUpConfirm from "../Components/CreatePromoter/PopUpConfirm";
 
-export default function CreatePromoter(props) {
-
-	const {setUser} = props
+export default function CreatePromoter() {
 
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
@@ -43,10 +41,8 @@ export default function CreatePromoter(props) {
 
 	return (
 		<div>
-			<NavBarAdmin 
-				selected="promoters"
-				setUser={setUser}
-			/>
+			<NavBarAdmin selected="promoters"/>
+
 			<PopUpConfirm
 				trigger={popUpTrigger}
 				setPopUpTrigger={setPopUpTrigger}

@@ -8,7 +8,7 @@ import Magnifier from "../Images/magnifier.png"
 
 export default function HomeUser(props){
 
-    const {user,setUser,setEventId} = props
+    const {setEventId} = props
 
     const navigate = useNavigate();
 

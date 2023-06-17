@@ -46,11 +46,24 @@
 
 .suggestEventInputDate{
     margin: 10px;
-    margin-left: 130px;
     padding-left: 10px;
     background-color: var(--grey);
     border: none;
     border-radius: 10px;
-    width: 150px;
+    width: 120px;
     height: 30px;
+}
+
+.suggestEventInputTime{
+    margin: 10px;
+    padding-left: 10px;
+    background-color: var(--grey);
+    border: none;
+    border-radius: 10px;
+    width: 120px;
+    height: 30px;
+}
+
+.suggestDateContainer{
+    display: flex;
 }

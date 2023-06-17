@@ -9,8 +9,6 @@ import VisaPopIn from "../Components/PaymentMethods/VisaPopIn";
 
 export default function PaymentMethods(props) {
   
-	const {user,setUser} = props
-
 	const [paymentType, setPaymentType] = useState("");
 	const [paymentInfo, setPaymentInfo] = useState();
 	const [message, setMessage] = useState(false);

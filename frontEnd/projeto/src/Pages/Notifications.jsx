@@ -4,9 +4,7 @@ import SavedFollowElem from "../Components/General/EventElem.jsx";
 
 import { useState } from "react";
 
-export default function Notifications(props) {
-
-  const {user,setUser} = props
+export default function Notifications() {
 
   const [events, setEvents] = useState([
     // para ser substituido pelo pedido com base no filtro
@@ -96,6 +94,7 @@ export default function Notifications(props) {
         setPopUpTrigger={setPopUpTrigger}
         type={"saved"}
       />
+      
       <div className="center">
         <div className="defaultContainer">
           <h1>Notifications</h1>

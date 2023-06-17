@@ -1,5 +1,5 @@
 
-import { useState } from "react"
+import { useState,useContext } from "react"
 import NavBarUser from "../Components/NavBar/NavBarUser"
 import NavBar from "../Components/NavBar/NavBar"
 import TicketAlert from "../Components/Event/TicketAlert"
@@ -9,12 +9,15 @@ import TicketSold from "../Components/Event/TicketSold"
 import FullTicket from "../Components/Event/FullTicket"
 import Artist from "../Components/Event/Artist"
 import Map from "../Components/Event/Map"
+import UserContext from "../Contexts/UserContext"
 
 import "../Styles/Event.css";
 
 export default function Event(props){
 
-    const {eventId,user,setUser} = props
+    const {eventId} = props
+    const {user,setUser} = useContext(UserContext);
+
 
     const [show,setShow] = useState("ticketsType") // ticket / tickets / ticketsType / info
 
