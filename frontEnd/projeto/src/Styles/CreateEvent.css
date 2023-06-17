@@ -130,6 +130,15 @@
   padding-right: 15;
 }
 
+.inputSelectArtist {
+  flex: 1;
+  border: 1px solid var(--black);
+  border-radius: 10px;
+  font-size: 22px;
+  padding-right: 15;
+  max-width: 50%;
+}
+
 .inputPopUpAddType {
   border: 1px solid var(--black);
   border-radius: 10px;

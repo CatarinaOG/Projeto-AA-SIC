@@ -1,24 +1,9 @@
 import { useState, useEffect } from "react";
 import "../../Styles/Profile.css";
 
-export default function PopUpAddArtist(props) {
+export default function PopUpCreateArtist(props) {
   const [artistName, setArtistName] = useState("");
   const [message, setMessage] = useState("aaaaa");
-
-  const [artistOptions, setArtistOptions] = useState([
-    {
-      artist_name: "Papa Roach",
-      artist_code: 12,
-    },
-    {
-      artist_name: "Architects",
-      artist_code: 13,
-    },
-    {
-      artist_name: "Parkway Drive",
-      artist_code: 13,
-    },
-  ]);
 
   useEffect(() => {
     if (props.trigger) {
@@ -40,31 +25,18 @@ export default function PopUpAddArtist(props) {
     }
   };
 
-  return props.trigger ? (
+  return (
     <div>
       <div className="editContainter">
-        <h2 className="editTitle">Select an Artist Name</h2>
+        <h2 className="editTitle">Add Artist Name</h2>
         <form>
-          <div>
-            <select
-              className="inputSelectArtist"
-              value={artistName}
-              onChange={handleArtistChange}
-            >
-              <option value=""></option>
-              {artistOptions.map((option, index) => (
-                <option key={index} value={option.artists_code}>
-                  {option.artist_name}
-                </option>
-              ))}
-            </select>
-            <h3
-              className="redH3"
-              onClick={() => props.setPopUpTriggerCreate(true)}
-            >
-              Create New
-            </h3>
-          </div>
+          <input
+            className="inputPopUpAddType"
+            type="text"
+            placeholder="Artist"
+            value={artistName}
+            onChange={handleArtistChange}
+          ></input>
         </form>
         <h3 className="redH3">{message}</h3>
         <div className="popUpSellingListButton">
@@ -86,7 +58,5 @@ export default function PopUpAddArtist(props) {
         </div>
       </div>
     </div>
-  ) : (
-    ""
   );
 }
