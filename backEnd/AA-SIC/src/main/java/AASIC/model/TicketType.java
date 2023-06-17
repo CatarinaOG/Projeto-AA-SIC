@@ -1,9 +1,14 @@
 package AASIC.model;
 
+import lombok.Data;
 import org.hibernate.mapping.Set;
 import jakarta.persistence.*;
 
+import java.util.Date;
+import java.util.List;
+
 @Entity
+@Data
 @Table(name = "ticket_type")
 public class TicketType{
 
@@ -12,42 +17,21 @@ public class TicketType{
     @GeneratedValue
     @Column(name = "id")
     private int id;
-
     @Column(name = "type")
     private String type;
-
+    @Column(name = "start_date")
+    private Date start_date;
+    @Column(name = "end_date")
+    private Date end_date;
     @Column(name = "price")
     private float price;
-
     @Column(name = "'range'")
     private float range;
+    @OneToMany(mappedBy = "ticket_type" , cascade = CascadeType.ALL)
+    private List<Ad> ads;
 
-    /* Getters */
-    public int getId() {
-        return id;
-    }
-    public float getPrice() {
-        return price;
-    }
-    public float getRange() {
-        return range;
-    }
-    public String getType() {
-        return type;
-    }
-
-    /* Setters */
-    public void setId(int id) {
-        this.id = id;
-    }
-    public void setPrice(float price) {
-        this.price = price;
-    }
-    public void setRange(float range) {
-        this.range = range;
-    }
-    public void setType(String type) {
-        this.type = type;
-    }
+    @ManyToOne
+    @JoinColumn(name = "event_id", referencedColumnName = "id")
+    private Event event;
 
 }

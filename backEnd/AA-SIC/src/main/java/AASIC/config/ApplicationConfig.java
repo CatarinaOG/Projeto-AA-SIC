@@ -1,5 +1,7 @@
 package AASIC.config;
 
+import AASIC.repositories.AdminRepo;
+import AASIC.repositories.PromoterRepo;
 import AASIC.repositories.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,6 +25,8 @@ public class ApplicationConfig {
 
     // é necessário ir buscar os utilizadores à base de dados -> precisamos do repositório de utilizadores
     private final UserRepo userRepo;
+    private final PromoterRepo promoterRepo;
+    private final AdminRepo adminRepo;
 
     // Esta anotação serve para indicar ao spring que este método representa um Bean
 
@@ -32,8 +37,27 @@ public class ApplicationConfig {
     public UserDetailsService userDetailsService(){
         // aqui podemos utilizar uma expressão lamdba para implementar o método que precisamos deste service (loadByUsername)
         // o username será recebido como argumento
-        return username -> userRepo.findUserByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException(" User not found ! "));
+
+       return new UserDetailsService() {
+           public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+               if(userRepo.findUserByEmail(email).isPresent()){
+                   return userRepo.findUserByEmail(email).get();
+               }
+               else if (promoterRepo.findPromoterByEmail(email).isPresent()){
+                   return promoterRepo.findPromoterByEmail(email).get();
+               }
+               else if (adminRepo.findAdminByEmail(email).isPresent()){
+                   return adminRepo.findAdminByEmail(email).get();
+               }
+               else{
+                   throw new UsernameNotFoundException("User not found!");
+               }
+
+           }
+       };
+
+
     }
 
     /**
