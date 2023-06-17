@@ -4,11 +4,18 @@ package AASIC.services;
 import AASIC.model.*;
 import AASIC.repositories.*;
 import AASIC.requests.*;
+import AASIC.responses.GetArtistsResponse;
+import AASIC.responses.GetCategoriesResponse;
+import AASIC.responses.GetEventsByPromoterResponse;
+import AASIC.responses.GetVenuesResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -100,5 +107,60 @@ public class PromoterService {
         location.setCapacity(request.getCapacity());
         location.setCity(request.getCity());
         locationRepo.save(location);
+    }
+
+    public List<GetCategoriesResponse> get_categories() {
+        List<GetCategoriesResponse> response = new ArrayList<>();
+        List<Category> categoryList = categoryRepo.findAll();
+        for (Category c : categoryList){
+            GetCategoriesResponse aux = new GetCategoriesResponse();
+            aux.setCategory_code(c.getId());
+            aux.setCategory_name(c.getName());
+            response.add(aux);
+        }
+        return response;
+    }
+
+    public List<GetVenuesResponse> get_venues() {
+        List<GetVenuesResponse> response = new ArrayList<>();
+        List<Location> locationList = locationRepo.findAll();
+        for(Location l : locationList){
+            GetVenuesResponse aux = new GetVenuesResponse();
+            aux.setVenue_code(l.getId());
+            aux.setVenue_name(l.getName());
+            response.add(aux);
+        }
+        return response;
+    }
+
+    public List<GetArtistsResponse> get_artists() {
+        List<GetArtistsResponse> response = new ArrayList<>();
+        List<Artist> artistList = artistRepo.findAll();
+        for(Artist a : artistList){
+            GetArtistsResponse aux = new GetArtistsResponse();
+            aux.setArtist_code(a.getId());
+            aux.setArtist_name(a.getName());
+            response.add(aux);
+        }
+        return response;
+    }
+
+    public List<GetEventsByPromoterResponse> get_events_by_promoter(String email) {
+        List<GetEventsByPromoterResponse> response = new ArrayList<>();
+        List<Event> eventsList = eventRepo.findEventsByPromoter(promoterRepo.findPromoterByEmail(email).get().getId());
+        for(Event e : eventsList){
+            if (e.getPromoter().getEmail().equals(email)){
+                GetEventsByPromoterResponse aux = new GetEventsByPromoterResponse();
+                aux.setEvent_id(e.getId());
+                aux.setName(e.getName());
+                aux.setCity(e.getLocation().getCity());
+                aux.setVenue_name(e.getLocation().getName());
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                String strDate = dateFormat.format(e.getDate_start());
+                aux.setDate(e.getDate_start().toString());
+                response.add(aux);
+            }
+        }
+        return response;
     }
 }
