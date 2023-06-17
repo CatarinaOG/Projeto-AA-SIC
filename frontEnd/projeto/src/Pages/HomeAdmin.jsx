@@ -7,12 +7,15 @@ import Magnifier from "../Images/magnifier.png"
 
 export default function Home(props){
 
-    const {setEventId} = props
+    const {setEventId,setUser} = props
 
     return(
         <div>
 
-            <NavBarAdmin />
+            <NavBarAdmin 
+                selected="home"
+                setUser={setUser}
+            />
 
             <div class="container">
                 <img className="wallpaper" src={Wallpaper} alt="" />

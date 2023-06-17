@@ -152,7 +152,7 @@ export default function CreateEvent(props) {
 				setPopUpTrigger={setPopUpTrigger3}
 			/>
 			<div className="center">
-				<div className="CreateEventContainer">
+				<div className="defaultContainer">
 					<h1 className="h1CreateEvent">Event Information</h1>
 					<form className="formContainer" onSubmit={handleSubmit}>
 						<div className="divFormCreateEvent">

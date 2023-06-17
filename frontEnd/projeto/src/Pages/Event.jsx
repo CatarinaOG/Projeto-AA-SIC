@@ -10,6 +10,7 @@ import FullTicket from "../Components/Event/FullTicket"
 import Artist from "../Components/Event/Artist"
 import Map from "../Components/Event/Map"
 
+import "../Styles/Event.css";
 
 export default function Event(props){
 

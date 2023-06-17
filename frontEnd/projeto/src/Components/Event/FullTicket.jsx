@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import goBackImg from "../../Images/goBack.png"
 import BlackClose from "../../Images/blackClose.png"
-import { useState } from 'react';
 
 export default function FullTicket(props){
 

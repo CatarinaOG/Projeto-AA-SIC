@@ -44,7 +44,7 @@ export default function NavBar(props){
         // enviar pedido com input.password e input.email
         // adicionar os erros
         // verificar tipo de user
-        navigate('/HomePromoter')
+        navigate('/HomeAdmin')
     }
 
     return(

@@ -1,20 +1,65 @@
 
+import { useState } from "react"
+import { useNavigate } from 'react-router-dom';
 import NavBarAdmin from "../Components/NavBar/NavBarAdmin"
+import Promoter from "../Components/PromotersListing/Promoter"
 
-export default function PromotersListing(){
+import add from "../Images/plus.png"
+
+import "../Styles/PromotersListing.css"
+
+export default function PromotersListing(props){
+
+    const {setUser} = props
+
+    const navigate = useNavigate();
+
+    const [promoters,setPromoters] = useState([
+        {
+            name: "Maria Conceição",
+            email: "maria@maria",
+            password: "maria",
+        },
+        {
+            name: "Maria Conceição",
+            email: "maria@maria",
+            password: "maria",
+        },
+        {
+            name: "Maria Conceição",
+            email: "maria@maria",
+            password: "maria",
+        },
+    ])
+
+    function addPromoter(){
+        navigate('/CreatePromoter')
+    }
 
 
-
+    const showPromoters = promoters.map((promoter) => 
+        <Promoter promoter={promoter} />
+    )
 
     return(
         <div>
 
-            <NavBarAdmin />
+            <NavBarAdmin 
+                selected="promoters"
+                setUser={setUser}
+            />
 
             <div className="center">
                 <div className="defaultContainer">
 
-                    <h1>Promoters</h1>
+                    <div className="titlePromoters">
+                        <h1>Promoters</h1>
+                        <div className="displayHorizontally">
+                            <img className="addPromoterImg" src={add} alt="" />
+                            <p className="addPromoter" onClick={addPromoter}>Add Promoter</p>
+                        </div>
+                    </div>
+                    {showPromoters}
 
                 </div>
             </div>

@@ -10,7 +10,6 @@ import "./Styles/CreateEvent.css";
 import "./Styles/AddVenue.css";
 
 import Home from "./Pages/Home";
-import HomeAdmin from "./Pages/HomeAdmin";
 import HomeUser from "./Pages/HomeUser";
 import SellingListing from "./Pages/SellingListing";
 import BoughtTickets from "./Pages/BoughtTickets";
@@ -27,14 +26,15 @@ import PaymentMethods from "./Pages/PaymentMethods";
 import HomePromoter from "./Pages/HomePromoter";
 import SuggestedEvents from "./Pages/SuggestedEvents"
 import EventsListing from "./Pages/EventsListing";
-
-
-import CreatePromoter from "./Pages/CreatePromoter";
 import CreateEvent from "./Pages/CreateEvent";
+
+import HomeAdmin from "./Pages/HomeAdmin";
+import PromotersListing from "./Pages/PromotersListing";
+import CreatePromoter from "./Pages/CreatePromoter";
+
 import AddVenue from "./Pages/AddVenue";
 
 import "./Styles/General.css";
-import "./Styles/Event.css";
 
 function App() {
 	const [user, setUser] = useState({
@@ -60,9 +60,6 @@ function App() {
 			<Route
 				path="/HomeUser" element={
 				<HomeUser user={user} setUser={setUser} setEventId={setEventId} />}
-			/>
-			<Route path="/HomeAdmin" element={
-				<HomeAdmin eventId={eventId}/>} 
 			/>
 			<Route
 				path="/Listings"element={
@@ -125,6 +122,19 @@ function App() {
 				path="/AddEvent" element={
 				<CreateEvent setUser={setUser} />}
 			/>
+
+
+			<Route path="/HomeAdmin" element={
+				<HomeAdmin setUser={setUser} setEventId={setEventId}/>} 
+			/>
+			<Route path="/Promoters" element={
+				<PromotersListing setUser={setUser}/>} 
+			/>
+			<Route path="/CreatePromoter" element={
+				<CreatePromoter setUser={setUser}/>} 
+			/>
+
+
 		</Routes>
 		</BrowserRouter>
   );

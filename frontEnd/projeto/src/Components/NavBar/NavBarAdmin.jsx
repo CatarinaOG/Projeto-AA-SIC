@@ -4,7 +4,13 @@ import Logout from "../../Images/logout.png"
 
 import "../../Styles/NavBar.css"
 
-export default function NavBarAdmin(){
+export default function NavBarAdmin(props){
+
+    const {selected,setUser} = props
+
+    function logout(){
+        setUser({})
+    }
 
     return(
 
@@ -15,8 +21,8 @@ export default function NavBarAdmin(){
 
                 <div className="navBarRighSide">
 
-                    <a href="" className="tab">Promoters</a>
-                    <a href="" className="iconTab"><img src={Logout} alt="" /></a>
+                    <a href="/Promoters" className={selected === "promoters" ? "tabSelected" : "tab"}>Promoters</a>
+                    <a href="/" className="iconTab" onClick={logout}><img src={Logout} alt="" /></a>
                     
                 </div>
 
