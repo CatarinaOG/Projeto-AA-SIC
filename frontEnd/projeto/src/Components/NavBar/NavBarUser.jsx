@@ -1,6 +1,7 @@
 
 import { useState,useContext } from "react"
 import { useNavigate,Link } from "react-router-dom"
+import { Cookies } from "react-cookie"
 import UserContext from "../../Contexts/UserContext"
 
 
@@ -19,6 +20,7 @@ export default function NavBarUser(props){
 
     const {selected} = props 
     const {user, setUser} = useContext(UserContext);
+    const cookie = new Cookies()
 
     const [showOptions, setShowOptions] = useState(false)
 
@@ -36,14 +38,12 @@ export default function NavBarUser(props){
 
     function removeUser(){
         setUser({})
+        cookie.remove('token')
+
     }
 
     function goToProfile(){
         navigate("/Profile")
-    }
-
-    function goToListings(){
-        navigate("/Listings")
     }
 
     return(

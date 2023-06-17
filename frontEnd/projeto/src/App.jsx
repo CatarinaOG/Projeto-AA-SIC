@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Cookies } from 'react-cookie'
+import UserContext from "./Contexts/UserContext"
 
 import "./Styles/General.css";
 import "./Styles/Event.css";
@@ -34,16 +36,19 @@ import CreatePromoter from "./Pages/CreatePromoter";
 
 import AddVenue from "./Pages/AddVenue";
 
-import UserContext from "./Contexts/UserContext"
 
 import "./Styles/General.css";
 
 function App() {
+
+	const cookies = new Cookies()
+
+	const [token,setToken] = useState(cookies.get("token"))
 	const [user, setUser] = useState({});
   	const [eventId, setEventId] = useState();
 	const [suggestedEvent,setSuggestedEvent] = useState({})
 
-    console.log(user)
+
 
   	return (
 		<BrowserRouter>

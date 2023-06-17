@@ -1,7 +1,7 @@
 import { useState,useContext } from "react"
 import { useNavigate,Link } from 'react-router-dom';
+import { Cookies } from "react-cookie";
 import UserContext from "../../Contexts/UserContext"
-
 
 import Logo from "../../Images/logo.png"
 import Info from "../../Images/info.png"
@@ -49,6 +49,8 @@ export default function NavBar(){
 
     function sendLoginRequest(){
 
+		const cookies = new Cookies()
+
         fetch("http://localhost:8080/api/user/login", {
             method: 'POST',
             headers: {
@@ -67,12 +69,15 @@ export default function NavBar(){
             switch (userResponse.type){
                 case "user": 
                     navigate('/HomeUser')
+				    cookies.set('token',userResponse.token)
                     break
                 case "promoter":
                     navigate('/HomePromoter')
+				    cookies.set('token',userResponse.token)
                     break
                 case "admin":
                     navigate('/HomeAdmin')
+				    cookies.set('token',userResponse.token)
                     break
             }
         })

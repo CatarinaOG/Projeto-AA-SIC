@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { Link } from "react-router-dom"
+import { Cookies } from "react-cookie"
 import UserContext from "../../Contexts/UserContext"
 
 import Logo from "../../Images/logo.png"
@@ -11,9 +12,11 @@ export default function NavBarAdmin(props){
 
     const {selected} = props
     const {setUser} = useContext(UserContext);
+    const cookie = new Cookies()
 
     function logout(){
         setUser({})
+        cookie.remove('token')
     }
 
     return(
