@@ -8,12 +8,17 @@ import AASIC.repositories.SuggestedEventRepo;
 import AASIC.repositories.UserRepo;
 import AASIC.requests.EditProfileRequest;
 import AASIC.requests.SuggestEventRequest;
+import AASIC.responses.GetSuggestedEventsResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -60,5 +65,33 @@ public class UserService {
 
         suggestedEventRepo.save(suggestedEvent);
 
+    }
+
+    public List<GetSuggestedEventsResponse> get_suggested_event(SuggestEventRequest request, String email) {
+
+        List<SuggestedEvent> suggestedEventList = suggestedEventRepo.findAll();
+        List<GetSuggestedEventsResponse> response = new ArrayList<>();
+
+        for(SuggestedEvent se : suggestedEventList) {
+            GetSuggestedEventsResponse aux = new GetSuggestedEventsResponse();
+            aux.setId(se.getId());
+            aux.setName(se.getName());
+            aux.setAddress(se.getLocation());
+
+            // -- LocalDateTime to String --
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+            LocalDateTime start_date = se.getStart_date();
+            LocalDateTime end_date = se.getEnd_date();
+
+            // -----------------------------
+
+            aux.setStart_date(start_date.format(formatter));
+            aux.setEnd_date(end_date.format(formatter));
+
+            response.add(aux);
+        }
+        return response;
     }
 }

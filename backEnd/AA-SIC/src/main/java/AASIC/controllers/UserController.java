@@ -4,6 +4,7 @@ package AASIC.controllers;
 import AASIC.config.JWTService;
 import AASIC.requests.EditProfileRequest;
 import AASIC.requests.SuggestEventRequest;
+import AASIC.responses.GetSuggestedEventsResponse;
 import AASIC.services.AuthenticationService;
 import AASIC.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 //import org.json.*;
 
@@ -52,5 +55,13 @@ public class UserController {
         String email = jwtService.extractUsername(jwt);
         userService.suggest_event(request, email);
         return ResponseEntity.ok("");
+    }
+
+    @GetMapping("get_suggested_events")
+    public ResponseEntity<List<GetSuggestedEventsResponse>> get_suggested_events(@RequestBody SuggestEventRequest request,
+                                                                                 @RequestHeader(name = "Authorization") String token){
+        var jwt = token.substring(7);
+        String email = jwtService.extractUsername(jwt);
+        return ResponseEntity.ok(userService.get_suggested_event(request, email));
     }
 }
