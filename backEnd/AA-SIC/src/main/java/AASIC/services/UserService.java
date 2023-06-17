@@ -38,6 +38,7 @@ public class UserService {
         if(!request.getLanguage().equals("null")) user.setLanguage(request.getLanguage());
         if(!request.getCard_number().equals("null")) user.setCard_number(request.getCard_number());
         if(!request.getCard_cvc().equals("null")) user.setCard_cvc(request.getCard_cvc());
+        if(!request.getPicture().equals("null")) user.setProfile_pic(request.getPicture());
 
         userRepo.save(user);
     }
