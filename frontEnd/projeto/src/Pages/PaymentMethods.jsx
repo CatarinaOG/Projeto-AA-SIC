@@ -9,93 +9,89 @@ import VisaPopIn from "../Components/PaymentMethods/VisaPopIn";
 
 export default function PaymentMethods(props) {
   
-  const {user,setUser} = props
+	const {user,setUser} = props
 
-  const [paymentType, setPaymentType] = useState("");
-  const [paymentInfo, setPaymentInfo] = useState();
-  const [message, setMessage] = useState(false);
+	const [paymentType, setPaymentType] = useState("");
+	const [paymentInfo, setPaymentInfo] = useState();
+	const [message, setMessage] = useState(false);
 
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 
 
-  function goBack(){
-    navigate('/Event')
-  }
+	function goBack(){
+		navigate('/Event')
+	}
 
-  return (
-    <div>
-      <NavBarUser 
-        selected="home"
-        user={user}
-        setUser={setUser}
-      />
+	return (
+		<div>
+		<NavBarUser selected="home"/>
 
-      <div className="center">
-        <div className="defaultContainer">
-          <h1>Payment Methods</h1>
-          <div className="eventsContainer">
-            <PaymentMethodElem
-              type={"MBWay"}
-              paymentType={paymentType}
-              setPaymentType={setPaymentType}
-            />
-            {paymentType === "MBWay" && (
-              <MBWayPopIn
-                setPaymentType={setPaymentType}
-                setPaymentInfo={setPaymentInfo}
-                setMessage={setMessage}
-              />
-            )}
+		<div className="center">
+			<div className="defaultContainer">
+			<h1>Payment Methods</h1>
+			<div className="eventsContainer">
+				<PaymentMethodElem
+				type={"MBWay"}
+				paymentType={paymentType}
+				setPaymentType={setPaymentType}
+				/>
+				{paymentType === "MBWay" && (
+				<MBWayPopIn
+					setPaymentType={setPaymentType}
+					setPaymentInfo={setPaymentInfo}
+					setMessage={setMessage}
+				/>
+				)}
 
-            <PaymentMethodElem
-              type={"PayPal"}
-              paymentType={paymentType}
-              setPaymentType={setPaymentType}
-            />
-            {paymentType === "PayPal" && (
-              <PayPalPopIn
-                setPaymentType={setPaymentType}
-                setPaymentInfo={setPaymentInfo}
-                setMessage={setMessage}
-              />
-            )}
+				<PaymentMethodElem
+				type={"PayPal"}
+				paymentType={paymentType}
+				setPaymentType={setPaymentType}
+				/>
+				{paymentType === "PayPal" && (
+				<PayPalPopIn
+					setPaymentType={setPaymentType}
+					setPaymentInfo={setPaymentInfo}
+					setMessage={setMessage}
+				/>
+				)}
 
-            <PaymentMethodElem
-              type={"Visa"}
-              paymentType={paymentType}
-              setPaymentType={setPaymentType}
-            />
-            {paymentType === "Visa" && (
-              <VisaPopIn
-                setPaymentType={setPaymentType}
-                setPaymentInfo={setPaymentInfo}
-                setMessage={setMessage}
-              />
-            )}
-          </div>
-          {message !== "Success" ? (
-            <div>
-              <div className="buttonContainerPayment">
-                <h3 className="redH3">{message}</h3>
-              </div>
-              <div className="buttonContainerPayment">
-                <button className="button" onClick={goBack}>Go back</button>
-              </div>
-            </div>
-          ) : (
-            <div>
-              <div className="buttonContainerPayment">
-                <h3 className="greenH3">
-                  Success! you may return to the main page
-                </h3>
-              </div>
-              <div className="buttonContainerPayment">
-                <button className="button">Return to Main</button>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
+				<PaymentMethodElem
+				type={"Visa"}
+				paymentType={paymentType}
+				setPaymentType={setPaymentType}
+				/>
+				{paymentType === "Visa" && (
+				<VisaPopIn
+					setPaymentType={setPaymentType}
+					setPaymentInfo={setPaymentInfo}
+					setMessage={setMessage}
+				/>
+				)}
+			</div>
+			{message !== "Success" ? (
+				<div>
+				<div className="buttonContainerPayment">
+					<h3 className="redH3">{message}</h3>
+				</div>
+				<div className="buttonContainerPayment">
+					<button className="button" onClick={goBack}>Go back</button>
+				</div>
+				</div>
+			) : (
+				<div>
+				<div className="buttonContainerPayment">
+					<h3 className="greenH3">
+					Success! you may return to the main page
+					</h3>
+				</div>
+				<div className="buttonContainerPayment">
+					<button className="button">Return to Main</button>
+				</div>
+				</div>
+			)}
+			</div>
+		</div>
+		</div>
+	);
 }

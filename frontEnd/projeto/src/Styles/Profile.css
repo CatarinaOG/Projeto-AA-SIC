@@ -109,6 +109,34 @@
     border: 1px solid black;
 }
 
+.bankInputContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 320px;
+}
+
+.editInputCard{
+    background-color: var(--grey);
+    border: none;
+    border-radius: 10px;
+    width: 200px;
+    height: 30px;
+    margin-top: 6vh;
+    text-align: center;
+    bottom: 0px;
+}
+
+.editInputCVC{
+    background-color: var(--grey);
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+    margin-top: 6vh;
+    text-align: center;
+    bottom: 0px;
+}
+
 
 .urlError{
     color: red;
@@ -165,15 +193,18 @@
 }
 
 .editButton:hover{
-    background: none;
-    border: none;
-    background-image: url("../Images/edit.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 20px;
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.2);
+}
+
+.plusButton{
     height: 20px;
-    cursor: pointer;
     margin-left: 20px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.plusButton:hover{
     transition: transform 0.2s ease-in-out;
     transform: scale(1.2);
 }

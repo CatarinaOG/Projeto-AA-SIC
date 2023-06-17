@@ -1,10 +1,13 @@
 
-import { useState } from "react"
+import { useState,useContext } from "react"
+import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
 
 export default function EditPic(props){
 
-    const {setUser,setEditInfo} = props
+    const {setEditInfo} = props
+    const {user,setUser} = useContext(UserContext);
+
 
     const [temp,setTemp] = useState("")
     const [emptyURLError,setEmptyURLError] = useState(false)
@@ -21,10 +24,32 @@ export default function EditPic(props){
         setEditInfo("none")
     }
 
+    function sendEditInfoRequest(){
+
+        fetch("http://localhost:8080/api/user/profile_edit", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+                picture: temp,
+            })
+        })
+        .then(response => {
+            if(response.ok)
+                setUser(oldUser => ({...oldUser,profilePic:temp}))
+        })
+        .catch(error => {
+            console.log(error)
+        });
+
+    }
+
     function changePicture(event){
-        event.preventDefault();    // talvez depois retirar para meter como pedido para a back end
+        event.preventDefault();
         if(temp !== ""){
-            setUser(oldUser => ({...oldUser,profilePic:temp}))
+            sendEditInfoRequest()
             setEditInfo("none")
         }
         else{

@@ -89,13 +89,7 @@ export default function Browse(props){
 
     return(
         <div>
-            { user.email && 
-                <NavBarUser 
-                    selected="home"
-                    user={user}
-                    setUser={setUser}
-                />
-            }
+            { user.email && <NavBarUser selected="home"/>}
             
             { !user.email && 
                 <NavBar 
