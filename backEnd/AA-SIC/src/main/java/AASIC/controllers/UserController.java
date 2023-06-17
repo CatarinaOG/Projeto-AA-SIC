@@ -26,16 +26,19 @@ public class UserController {
 
 
     @PostMapping("/register")
+    @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){
         return ResponseEntity.ok(authService.register_user(request));
     }
 
     @PostMapping("/login")
+    @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request){
         return ResponseEntity.ok(authService.login_user(request));
     }
 
     @PostMapping("/profile_edit")
+    @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity<String> edit_profile_info(@RequestBody EditProfileRequest request, @RequestHeader(name = "Authorization") String token){
         var jwt = token.substring(7);
         String email = jwtService.extractUsername(jwt);
