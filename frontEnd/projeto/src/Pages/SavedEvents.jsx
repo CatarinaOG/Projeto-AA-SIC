@@ -1,13 +1,11 @@
 import NavBarUser from "../Components/NavBar/NavBarUser";
 import PopUpRemoveListing from "../Components/SellingListing/PopUpRemoveListing";
-import SavedFollowElem from "../Components/General/EventElem.jsx";
+import EventElem from "../Components/General/EventElem.jsx";
 
 import { useState } from "react";
 import PopUpSaved from "../Components/General/PopUpSaved";
 
 export default function SavedEvents(props) {
-
-	const {user,setUser} = props
 
 	const [events, setEvents] = useState([
 		// para ser substituido pelo pedido com base no filtro
@@ -72,34 +70,15 @@ export default function SavedEvents(props) {
 		status: "sold",
 		},
 	]);
-  
-	const [popUpTrigger, setPopUpTrigger] = useState(false);
-	const [popUpID, setPopUpID] = useState("");
 
 	const eventsFiltered = events.map((event) =>
-		<SavedFollowElem
-			event={event}
-			setPopUpTrigger={setPopUpTrigger}
-			setPopUpID={setPopUpID}
-		/>
+		<EventElem event={event} type="saved"/>
 	);
-
-	const handleRemoveEvents = (id) => {
-		setEvents((prevEvents) => prevEvents.filter((item) => item.id !== id));
-	};
 
 	return (
 		<div>
 			<NavBarUser selected="home"/>
 			
-			<PopUpSaved
-				trigger={popUpTrigger}
-				setPopUpTrigger={setPopUpTrigger}
-				type={"selling"}
-				popUpID={popUpID}
-				setPopUpID={setPopUpID}
-				onRemove={handleRemoveEvents}
-			/>
 			<div className="center">
 				<div className="defaultContainer">
 					<h1>Saved Events</h1>

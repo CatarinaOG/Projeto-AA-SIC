@@ -71,35 +71,21 @@ export default function FollowedEvents(props) {
       status: "sold",
     },
   ]);
-  const [popUpTrigger, setPopUpTrigger] = useState(false);
-  const [popUpID, setPopUpID] = useState("");
 
   const eventsFiltered = events.map((event) => {
     return (
       <SavedFollowElem
         event={event}
-        setPopUpTrigger={setPopUpTrigger}
-        setPopUpID={setPopUpID}
+        type="followed"
       />
     );
   });
 
-  const handleRemoveEvents = (id) => {
-    setEvents((prevEvents) => prevEvents.filter((item) => item.id !== id));
-  };
 
   return (
     <div>
 		<NavBarUser selected="home"/>
 
-		<PopUpSaved
-			trigger={popUpTrigger}
-			setPopUpTrigger={setPopUpTrigger}
-			type={"selling"}
-			popUpID={popUpID}
-			setPopUpID={setPopUpID}
-			onRemove={handleRemoveEvents}
-		/>
 		<div className="center">
 			<div className="defaultContainer">
 				<h1>Followed Events</h1>
