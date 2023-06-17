@@ -11,16 +11,17 @@ export default function SuggestedEvents(props){
 
     const [suggestedEvents,setSuggestedEvents] = useState([
         {
-            name: "nos alice",
+            id: 1,
+            name: "Nos alice",
             place: "Porto",
             start_date: "24/03/34",
             start_time: "10:23",
             end_date: "03/34/23",
             end_time: "10:23",
-
         },
         {
-            name: "nos alice",
+            id: 2,
+            name: "Nos alice",
             place: "lisboa",
             start_date: "24/03/34",
             start_time: "10:23",
@@ -30,7 +31,11 @@ export default function SuggestedEvents(props){
     ])
 
     const showTheSuggestedEvents = suggestedEvents.map((event) => 
-        <SuggestedEvent event={event} setSuggestedEvent={setSuggestedEvent}/>
+        <SuggestedEvent 
+            key={event.id} 
+            event={event} 
+            setSuggestedEvent={setSuggestedEvent}
+        />
     )
 
     return(

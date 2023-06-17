@@ -1,6 +1,6 @@
 import NavBarUser from "../Components/NavBar/NavBarUser"
 import Filters from "../Components/Filters/Filters"
-import BoughtEvent from "../Components/BoughtTickets/BoughtTicket"
+import BoughtTicket from "../Components/BoughtTickets/BoughtTicket"
 
 import { useState } from "react"
 
@@ -80,9 +80,9 @@ export default function BoughtTickets(){
         },
     ])
 
-    const eventsFiltered = events.map( event => {
-        return(<BoughtEvent event={event}/>)
-    })
+    const eventsFiltered = events.map( event => 
+        <BoughtTicket key={event.id} event={event}/>
+    )
 
 
     return(

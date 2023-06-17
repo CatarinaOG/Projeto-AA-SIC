@@ -1,5 +1,7 @@
 
 import { useState,useContext } from "react"
+import NavBarAdmin from "../Components/NavBar/NavBarAdmin"
+import NavBarPromoter from "../Components/NavBar/NavBarPromoter"
 import NavBarUser from "../Components/NavBar/NavBarUser"
 import NavBar from "../Components/NavBar/NavBar"
 import TicketAlert from "../Components/Event/TicketAlert"
@@ -154,16 +156,14 @@ export default function Event(props){
         />
     )
 
+
     return(
         <div>
-            { user.email && <NavBarUser selected="home"/>}
-            
-            { !user.email && 
-                <NavBar 
-                    selected="home"
-                    setUser={setUser}
-                />
-            }
+            { !user && <NavBar />}
+            { user.type === "user" && <NavBarUser selected="home"/>}
+            { user.type === "promoter" && <NavBarPromoter selected="home"/>}
+            { user.type === "admin" && <NavBarAdmin selected="home"/>}
+
             
             <img className="wallpaperBlur" src={event.image} alt="" />
 

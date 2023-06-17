@@ -6,13 +6,14 @@ export default function PopUpAddType(props) {
   const [price, setPrice] = useState(null);
   const [dateStartType, setDateStartType] = useState(null);
   const [dateEndType, setDateEndType] = useState(null);
+  const [timeStartType, setTimeStartType] = useState(null);
+  const [timeEndType, setTimeEndType] = useState(null);
   const [message, setMessage] = useState("");
   const dateStartCompare = new Date(props.dateStart);
   const dateEndCompare = new Date(props.dateEnd);
 
   useEffect(() => {
     if (props.trigger) {
-      // Clear the form when the popup is triggered
       setTicketType("");
       setPrice(null);
     }
@@ -48,6 +49,15 @@ export default function PopUpAddType(props) {
     }
   };
 
+  const handleTimeStartTypeChange = (event) => {
+      setTimeStartType(event.target.value);
+  };
+
+  const handleTimeEndTypeChange = (event) => {
+    setTimeEndType(event.target.value);
+  };
+
+
   const submitType = () => {
     if (
       ticketType === "" ||
@@ -57,15 +67,22 @@ export default function PopUpAddType(props) {
     ) {
       setMessage("One or more fields Incomplete");
     } else {
+      const type_start  = dateStartType + " " + timeStartType
+      const type_end  = dateEndType + " " + timeEndType
       const newType = {
         typeName: ticketType,
         price: price,
-        dateStart: dateStartType,
-        dateEnd: dateStartType,
+        type_start : type_start,
+        type_end : type_end,
       };
       props.onAddType(newType);
     }
   };
+
+
+
+
+  
   return props.trigger ? (
     <div>
       <div className="editContainter">
@@ -93,10 +110,24 @@ export default function PopUpAddType(props) {
               onChange={handleDateStartChange}
             ></input>
             <input
+              type="time"
+              className="addTypeDate"
+              value={timeStartType}
+              onChange={handleTimeStartTypeChange}
+            ></input>
+          </div>
+          <div>
+            <input
               type="date"
               className="addTypeDate"
               value={dateEndType}
               onChange={handleDateEndChange}
+            ></input>
+            <input
+              type="time"
+              className="addTypeDate"
+              value={timeEndType}
+              onChange={handleTimeEndTypeChange}
             ></input>
           </div>
         </form>

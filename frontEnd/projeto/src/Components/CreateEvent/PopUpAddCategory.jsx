@@ -23,6 +23,30 @@ export default function PopUpAddCategory(props) {
       props.setPopUpTrigger(false);
     }
   };
+
+  function postCategory(){
+    fetch("http://localhost:8080/api/promoter/register", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name : {categoryName}})
+    })
+    .then(response => {
+        if(response.ok){
+          props.setPopUpTrigger(false);
+        }
+    })
+    .catch(error => {
+        setMessage(error)
+    });
+  }
+
+
+
+
+
+
   return props.trigger ? (
     <div>
       <div className="editContainter">

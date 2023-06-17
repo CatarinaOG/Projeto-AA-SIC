@@ -25,6 +25,28 @@ export default function PopUpCreateArtist(props) {
     }
   };
 
+
+  function postArtist(){
+    fetch("http://localhost:8080/api/promoter/register", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({name : {artistName}})
+    })
+    .then(response => {
+        if(response.ok){
+          props.setPopUpTrigger(false);
+        }
+    })
+    .catch(error => {
+        setMessage(error)
+    });
+  }
+
+
+
+
   return (
     <div>
       <div className="editContainter">

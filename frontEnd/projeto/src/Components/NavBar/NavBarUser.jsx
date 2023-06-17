@@ -1,6 +1,7 @@
 
 import { useState,useContext } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate,Link } from "react-router-dom"
+import { Cookies } from "react-cookie"
 import UserContext from "../../Contexts/UserContext"
 
 
@@ -19,6 +20,7 @@ export default function NavBarUser(props){
 
     const {selected} = props 
     const {user, setUser} = useContext(UserContext);
+    const cookie = new Cookies()
 
     const [showOptions, setShowOptions] = useState(false)
 
@@ -36,6 +38,8 @@ export default function NavBarUser(props){
 
     function removeUser(){
         setUser({})
+        cookie.remove('token')
+
     }
 
     function goToProfile(){
@@ -47,15 +51,15 @@ export default function NavBarUser(props){
         <div>
             <nav className="navBar">
                 
-                <a href="/HomeUser"><img className="logoImage" onClick={showNone} src={Logo} alt="" /></a>
+                <Link to="/HomeUser"><img className="logoImage" onClick={showNone} src={Logo} alt="" /></Link>
 
                 <div className="navBarRighSide">
 
-                    <a href="" className="iconTab"><img src={Info} alt="" /></a>
-                    <a href="/Listings" className={selected === "listings"? "tabSelected" : "tab"}>My Listings</a>
-                    <a href="/MyTickets" className={selected === "boughtTickets"? "tabSelected" : "tab"}>My Tickets</a>
-                    <a href="/"><img className="profileTab" onClick={showOptionsFunction} src={profile_pic} alt="" /></a>
-                    <a href="/SellTicket" className={selected === "sellTicket"? "sellTabSelected" : "sellTab"}>Sell Tickets!</a>
+                    <Link to="" className="iconTab"><img src={Info} alt="" /></Link>
+                    <Link to="/Listings" className={selected === "listings"? "tabSelected" : "tab"}>My Listings</Link>
+                    <Link to="/MyTickets" className={selected === "boughtTickets"? "tabSelected" : "tab"}>My Tickets</Link>
+                    <Link to=""><img className="profileTab" onClick={showOptionsFunction} src={profile_pic} alt="" /></Link>
+                    <Link to="/SellTicket" className={selected === "sellTicket"? "sellTabSelected" : "sellTab"}>Sell Tickets!</Link>
                     
                 </div>
 
@@ -66,47 +70,47 @@ export default function NavBarUser(props){
                     <div className="clearOverlay" onClick={showNone}></div>
                     <div className="popupOptions">
                         <div className="displayVertically">
-                            <a href="/SavedEvents" className="option">
+                            <Link to="/SavedEvents" className="option">
                                 <div className="displayHorizontally">
                                     <img className="optionsIcon" src={Saved} alt="" />
                                     <p className="optionsName">Saved Events</p>
                                 </div>
-                            </a>
+                            </Link>
 
-                            <a href="/FollowedEvents" className="option">
+                            <Link to="/FollowedEvents" className="option">
                                 <div className="displayHorizontally">
                                     <img className="optionsIcon" src={Alert} alt="" />
                                     <p className="optionsName">Followed Events</p>
                                 </div>
-                            </a>
+                            </Link>
 
-                            <div className="option" onClick={goToProfile}>
+                            <Link to="/Profile" className="option" onClick={goToProfile}>
                                 <div className="displayHorizontally">
                                     <img className="optionsIcon" src={Account} alt="" />
                                     <p className="optionsName">Account</p>
                                 </div>
-                            </div>
+                            </Link>
 
-                            <a href="/Notifications" className="option">
+                            <Link to="/Notifications" className="option">
                                 <div className="displayHorizontally">
                                     <img className="optionsIcon" src={Notification} alt="" />
                                     <p className="optionsName">Notifications</p>
                                 </div>
-                            </a>
+                            </Link>
 
-                            <a href="/Suggestion" className="option">
+                            <Link to="/Suggestion" className="option">
                                 <div className="displayHorizontally">
                                     <img className="optionsIcon" src={Suggest} alt="" />
                                     <p className="optionsName">Suggest Event</p>
                                 </div>
-                            </a>
+                            </Link>
 
-                            <a href="/" className="option" onClick={removeUser}>
+                            <Link to="/" className="option" onClick={removeUser}>
                                 <div className="displayHorizontally">
                                     <img className="optionsIcon" src={Logout} alt="" />
                                     <p className="optionsName">Logout</p>
                                 </div>
-                            </a>
+                            </Link>
 
                         </div>
                     </div>
