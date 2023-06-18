@@ -5,6 +5,7 @@ import AASIC.model.*;
 import AASIC.repositories.*;
 import AASIC.requests.*;
 import AASIC.responses.*;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -95,23 +96,32 @@ public class PromoterService {
     }
 
 
-    public void create_artist(CreateArtistRequest request) {
+    public String create_artist(CreateArtistRequest request) {
+        if (artistRepo.findByName(request.getName()).isPresent()){
+            return "{\"confirmed\" : \"false\"}";
+        }
         String artis_name = request.getName();
         Artist artist = new Artist();
         artist.setName(artis_name);
         artistRepo.save(artist);
-
+        return "{\"confirmed\" : \"true\"}";
     }
 
-    public void create_category(CreateArtistRequest request) {
+    public String create_category(CreateArtistRequest request) {
+        if(categoryRepo.findByName(request.getName()).isPresent()){
+            return "{\"confirmed\" : \"false\"}";
+        }
         String categary_name = request.getName();
         Category category = new Category();
         category.setName(categary_name);
         categoryRepo.save(category);
-
+        return "{\"confirmed\" : \"true\"}";
     }
 
-    public void create_location(AddLocalRequest request) {
+    public String create_location(AddLocalRequest request) {
+        if(locationRepo.findByName(request.getName()).isPresent()){
+            return "{\"confirmed\" : \"false\"}";
+        }
         Location location = new Location();
         location.setName(request.getName());
         location.setAddress(request.getAddress());
@@ -120,6 +130,7 @@ public class PromoterService {
         location.setCapacity(request.getCapacity());
         location.setCity(request.getCity());
         locationRepo.save(location);
+        return "{\"confirmed\" : \"true\"}";
     }
 
     public List<GetCategoriesResponse> get_categories() {
@@ -198,5 +209,10 @@ public class PromoterService {
 
     public void remove_event(RemoveEventRequest request){
         eventRepo.deleteById(request.getEvent_id());
+    }
+
+    @Transactional
+    public void remove_suggestion(RemoveSugestionRequest request) {
+        System.out.println("Falta fazer isto");
     }
 }
