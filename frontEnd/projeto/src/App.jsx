@@ -134,6 +134,10 @@ function App() {
 					<Route path="/CreatePromoter" element={
 						<CreatePromoter/>} 
 					/>
+					<Route path="/AddVenue" element={
+						<AddVenue/>} 
+					/>
+
 
 
 				</Routes>

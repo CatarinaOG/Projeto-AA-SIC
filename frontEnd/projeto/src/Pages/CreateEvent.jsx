@@ -1,4 +1,6 @@
 import { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { TypeList } from "../Components/CreateEvent/TypeList"; // Import TypeList component correctly
 
 import UserContext from "../Contexts/UserContext"
@@ -11,6 +13,8 @@ import PopUpAddCategory from "../Components/CreateEvent/PopUpAddCategory";
 import PopUpCreateArtist from "../Components/CreateEvent/PopUpCreateArtist";
 
 export default function CreateEvent(props) {
+	const navigate = useNavigate()
+	
 
 	const {suggestedEvent,addEventInfo,setAddEventInfo} = props
     const {user} = useContext(UserContext);
@@ -74,12 +78,22 @@ export default function CreateEvent(props) {
 	]);
 
 	useEffect(() => {
-		if (suggestedEvent) {
+		if (suggestedEvent.event_name !== undefined) {
+		console.log(suggestedEvent.event_name)
 		setEventName(suggestedEvent.event_name);
 		setEventDateStart(suggestedEvent.start_date);
 		setEventDateEnd(suggestedEvent.end_date);
 		setEventTimeStart(suggestedEvent.start_time);
 		setEventTimeEnd(suggestedEvent.end_time);
+		}
+		else if (addEventInfo.eventName !== undefined || addEventInfo.eventDateStart !== undefined || addEventInfo.eventDateEnd !== undefined || addEventInfo.eventTimeStart !== undefined || addEventInfo.eventTimeEnd !== undefined || addEventInfo.eventCategory !== undefined){	
+			console.log("ENTREI ACOLÁ")
+			setEventName(addEventInfo.eventName);
+			setEventDateStart(addEventInfo.eventDateStart);
+			setEventDateEnd(addEventInfo.eventDateEnd);
+			setEventTimeStart(addEventInfo.eventTimeStart);
+			setEventTimeEnd(addEventInfo.eventTimeEnd);
+			setEventCategory(addEventInfo.eventCategory);
 		}
 	}, []);
 
@@ -119,7 +133,7 @@ export default function CreateEvent(props) {
 
 	function sendCreateEventRequest(){
 		fetch("http://localhost:8080/", {
-            method: 'GET',
+            method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${user.token}`
@@ -133,7 +147,6 @@ export default function CreateEvent(props) {
             console.log(error)
         });
 	}
-
 
 
 	function handleAddType(newType) {
@@ -207,8 +220,25 @@ export default function CreateEvent(props) {
 		artists === 0
 		) {
 		setMessage("There are one or more fields empty");
+		setAddEventInfo("");
 		}
 	};
+
+
+	function changeToAddVenue(){
+		console.log(eventName)
+		const eventSoFar = {
+			eventName : eventName,
+			eventCategory : eventCategory,
+			eventDateStart : eventDateStart,
+			eventDateEnd : eventDateEnd,
+			eventTimeStart : eventTimeStart,
+			eventTimeEnd : eventTimeEnd
+		}
+		console.log(eventSoFar);
+		setAddEventInfo(eventSoFar);
+		navigate("/AddVenue")
+	}
 
 	return (
 		<div>
@@ -275,7 +305,7 @@ export default function CreateEvent(props) {
 											</option>
 										))}
 								</select>
-								<h4 className="underlined">Add New</h4>
+								<h4 className="underlined" onClick={changeToAddVenue}>Add New</h4>
 							</div>
 						</div>
 						<div className="divFormCreatePromoter">

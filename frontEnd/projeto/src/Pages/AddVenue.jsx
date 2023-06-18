@@ -1,12 +1,8 @@
 import { useState } from "react";
-import NavBarUser from "../Components/NavBar/NavBarUser";
-import PaymentMethodElem from "../Components/PaymentMethods/PaymentMethodElem";
-import MBWayPopIn from "../Components/PaymentMethods/MBWayPopIn";
-import PayPalPopIn from "../Components/PaymentMethods/PayPalPopIn";
-import VisaPopIn from "../Components/PaymentMethods/VisaPopIn";
+import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
 import PopUpAddVenue from "../Components/AddVenue/PopUpAddVenue";
 
-export default function CreatePromoter() {
+export default function AddVenue() {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [latitude, setLatitude] = useState("");
@@ -101,7 +97,7 @@ export default function CreatePromoter() {
   
   return (
     <div>
-      <NavBarUser />
+			<NavBarPromoter selected="events"/>
       <PopUpAddVenue trigger={popUpTrigger} setPopUpTrigger={setPopUpTrigger} />
       <div className="center">
         <div className="CreateVenueContainer">

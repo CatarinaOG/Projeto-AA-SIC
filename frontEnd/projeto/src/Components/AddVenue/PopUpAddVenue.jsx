@@ -1,8 +1,11 @@
 import "../../Styles/Profile.css";
+import { useNavigate } from "react-router-dom";
 
 export default function PopUpAddVenue(props) {
+  const navigate = useNavigate();
   const handleRemoveList = () => {
     props.setPopUpTrigger(false);
+		navigate("/AddEvent")
   };
 
   return props.trigger ? (
