@@ -48,14 +48,14 @@ function App() {
   	const [eventId, setEventId] = useState();
 	const [suggestedEvent,setSuggestedEvent] = useState({})
 	const [addEventInfo,setAddEventInfo] = useState({})
-
+	const [searchText,setSearchText] = useState("")
 
   	return (
 		<BrowserRouter>
 			<UserContext.Provider value={{ user, setUser }}>
 				<Routes>
 					<Route path="/" element={
-						<Home setUser={setUser} setEventId={setEventId} />} 
+						<Home setUser={setUser} setEventId={setEventId} setSearchText={setSearchText}/>} 
 					/>
 
 					<Route
@@ -96,7 +96,7 @@ function App() {
 					/>
 					<Route
 						path="/Browse" element={
-						<Browse setEventId={setEventId}/>}
+						<Browse searchText={searchText} setSearchText={setSearchText} setEventId={setEventId}/>}
 					/>
 					<Route
 						path="/Event"element={

@@ -1,21 +1,22 @@
+import { useState,useContext } from "react"
+
 import Filters from "../Components/Filters/Filters"
 import NavBarUser from "../Components/NavBar/NavBarUser"
 import NavBar from "../Components/NavBar/NavBar"
-
-
-import { useState,useContext } from "react"
-
-import UserContext from "../Contexts/UserContext"
 import BrowseTicket from "../Components/Browse/BrowseTicket"
-
-import "../Styles/Browse.css"
+import UserContext from "../Contexts/UserContext"
 import NavBarPromoter from "../Components/NavBar/NavBarPromoter"
 import NavBarAdmin from "../Components/NavBar/NavBarAdmin"
+
+import Magnifier from "../Images/magnifier.png"
+
+import "../Styles/Browse.css"
+
 
 
 export default function Browse(props){
 
-    const {setEventId} = props
+    const {searchText,setSearchText,setEventId} = props
     const {user} = useContext(UserContext);
 
     const [events,setEvents] =useState([ // para ser substituido pelo pedido com base no filtro
@@ -84,6 +85,9 @@ export default function Browse(props){
         },
     ])
 
+    function searchEvents(){
+    }
+
     const show_events = events.map((event) => 
         <BrowseTicket 
             key={event.id}
@@ -94,7 +98,7 @@ export default function Browse(props){
 
     return(
         <div>
-            { !user&& <NavBar />}
+            { !user.type && <NavBar />}
             { user.type === "user" && <NavBarUser selected="home"/>}
             { user.type === "promoter" && <NavBarPromoter selected="home"/>}
             { user.type === "admin" && <NavBarAdmin selected="home"/>}
@@ -105,10 +109,20 @@ export default function Browse(props){
                         <h1>Browse Events</h1>
                         <p className="gray">Find events off all types from any date in any place!</p>
 
+
+                        <div className="searchBarBrowse">
+                            <div>
+                                <img className="magnifier" src={Magnifier} alt="" />
+                                <form onSubmit={searchEvents}>
+                                    <input className="inputBrowse" type="text" placeholder="Where do you want to go?" value={searchText} onChange={(event) => setSearchText(event.target.value)}/>              
+                                </form>
+                            </div>
+                        </div>
+
                         <Filters />
 
                         { events.length > 0 && 
-                            <div className="marginTop">
+                            <div className="eventsContainer">
                                 {show_events}
                             </div>
                         }

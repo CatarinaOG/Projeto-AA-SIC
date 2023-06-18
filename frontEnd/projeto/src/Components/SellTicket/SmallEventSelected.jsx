@@ -2,13 +2,15 @@ import Close from "../../Images/close.png"
 
 export default function SmallEventSelected(props){
 
-    const {ticket,setTicket,setFase} = props
+    const {ticket,setTicket,setFase,done} = props
 
     const event = ticket.event
 
     function goToEventFase(){
-        setFase("event")
-        setTicket( oldTicket => ({...oldTicket,price:0}))
+        if(!done){
+            setFase("event")
+            setTicket( oldTicket => ({...oldTicket,price:0}))
+        }
     }
 
     return(

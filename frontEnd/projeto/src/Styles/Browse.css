@@ -1,7 +1,7 @@
 
 
 .eventsContainer{
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .event{
@@ -57,3 +57,19 @@
     transform: scale(1.1);
 }
 
+.searchBarBrowse{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.inputBrowse{
+    background-color: var(--dark-blue);
+    border-radius: 10px;
+    width: 75vw;
+    max-width: 600px;
+    padding: 10px;
+    padding-left: 40px;
+    color: #fff;
+    border: none;
+}

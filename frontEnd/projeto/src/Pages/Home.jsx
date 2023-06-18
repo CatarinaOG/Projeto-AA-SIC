@@ -7,16 +7,19 @@ import Wallpaper from "../Images/wallpaper.png"
 import Magnifier from "../Images/magnifier.png"
 
 import "../Styles/Home.css"
+import { useState } from 'react';
 
 
 export default function Home(props){
 
-    const {setUser,setEventId} = props
+    const {setUser,setEventId,setSearchText} = props
 
+    const [tmp,setTmp] = useState("") 
     const navigate = useNavigate();
 
 
     function handleFormSubmit(){
+        setSearchText(tmp)
         navigate("/Browse")
     }
 
@@ -31,7 +34,7 @@ export default function Home(props){
                     <div className="input-wrapper">
                         <img className="magnifier" src={Magnifier} alt="" />
                         <form onSubmit={handleFormSubmit}>
-                            <input className="inputHome" type="text" placeholder="Where do you want to go?"/>              
+                            <input className="inputHome" type="text" placeholder="Where do you want to go?" onChange={(event) => setTmp(event.target.value)}/>              
                         </form>
                     </div>
                 </div>

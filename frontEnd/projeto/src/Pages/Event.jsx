@@ -159,7 +159,7 @@ export default function Event(props){
 
     return(
         <div>
-            { !user && <NavBar />}
+            { !user.type && <NavBar />}
             { user.type === "user" && <NavBarUser selected="home"/>}
             { user.type === "promoter" && <NavBarPromoter selected="home"/>}
             { user.type === "admin" && <NavBarAdmin selected="home"/>}

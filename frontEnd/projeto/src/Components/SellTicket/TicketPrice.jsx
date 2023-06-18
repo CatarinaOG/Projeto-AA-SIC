@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 
 export default function TicketPrice(props){
 
-    const {ticket,setTicket,setFase} = props;
+    const {ticket,setTicket,setFase,done} = props;
 
     const [error,setError] = useState(0)
 
@@ -37,7 +37,7 @@ export default function TicketPrice(props){
 
                 <div className="priceInputContainer">
                     <p className="dollarSign">$</p>
-                    <input className="inputPrice" onKeyDown={handleEnter} onChange={handleChange} value={ticket.price} type="number"/>
+                    <input className="inputPrice" onKeyDown={handleEnter} onChange={handleChange} value={ticket.price} type="number" readOnly={ done? true : false }/>
                 </div>
 
                 <p className="maxPrice">Max: {maxPrice}$</p>

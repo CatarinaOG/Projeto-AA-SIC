@@ -2,13 +2,15 @@ import Close from "../../Images/close.png"
 
 export default function TicketTypeSelected(props){
 
-    const {ticket,setTicket,setFase} = props
+    const {ticket,setTicket,setFase,done} = props
 
     const type = ticket.type
 
     function goToTypeFase(){
-        setFase("type")
-        setTicket( oldTicket => ({...oldTicket,price:0}))
+        if(!done){
+            setFase("type")
+            setTicket( oldTicket => ({...oldTicket,price:0}))
+        }
     }
 
     return(

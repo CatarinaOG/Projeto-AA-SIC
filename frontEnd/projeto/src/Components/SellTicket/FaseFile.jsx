@@ -6,7 +6,6 @@ import TicketPrice from "./TicketPrice"
 import TicketDescription from "./TicketDescription"
 import UserContext from "../../Contexts/UserContext"
 
-
 import fileImage from "../../Images/file.png"
 
 
@@ -37,13 +36,6 @@ export default function FaseFile(props){
 
     function sendSellTicketRequest(){
 
-        console.log({
-            event_id: ticket.event.id,
-            type_id: ticket.type.id,
-            price: ticket.price,
-            description: ticket.description,
-        })
-
         fetch("http://localhost:8080/api/user/sell_ticket", {
             method: 'POST',
             headers: {
@@ -55,6 +47,7 @@ export default function FaseFile(props){
                 type_id: ticket.type.id,
                 price: ticket.price,
                 description: ticket.description,
+                file: "http:hello"
             })
         })
         .then(response => response.json())
@@ -79,7 +72,9 @@ export default function FaseFile(props){
 
                 <SmallEventSelected 
                     ticket={ticket}
-                    setFase={setFase}/>
+                    setFase={setFase}
+                    done={done}
+                />
 
                 <h1>Select Ticket</h1>
                 <p className="gray">What kind of ticket do you have?</p>
@@ -87,7 +82,9 @@ export default function FaseFile(props){
                 <TicketTypeSelected
                     ticket={ticket}
                     setTicket={setTicket}
-                    setFase={setFase}/>
+                    setFase={setFase}
+                    done={done}
+                />
 
                 <h1>Select Price</h1>
                 <p className="gray">For how much would you like to sell the ticket for?</p>
@@ -95,14 +92,18 @@ export default function FaseFile(props){
                 <TicketPrice 
                     ticket={ticket} 
                     setTicket={setTicket}
-                    setFase={setFase}/>
+                    setFase={setFase}
+                    done={done}
+                />
 
                 <h1>Insert Description (Optional)</h1>
                 <p className="gray">Can you tell us why you want to sell your precious ticket?</p>
 
                 <TicketDescription 
                     setTicket={setTicket}
-                    setFase={setFase}/>
+                    setFase={setFase}
+                    done={done}
+                />
 
                 <h1 ref={toTitleRef}>Insert file of Ticket</h1>
 
