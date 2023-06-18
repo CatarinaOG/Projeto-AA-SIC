@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -322,9 +323,17 @@ public class UserService {
                 EventsSuggestedForSellingTicketResponse aux = new EventsSuggestedForSellingTicketResponse();
                 aux.setId(e.getId());
                 aux.setDate(e.getDate_start().format(formatter));
-                aux.setDuration("");
+
+                Duration duration = Duration.between(e.getDate_start(), e.getDate_end());
+                long daysBetween = duration.toDays();
+
+                aux.setDuration(String.valueOf(daysBetween));
+                aux.setAddress(e.getLocation().getAddress());
+                aux.setName(e.getName());
+
+                response.add(aux);
             }
         }
-        return null;
+        return response;
     }
 }

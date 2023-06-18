@@ -8,6 +8,7 @@ import AASIC.repositories.PromoterRepo;
 import AASIC.requests.GetPromotersResponse;
 import AASIC.requests.RemovePromoterRequest;
 import AASIC.responses.AuthenticationResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -39,13 +40,14 @@ public class AdminService {
             aux.setId(p.getId());
             aux.setEmail(p.getEmail());
             aux.setName(p.getName());
-            aux.setPassword(p.getPassword());
+            //aux.setPassword(p.getLanguage());
 
             response.add(aux);
         }
         return response;
     }
 
+    @Transactional
     public void remove_promoter(RemovePromoterRequest request) {
         promoterRepo.removePromoterById(request.getPromoter_id());
     }
