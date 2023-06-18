@@ -5,7 +5,7 @@ import BlackClose from "../../Images/blackClose.png"
 export default function EditLanguage(props){
 
     const {setEditInfo} = props
-    const { user } = useContext(UserContext);
+    const { user,setUser } = useContext(UserContext);
 
     function closeEdit(){
         setEditInfo("none")
@@ -24,7 +24,8 @@ export default function EditLanguage(props){
             })
         })
         .then(response => {
-            console.log(response)
+            setUser((oldUser) => ({...oldUser,language: lng}))
+
         })
         .catch(error => {
             console.log(error)

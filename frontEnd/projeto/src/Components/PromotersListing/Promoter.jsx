@@ -23,7 +23,7 @@ export default function Promoter(props){
 
     function sendDeletePromoterRequest(){
 
-        fetch("http://localhost:8080/", {
+        fetch("http://localhost:8080/api/admin/remove_promoter", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export default function Promoter(props){
         })
         .then(response => response.json())
         .then(userResponse => {
-            console.log(userResponse)
+            setShowConfirmation(false)
         })
         .catch(error => {
             console.log(error)
@@ -45,42 +45,40 @@ export default function Promoter(props){
 
     function deletePromoter(){
         sendDeletePromoterRequest()
-        setShowConfirmation(false)
     }
 
     return(
-        <div className="promoterContainer">
-            <img className="closeImg" src={close} alt="" onClick={askConfirmation}/>
-            <div className="promoterLeftSide">
-                <h2>{promoter.name}</h2>
-            </div>
-            <div className="promoterRightSide">
-                <div className="displayHorizontally">
-                    <h3>Email:</h3>
-                    <h3 className="promoterValues">{promoter.email}</h3>
+        <div className="center">
+            <div className="promoterContainer">
+                <img className="closeImg" src={close} alt="" onClick={askConfirmation}/>
+                <div className="promoterRightSide">
+                    <div className="displayHorizontally">
+                        <h3>Name:</h3>
+                        <h3 className="promoterValues">{promoter.name}</h3>
+                    </div>
+                    <div className="displayHorizontally">
+                        <h3>Email:</h3>
+                        <h3 className="promoterValues">{promoter.email}</h3>
+                    </div>
+                    
                 </div>
-                <div className="displayHorizontally">
-                    <h3>Password:</h3>
-                    <h3 className="promoterValues">{promoter.password}</h3>
-                </div>
-            </div>
 
-            { showConfirmation &&
-                <div>
-                    <div className="overlay"></div>
-                    <div className="popUpContainer">
-                        <img src={BlackClose} className="editClose" alt="" onClick={closeConfirmation} />
-                        <h3 className="popUpInfoWithButtons">Are you sure you want to delete this promoter?</h3>
-                        <div className="center">
-                            <div className="promoterButtons">
-                                <button className="button" onClick={deletePromoter}>Yes</button>
-                                <button className="button" onClick={closeConfirmation}>No</button>
+                { showConfirmation &&
+                    <div>
+                        <div className="overlay"></div>
+                        <div className="popUpContainer">
+                            <img src={BlackClose} className="editClose" alt="" onClick={closeConfirmation} />
+                            <h3 className="popUpInfoWithButtons">Are you sure you want to delete this promoter?</h3>
+                            <div className="center">
+                                <div className="promoterButtons">
+                                    <button className="button" onClick={deletePromoter}>Yes</button>
+                                    <button className="button" onClick={closeConfirmation}>No</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
-
+                }
+            </div>
         </div>
     )
 }

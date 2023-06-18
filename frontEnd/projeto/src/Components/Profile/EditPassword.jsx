@@ -5,7 +5,7 @@ import BlackClose from "../../Images/blackClose.png"
 export default function EditPassword(props){
 
     const {setEditInfo} = props
-    const { user } = useContext(UserContext);
+    const { user,setUser } = useContext(UserContext);
 
     const [temp,setTemp] = useState("")
     const [temp2,setTemp2] = useState("")
@@ -41,7 +41,8 @@ export default function EditPassword(props){
             })
         })
         .then(response => {
-            console.log(response) 
+            setUser((oldUser) => ({...oldUser,password: temp}))
+
         })
         .catch(error => {
             console.log(error)

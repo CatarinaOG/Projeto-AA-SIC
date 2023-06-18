@@ -7,7 +7,7 @@ import BlackClose from "../../Images/blackClose.png"
 export default function AddBankDetails(props){
 
     const {setAddInfo} = props
-    const { user } = useContext(UserContext);
+    const { user,setUser } = useContext(UserContext);
 
 
     const [temp,setTemp] = useState("")
@@ -45,7 +45,7 @@ export default function AddBankDetails(props){
             })
         })
         .then(response => {
-            console.log(response)
+            setUser((oldUser) => ({...oldUser,card_number: temp,card_cvc: temp2}))
         })
         .catch(error => {
             console.log(error)

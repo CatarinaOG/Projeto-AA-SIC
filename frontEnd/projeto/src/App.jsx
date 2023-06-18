@@ -36,7 +36,6 @@ import CreatePromoter from "./Pages/CreatePromoter";
 
 import AddVenue from "./Pages/AddVenue";
 
-
 import "./Styles/General.css";
 
 function App() {
@@ -80,6 +79,7 @@ function App() {
         .then(response => response.json())
         .then(responseJSON => {
 			setUser(responseJSON)
+			setUser((old) => ({...old,token: cookiesSave.token}))
         })
         .catch(error => {
             console.log(error)
@@ -89,8 +89,10 @@ function App() {
 
 
 	useEffect(() => {
-		if(!user && cookiesSave.token)
+		if(!user.type && cookiesSave.token){
 			sendGetUserRequest()
+		}
+
 	},[])
 
 
@@ -102,88 +104,126 @@ function App() {
 						<Home setUser={setUser} setEventId={setEventId} setSearchText={setSearchText}/>} 
 					/>
 
-					<Route
-						path="/HomeUser" element={
-						<HomeUser setEventId={setEventId} />}
-					/>
-					<Route
-						path="/Listings" element={
-						<SellingListing />}
-					/>
-					<Route
-						path="/MyTickets" element={
-						<BoughtTickets />}
-					/>
-					<Route
-						path="/SellTicket" element={
-						<SellTicket />}
-					/>
-					<Route
-						path="/SavedEvents" element={
-						<SavedEvents setEventId={setEventId}/>}
-					/>
-					<Route
-						path="/FollowedEvents" element={
-						<FollowedEvents setEventId={setEventId}/>}
-					/>
-					<Route
-						path="/Profile" element={
-						<Profile />}
-					/>
-					<Route
-						path="/Notifications" element={
-						<Notifications />}
-					/>
-					<Route
-						path="/Suggestion" element={
-						<SuggestEvent />}
-					/>
-					<Route
-						path="/Browse" element={
-						<Browse searchText={searchText} setSearchText={setSearchText} setEventId={setEventId}/>}
-					/>
-					<Route
-						path="/Event"element={
-						<Event eventId={eventId} />}
-					/>
-					<Route
-						path="/PaymentMethods"element={
-						<PaymentMethods />}
-					/>
+					{ user.type === "user" &&
+						<Route
+							path="/HomeUser" element={
+							<HomeUser setEventId={setEventId} />}
+						/>
+					}
+					{ user.type === "user" &&
+						<Route
+							path="/Listings" element={
+							<SellingListing />}
+						/>
+					}
+					{ user.type === "user" &&
+						<Route
+							path="/MyTickets" element={
+							<BoughtTickets />}
+						/>
+					}
+					{ user.type === "user" &&
+						<Route
+							path="/SellTicket" element={
+							<SellTicket />}
+						/>
+					}
+					{ user.type === "user" &&
+						<Route
+							path="/SavedEvents" element={
+							<SavedEvents setEventId={setEventId}/>}
+						/>
+					}
+					{ user.type === "user" &&
+						<Route
+							path="/FollowedEvents" element={
+							<FollowedEvents setEventId={setEventId}/>}
+						/>
+					}
+					{ user.type === "user" &&
+						<Route
+							path="/Profile" element={
+							<Profile />}
+						/>
+					}
+					{ user.type === "user" &&
 
+						<Route
+							path="/Notifications" element={
+							<Notifications />}
+						/>
+					}
+					{ user.type === "user" &&
 
-					<Route path="/HomePromoter" element={
-						<HomePromoter setEventId={setEventId}/>} 
-					/>
-					<Route
-						path="/Suggestions" element={
-						<SuggestedEvents setSuggestedEvent={setSuggestedEvent}/>}
-					/>
-					<Route
-						path="/Events" element={
-						<EventsListing />}
-					/>
-					<Route
-						path="/AddEvent" element={
-						<CreateEvent suggestedEvent={suggestedEvent} addEventInfo={addEventInfo} setAddEventInfo={setAddEventInfo}/>}
-					/>
+						<Route
+							path="/Suggestion" element={
+							<SuggestEvent />}
+						/>
+					}
+					{ user.type === "user" &&
+						<Route
+							path="/Browse" element={
+							<Browse searchText={searchText} setSearchText={setSearchText} setEventId={setEventId}/>}
+						/>
+					}
+					{ user.type === "user" &&
+						<Route
+							path="/Event"element={
+							<Event eventId={eventId} />}
+						/>
+					}
+					{ user.type === "user" &&
 
+						<Route
+							path="/PaymentMethods"element={
+							<PaymentMethods />}
+						/>
+					}
 
-					<Route path="/HomeAdmin" element={
-						<HomeAdmin setEventId={setEventId}/>} 
-					/>
-					<Route path="/Promoters" element={
-						<PromotersListing />} 
-					/>
-					<Route path="/CreatePromoter" element={
-						<CreatePromoter/>} 
-					/>
-					<Route path="/AddVenue" element={
-						<AddVenue/>} 
-					/>
+					{ user.type === "promoter" &&
+						<Route path="/HomePromoter" element={
+							<HomePromoter setEventId={setEventId}/>} 
+						/>
+					}
+					{ user.type === "promoter" &&
+						<Route
+							path="/Suggestions" element={
+							<SuggestedEvents setSuggestedEvent={setSuggestedEvent}/>}
+						/>
+					}
+					{ user.type === "promoter" &&
+						<Route
+							path="/Events" element={
+							<EventsListing />}
+						/>
+					}
+					{ user.type === "promoter" &&
+						<Route
+							path="/AddEvent" element={
+							<CreateEvent suggestedEvent={suggestedEvent} addEventInfo={addEventInfo} setAddEventInfo={setAddEventInfo}/>}
+						/>
+					}
 
-
-
+					{ user.type === "admin" &&
+						<Route path="/HomeAdmin" element={
+							<HomeAdmin setEventId={setEventId}/>} 
+						/>
+					}
+					{ user.type === "admin" &&
+						<Route path="/Promoters" element={
+							<PromotersListing />} 
+						/>
+					}
+					{ user.type === "admin" &&
+						<Route path="/CreatePromoter" element={
+							<CreatePromoter/>} 
+						/>
+					}	
+					{ user.type === "admin" &&
+						<Route path="/AddVenue" element={
+							<AddVenue/>} 
+						/>
+					}	
 				</Routes>
 			</UserContext.Provider>
 		</BrowserRouter>

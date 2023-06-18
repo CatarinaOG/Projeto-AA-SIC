@@ -1,5 +1,5 @@
 
-import { useState,useContext } from "react";
+import { useState,useContext, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import UserContext from "../Contexts/UserContext"
 import NavBarAdmin from "../Components/NavBar/NavBarAdmin"
@@ -15,30 +15,11 @@ export default function PromotersListing(){
     const {user} = useContext(UserContext);
 
 
-    const [promoters,setPromoters] = useState([
-        {
-            id: 1,
-            name: "Maria Conceição",
-            email: "maria@maria",
-            password: "maria",
-        },
-        {
-            id: 2,
-            name: "Maria Conceição",
-            email: "maria@maria",
-            password: "maria",
-        },
-        {
-            id: 3,
-            name: "Maria Conceição",
-            email: "maria@maria",
-            password: "maria",
-        },
-    ])
+    const [promoters,setPromoters] = useState([])
 
     function sendGetPromotersRequest(){
 
-        fetch("http://localhost:8080/", {
+        fetch("http://localhost:8080/api/admin/get_promoters", {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -47,13 +28,17 @@ export default function PromotersListing(){
         })
         .then(response => response.json())
         .then(responseJSON => {
-            //setSuggestedEvents(responseJSON)
-            console.log(responseJSON)
+            setPromoters(responseJSON)
         })
         .catch(error => {
             console.log(error)
         });
     }
+
+    useEffect(() => {
+        if(promoters.length === 0)
+            sendGetPromotersRequest()
+    })
 
     function addPromoter(){
         navigate('/CreatePromoter')

@@ -1,4 +1,4 @@
-import { useState,useContext } from "react"
+import { useState,useContext, useEffect } from "react"
 import UserContext from "../Contexts/UserContext"
 
 import NavBarUser from "../Components/NavBar/NavBarUser"
@@ -51,6 +51,9 @@ export default function Profile(){
         setAddInfo("bank_details")
     }
 
+    useEffect(() => {
+        
+    })
 
     return(
 
@@ -95,12 +98,10 @@ export default function Profile(){
                         <div className="lastEditSection">
                             <div className="editContent">
                                 <h3>Language</h3>
-                                    { false && // para tirar pq vem sempre uma
-                                        <div className="displayHorizontally">
-                                            <p>{user.language}</p>
-                                            <button className="editButton" onClick={editLanguage}></button>
-                                        </div>
-                                    }
+                                    <div className="displayHorizontally">
+                                        <p>{user.language}</p>
+                                        <button className="editButton" onClick={editLanguage}></button>
+                                    </div>
                             </div>
                         </div>
                     </div>
