@@ -5,7 +5,6 @@ import "../../Styles/Profile.css";
 
 export default function PopUpConfirm({trigger,setPopUpTrigger,email,password,name,setMessage}) {
   const [phase, setPhase] = useState(1);
-  const {user} = useContext(UserContext);
 
   console.log(email);
   console.log(password);
@@ -29,22 +28,7 @@ export default function PopUpConfirm({trigger,setPopUpTrigger,email,password,nam
   }
 
 	function postPromoter(){
-		fetch("http://localhost:8080/api/admin/create_promoter", {
-			method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.token}`
-      },
-			body: JSON.stringify(inputs)
-		})
-    .then(response => response.json())
-    .then(responseJSON => {
-        //setSuggestedEvents(responseJSON)
-        console.log(responseJSON)
-    })
-		.catch(error => {
-			setMessage(error)
-		});
+		
   }
 
   return trigger ? (

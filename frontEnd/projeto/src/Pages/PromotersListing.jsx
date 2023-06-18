@@ -61,7 +61,7 @@ export default function PromotersListing(){
 
 
     const showPromoters = promoters.map((promoter) => 
-        <Promoter kay={promoter.id} promoter={promoter} />
+        <Promoter key={promoter.id} promoter={promoter} />
     )
 
     return(
