@@ -4,9 +4,11 @@ import AASIC.config.JWTService;
 import AASIC.controllers.AuthenticationRequest;
 import AASIC.controllers.AuthenticationResponse;
 import AASIC.controllers.RegisterRequest;
+import AASIC.model.Admin;
 import AASIC.model.Promoter;
 import AASIC.model.Role;
 import AASIC.model.User;
+import AASIC.repositories.AdminRepo;
 import AASIC.repositories.UserRepo;
 import AASIC.repositories.PromoterRepo;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ public class AuthenticationService {
 
     private final UserRepo userRepo;
     private final PromoterRepo promoterRepo;
+    private final AdminRepo adminRepo;
     private final PasswordEncoder passwordEncoder;
     private final JWTService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -133,4 +136,52 @@ public class AuthenticationService {
                 .name(promoter.getName())
                 .build();
     }
+
+
+    public AuthenticationResponse register_admin(RegisterRequest request) {
+        if (adminRepo.findAdminByEmail(request.getEmail()).isPresent()){
+            /**
+             * Aqui vamos devolver uma mensagem de erro para avisar que o email já está registado
+             */
+            return AuthenticationResponse.builder()
+                    .token("Email já utilizado")
+                    .build();
+        }
+        var admin = Admin.builder()
+                .name(request.getName())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.ADMIN)
+                .build();
+        adminRepo.save(admin);
+        var jwt = jwtService.generateToken(admin);
+
+        /**
+         * Aqui vamos devolver o token criado ao utilizador
+         */
+        return AuthenticationResponse.builder()
+                .token(jwt)
+                .name(admin.getName())
+                .build();
+    }
+
+    public AuthenticationResponse login_admin(AuthenticationRequest request) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
+        var admin = adminRepo.findAdminByEmail(request.getEmail())
+                .orElseThrow();
+
+
+        /**
+         * Depois de se confirmar que o utilizador existe e a password está correta podemos criar um jwt e enviar na resposta
+         */
+        var jwt = jwtService.generateToken(admin);
+        return AuthenticationResponse.builder()
+                .token(jwt)
+                .type("admin")
+                .name(admin.getName())
+                .build();
+    }
+
+
+
 }

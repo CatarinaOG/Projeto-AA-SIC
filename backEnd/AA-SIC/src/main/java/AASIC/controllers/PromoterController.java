@@ -31,12 +31,6 @@ public class PromoterController {
     private final UserService userService;
     private final PromoterService promoterService;
 
-
-    @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){
-        return ResponseEntity.ok(authService.register_promoter(request));
-    }
-
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request){
         return ResponseEntity.ok(authService.login_promoter(request));
