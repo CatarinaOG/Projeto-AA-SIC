@@ -18,7 +18,7 @@ import "../Styles/Event.css";
 export default function Event(props){
 
     const {eventId} = props
-    const {user,setUser} = useContext(UserContext);
+    const {user} = useContext(UserContext);
 
 
     const [show,setShow] = useState("ticketsType") // ticket / tickets / ticketsType / info
@@ -117,9 +117,29 @@ export default function Event(props){
         setShow("info")
     }
 
+    function sendSaveEventRequest(){
+
+        fetch("http://localhost:8080/api/user/save_event", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+                event_id: event.id
+            })
+        })
+        .catch(error => {
+            console.log(error)
+        });
+
+    }
+
     function saveEvent(){
-        // enviar pedido para guardar/desguardar evento
-        // event.id e user.id
+        if(event.is_saved)
+            sendSaveEventRequest()
+        //else
+            //sendDeSaveEventRequest()
     }
 
     const showTheTicketsTypes = ticketTypes.map((ticketType) => 
@@ -163,21 +183,22 @@ export default function Event(props){
             { user.type === "user" && <NavBarUser selected="home"/>}
             { user.type === "promoter" && <NavBarPromoter selected="home"/>}
             { user.type === "admin" && <NavBarAdmin selected="home"/>}
-
             
             <img className="wallpaperBlur" src={event.image} alt="" />
 
             <div className="center">
                 <div>
-
                     <div className="overImageContainer">
                         <img className="eventImage" src={event.image} alt="" />
                         <h2>{event.eventName}</h2>
                         <h3>{event.dayOfWeek}, {event.month} {event.day} | {event.time} </h3>
                         <p>{event.eventPlace}</p>
-                        <button className="saveEventButton" onClick={saveEvent}>
-                            {event.is_saved? "You saved this event!" : "Save Event"}
-                        </button>
+
+                        {user.type === "user" &&
+                            <button className="saveEventButton" onClick={saveEvent}>
+                                {event.is_saved? "You saved this event!" : "Save Event"}
+                            </button>
+                        }
                     </div>
                 
                     <div className="defaultContainer">
@@ -207,16 +228,20 @@ export default function Event(props){
 
                         { show === "ticketsType" &&
                             <div className="marginBottom">
-                                <TicketAlert event={event} user={user}/>
-                                <h2>Tickets Types</h2>
+                                {user.type === "user" &&
+                                    <TicketAlert event={event} />
+                                }      
+                                <h2 className="marginTop">Tickets Types</h2>
                                 {showTheTicketsTypes}
                             </div>
                         }
 
                         { show === "tickets" &&
                             <div>
-                                <TicketAlert event={event} user={user} />
-                                <h2>Tickets Available</h2>
+                                {user.type === "user" &&
+                                    <TicketAlert event={event} />
+                                }
+                                <h2 className="marginTop">Tickets Available</h2>
                                 {showTheTickets}
                                 <h2>Tickets Sold</h2>
                                 {showTheSoldTickets}
@@ -228,7 +253,6 @@ export default function Event(props){
                                 <FullTicket 
                                     ticket={ticket}
                                     ticketType={ticketType}
-                                    user={user}
                                     setShow={setShow}
                                 />
                             </div>

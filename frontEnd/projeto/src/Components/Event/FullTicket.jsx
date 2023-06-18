@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import UserContext from "../../Contexts/UserContext"
 import goBackImg from "../../Images/goBack.png"
 import BlackClose from "../../Images/blackClose.png"
 
 export default function FullTicket(props){
 
-    const {ticket,ticketType,user,setShow} = props
+    const {ticket,ticketType,setShow} = props
+    const {user} = useContext(UserContext);
+
 
     const [loginMandatory,setLoginMandatory] = useState(false)
 
@@ -59,7 +62,7 @@ export default function FullTicket(props){
                     <div className="overlay"></div>
                     <div className="popUpContainer">
                         <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
-                        <h3 className="popUpInfo">Sign in to buy a ticket!</h3>
+                        <h3 className="popUpInfo">Log in to buy a ticket!</h3>
                     </div>
                 </div>
             }
