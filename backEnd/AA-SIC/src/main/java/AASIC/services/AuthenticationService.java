@@ -2,7 +2,7 @@ package AASIC.services;
 
 import AASIC.config.JWTService;
 import AASIC.controllers.AuthenticationRequest;
-import AASIC.controllers.AuthenticationResponse;
+import AASIC.responses.AuthenticationResponse;
 import AASIC.controllers.RegisterRequest;
 import AASIC.model.Admin;
 import AASIC.model.Promoter;
@@ -14,7 +14,6 @@ import AASIC.repositories.PromoterRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +61,7 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwt)
                 .name(user.getName())
+                .language(user.getLanguage())
                 .build();
 
     }
@@ -93,6 +93,7 @@ public class AuthenticationService {
                     .token(jwt)
                     .type("promoter")
                     .name(promoter.getName())
+                    .language(promoter.getLanguage())
                     .build();
         }
         if (adminRepo.findAdminByEmail(request.getEmail()).isPresent()) {
@@ -101,6 +102,8 @@ public class AuthenticationService {
             return AuthenticationResponse.builder()
                     .token(jwt)
                     .type("admin")
+                    .name(promoter.getName())
+                    .language(promoter.getLanguage())
                     .build();
         }
 
@@ -128,6 +131,7 @@ public class AuthenticationService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .language("English")
                 .role(Role.USER)
                 .build();
         promoterRepo.save(promoter);
@@ -139,6 +143,7 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwt)
                 .name(promoter.getName())
+                .language(promoter.getLanguage())
                 .build();
     }
 
@@ -156,6 +161,7 @@ public class AuthenticationService {
                 .name(request.getName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .language("English")
                 .role(Role.ADMIN)
                 .build();
         adminRepo.save(admin);
@@ -167,6 +173,7 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwt)
                 .name(admin.getName())
+                .language(admin.getLanguage())
                 .build();
     }
 

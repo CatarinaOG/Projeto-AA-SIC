@@ -3,10 +3,7 @@ package AASIC.services;
 import AASIC.model.*;
 import AASIC.repositories.*;
 import AASIC.requests.*;
-import AASIC.responses.GetFollowedEventsReponse;
-import AASIC.responses.GetSavedEventsResponse;
-import AASIC.responses.GetSuggestedEventsResponse;
-import AASIC.responses.GetTicketsListedByUserResponse;
+import AASIC.responses.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -212,12 +209,101 @@ public class UserService {
 
     public void remove_saved_event(RemoveSavedEventRequest request) {
         EventSaved eventSaved = eventSavedRepo.findEventSavedByEventId(request.getEvent_id()).get();
-        System.out.println("-----------------------------------"+eventSaved.getId());
-        eventSavedRepo.deleteById(eventSaved.getId());
+        eventSavedRepo.removeEventSavedByEventId(eventSaved.getId());
     }
 
     public void remove_followed_event(RemoveFollowedEventRequest request){
         EventFollowed eventFollowed = eventFollowedRepo.findEventFollowedByEventId(request.getEvent_id()).get();
-        eventFollowedRepo.deleteById(eventFollowed.getId());
+        eventFollowedRepo.removeEventFollowedByEventId(eventFollowed.getId());
+    }
+
+    public AuthenticationResponse get_user(String email) {
+        User u = userRepo.findUserByEmail(email).get();
+        return AuthenticationResponse
+                .builder()
+                .type("user")
+                .profile_pic(u.getProfile_pic())
+                .name(u.getName())
+                .phone(u.getPhone())
+                .language(u.getLanguage())
+                .card_number(u.getCard_number())
+                .card_cvc(u.getCard_cvc())
+                .build();
+    }
+
+    public void buy_ticket(BuyTicketRequest request, String email) {
+        Ad t = adRepo.findById(request.getTicket_id()).get();
+        User u = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        t.setSold(true);
+        t.setBuyer(u);
+        adRepo.save(t);
+    }
+
+    public List<GetBoughtTicketsByUserResponse> get_bought_tickets(String email) {
+
+        User u = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        List<Ad> ads = u.getTickets_bought();
+        List<GetBoughtTicketsByUserResponse> response = new ArrayList<>();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+        for(Ad a : ads){
+            GetBoughtTicketsByUserResponse aux = new GetBoughtTicketsByUserResponse();
+            aux.setStart_date(a.getEvent().getDate_start().format(formatter));
+            aux.setEnd_date(a.getEvent().getDate_end().format(formatter));
+            aux.setTicket_type(a.getTicket_type().getType());
+            aux.setEvent_name(a.getEvent().getName());
+            aux.setEvent_place(a.getEvent().getLocation().getName());
+            aux.setTicket_price(a.getPrice());
+
+            response.add(aux);
+        }
+        return response;
+    }
+
+    public List<GetTicketsTypeEventResponse> get_tickets_by_type_and_event(GetTicketsTypeEventRequest request) {
+
+        List<Ad> ads = adRepo.findAll();
+        int type_id = request.getTicket_type_id();
+        int event_id = request.getEvent_id();
+        List<GetTicketsTypeEventResponse> response = new ArrayList<>();
+
+        for(Ad a : ads){
+            if (a.getTicket_type().getId() == type_id && a.getEvent().getId() == event_id){
+                GetTicketsTypeEventResponse aux = new GetTicketsTypeEventResponse();
+                aux.setId(a.getId());
+                aux.setDescription(a.getTicket());
+                aux.setPrice(a.getPrice());
+                aux.setUser_image(a.getUser().getProfile_pic());
+                aux.setUser_name(a.getUser().getName());
+
+                response.add(aux);
+            }
+        }
+        return response;
+    }
+
+
+    public List<GetTicketsTypeEventResponse> get_sold_tickets_by_type_and_event(GetTicketsTypeEventRequest request) {
+
+        List<Ad> ads = adRepo.findAll();
+        int type_id = request.getTicket_type_id();
+        int event_id = request.getEvent_id();
+        List<GetTicketsTypeEventResponse> response = new ArrayList<>();
+
+        for(Ad a : ads){
+            if (a.getTicket_type().getId() == type_id && a.getEvent().getId() == event_id && a.getSold()){
+                GetTicketsTypeEventResponse aux = new GetTicketsTypeEventResponse();
+                aux.setId(a.getId());
+                aux.setDescription(a.getTicket());
+                aux.setPrice(a.getPrice());
+                aux.setUser_image(a.getUser().getProfile_pic());
+                aux.setUser_name(a.getUser().getName());
+
+                response.add(aux);
+            }
+        }
+        return response;
+
     }
 }

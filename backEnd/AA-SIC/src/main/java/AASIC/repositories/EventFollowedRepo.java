@@ -14,4 +14,7 @@ import java.util.Optional;
 public interface EventFollowedRepo extends JpaRepository<EventFollowed, Integer> {
     @Query(value = "SELECT * FROM event_followed WHERE event_followed.event_id = ?", nativeQuery = true)
     Optional<EventFollowed> findEventFollowedByEventId(Integer id);
+
+    @Query(value = "DELETE * FROM event_followed WHERE event_followed.event_id = ?", nativeQuery = true)
+    void removeEventFollowedByEventId(Integer id);
 }

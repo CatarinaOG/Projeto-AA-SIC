@@ -1,4 +1,4 @@
-package AASIC.controllers;
+package AASIC.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
