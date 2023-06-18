@@ -1,15 +1,13 @@
 package AASIC.controllers;
 
 import AASIC.config.JWTService;
-import AASIC.requests.AddEventRequest;
-import AASIC.requests.AddLocalRequest;
-import AASIC.requests.CreateArtistRequest;
-import AASIC.requests.RemoveEventRequest;
+import AASIC.requests.*;
 import AASIC.responses.*;
 import AASIC.services.AuthenticationService;
 import AASIC.services.PromoterService;
 import AASIC.services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,8 +48,7 @@ public class PromoterController {
     public ResponseEntity<String> create_artist(@RequestBody CreateArtistRequest request, @RequestHeader(name="Authorization") String token){
         var jwt = token.substring(7);
         String email = jwtService.extractUsername(jwt);
-        promoterService.create_artist(request);
-        return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
+        return ResponseEntity.ok(promoterService.create_artist(request));
     }
 
     /**
@@ -61,14 +58,12 @@ public class PromoterController {
      */
     @PostMapping("/create_category")
     public ResponseEntity<String> create_category(@RequestBody CreateArtistRequest request){
-        promoterService.create_category(request);
-        return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
+        return ResponseEntity.ok(promoterService.create_category(request));
     }
 
     @PostMapping("/add_location")
     public ResponseEntity<String> add_location(@RequestBody AddLocalRequest request){
-        promoterService.create_location(request);
-        return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
+        return ResponseEntity.ok(promoterService.create_location(request));
     }
 
     @GetMapping("/get_categories")
@@ -105,4 +100,11 @@ public class PromoterController {
         promoterService.remove_event(request);
         return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
     }
+
+    @PostMapping
+    public ResponseEntity<String> remove_suggestion(RemoveSugestionRequest request){
+        promoterService.remove_suggestion(request);
+        return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
+    }
+
 }
