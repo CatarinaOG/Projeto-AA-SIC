@@ -261,9 +261,49 @@ public class UserService {
         return response;
     }
 
-    public List<GetTicketsTypeEventResponse> get_tickets_type_event(GetTicketsTypeEventRequest request) {
+    public List<GetTicketsTypeEventResponse> get_tickets_by_type_and_event(GetTicketsTypeEventRequest request) {
 
-        return null;
+        List<Ad> ads = adRepo.findAll();
+        int type_id = request.getTicket_type_id();
+        int event_id = request.getEvent_id();
+        List<GetTicketsTypeEventResponse> response = new ArrayList<>();
+
+        for(Ad a : ads){
+            if (a.getTicket_type().getId() == type_id && a.getEvent().getId() == event_id){
+                GetTicketsTypeEventResponse aux = new GetTicketsTypeEventResponse();
+                aux.setId(a.getId());
+                aux.setDescription(a.getTicket());
+                aux.setPrice(a.getPrice());
+                aux.setUser_image(a.getUser().getProfile_pic());
+                aux.setUser_name(a.getUser().getName());
+
+                response.add(aux);
+            }
+        }
+        return response;
+    }
+
+
+    public List<GetTicketsTypeEventResponse> get_sold_tickets_by_type_and_event(GetTicketsTypeEventRequest request) {
+
+        List<Ad> ads = adRepo.findAll();
+        int type_id = request.getTicket_type_id();
+        int event_id = request.getEvent_id();
+        List<GetTicketsTypeEventResponse> response = new ArrayList<>();
+
+        for(Ad a : ads){
+            if (a.getTicket_type().getId() == type_id && a.getEvent().getId() == event_id && a.getSold()){
+                GetTicketsTypeEventResponse aux = new GetTicketsTypeEventResponse();
+                aux.setId(a.getId());
+                aux.setDescription(a.getTicket());
+                aux.setPrice(a.getPrice());
+                aux.setUser_image(a.getUser().getProfile_pic());
+                aux.setUser_name(a.getUser().getName());
+
+                response.add(aux);
+            }
+        }
+        return response;
 
     }
 }

@@ -146,9 +146,14 @@ public class UserController {
         return ResponseEntity.ok(userService.get_bought_tickets(email));
     }
 
-    @GetMapping("/get_tickets_type_event")
+    @GetMapping("/get_tickets_by_type_and_event")
     public ResponseEntity<List<GetTicketsTypeEventResponse>> get_tickets_type_event(@RequestBody GetTicketsTypeEventRequest request){
-        return ResponseEntity.ok(userService.get_tickets_type_event(request));
+        return ResponseEntity.ok(userService.get_tickets_by_type_and_event(request));
+    }
+
+    @GetMapping("/get_sold_tickets_by_type_and_event")
+    public ResponseEntity<List<GetTicketsTypeEventResponse>> get_sold_tickets_by_type_and_event(@RequestBody GetTicketsTypeEventRequest request){
+        return ResponseEntity.ok(userService.get_sold_tickets_by_type_and_event(request));
     }
 
 }

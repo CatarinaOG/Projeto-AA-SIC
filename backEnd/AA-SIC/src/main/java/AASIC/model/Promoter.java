@@ -31,6 +31,8 @@ public class Promoter implements UserDetails {
     private String email;
     @Column(name = "password")
     private String password;
+    @Column(name = "language")
+    private String language;
     @Column(name = "role")
     private Role role;
 
