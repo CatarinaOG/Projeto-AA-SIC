@@ -51,6 +51,8 @@ public class User implements UserDetails {
     private List<EventSaved> events_saved;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Ad> tickets_bought;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Notification> notifications;
 
 
     /*

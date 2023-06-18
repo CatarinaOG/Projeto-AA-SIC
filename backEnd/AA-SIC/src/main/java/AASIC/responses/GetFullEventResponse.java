@@ -10,23 +10,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class GetFullEventRequest {
+public class GetFullEventResponse {
 
     private int id;
-    private String day_of_week;
-    private String month;
-    private String day;
-    private String time;
+    private String start_date;
+    private String end_date;
     private String event_name;
     private String event_place;
     private String image;
     private int tickets_available;
     private int tickets_sold;
     private int tickets_wanted;
-    private boolean is_saved;
-    private boolean is_followed;
+    private boolean event_saved;
+    private boolean event_followed;
     private String lat;
     private String lng;
     private int upcoming_events; // upcoming events da localização deste evento
+
 
 }

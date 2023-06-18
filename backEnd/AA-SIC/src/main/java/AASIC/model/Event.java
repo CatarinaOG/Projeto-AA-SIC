@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
@@ -22,8 +23,6 @@ public class Event{
     private LocalDateTime date_end;
     @Column(name = "accepted")
     private boolean accepted;
-    @Column(name = "number_of_followers")
-    private int number_of_followers;
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<EventFollowed> users_following;
 

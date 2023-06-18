@@ -135,8 +135,7 @@ public class UserController {
     public ResponseEntity<String> buy_ticket(@RequestBody BuyTicketRequest request, @RequestHeader(name="Authorization") String token){
         var jwt = token.substring(7);
         String email = jwtService.extractUsername(jwt);
-        userService.buy_ticket(request, email);
-        return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
+        return ResponseEntity.ok(userService.buy_ticket(request, email));
     }
 
     @GetMapping("/get_bought_tickets")
@@ -161,4 +160,10 @@ public class UserController {
         return ResponseEntity.ok(userService.get_events_suggested_for_selling_ticket());
     }
 
+    @GetMapping("/get_notifications")
+    public ResponseEntity<List<GetNotificationResponse>> get_notifications_by_user(@RequestHeader(name = "Authorization") String token){
+        var jwt = token.substring(7);
+        String email = jwtService.extractUsername(jwt);
+        return ResponseEntity.ok(userService.get_notifications_by_user(email));
+    }
 }

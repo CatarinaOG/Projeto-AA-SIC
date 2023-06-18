@@ -34,7 +34,14 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/*/register","/api/*/login") // aqui vamos definir uma whitelist de requests onde não é preciso autenticação
+                .requestMatchers(
+                        "/api/*/register",
+                        "/api/*/login",
+                        "/api/event/get_full_event",
+                        "/api/event/get_filters_event",
+                        "/api/event/get_events",
+                        "/api/event/get_filtered_events"
+                ) // aqui vamos definir uma whitelist de requests onde não é preciso autenticação
                 .permitAll() // aqui vamos permitir todos os requests
                 .anyRequest() // todos os outros necessitam de autenticação
                 .authenticated()

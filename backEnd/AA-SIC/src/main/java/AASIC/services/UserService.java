@@ -6,6 +6,8 @@ import AASIC.requests.*;
 import AASIC.responses.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.ast.Not;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,7 @@ public class UserService {
     private final EventSavedRepo eventSavedRepo;
     private final EventFollowedRepo eventFollowedRepo;
     private final ArtistInEventRepo artistInEventRepo;
+    private final NotificationRepo notificationRepo;
 
     public void edit_profile(EditProfileRequest request, String email) {
         User user = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
@@ -98,11 +101,37 @@ public class UserService {
         return response;
     }
 
+    private void notify_users(Event e, String op){
+        List<EventFollowed> userList = e.getUsers_following();
+        String title = "";
+        String content = "";
+        if (op.equals("sell")){
+            title = "New Ad in a followed Event!";
+            content = "Event " + e.getName() + " has a new Ticket for sale! Check it out!";
+        }
+        else if(op.equals("buy")){
+            title = "One of your tickets has been bought!!";
+            content = "Your ticket to " + e.getName() + " has been sold! Check it out!";
+        }
+        for(EventFollowed eventFollowed : userList){
+            Notification n = Notification
+                    .builder()
+                    .title(title)
+                    .content(content)
+                    .date(LocalDateTime.now())
+                    .build();
+            n.setUser(eventFollowed.getUser());
+
+            notificationRepo.save(n);
+        }
+    }
+
     public void sell_ticket(SellTicketRequest request, String email) {
         User user = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
 
+        Event e = eventRepo.findById(request.getEvent_id()).get();
         Ad ad = new Ad();
-        ad.setEvent(eventRepo.findById(request.getEvent_id()).get());
+        ad.setEvent(e);
         ad.setDate(LocalDateTime.now());
         ad.setUser(user);
         ad.setTicket_type(ticketTypeRepo.findById(request.getType_id()).get());
@@ -110,9 +139,9 @@ public class UserService {
         ad.setTicket(request.getFile());
         ad.setDescription(request.getDescription());
         ad.setSold(false);
-
         adRepo.save(ad);
 
+        notify_users(e,"sell");
     }
 
     public List<GetTicketsListedByUserResponse> get_tickets_listed_by_user(String email) {
@@ -237,12 +266,17 @@ public class UserService {
                 .build();
     }
 
-    public void buy_ticket(BuyTicketRequest request, String email) {
+    public String buy_ticket(BuyTicketRequest request, String email) {
         Ad t = adRepo.findById(request.getTicket_id()).get();
         User u = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        if(t.getUser().getId() == u.getId()){
+            return "{\"confirmed\" : \"false\"}";
+        }
         t.setSold(true);
         t.setBuyer(u);
         adRepo.save(t);
+        notify_users(t.getEvent(), "buy");
+        return "{\"confirmed\" : \"true\"}";
     }
 
     public List<GetBoughtTicketsByUserResponse> get_bought_tickets(String email) {
@@ -340,6 +374,24 @@ public class UserService {
 
                 response.add(aux);
             }
+        }
+        return response;
+    }
+
+    public List<GetNotificationResponse> get_notifications_by_user(String email) {
+        User u = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        List<GetNotificationResponse> response = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+        for(Notification n : u.getNotifications()){
+            GetNotificationResponse aux = GetNotificationResponse
+                    .builder()
+                    .title(n.getTitle())
+                    .content(n.getContent())
+                    .date(n.getDate().format(formatter))
+                    .build();
+
+            response.add(aux);
         }
         return response;
     }
