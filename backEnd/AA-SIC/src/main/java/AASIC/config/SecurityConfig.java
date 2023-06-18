@@ -30,6 +30,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf()
+                .and()
+                .cors()
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/*/register","/api/*/login") // aqui vamos definir uma whitelist de requests onde não é preciso autenticação
