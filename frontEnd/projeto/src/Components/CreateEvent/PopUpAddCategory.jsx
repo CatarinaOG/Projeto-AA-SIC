@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect ,useContext} from "react";
+import UserContext from "../../Contexts/UserContext";
 import "../../Styles/Profile.css";
 
 export default function PopUpAddCategory(props) {
   const [categoryName, setCategoryName] = useState("");
   const [message, setMessage] = useState("aaaaa");
+  const {user} = useContext(UserContext);
 
   useEffect(() => {
     if (props.trigger) {
@@ -12,7 +14,7 @@ export default function PopUpAddCategory(props) {
     }
   }, [props.trigger]);
 
-  const handleArtistChange = (event) => {
+  const handleCategoryChange = (event) => {
     setCategoryName(event.target.value);
   };
 
@@ -20,25 +22,36 @@ export default function PopUpAddCategory(props) {
     if (categoryName === "") {
       setMessage("Invalid artist name");
     } else {
-      props.setPopUpTrigger(false);
+      postCategory();
     }
   };
 
+  const input = {
+    name : categoryName
+  }
   function postCategory(){
-    fetch("http://localhost:8080/api/promoter/register", {
+    fetch("http://localhost:8080/api/promoter/create_category", {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',        
+          'Authorization': `Bearer ${user.token}`
         },
-        body: JSON.stringify({name : {categoryName}})
+        body: JSON.stringify(input)
     })
     .then(response => {
-        if(response.ok){
-          props.setPopUpTrigger(false);
-        }
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Error: ' + response.status);
+      }
+    })
+    .then(responseJSON => {
+      console.log("AAAAAA");
+      //setSuggestedEvents(responseJSON)
+      //console.log(responseJSON)
     })
     .catch(error => {
-        setMessage(error)
+      console.log('Error:', error);
     });
   }
 
@@ -57,7 +70,7 @@ export default function PopUpAddCategory(props) {
             type="text"
             placeholder="Category Name"
             value={categoryName}
-            onChange={handleArtistChange}
+            onChange={handleCategoryChange}
           ></input>
         </form>
         <h3 className="redH3">{message}</h3>

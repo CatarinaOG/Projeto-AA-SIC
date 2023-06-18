@@ -41,7 +41,7 @@ public class PromoterController {
         var jwt = token.substring(7);
         String email = jwtService.extractUsername(jwt);
         promoterService.create_event(request, email);
-        return ResponseEntity.ok("\"confirmed\" : \"true\"");
+        return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
     }
 
     /**
@@ -55,7 +55,7 @@ public class PromoterController {
         var jwt = token.substring(7);
         String email = jwtService.extractUsername(jwt);
         promoterService.create_artist(request);
-        return ResponseEntity.ok("\"confirmed\" : \"true\"");
+        return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
     }
 
     /**
@@ -66,13 +66,13 @@ public class PromoterController {
     @PostMapping("/create_category")
     public ResponseEntity<String> create_category(@RequestBody CreateArtistRequest request){
         promoterService.create_category(request);
-        return ResponseEntity.ok("\"confirmed\" : \"true\"");
+        return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
     }
 
     @PostMapping("/add_location")
     public ResponseEntity<String> add_location(@RequestBody AddLocalRequest request){
         promoterService.create_location(request);
-        return ResponseEntity.ok("\"confirmed\" : \"true\"");
+        return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
     }
 
     @GetMapping("/get_categories")

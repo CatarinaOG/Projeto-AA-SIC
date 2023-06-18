@@ -49,6 +49,7 @@ export default function CreatePromoter() {
 				email={email}
 				password={password}
 				name={name}
+				setMessage={setMessage}
 			/>
 
 			<div className="center">

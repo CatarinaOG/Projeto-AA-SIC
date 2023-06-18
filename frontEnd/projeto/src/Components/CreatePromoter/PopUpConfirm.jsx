@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useState, useContext} from "react";
+import UserContext from "../../Contexts/UserContext";
 import "../../Styles/Profile.css";
 
-export default function PopUpConfirm({trigger,setPopUpTrigger,email,password,name}) {
+
+export default function PopUpConfirm({trigger,setPopUpTrigger,email,password,name,setMessage}) {
   const [phase, setPhase] = useState(1);
+  const {user} = useContext(UserContext);
+
+  console.log(email);
+  console.log(password);
+  console.log(name)
 
 
   function handleClick() {
     console.log(email, name, password);
-    sendCreateRequest();
+    postPromoter();
   }
 
   function toHome() {
@@ -16,31 +23,29 @@ export default function PopUpConfirm({trigger,setPopUpTrigger,email,password,nam
   }
 
   const inputs = {
-    name : {name},
-    email : {email}, 
-    password : {password}
+    name : name,
+    email : email, 
+    password : password
   }
 
-  function sendCreateRequest(){
-
-    fetch("http://localhost:8080/api/promoter/register", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(inputs)
-    })
+	function postPromoter(){
+		fetch("http://localhost:8080/api/admin/create_promoter", {
+			method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`
+      },
+			body: JSON.stringify(inputs)
+		})
     .then(response => response.json())
-    .then(message => {
-      setPhase(2);
+    .then(responseJSON => {
+        //setSuggestedEvents(responseJSON)
+        console.log(responseJSON)
     })
-    .catch(error => {
-      
-    });
-}
-
-
-
+		.catch(error => {
+			setMessage(error)
+		});
+  }
 
   return trigger ? (
     <div className="editContainter">
