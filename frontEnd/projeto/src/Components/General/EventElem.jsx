@@ -38,8 +38,8 @@ export default function EventElem(props) {
 	return(
 		<div className="listingEvent" onClick={goToEvent}>
             <div className="listingEventLeftSide">
-                <h2>{event.eventName}</h2>
-				<h4 className="colorGreen">{event.dayOfWeek}, {event.month} {event.day} | {event.eventPlace}{" "}</h4>
+                <h2>{event.name}</h2>
+				<h4 className="colorGreen">{event.date} | {event.venue_name}|{event.city} {" "} </h4>
 				<div className="listingElemClose">
 					<img className="closeIcon" src={Close} alt="" onClick={deleteEvent}/>
 				</div>

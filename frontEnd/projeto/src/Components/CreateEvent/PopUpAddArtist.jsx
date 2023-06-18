@@ -9,20 +9,7 @@ export default function PopUpAddArtist(props) {
   const {user} = useContext(UserContext);
 
 
-  const [artistOptions, setArtistOptions] = useState([
-    {
-      artist_name: "Papa Roach",
-      artist_code: 12,
-    },
-    {
-      artist_name: "Architects",
-      artist_code: 14,
-    },
-    {
-      artist_name: "Parkway Drive",
-      artist_code: 13,
-    },
-  ]);
+  const [artistOptions, setArtistOptions] = useState([]);
 
 	function getArtists(){
 		fetch("http://localhost:8080/api/promoter/get_artists", {
@@ -38,10 +25,8 @@ export default function PopUpAddArtist(props) {
       throw new Error('Network response was not ok.');
     })
     .then(data => {
-      const sortedOptions = data.sort((a, b) =>
-      a.artist_name.localeCompare(b.artist_name)
-    );
-    setArtistOptions(sortedOptions);
+    setArtistOptions(data);
+      
       })
 		.catch(error => {
 			console.log(error)
@@ -94,10 +79,10 @@ export default function PopUpAddArtist(props) {
               isSearchable={true}
             />
             <h3
-              className="redH3"
+              className="promptAddArtist"
               onClick={() => {props.setPopUpTriggerCreate(true); props.setPopUpTrigger(false)}}
             >
-              Create New
+              Not Listed? Click here!
             </h3>
           </div>
         </form>

@@ -74,9 +74,7 @@ export default function FaseFile(props){
             },
             (err) => console.log(err),
             () => {
-                // download url
                 getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                    console.log(url)
                     setTicket(oldTicket => ({...oldTicket,download_url:url})) 
                     sendSellTicketRequest(url)
                 });

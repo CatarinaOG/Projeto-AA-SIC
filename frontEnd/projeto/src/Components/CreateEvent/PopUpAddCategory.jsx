@@ -46,9 +46,12 @@ export default function PopUpAddCategory(props) {
       }
     })
     .then(responseJSON => {
-      console.log("AAAAAA");
-      //setSuggestedEvents(responseJSON)
-      //console.log(responseJSON)
+      if(responseJSON.confirmed){
+        props.setPopUpTrigger(false)
+      }
+      else{
+        setMessage("Category already exists!")
+      }
     })
     .catch(error => {
       console.log('Error:', error);
