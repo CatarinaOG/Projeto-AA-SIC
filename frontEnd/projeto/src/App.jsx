@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Cookies } from 'react-cookie'
 import UserContext from "./Contexts/UserContext"
@@ -43,12 +43,56 @@ function App() {
 
 	const cookies = new Cookies()
 
-	const [token,setToken] = useState(cookies.get("token"))
+	const [cookiesSave,setCookiesSave] = useState({
+		token: cookies.get("token"),
+		type: cookies.get("type")
+	})
 	const [user, setUser] = useState({});
   	const [eventId, setEventId] = useState();
 	const [suggestedEvent,setSuggestedEvent] = useState({})
 	const [addEventInfo,setAddEventInfo] = useState({})
 	const [searchText,setSearchText] = useState("")
+
+
+	function sendGetUserRequest(){
+
+		let url = ""
+
+		switch(cookiesSave.type){
+			case "user":
+				url = "http://localhost:8080/api/user/get_user"
+				break
+			case "promoter":
+				url = "http://localhost:8080/api/promoter/get_user"
+				break
+			case "admin":
+				url = "http://localhost:8080/api/admin/get_user"
+				break
+		}
+
+		fetch(url, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${cookiesSave.token}`
+            }
+        })
+        .then(response => response.json())
+        .then(responseJSON => {
+			setUser(responseJSON)
+        })
+        .catch(error => {
+            console.log(error)
+        });
+
+	}
+
+
+	useEffect(() => {
+		if(!user && cookiesSave.token)
+			sendGetUserRequest()
+	},[])
+
 
   	return (
 		<BrowserRouter>

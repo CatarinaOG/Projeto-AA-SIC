@@ -39,7 +39,7 @@ export default function NavBarUser(props){
     function removeUser(){
         setUser({})
         cookie.remove('token')
-
+        cookie.remove('type')
     }
 
     function goToProfile(){

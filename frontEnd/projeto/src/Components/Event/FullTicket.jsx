@@ -12,9 +12,10 @@ export default function FullTicket(props){
 
 
     const [loginMandatory,setLoginMandatory] = useState(false)
+    const [onlyUser,setOnlyUser] = useState(false)
+
 
     const navigate = useNavigate();
-
 
     function goBack(){
         setShow("tickets")
@@ -22,15 +23,25 @@ export default function FullTicket(props){
 
     function buyTicket(){
 
-        if(!user.email)
+        if(!user){
             setLoginMandatory(true)
-        else
+            return
+        }
+
+        if(user.type === "user"){
             navigate('/PaymentMethods')
-            // enviar pedido user.id ticket.id
+            return
+        }
+        
+        if(user.type !== "user"){
+            setOnlyUser(true)
+            return
+        }
     }
 
     function closeEdit(){
         setLoginMandatory(false)
+        setOnlyUser(false)
     }
 
     return(
@@ -63,6 +74,17 @@ export default function FullTicket(props){
                     <div className="popUpContainer">
                         <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
                         <h3 className="popUpInfo">Log in to buy a ticket!</h3>
+                    </div>
+                </div>
+            }
+
+            { onlyUser &&
+
+                <div>
+                    <div className="overlay"></div>
+                    <div className="popUpContainer">
+                        <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
+                        <h3 className="popUpInfo">Only users can buy a ticket!</h3>
                     </div>
                 </div>
             }

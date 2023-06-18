@@ -78,12 +78,12 @@ export default function SellTicket(){
     ])
 
     const [ticket,setTicket] = useState({
-        userID: 1,
         event: null,
         type: null,
         price: 0,
         description: "",
-        file: null
+        file: "",
+        download_url: "",
     })
 
     const [fase,setFase] = useState("event") // event / type / price / description / file

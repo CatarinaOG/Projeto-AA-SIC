@@ -17,6 +17,7 @@ export default function NavBarAdmin(props){
     function logout(){
         setUser({})
         cookie.remove('token')
+        cookie.remove('type')
     }
 
     return(

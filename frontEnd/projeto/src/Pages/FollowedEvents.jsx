@@ -72,7 +72,7 @@ export default function FollowedEvents(props) {
 	]);
 
 	const eventsFiltered = events.map((event) =>
-		<SavedFollowElem event={event} setEventId={setEventId} type="followed"/>
+		<SavedFollowElem key={event.id} event={event} setEventId={setEventId} type="followed"/>
 	);
 
 

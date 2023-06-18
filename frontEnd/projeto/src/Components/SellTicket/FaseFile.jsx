@@ -1,4 +1,6 @@
 import { useRef, useEffect, useState, useContext } from "react"
+import { ref,uploadBytesResumable,getDownloadURL } from "firebase/storage"
+import storage from "../../firebaseConfig"
 
 import SmallEventSelected from "./SmallEventSelected"
 import TicketTypeSelected from "./TicketTypeSelected"
@@ -34,7 +36,7 @@ export default function FaseFile(props){
     };
 
 
-    function sendSellTicketRequest(){
+    function sendSellTicketRequest(url){
 
         fetch("http://localhost:8080/api/user/sell_ticket", {
             method: 'POST',
@@ -47,7 +49,7 @@ export default function FaseFile(props){
                 type_id: ticket.type.id,
                 price: ticket.price,
                 description: ticket.description,
-                file: "http:hello"
+                file: url,
             })
         })
         .then(response => response.json())
@@ -58,9 +60,34 @@ export default function FaseFile(props){
 
     }
 
+    function handleFile(){
+    
+        const storageRef = ref(storage, `/${ticket.file.name}`)
+        const uploadTask = uploadBytesResumable(storageRef, ticket.file);
+
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                const percent = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+            },
+            (err) => console.log(err),
+            () => {
+                // download url
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    console.log(url)
+                    setTicket(oldTicket => ({...oldTicket,download_url:url})) 
+                    sendSellTicketRequest(url)
+                });
+            }
+        );
+
+    }
+
 
     function hanfleConfirm(){
-        sendSellTicketRequest()
+        handleFile()
         setDone(oldDone => !oldDone)
     }
 
@@ -110,7 +137,7 @@ export default function FaseFile(props){
                 { !fileSaved && 
                 <div>
                     <div className="file-input-container">
-                        <label className="file-input-label" for="my-file-input">Choose a file</label>
+                        <label className="file-input-label" htmlFor="my-file-input">Choose a file</label>
                         <input className="file-input" onChange={handleFileUpload} type="file" id="my-file-input" />
                     </div>
                 </div>}

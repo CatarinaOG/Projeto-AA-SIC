@@ -1,8 +1,8 @@
 import { useState,useContext} from "react";
+import { useNavigate } from "react-router-dom";
 import UserContext from "../Contexts/UserContext";
 import NavBarAdmin from "../Components/NavBar/NavBarAdmin";
 import BlackClose from "../Images/blackClose.png"
-import { useNavigate } from "react-router-dom";
 
 export default function CreatePromoter() {
 	

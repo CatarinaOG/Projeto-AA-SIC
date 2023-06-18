@@ -18,7 +18,7 @@ export default function NavBarPromoter(props){
     function logout(){
         setUser({})
         cookie.remove('token')
-
+        cookie.remove('type')
     }
 
     return(

@@ -11,6 +11,7 @@ import "../../Styles/NavBar.css"
 export default function NavBar(){
 
     const { setUser } = useContext(UserContext);
+	const cookies = new Cookies()
 
     const [showError,setShowError] = useState(0)
     const [error,setError] = useState("")
@@ -49,7 +50,6 @@ export default function NavBar(){
 
     function sendLoginRequest(){
 
-		const cookies = new Cookies()
 
         fetch("http://localhost:8080/api/user/login", {
             method: 'POST',
@@ -70,14 +70,17 @@ export default function NavBar(){
                 case "user": 
                     navigate('/HomeUser')
 				    cookies.set('token',userResponse.token)
+				    cookies.set('type',userResponse.type)
                     break
                 case "promoter":
                     navigate('/HomePromoter')
 				    cookies.set('token',userResponse.token)
+				    cookies.set('type',userResponse.type)
                     break
                 case "admin":
                     navigate('/HomeAdmin')
 				    cookies.set('token',userResponse.token)
+				    cookies.set('type',userResponse.type)
                     break
             }
         })
@@ -99,6 +102,8 @@ export default function NavBar(){
         .then(response => response.json())
         .then(userResponse => {
             setUser({...userResponse,email: inputs.email})
+            cookies.set('token',userResponse.token)
+            cookies.set('type',userResponse.type)
             navigate('/HomeUser')
         })
         .catch(error => {

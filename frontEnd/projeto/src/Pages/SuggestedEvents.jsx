@@ -1,4 +1,4 @@
-import { useState,useContext } from "react";
+import { useState,useContext, useEffect } from "react";
 import UserContext from "../Contexts/UserContext"
 
 import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
@@ -11,22 +11,12 @@ export default function SuggestedEvents(props){
     const {setSuggestedEvent} = props
     const {user} = useContext(UserContext);
 
-    const [suggestedEvents,setSuggestedEvents] = useState([
-        {
-            id: 1,
-            name: "Nos alice",
-            address: "Porto",
-            start_date: "24/03/34 10:23",
-            end_date: "03/34/23 10:23",
-        },
-        {
-            id: 2,
-            name: "Nos alice",
-            address: "lisboa",
-            start_date: "24/03/34 10:23",
-            end_date: "03/34/23 10:23",
-        },
-    ])
+    const [suggestedEvents,setSuggestedEvents] = useState([])
+
+
+    useEffect(() => {
+        sendGetSuggestedRequest()
+    },[])
 
     function sendGetSuggestedRequest(){
 
@@ -39,14 +29,13 @@ export default function SuggestedEvents(props){
         })
         .then(response => response.json())
         .then(responseJSON => {
-            //setSuggestedEvents(responseJSON)
-            console.log(responseJSON)
+            setSuggestedEvents(responseJSON)
         })
         .catch(error => {
             console.log(error)
         });
     }
-
+    
 
     const showTheSuggestedEvents = suggestedEvents.map((event) => 
         <SuggestedEvent 

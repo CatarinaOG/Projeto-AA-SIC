@@ -69,9 +69,6 @@ export default function BoughtTickets(){
         <BoughtTicket key={event.id} event={event}/>
     )
 
-    console.log(filters)
-
-
     return(
         <div>
             <NavBarUser selected="boughtTickets" />
