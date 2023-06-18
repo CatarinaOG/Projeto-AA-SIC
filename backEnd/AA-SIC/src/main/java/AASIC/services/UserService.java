@@ -260,4 +260,10 @@ public class UserService {
         }
         return response;
     }
+
+    public List<GetTicketsTypeEventResponse> get_tickets_type_event(GetTicketsTypeEventRequest request) {
+
+        return null;
+
+    }
 }
