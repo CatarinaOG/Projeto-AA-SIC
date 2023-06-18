@@ -1,7 +1,7 @@
 
 export default function TicketDescription(props){
 
-    const {setTicket,setFase} = props
+    const {setTicket,setFase,done} = props
 
     const handleEnter = (event) => {
         if (event.key === "Enter"){
@@ -12,7 +12,7 @@ export default function TicketDescription(props){
 
     return(
         <div>
-            <textarea className="descriptionInput" onKeyDown={handleEnter} name="" id="" cols="30" rows="10"></textarea>
+            <textarea className="descriptionInput" onKeyDown={handleEnter} name="" id="" cols="30" rows="10" readOnly={done? true : false}></textarea>
         </div>
     )
 
