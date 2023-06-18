@@ -14,10 +14,10 @@ export default function Home(props){
 
             <NavBarAdmin selected="home"/>
 
-            <div class="container">
+            <div className="container">
                 <img className="wallpaper" src={Wallpaper} alt="" />
 
-                <div class="input-wrapper">
+                <div className="input-wrapper">
                     <img className="magnifier" src={Magnifier} alt="" />
                     <input className="inputHome" type="text" placeholder="Where do you want to go?"/>              
                 </div>

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect ,useContext} from "react";
+import UserContext from "../Contexts/UserContext";
 import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
 import PopUpAddVenue from "../Components/AddVenue/PopUpAddVenue";
 
@@ -11,6 +12,7 @@ export default function AddVenue() {
   const [city, setCity] = useState("");
   const [message, setMessage] = useState("");
   const [popUpTrigger, setPopUpTrigger] = useState(false);
+  const {user} = useContext(UserContext);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -58,7 +60,7 @@ export default function AddVenue() {
     ) {
       setMessage("One or More inputs incomplete");
     } else {
-      setPopUpTrigger(true);
+      postVenue()
       console.log(name, address, latitude, longitude, capacity);
     }
   };
@@ -66,25 +68,26 @@ export default function AddVenue() {
   
   function postVenue(){
     const input ={
-      name : {name},
-      address : {address},
-      latitude : {latitude},
-      longitude : {longitude},
-      capacity : {capacity},
-      city : {city}
+      name : name,
+      address : address,
+      latitude : latitude,
+      longitude : longitude,
+      capacity : capacity,
+      city : city
     }
-    
-    fetch("http://localhost:8080/api/promoter/register", {
+    console.log(JSON.stringify(input))
+    fetch("http://localhost:8080/api/promoter/add_location", {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`
         },
         body: JSON.stringify(input)
     })
     .then(response => {
-        if(response.ok){
-         setPopUpTrigger(false);
-        }
+        if(response.ok)
+          setPopUpTrigger(true);
+
     })
     .catch(error => {
         setMessage(error)

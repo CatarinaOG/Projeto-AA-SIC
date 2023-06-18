@@ -69,12 +69,22 @@ export default function PopUpAddType(props) {
     } else {
       const type_start  = dateStartType + " " + timeStartType
       const type_end  = dateEndType + " " + timeEndType
+
+
+      const event_date_start_unform = dateStartType;
+      const [year, month, day] = event_date_start_unform.split('-');
+      const formattedStart = `${day}/${month}/${year} ${timeStartType}`;
+      const event_date_end_unform = dateEndType;
+      const [year2, month2, day2] = event_date_end_unform.split('-');
+      const formattedEnd = `${day2}/${month2}/${year2} ${timeEndType}`;
+
       const newType = {
-        typeName: ticketType,
+        ticket_type: ticketType,
         price: price,
-        type_start : type_start,
-        type_end : type_end,
+        type_date_start : formattedStart,
+        type_date_end : formattedEnd,
       };
+      console.log(JSON.stringify(newType))
       props.onAddType(newType);
     }
   };
