@@ -203,6 +203,12 @@ function App() {
 							<CreateEvent suggestedEvent={suggestedEvent} addEventInfo={addEventInfo} setAddEventInfo={setAddEventInfo}/>}
 						/>
 					}
+					{ user.type === "promoter" &&
+						<Route path="/AddVenue" element={
+							<AddVenue />} 
+						/>
+					}	
+
 
 					{ user.type === "admin" &&
 						<Route path="/HomeAdmin" element={
@@ -219,11 +225,7 @@ function App() {
 							<CreatePromoter/>} 
 						/>
 					}	
-					{ user.type === "admin" &&
-						<Route path="/AddVenue" element={
-							<AddVenue/>} 
-						/>
-					}	
+					
 				</Routes>
 			</UserContext.Provider>
 		</BrowserRouter>
