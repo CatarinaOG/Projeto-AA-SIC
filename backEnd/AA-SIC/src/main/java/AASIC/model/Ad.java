@@ -22,7 +22,7 @@ public class Ad{
     @Column(name="price")
     private float price;
     @Column(name = "sold")
-    private boolean sold;
+    private Boolean sold;
     @Column(name = "description")
     private String description;
 

@@ -38,8 +38,6 @@ public class PromoterService {
         event.setName(request.getEvent_name());
         try{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + request.getEvent_date_start());
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + request.getEvent_date_end());
 
             LocalDateTime start_time = LocalDateTime.parse(request.getEvent_date_start(), formatter);
             LocalDateTime end_time = LocalDateTime.parse(request.getEvent_date_end(), formatter);
@@ -54,6 +52,7 @@ public class PromoterService {
         event.setLocation(locationRepo.findById(request.getEvent_venue_id()).get());
         Promoter promoter = promoterRepo.findPromoterByEmail(email).get();
         event.setPromoter(promoter);
+        event.setCategory(categoryRepo.findById(Integer.parseInt(request.getEvent_category())).get());
         eventRepo.save(event);
 
         for (TicketTypeRequest ttr : request.getEvent_types()){

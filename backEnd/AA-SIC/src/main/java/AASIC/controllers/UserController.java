@@ -6,6 +6,7 @@ import AASIC.requests.EditProfileRequest;
 import AASIC.requests.SellTicketRequest;
 import AASIC.requests.SuggestEventRequest;
 import AASIC.responses.GetSuggestedEventsResponse;
+import AASIC.responses.GetTicketsListedByUserResponse;
 import AASIC.services.AuthenticationService;
 import AASIC.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -69,5 +70,12 @@ public class UserController {
         String email = jwtService.extractUsername(jwt);
         userService.sell_ticket(request, email);
         return ResponseEntity.ok("\"confirmed\" : \"true\"");
+    }
+
+    @PostMapping("/get_tickets_listed_by_user")
+    public ResponseEntity<List<GetTicketsListedByUserResponse>> get_tickets_listed_by_user(@RequestHeader(name = "Authorization") String token){
+        var jwt = token.substring(7);
+        String email = jwtService.extractUsername(jwt);
+        return ResponseEntity.ok(userService.get_tickets_listed_by_user(email));
     }
 }

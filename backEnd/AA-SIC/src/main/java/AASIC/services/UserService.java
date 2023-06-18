@@ -9,6 +9,7 @@ import AASIC.requests.EditProfileRequest;
 import AASIC.requests.SellTicketRequest;
 import AASIC.requests.SuggestEventRequest;
 import AASIC.responses.GetSuggestedEventsResponse;
+import AASIC.responses.GetTicketsListedByUserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -113,5 +114,32 @@ public class UserService {
 
         adRepo.save(ad);
 
+    }
+
+    public List<GetTicketsListedByUserResponse> get_tickets_listed_by_user(String email) {
+        User user = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        List<Ad> adsByUser = adRepo.findAdsByUser(user.getId());
+
+        List<GetTicketsListedByUserResponse> response = new ArrayList<>();
+
+        for(Ad a : adsByUser){
+            GetTicketsListedByUserResponse aux = new GetTicketsListedByUserResponse();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+            aux.setStart_date(a.getEvent().getDate_start().format(formatter));  //12/12/2018 18:25:58
+            aux.setEnd_date(a.getEvent().getDate_end().format(formatter));
+            aux.setCreated_date(a.getDate().format(formatter));
+            aux.setTicket_type(a.getTicket_type().getType());
+            aux.setEvent_name(a.getEvent().getName());
+            aux.setEvent_place(a.getEvent().getLocation().getName());
+            aux.setTicket_price(a.getPrice());
+            aux.setTicket_id(a.getId());
+            if (a.getSold()) aux.setTicket_status("sold");
+            else aux.setTicket_status("available");
+
+            response.add(aux);
+        }
+        return response;
     }
 }

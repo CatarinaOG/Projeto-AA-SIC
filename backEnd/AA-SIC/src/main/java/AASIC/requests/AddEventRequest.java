@@ -16,6 +16,7 @@ public class AddEventRequest {
     private int event_venue_id;
     private String event_date_start;
     private String event_date_end;
+    private String event_category;
     private List<TicketTypeRequest> event_types;
     private List<ArtistRequest> event_artists;
 }
