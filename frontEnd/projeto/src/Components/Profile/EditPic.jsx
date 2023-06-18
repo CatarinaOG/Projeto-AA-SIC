@@ -1,29 +1,54 @@
 
-import { useState,useContext } from "react"
+import { useState,useContext,useRef } from "react"
+import { ref,uploadBytesResumable,getDownloadURL } from "firebase/storage"
+import storage from "../../firebaseConfig"
 import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
+import fileImage from "../../Images/doc.png"
+
 
 export default function EditPic(props){
 
-    const {setEditInfo,setInfo} = props
+    const {setEditInfo} = props
     const {user,setUser} = useContext(UserContext);
 
+    const [fileSaved,setFileSaved] = useState(false)
     const [temp,setTemp] = useState("")
-    const [emptyURLError,setEmptyURLError] = useState(false)
 
     function saveTemp(event){
-        setTemp(event.target.value)
-    }
-
-    function setErrorToFalse(){
-        setEmptyURLError(false)
+        setTemp(event.target.files[0])
+        setFileSaved(true)
     }
 
     function closeEdit(){
         setEditInfo("none")
     }
 
-    function sendEditInfoRequest(){
+    function handleFile(){
+    
+        const storageRef = ref(storage, `/${temp.name}`)
+        const uploadTask = uploadBytesResumable(storageRef, temp);
+
+        uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+                const percent = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+            },
+            (err) => console.log(err),
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    setUser(user => ({...user,profile_pic:url})) 
+                    sendEditInfoRequest(url)
+                    setEditInfo("none")
+                });
+            }
+        );
+
+    }
+
+    function sendEditInfoRequest(url){
 
         fetch("http://localhost:8080/api/user/profile_edit", {
             method: 'POST',
@@ -32,7 +57,7 @@ export default function EditPic(props){
               'Authorization': `Bearer ${user.token}`
             },
             body: JSON.stringify({
-                picture: temp,
+                picture: url,
             })
         })
         .then(response => {
@@ -47,15 +72,9 @@ export default function EditPic(props){
 
     function changePicture(event){
         event.preventDefault();
-        
-        if(temp !== ""){
-            sendEditInfoRequest()
-            setEditInfo("none")
-        }
-        else{
-            setEmptyURLError(old => !old);
-        }
+        handleFile()
     }
+
 
     return(
         <div>
@@ -63,8 +82,21 @@ export default function EditPic(props){
                 <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
                 <h3 className="editTitle">Change profile Picture</h3>
                 <form action="/submit" onSubmit={changePicture}>
-                    <input className="editInput" onChange={saveTemp} onFocus={setErrorToFalse} placeholder="Insert the url for your new profile picture" type="text"/>
-                    <p className={emptyURLError? "urlError" : "urlErrorNotVisible"}>Insert an URL before confirming</p>
+                    { !fileSaved && 
+                        <div>
+                            <div className="file-input-container">
+                                <label className="file-input-label" htmlFor="my-file-input">Choose a file</label>
+                                <input className="file-input" onChange={saveTemp} type="file" id="my-file-input" />
+                            </div>
+                        </div>
+                    }
+                    { fileSaved &&
+                        <div>
+                            <div className="center">
+                                <img className="picSaved" src={fileImage} alt="" />
+                            </div>
+                        </div>
+                    }
                     <button className="button" type="submit">Confirm</button>
                 </form>
             </div>

@@ -3,6 +3,7 @@ import Filters from "../Components/Filters/Filters"
 import BoughtTicket from "../Components/BoughtTickets/BoughtTicket"
 import UserContext from "../Contexts/UserContext"
 
+import "../Styles/BoughTickets.css"
 
 import { useState,useContext } from "react"
 
@@ -16,7 +17,7 @@ export default function BoughtTickets(){
     })
 
 
-    const [events,setEvents] =useState([
+    const [tickets,setTickets] =useState([
         {
             id: 1,
             dayOfWeek: "Wednesday",
@@ -26,7 +27,8 @@ export default function BoughtTickets(){
             ticketType: "Relvado",
             eventName: "Coldplay - Music Of The Spheres World Tour",
             eventPlace: "Estádio Cidade de Coimbra, Coimbra",
-            ticketPrice: "80.56"
+            ticketPrice: "80.56",
+            file: "https://firebasestorage.googleapis.com/v0/b/nifty-might-382013.appspot.com/o/Screenshot%20from%202023-06-18%2021-41-38.png?alt=media&token=e059f764-3752-4a21-9ffe-9d029dddedc6",
         },
         {
             id: 2,
@@ -37,7 +39,8 @@ export default function BoughtTickets(){
             ticketType: "Floor",
             eventName: "Post Malone - Twelve Carat Tour",
             eventPlace: "Ziggo Dome, Amsterdam",
-            ticketPrice: "109.02"
+            ticketPrice: "109.02",
+            file: "https://firebasestorage.googleapis.com/v0/b/nifty-might-382013.appspot.com/o/Screenshot%20from%202023-06-18%2021-41-38.png?alt=media&token=e059f764-3752-4a21-9ffe-9d029dddedc6",
         },
     ])
 
@@ -65,8 +68,8 @@ export default function BoughtTickets(){
     }
 
 
-    const eventsFiltered = events.map( event => 
-        <BoughtTicket key={event.id} event={event}/>
+    const ticketrsFiltered = tickets.map( ticket => 
+        <BoughtTicket key={ticket.id} ticket={ticket}/>
     )
 
     return(
@@ -80,7 +83,7 @@ export default function BoughtTickets(){
                     <Filters type="boughtTickets" setFilters={setFilters}/>
 
                     <div className="eventsContainer">
-                        {eventsFiltered}
+                        {ticketrsFiltered}
                     </div>
 
                 </div>
