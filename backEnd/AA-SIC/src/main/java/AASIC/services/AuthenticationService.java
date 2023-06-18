@@ -68,24 +68,46 @@ public class AuthenticationService {
 
     public AuthenticationResponse login_user(AuthenticationRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
-        var user = userRepo.findUserByEmail(request.getEmail())
-                .orElseThrow();
+        User user = null;
+        Promoter promoter = null;
 
+        if (userRepo.findUserByEmail(request.getEmail()).isPresent()){
+            user = userRepo.findUserByEmail(request.getEmail()).get();
+            var jwt = jwtService.generateToken(user);
+            return AuthenticationResponse.builder()
+                    .token(jwt)
+                    .type("user")
+                    .profile_pic(user.getProfile_pic())
+                    .name(user.getName())
+                    .phone(user.getPhone())
+                    .language(user.getLanguage())
+                    .card_number(user.getCard_number())
+                    .card_cvc(user.getCard_cvc())
+                    .build();
+        }
 
-        /**
-         * Depois de se confirmar que o utilizador existe e a password está correta podemos criar um jwt e enviar na resposta
-        */
-        var jwt = jwtService.generateToken(user);
+        if (promoterRepo.findPromoterByEmail(request.getEmail()).isPresent()) {
+            promoter = promoterRepo.findPromoterByEmail(request.getEmail()).get();
+            var jwt = jwtService.generateToken(promoter);
+            return AuthenticationResponse.builder()
+                    .token(jwt)
+                    .type("promoter")
+                    .name(promoter.getName())
+                    .build();
+        }
+        if (adminRepo.findAdminByEmail(request.getEmail()).isPresent()) {
+            Admin admin = adminRepo.findAdminByEmail(request.getEmail()).get();
+            var jwt = jwtService.generateToken(admin);
+            return AuthenticationResponse.builder()
+                    .token(jwt)
+                    .type("admin")
+                    .build();
+        }
+
         return AuthenticationResponse.builder()
-                .token(jwt)
-                .type("user")
-                .profile_pic(user.getProfile_pic())
-                .name(user.getName())
-                .phone(user.getPhone())
-                .language(user.getLanguage())
-                .card_number(user.getCard_number())
-                .card_cvc(user.getCard_cvc())
+                .token("Email não está registado!")
                 .build();
+
     }
 
     /**
@@ -120,23 +142,6 @@ public class AuthenticationService {
                 .build();
     }
 
-    public AuthenticationResponse login_promoter(AuthenticationRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
-        var promoter = promoterRepo.findPromoterByEmail(request.getEmail())
-                .orElseThrow();
-
-
-        /**
-         * Depois de se confirmar que o utilizador existe e a password está correta podemos criar um jwt e enviar na resposta
-         */
-        var jwt = jwtService.generateToken(promoter);
-        return AuthenticationResponse.builder()
-                .token(jwt)
-                .type("promoter")
-                .name(promoter.getName())
-                .build();
-    }
-
 
     public AuthenticationResponse register_admin(RegisterRequest request) {
         if (adminRepo.findAdminByEmail(request.getEmail()).isPresent()){
@@ -164,24 +169,5 @@ public class AuthenticationService {
                 .name(admin.getName())
                 .build();
     }
-
-    public AuthenticationResponse login_admin(AuthenticationRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
-        var admin = adminRepo.findAdminByEmail(request.getEmail())
-                .orElseThrow();
-
-
-        /**
-         * Depois de se confirmar que o utilizador existe e a password está correta podemos criar um jwt e enviar na resposta
-         */
-        var jwt = jwtService.generateToken(admin);
-        return AuthenticationResponse.builder()
-                .token(jwt)
-                .type("admin")
-                .name(admin.getName())
-                .build();
-    }
-
-
 
 }

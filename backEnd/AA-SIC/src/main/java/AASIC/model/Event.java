@@ -25,7 +25,10 @@ public class Event{
     @Column(name = "number_of_followers")
     private int number_of_followers;
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
-    private List<EventFollowed> users;
+    private List<EventFollowed> users_following;
+
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private List<EventSaved> users_saved;
 
     @OneToMany(mappedBy = "event" , cascade = CascadeType.ALL)
     private List<Ad> ads;

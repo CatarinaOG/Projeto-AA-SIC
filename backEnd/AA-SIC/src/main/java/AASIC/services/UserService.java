@@ -1,14 +1,9 @@
 package AASIC.services;
 
-import AASIC.model.Ad;
-import AASIC.model.Event;
-import AASIC.model.SuggestedEvent;
-import AASIC.model.User;
+import AASIC.model.*;
 import AASIC.repositories.*;
-import AASIC.requests.EditProfileRequest;
-import AASIC.requests.RemoveTicketListingRequest;
-import AASIC.requests.SellTicketRequest;
-import AASIC.requests.SuggestEventRequest;
+import AASIC.requests.*;
+import AASIC.responses.GetSavedEventsResponse;
 import AASIC.responses.GetSuggestedEventsResponse;
 import AASIC.responses.GetTicketsListedByUserResponse;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +25,8 @@ public class UserService {
     private final SuggestedEventRepo suggestedEventRepo;
     private final TicketTypeRepo ticketTypeRepo;
     private final AdRepo adRepo;
+    private final EventSavedRepo eventSavedRepo;
+    private final EventFollowedRepo eventFollowedRepo;
 
     public void edit_profile(EditProfileRequest request, String email) {
         User user = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
@@ -146,5 +143,47 @@ public class UserService {
 
     public void remove_ticket_listing(RemoveTicketListingRequest request) {
         adRepo.deleteById(request.getAd_id());
+    }
+
+    public void save_event (SaveEventRequest request, String email) {
+
+        User u = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        Event e = eventRepo.findById(request.getEvent_id()).get();
+
+        EventSaved eventSaved = new EventSaved();
+        eventSaved.setEvent(e);
+        eventSaved.setUser(u);
+        eventSavedRepo.save(eventSaved);
+    }
+
+    public void follow_event(FollowEventRequest request, String email) {
+
+        User u = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        Event e = eventRepo.findById(request.getEvent_id()).get();
+
+        EventFollowed eventFollowed = new EventFollowed();
+        eventFollowed.setEvent(e);
+        eventFollowed.setUser(u);
+        eventFollowedRepo.save(eventFollowed);
+
+    }
+
+    public List<GetSavedEventsResponse> get_saved_events(String email) {
+        User u = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        List<GetSavedEventsResponse> response = new ArrayList<>();
+        for (EventSaved eventSaved : u.getEvents_saved()){
+            GetSavedEventsResponse aux = new GetSavedEventsResponse();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+            aux.setEvent_id(eventSaved.getEvent().getId());
+            aux.setStart_date(eventSaved.getEvent().getDate_start().format(formatter));
+            aux.setEnd_date(eventSaved.getEvent().getDate_end().format(formatter));
+            aux.setEvent_name(eventSaved.getEvent().getName());
+            aux.setEvent_place(eventSaved.getEvent().getLocation().getName());
+
+            response.add(aux);
+        }
+        return response;
     }
 }

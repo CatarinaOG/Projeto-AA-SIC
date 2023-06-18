@@ -33,7 +33,7 @@ public class PromoterController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request){
-        return ResponseEntity.ok(authService.login_promoter(request));
+        return ResponseEntity.ok(authService.login_user(request));
     }
 
     @PostMapping("/add_event")

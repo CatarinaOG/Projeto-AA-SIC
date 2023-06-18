@@ -2,10 +2,8 @@ package AASIC.controllers;
 
 //import javax.annotation.Resource;
 import AASIC.config.JWTService;
-import AASIC.requests.EditProfileRequest;
-import AASIC.requests.RemoveTicketListingRequest;
-import AASIC.requests.SellTicketRequest;
-import AASIC.requests.SuggestEventRequest;
+import AASIC.requests.*;
+import AASIC.responses.GetSavedEventsResponse;
 import AASIC.responses.GetSuggestedEventsResponse;
 import AASIC.responses.GetTicketsListedByUserResponse;
 import AASIC.services.AuthenticationService;
@@ -83,6 +81,30 @@ public class UserController {
     @PostMapping("/remove_ticket_listing")
     public ResponseEntity<String> remove_ticket_listing(@RequestBody RemoveTicketListingRequest request){
         userService.remove_ticket_listing(request);
+        return ResponseEntity.ok("\"confirmed\" : \"true\"");
+    }
+
+    @PostMapping("/save_event")
+    public ResponseEntity<String> save_event(@RequestBody SaveEventRequest request, @RequestHeader(name = "Authorization") String token) {
+        var jwt = token.substring(7);
+        String email = jwtService.extractUsername(jwt);
+        userService.save_event(request, email);
+        return ResponseEntity.ok("\"confirmed\" : \"true\"");
+    }
+
+    @GetMapping("get_saved_events")
+    public ResponseEntity<List<GetSavedEventsResponse>> get_saved_events(@RequestHeader(name = "Authorization") String token){
+        var jwt = token.substring(7);
+        String email = jwtService.extractUsername(jwt);
+        return ResponseEntity.ok(userService.get_saved_events(email));
+    }
+
+
+    @PostMapping("/follow_event")
+    public ResponseEntity<String> follow_event(@RequestBody FollowEventRequest request, @RequestHeader(name = "Authorization") String token) {
+        var jwt = token.substring(7);
+        String email = jwtService.extractUsername(jwt);
+        userService.follow_event(request, email);
         return ResponseEntity.ok("\"confirmed\" : \"true\"");
     }
 }

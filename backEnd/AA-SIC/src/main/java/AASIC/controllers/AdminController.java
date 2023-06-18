@@ -23,7 +23,7 @@ public class AdminController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest request){
-        return ResponseEntity.ok(authenticationService.login_admin(request));
+        return ResponseEntity.ok(authenticationService.login_user(request));
     }
 
     @PostMapping("/register")
