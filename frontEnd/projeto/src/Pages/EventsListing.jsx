@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect ,useContext} from "react";
+import UserContext from "../Contexts/UserContext";
 
 import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
 import PopUpRemoveListing from "../Components/SellingListing/PopUpRemoveListing";
@@ -7,6 +8,7 @@ import EventElem from "../Components/General/EventElem.jsx";
 import AddPrompt from "../Components/EventsListing/AddPrompt";
 
 export default function EventsListing() {
+	const {user} = useContext(UserContext);
 
 	const [events, setEvents] = useState([
 		// para ser substituido pelo pedido com base no filtro
@@ -87,6 +89,34 @@ export default function EventsListing() {
 	const showEvents = events.map((event) =>
 		<EventElem event={event} setPopUpTrigger={setPopUpTrigger} />
 	);
+	
+	useEffect(() => {
+		getEvents()
+	  }, []);
+
+
+	function getEvents(){
+		fetch("http://localhost:8080/api/promoter/get_events_by_promoter", {
+			method: 'GET',
+			headers: {
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${user.token}`
+		}
+		})
+    .then(response => {
+      if (response.ok)
+        return response.json(); // Parse the response JSON
+      throw new Error('Network response was not ok.');
+    })
+    .then(data => {
+    setEvents(data);
+      })
+		.catch(error => {
+			console.log(error)
+		});
+	}
+
+
 
 	return (
 		<div>

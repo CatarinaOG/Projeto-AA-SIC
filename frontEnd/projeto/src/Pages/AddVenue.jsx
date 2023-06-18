@@ -2,6 +2,7 @@ import { useState, useEffect ,useContext} from "react";
 import UserContext from "../Contexts/UserContext";
 import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
 import PopUpAddVenue from "../Components/AddVenue/PopUpAddVenue";
+import { useNavigate } from "react-router-dom";
 
 export default function AddVenue() {
   const [name, setName] = useState("");
@@ -13,6 +14,7 @@ export default function AddVenue() {
   const [message, setMessage] = useState("");
   const [popUpTrigger, setPopUpTrigger] = useState(false);
   const {user} = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -95,7 +97,9 @@ export default function AddVenue() {
   }
 
 
-
+  function cancel(){
+		navigate("/AddEvent")
+  }
 
   
   return (
@@ -164,7 +168,7 @@ export default function AddVenue() {
             </div>
             <div className="divButtonCreatePromoter">
               <input className="button" type="submit" value="Submit" />
-              <input className="button" type="submit" value="Cancel" />
+              <input className="button" type="submit" value="Cancel" onClick={cancel} />
             </div>
           </form>
         </div>

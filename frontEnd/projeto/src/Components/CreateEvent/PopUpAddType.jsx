@@ -67,16 +67,12 @@ export default function PopUpAddType(props) {
     ) {
       setMessage("One or more fields Incomplete");
     } else {
-      const type_start  = dateStartType + " " + timeStartType
-      const type_end  = dateEndType + " " + timeEndType
-
-
       const event_date_start_unform = dateStartType;
       const [year, month, day] = event_date_start_unform.split('-');
-      const formattedStart = `${day}/${month}/${year} ${timeStartType}`;
+      const formattedStart = `${day}/${month}/${year} ${timeStartType}:00`;
       const event_date_end_unform = dateEndType;
       const [year2, month2, day2] = event_date_end_unform.split('-');
-      const formattedEnd = `${day2}/${month2}/${year2} ${timeEndType}`;
+      const formattedEnd = `${day2}/${month2}/${year2} ${timeEndType}:00`;
 
       const newType = {
         ticket_type: ticketType,

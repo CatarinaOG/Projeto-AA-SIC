@@ -25,8 +25,7 @@ export default function PopUpCreateArtist(props) {
       setMessage("Invalid artist name");
     } else {
       postArtist();
-      props.setPopUpTrigger(false);
-      props.setPopUpTriggerAdd(true);
+
     }
   };
 
@@ -51,9 +50,14 @@ export default function PopUpCreateArtist(props) {
       }
     })
     .then(responseJSON => {
-      console.log("AAAAAA");
-      //setSuggestedEvents(responseJSON)
-      //console.log(responseJSON)
+      console.log(responseJSON.confirmed);
+      if (responseJSON.confirmed){
+        props.setPopUpTrigger(false);
+        props.setPopUpTriggerAdd(true);
+      }
+      else{
+        setMessage("There is already an artist with that name")
+      }
     })
     .catch(error => {
       console.log('Error:', error);
