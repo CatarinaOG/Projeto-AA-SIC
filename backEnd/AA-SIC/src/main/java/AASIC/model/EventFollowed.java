@@ -8,6 +8,7 @@ import lombok.Data;
 @Table(name = "event_followed")
 public class EventFollowed {
     @Id
+    @GeneratedValue
     private int id;
 
     @ManyToOne

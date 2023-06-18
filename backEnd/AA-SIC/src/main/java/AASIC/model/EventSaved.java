@@ -9,6 +9,7 @@ import lombok.Data;
 @Table(name = "event_saved")
 public class EventSaved {
     @Id
+    @GeneratedValue
     private int id;
 
     @ManyToOne

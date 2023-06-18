@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ArtistRequest {
-    private String artist_name;
+    private int artist_code;
 }
 
 /**

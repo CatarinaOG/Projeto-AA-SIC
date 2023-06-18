@@ -96,13 +96,13 @@ public class PromoterController {
     }
 
     @PostMapping("/remove_event")
-    public ResponseEntity<String> remove_event(RemoveEventRequest request){
+    public ResponseEntity<String> remove_event(@RequestBody RemoveEventRequest request){
         promoterService.remove_event(request);
         return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
     }
 
-    @PostMapping
-    public ResponseEntity<String> remove_suggestion(RemoveSugestionRequest request){
+    @PostMapping("/remove_suggestion")
+    public ResponseEntity<String> remove_suggestion(@RequestBody RemoveSugestionRequest request){
         promoterService.remove_suggestion(request);
         return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
     }

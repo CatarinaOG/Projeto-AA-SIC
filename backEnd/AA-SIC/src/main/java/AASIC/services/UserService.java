@@ -4,6 +4,7 @@ import AASIC.model.*;
 import AASIC.repositories.*;
 import AASIC.requests.*;
 import AASIC.responses.*;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,6 +27,7 @@ public class UserService {
     private final AdRepo adRepo;
     private final EventSavedRepo eventSavedRepo;
     private final EventFollowedRepo eventFollowedRepo;
+    private final ArtistInEventRepo artistInEventRepo;
 
     public void edit_profile(EditProfileRequest request, String email) {
         User user = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
@@ -140,8 +142,9 @@ public class UserService {
         return response;
     }
 
+    @Transactional
     public void remove_ticket_listing(RemoveTicketListingRequest request) {
-        adRepo.deleteById(request.getAd_id());
+        adRepo.removeAdById(request.getAd_id());
     }
 
     public void save_event (SaveEventRequest request, String email) {
@@ -208,11 +211,13 @@ public class UserService {
         return response;
     }
 
+    @Transactional
     public void remove_saved_event(RemoveSavedEventRequest request) {
         EventSaved eventSaved = eventSavedRepo.findEventSavedByEventId(request.getEvent_id()).get();
-        eventSavedRepo.removeEventSavedByEventId(eventSaved.getId());
+        eventSavedRepo.deleteById(eventSaved.getId());
     }
 
+    @Transactional
     public void remove_followed_event(RemoveFollowedEventRequest request){
         EventFollowed eventFollowed = eventFollowedRepo.findEventFollowedByEventId(request.getEvent_id()).get();
         eventFollowedRepo.removeEventFollowedByEventId(eventFollowed.getId());

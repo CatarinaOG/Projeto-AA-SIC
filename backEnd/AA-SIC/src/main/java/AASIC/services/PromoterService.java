@@ -32,6 +32,7 @@ public class PromoterService {
     private final LocationRepo locationRepo;
     private final PromoterRepo promoterRepo;
     private final CategoryRepo categoryRepo;
+    private final SuggestedEventRepo suggestedEventRepo;
 
     public void create_event(AddEventRequest request, String email){
         Event event = new Event();
@@ -76,22 +77,13 @@ public class PromoterService {
         }
 
         for (ArtistRequest ar : request.getEvent_artists()){
-            Optional<Artist> artist = artistRepo.findByName(ar.getArtist_name());
-            if (artist.isPresent()){
-                ArtistInEvent aie = new ArtistInEvent();
-                aie.setEvent(event);
-                aie.setArtist(artist.get());
-                artistInEventRepo.save(aie);
-            }
-            else{
-                Artist a = new Artist();
-                a.setName(ar.getArtist_name());
-                ArtistInEvent aie = new ArtistInEvent();
-                aie.setEvent(event);
-                aie.setArtist(a);
-                artistRepo.save(a);
-                artistInEventRepo.save(aie);
-            }
+            Optional<Artist> artist = artistRepo.findById(ar.getArtist_code());
+
+            ArtistInEvent aie = new ArtistInEvent();
+            aie.setEvent(event);
+            aie.setArtist(artist.get());
+            artistInEventRepo.save(aie);
+
         }
     }
 
@@ -100,9 +92,9 @@ public class PromoterService {
         if (artistRepo.findByName(request.getName()).isPresent()){
             return "{\"confirmed\" : \"false\"}";
         }
-        String artis_name = request.getName();
+        String artist_name = request.getName();
         Artist artist = new Artist();
-        artist.setName(artis_name);
+        artist.setName(artist_name);
         artistRepo.save(artist);
         return "{\"confirmed\" : \"true\"}";
     }
@@ -213,6 +205,8 @@ public class PromoterService {
 
     @Transactional
     public void remove_suggestion(RemoveSugestionRequest request) {
-        System.out.println("Falta fazer isto");
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+request.getSuggestion_id());
+        SuggestedEvent se = suggestedEventRepo.findById(request.getSuggestion_id()).get();
+        suggestedEventRepo.deleteById(se.getId());
     }
 }

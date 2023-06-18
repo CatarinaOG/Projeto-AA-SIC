@@ -5,6 +5,7 @@ import AASIC.model.Event;
 import AASIC.model.EventFollowed;
 import AASIC.model.EventSaved;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.swing.text.html.Option;
@@ -15,6 +16,7 @@ public interface EventFollowedRepo extends JpaRepository<EventFollowed, Integer>
     @Query(value = "SELECT * FROM event_followed WHERE event_followed.event_id = ?", nativeQuery = true)
     Optional<EventFollowed> findEventFollowedByEventId(Integer id);
 
-    @Query(value = "DELETE * FROM event_followed WHERE event_followed.event_id = ?", nativeQuery = true)
+    @Modifying
+    @Query(value = "DELETE FROM event_followed es WHERE es.event_id = ?", nativeQuery = true)
     void removeEventFollowedByEventId(Integer id);
 }

@@ -4,6 +4,7 @@ import AASIC.model.Admin;
 import AASIC.model.Event;
 import AASIC.model.EventSaved;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -13,7 +14,8 @@ public interface EventSavedRepo extends JpaRepository<EventSaved, Integer> {
     @Query(value = "SELECT * FROM event_saved WHERE event_saved.event_id = ?", nativeQuery = true)
     Optional<EventSaved> findEventSavedByEventId(Integer id);
 
-    @Query(value = "DELETE * FROM event_saved WHERE event_saved.event_id = ?", nativeQuery = true)
+    @Modifying
+    @Query(value = "DELETE FROM event_saved WHERE event_id = ?", nativeQuery = true)
     void removeEventSavedByEventId(Integer id);
 
 
