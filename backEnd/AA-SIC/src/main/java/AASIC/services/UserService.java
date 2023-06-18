@@ -209,4 +209,15 @@ public class UserService {
         }
         return response;
     }
+
+    public void remove_saved_event(RemoveSavedEventRequest request) {
+        EventSaved eventSaved = eventSavedRepo.findEventSavedByEventId(request.getEvent_id()).get();
+        System.out.println("-----------------------------------"+eventSaved.getId());
+        eventSavedRepo.deleteById(eventSaved.getId());
+    }
+
+    public void remove_followed_event(RemoveFollowedEventRequest request){
+        EventFollowed eventFollowed = eventFollowedRepo.findEventFollowedByEventId(request.getEvent_id()).get();
+        eventFollowedRepo.deleteById(eventFollowed.getId());
+    }
 }
