@@ -4,16 +4,11 @@ import AASIC.config.JWTService;
 import AASIC.requests.AddEventRequest;
 import AASIC.requests.AddLocalRequest;
 import AASIC.requests.CreateArtistRequest;
-import AASIC.requests.EditProfileRequest;
-import AASIC.responses.GetArtistsResponse;
-import AASIC.responses.GetCategoriesResponse;
-import AASIC.responses.GetEventsByPromoterResponse;
-import AASIC.responses.GetVenuesResponse;
+import AASIC.responses.*;
 import AASIC.services.AuthenticationService;
 import AASIC.services.PromoterService;
 import AASIC.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -95,5 +90,12 @@ public class PromoterController {
         var jwt = token.substring(7);
         String email = jwtService.extractUsername(jwt);
         return ResponseEntity.ok(promoterService.get_events_by_promoter(email));
+    }
+
+    @GetMapping("/get_user")
+    public ResponseEntity<AuthenticationResponse> get_promoter(@RequestHeader(name="Authorization") String token){
+        var jwt = token.substring(7);
+        String email = jwtService.extractUsername(jwt);
+        return ResponseEntity.ok(promoterService.get_promoter(email));
     }
 }

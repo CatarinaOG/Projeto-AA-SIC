@@ -38,4 +38,9 @@ public class Ad{
     @JoinColumn(name = "event_id", referencedColumnName = "id")
     private Event event;
 
+    @ManyToOne
+    @JoinColumn(name = "buyer_id", referencedColumnName = "id")
+    private User buyer;
+
+
 }

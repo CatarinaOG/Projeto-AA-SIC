@@ -12,4 +12,9 @@ import java.util.Optional;
 public interface EventSavedRepo extends JpaRepository<EventSaved, Integer> {
     @Query(value = "SELECT * FROM event_saved WHERE event_saved.event_id = ?", nativeQuery = true)
     Optional<EventSaved> findEventSavedByEventId(Integer id);
+
+    @Query(value = "DELETE * FROM event_saved WHERE event_saved.event_id = ?", nativeQuery = true)
+    void removeEventSavedByEventId(Integer id);
+
+
 }

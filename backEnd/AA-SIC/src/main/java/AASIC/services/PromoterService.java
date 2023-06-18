@@ -4,12 +4,10 @@ package AASIC.services;
 import AASIC.model.*;
 import AASIC.repositories.*;
 import AASIC.requests.*;
-import AASIC.responses.GetArtistsResponse;
-import AASIC.responses.GetCategoriesResponse;
-import AASIC.responses.GetEventsByPromoterResponse;
-import AASIC.responses.GetVenuesResponse;
+import AASIC.responses.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -60,6 +58,7 @@ public class PromoterService {
             tt.setEvent(event);
             tt.setType(ttr.getTicket_type());
             tt.setPrice(ttr.getPrice());
+            tt.setRange(ttr.getPrice()*1.05f);
             try{
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
@@ -183,5 +182,15 @@ public class PromoterService {
             }
         }
         return response;
+    }
+
+    @GetMapping("/get_user")
+    public AuthenticationResponse get_promoter(String email) {
+        Promoter p = promoterRepo.findPromoterByEmail(email).get();
+        return AuthenticationResponse
+                .builder()
+                .type("promoter")
+                .name(p.getName())
+                .build();
     }
 }

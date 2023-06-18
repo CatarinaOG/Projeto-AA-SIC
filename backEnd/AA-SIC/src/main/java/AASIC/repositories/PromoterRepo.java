@@ -13,4 +13,7 @@ import java.util.Optional;
 
 public interface PromoterRepo extends JpaRepository<Promoter, Integer>{
     Optional<Promoter> findPromoterByEmail(String email);
+
+    @Query(value = "DELETE * FROM promoter WHERE promoter.id = ?", nativeQuery = true)
+    void removePromoterById(Integer id);
 }
