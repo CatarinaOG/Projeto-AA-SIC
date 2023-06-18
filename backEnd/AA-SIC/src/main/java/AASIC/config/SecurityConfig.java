@@ -29,9 +29,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf()
-                .and()
                 .cors()
+                .and()
+                .csrf()
                 .disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/*/register","/api/*/login") // aqui vamos definir uma whitelist de requests onde não é preciso autenticação

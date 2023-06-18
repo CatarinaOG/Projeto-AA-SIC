@@ -34,13 +34,13 @@ public class UserService {
     public void edit_profile(EditProfileRequest request, String email) {
         User user = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found."));
 
-        if(!request.getEmail().equals("null")) user.setEmail(request.getEmail());
-        if(!request.getPhone().equals("null")) user.setPhone(request.getPhone());
-        if(!request.getPassword().equals("null")) user.setPassword(request.getPassword());
-        if(!request.getLanguage().equals("null")) user.setLanguage(request.getLanguage());
-        if(!request.getCard_number().equals("null")) user.setCard_number(request.getCard_number());
-        if(!request.getCard_cvc().equals("null")) user.setCard_cvc(request.getCard_cvc());
-        if(!request.getPicture().equals("null")) user.setProfile_pic(request.getPicture());
+        if(request.getEmail() != null) user.setEmail(request.getEmail());
+        if(request.getPhone() != null) user.setPhone(request.getPhone());
+        if(request.getPassword() != null) user.setPassword(request.getPassword());
+        if(request.getLanguage() != null) user.setLanguage(request.getLanguage());
+        if(request.getCard_number() != null) user.setCard_number(request.getCard_number());
+        if(request.getCard_cvc() != null) user.setCard_cvc(request.getCard_cvc());
+        if(request.getPicture() != null) user.setProfile_pic(request.getPicture());
 
         userRepo.save(user);
     }
