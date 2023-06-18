@@ -3,6 +3,7 @@ package AASIC.controllers;
 //import javax.annotation.Resource;
 import AASIC.config.JWTService;
 import AASIC.requests.*;
+import AASIC.responses.GetFollowedEventsReponse;
 import AASIC.responses.GetSavedEventsResponse;
 import AASIC.responses.GetSuggestedEventsResponse;
 import AASIC.responses.GetTicketsListedByUserResponse;
@@ -99,12 +100,18 @@ public class UserController {
         return ResponseEntity.ok(userService.get_saved_events(email));
     }
 
-
     @PostMapping("/follow_event")
     public ResponseEntity<String> follow_event(@RequestBody FollowEventRequest request, @RequestHeader(name = "Authorization") String token) {
         var jwt = token.substring(7);
         String email = jwtService.extractUsername(jwt);
         userService.follow_event(request, email);
         return ResponseEntity.ok("\"confirmed\" : \"true\"");
+    }
+
+    @GetMapping("get_followed_events")
+    public ResponseEntity<List<GetFollowedEventsReponse>> get_followed_events(@RequestHeader(name = "Authorization") String token){
+        var jwt = token.substring(7);
+        String email = jwtService.extractUsername(jwt);
+        return ResponseEntity.ok(userService.get_followed_events(email));
     }
 }

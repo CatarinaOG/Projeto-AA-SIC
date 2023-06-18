@@ -3,6 +3,7 @@ package AASIC.services;
 import AASIC.model.*;
 import AASIC.repositories.*;
 import AASIC.requests.*;
+import AASIC.responses.GetFollowedEventsReponse;
 import AASIC.responses.GetSavedEventsResponse;
 import AASIC.responses.GetSuggestedEventsResponse;
 import AASIC.responses.GetTicketsListedByUserResponse;
@@ -181,6 +182,28 @@ public class UserService {
             aux.setEnd_date(eventSaved.getEvent().getDate_end().format(formatter));
             aux.setEvent_name(eventSaved.getEvent().getName());
             aux.setEvent_place(eventSaved.getEvent().getLocation().getName());
+
+            response.add(aux);
+        }
+        return response;
+    }
+
+
+    public List<GetFollowedEventsReponse> get_followed_events(String email) {
+
+        User u = userRepo.findUserByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+
+        List<GetFollowedEventsReponse> response = new ArrayList<>();
+        for (EventFollowed eventFollowed : u.getEvents_followed()){
+            GetFollowedEventsReponse aux = new GetFollowedEventsReponse();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+            aux.setEvent_id(eventFollowed.getEvent().getId());
+            aux.setStart_date(eventFollowed.getEvent().getDate_start().format(formatter));
+            aux.setEnd_date(eventFollowed.getEvent().getDate_end().format(formatter));
+            aux.setEvent_name(eventFollowed.getEvent().getName());
+            aux.setEvent_place(eventFollowed.getEvent().getLocation().getName());
 
             response.add(aux);
         }
