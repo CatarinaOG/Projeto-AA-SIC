@@ -250,12 +250,14 @@ public class UserService {
 
         for(Ad a : ads){
             GetBoughtTicketsByUserResponse aux = new GetBoughtTicketsByUserResponse();
+            aux.setId(a.getId());
             aux.setStart_date(a.getEvent().getDate_start().format(formatter));
             aux.setEnd_date(a.getEvent().getDate_end().format(formatter));
             aux.setTicket_type(a.getTicket_type().getType());
             aux.setEvent_name(a.getEvent().getName());
             aux.setEvent_place(a.getEvent().getLocation().getName());
             aux.setTicket_price(a.getPrice());
+            aux.setTicket_file(a.getTicket());
 
             response.add(aux);
         }

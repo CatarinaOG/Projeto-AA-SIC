@@ -178,3 +178,13 @@
   margin: 10px; /* Add margin-bottom for vertical spacing */
   max-width: 25%;
 }
+
+
+.underlined{
+  text-decoration: underline;
+}
+
+.promptAddArtist{
+  text-decoration: underline;
+  color: black;
+}

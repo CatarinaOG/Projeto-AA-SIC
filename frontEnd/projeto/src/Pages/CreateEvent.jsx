@@ -12,10 +12,10 @@ import PopUpAddArtist from "../Components/CreateEvent/PopUpAddArtist";
 import ArtistElem from "../Components/CreateEvent/ArtistElem";
 import PopUpAddCategory from "../Components/CreateEvent/PopUpAddCategory";
 import PopUpCreateArtist from "../Components/CreateEvent/PopUpCreateArtist";
+import PopUpCreateEvent from "../Components/CreateEvent/PopUpCreateEvent";
 
 export default function CreateEvent(props) {
 	const navigate = useNavigate()
-	
 
 	const {suggestedEvent,addEventInfo,setAddEventInfo} = props
     const {user} = useContext(UserContext);
@@ -28,55 +28,21 @@ export default function CreateEvent(props) {
 	const [eventDateEnd, setEventDateEnd] = useState("");
 	const [eventTimeStart,setEventTimeStart] = useState("");
 	const [eventTimeEnd,setEventTimeEnd] = useState("");
+	const [types, setTypes] = useState([]);
+	const [artists, setArtists] = useState([]);
+
 	const [popUpTrigger1, setPopUpTrigger1] = useState(false);
 	const [popUpTrigger2, setPopUpTrigger2] = useState(false);
 	const [popUpTrigger3, setPopUpTrigger3] = useState(false);
 	const [popUpTrigger4, setPopUpTrigger4] = useState(false);
+	const [popUpConfirm, setPopUpConfirm] = useState(false);
 
-	const [types, setTypes] = useState([]);
-	const [artists, setArtists] = useState([]);
+
 
 	const [message, setMessage] = useState("");
 
-	const [options, setOptions] = useState([
-		// para ser substituido pelo pedido com base no filtro
-		{
-		venueName: "Theatro Circo ",
-		venueCode: 1,
-		},
-		{
-		venueName: "Hard Club Porto",
-		venueCode: 2,
-		},
-		{
-		venueName: "Estádio Cidade Coimbra",
-		venueCode: 3,
-		},
-		{
-		venueName: "Parque da Cidade",
-		venueCode: 4,
-		},
-		{
-		venueName: "Parque da Belavista",
-		venueCode: 5,
-		},
-		{
-		venueName: "Passeio Marítimo Algés",
-		venueCode: 6,
-		},
-		{
-		venueName: "LAV - Lisboa ao Vivo",
-		venueCode: 7,
-		},
-	]);
-
-	
-	const [categories, setCategories] = useState([
-		{ name: "Music Festival" },
-		{ name: "Concert" },
-		{ name: "Stand Up Show" },
-		{ name: "Stand Up Festival" },
-	]);
+	const [options, setOptions] = useState([]);
+	const [categories, setCategories] = useState([]);
 
 	useEffect(() => {
 		getCategories()
@@ -155,10 +121,10 @@ export default function CreateEvent(props) {
 		const artistCodes = artists.map((artist) => ({ artist_code: artist.artist_code }));
 		const event_date_start_unform = eventDateStart;
 		const [year, month, day] = event_date_start_unform.split('-');
-		const formattedStart = `${day}/${month}/${year} ${eventTimeStart}`;
+		const formattedStart = `${day}/${month}/${year} ${eventTimeStart}:00`;
 		const event_date_end_unform = eventDateEnd;
 		const [year2, month2, day2] = event_date_end_unform.split('-');
-		const formattedEnd = `${day2}/${month2}/${year2} ${eventTimeEnd}`;
+		const formattedEnd = `${day2}/${month2}/${year2} ${eventTimeEnd}:00`;
 	
 		const input = {
 			event_name : eventName,
@@ -182,8 +148,10 @@ export default function CreateEvent(props) {
         .then(response => response.json())
         .then(responseJSON => {
             console.log(responseJSON)
+			setPopUpConfirm(true)
         })
         .catch(error => {
+			setMessage("There was an error")
             console.log(error)
         });
 	}
@@ -240,13 +208,41 @@ export default function CreateEvent(props) {
 	  };
 
 	function handleEventDateStartChange(event) {
-		console.log(event.target.value);
-		setEventDateStart(event.target.value);
+		const dateTemp = new Date(event.target.value);
+
+		if (eventDateEnd !== ""){
+			const dateCompare = new Date(eventDateEnd);
+			if (dateTemp > dateCompare) {
+				setMessage("Date is not possible");
+				setEventDateStart("");
+			  } else {
+				setMessage("");
+				setEventDateStart(event.target.value);
+			  }
+		}
+		else{
+			console.log(event.target.value);
+			setEventDateStart(event.target.value);
+		}
+
 	}
 
 	function handleEventDateEndChange(event) {
-		console.log(event.target.value);
-		setEventDateEnd(event.target.value);
+		const dateTemp = new Date(event.target.value);
+		if (eventDateStart !== ""){
+			const dateCompare = new Date(eventDateStart);
+			if (dateTemp < dateCompare) {
+				setMessage("Date is not possible");
+				setEventDateEnd("");
+			  } else {
+				setMessage("");
+				setEventDateEnd(event.target.value);
+			  }
+		}
+		else{
+			console.log(event.target.value);
+			setEventDateEnd(event.target.value);
+		}
 	}
 
 	function handleEventTimeStartChange(event) {
@@ -350,6 +346,8 @@ export default function CreateEvent(props) {
 				onAddArtist={handleAddArtist}
 				/>
 			)}
+
+      		<PopUpCreateEvent trigger={popUpConfirm} setPopUpTrigger={setPopUpConfirm} />
 
 			<PopUpAddCategory
 				trigger={popUpTrigger3}
