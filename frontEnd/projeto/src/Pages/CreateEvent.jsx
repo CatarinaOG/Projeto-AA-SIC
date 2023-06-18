@@ -13,13 +13,13 @@ import ArtistElem from "../Components/CreateEvent/ArtistElem";
 import PopUpAddCategory from "../Components/CreateEvent/PopUpAddCategory";
 import PopUpCreateArtist from "../Components/CreateEvent/PopUpCreateArtist";
 import PopUpCreateEvent from "../Components/CreateEvent/PopUpCreateEvent";
+import add from "../Images/plus.png"
 
 export default function CreateEvent(props) {
 	const navigate = useNavigate()
 
 	const {suggestedEvent,addEventInfo,setAddEventInfo} = props
     const {user} = useContext(UserContext);
-
 
 	const [eventName, setEventName] = useState("");
 	const [eventVenue, setEventVenue] = useState("");
@@ -48,15 +48,13 @@ export default function CreateEvent(props) {
 		getCategories()
 		getVenues();
 		if (suggestedEvent.event_name !== undefined) {
-		console.log(suggestedEvent.event_name)
-		setEventName(suggestedEvent.event_name);
-		setEventDateStart(suggestedEvent.start_date);
-		setEventDateEnd(suggestedEvent.end_date);
-		setEventTimeStart(suggestedEvent.start_time);
-		setEventTimeEnd(suggestedEvent.end_time);
+			setEventName(suggestedEvent.event_name);
+			setEventDateStart(suggestedEvent.start_date);
+			setEventDateEnd(suggestedEvent.end_date);
+			setEventTimeStart(suggestedEvent.start_time);
+			setEventTimeEnd(suggestedEvent.end_time);
 		}
 		else if (addEventInfo.eventName !== undefined || addEventInfo.eventDateStart !== undefined || addEventInfo.eventDateEnd !== undefined || addEventInfo.eventTimeStart !== undefined || addEventInfo.eventTimeEnd !== undefined || addEventInfo.eventCategory !== undefined){	
-			console.log("ENTREI ACOLÁ")
 			setEventName(addEventInfo.eventName);
 			setEventDateStart(addEventInfo.eventDateStart);
 			setEventDateEnd(addEventInfo.eventDateEnd);
@@ -147,12 +145,10 @@ export default function CreateEvent(props) {
         })
         .then(response => response.json())
         .then(responseJSON => {
-            console.log(responseJSON)
 			setPopUpConfirm(true)
         })
         .catch(error => {
 			setMessage("There was an error")
-            console.log(error)
         });
 	}
 
@@ -186,22 +182,17 @@ export default function CreateEvent(props) {
 			(venue) => venue.venue_name === selectedOption.venue_name
 		  );
 		  if (selectedVenue) {
-			console.log(selectedVenue.venue_name);
-			console.log(selectedVenue.venue_code);
 			setEventVenue(selectedVenue);
 		  }
 		}
 	  };
 
 	const handleEventCategoryChange = (selectedOption) => {
-		console.log(selectedOption)
 		if (selectedOption) {
 		  const selectedCategory = categories.find(
 			(category) => category.category_name === selectedOption.category_name
 		  );
 		  if (selectedCategory) {
-			console.log(selectedCategory.category_name);
-			console.log(selectedCategory.category_code);
 			setEventCategory(selectedCategory);
 		  }
 		}
@@ -221,7 +212,6 @@ export default function CreateEvent(props) {
 			  }
 		}
 		else{
-			console.log(event.target.value);
 			setEventDateStart(event.target.value);
 		}
 
@@ -240,7 +230,6 @@ export default function CreateEvent(props) {
 			  }
 		}
 		else{
-			console.log(event.target.value);
 			setEventDateEnd(event.target.value);
 		}
 	}
@@ -250,7 +239,6 @@ export default function CreateEvent(props) {
 	}
 
 	function handleEventTimeEndChange(event) {
-		console.log(event.target.value);
 		setEventTimeEnd(event.target.value);
 	}
 
@@ -296,14 +284,12 @@ export default function CreateEvent(props) {
 				event_date_start : formattedStart,
 				event_date_end : formattedEnd
 			}
-			console.log(JSON.stringify(input))
 			postEvent();
 		}
 	};
 
 
 	function changeToAddVenue(){
-		console.log(eventName)
 		const eventSoFar = {
 			eventName : eventName,
 			eventCategory : eventCategory,
@@ -312,7 +298,6 @@ export default function CreateEvent(props) {
 			eventTimeStart : eventTimeStart,
 			eventTimeEnd : eventTimeEnd
 		}
-		console.log(eventSoFar);
 		setAddEventInfo(eventSoFar);
 		navigate("/AddVenue")
 	}
@@ -354,102 +339,154 @@ export default function CreateEvent(props) {
 				setPopUpTrigger={setPopUpTrigger3}
 			/>
 			<div className="center">
-				<div className="defaultContainer">
-					<h1 className="h1CreateEvent">Event Information</h1>
-					<form className="formContainer" onSubmit={handleSubmit}>
-						<div className="divFormCreateEvent">
-							<h2 className="h2FormCreateEvent">Event Name</h2>
-							<input className="inputFormCreateEvent" type="text" value={eventName} onChange={handleEventNameChange}/>
-						</div>
-						<div className="divFormCreatePromoter">
-							<h2 className="h2FormCreatePromoter">Category</h2>
-							<div className="dateFormContainer">
-								<Select
-									className="inputVenueCreateEvent"
-									value={eventCategory}
-									onChange={handleEventCategoryChange}
-									options={categories}
-									getOptionLabel={(option) => option.category_name}
-									getOptionValue={(option) => option.category_name}
-									placeholder=""
-									isSearchable={true}
-									/>
+				<div className="defaultContainerCreateEvent">
+					<h1>Event Information</h1>
+                    <div className="smallContainer">
+						<form onSubmit={handleSubmit}>
 
-								<h4 className="underlined" onClick={setPopUpTrigger3}>Add New</h4>
-							</div>
-						</div>
-						<div className="divFormCreatePromoter">
-							<h2 className="h2FormCreatePromoter">Venue</h2>
-							<div className="dateFormContainer">
-							
-								<Select
-									className="inputVenue"
-									value={eventVenue}
-									onChange={handleEventVenueChange}
-									options={options}
-									getOptionLabel={(option) => option.venue_name}
-									getOptionValue={(option) => option}
-									placeholder=""
-									isSearchable={true}
-									/>
-								<h4 className="underlined" onClick={changeToAddVenue}>Add New</h4>
-							</div>
-						</div>
-						<div className="divFormCreatePromoter">
-							<h2 className="h2FormCreatePromoter">Date(Start/End)</h2>
-							<div className="dateFormContainer">
-								<input className="inputFormCreateEvent" type="date" value={eventDateStart} onChange={handleEventDateStartChange}/>
-								<input className="dateFormCreateEvent2" type="date" value={eventDateEnd} onChange={handleEventDateEndChange} />
-							</div>
-						</div>
-						<div className="divFormCreatePromoter">
-							<h2 className="h2FormCreatePromoter">Time(Start/End)</h2>
-							<div className="dateFormContainer">
-								<input className="inputFormCreateEvent" type="time" value={eventTimeStart} onChange={handleEventTimeStartChange} />
-								<input className="dateFormCreateEvent2" type="time" value={eventTimeEnd} onChange={handleEventTimeEndChange} />
-							</div>
-						</div>
-						<div className="divFormCreateEvent">
-							<div className="div1CreateEvent">
-								<div className="divCreateEventTitle">
-									<h2>Create Ticket Types</h2>
-									<img src={AddButton} alt="" className="addIcon" onClick={openPopType}/>
+							<div className="smallContainerCreateEventInputs">
+								<div className="smallContainerCreateEventLeftSide">
+                                	<div>
+										<h3 className="createEventLabel">Event Name</h3>
+										<h3 className="createEventLabelSelect">Category</h3>
+										<h3 className="createEventLabelSelect">Venue</h3>
+										<h3 className="createEventLabel">Date(Start/End)</h3>
+										<h3 className="createEventLabel">Time(Start/End)</h3>
+									
+										
+									</div>
 								</div>
-								<div>
-									{types.map((value, index) => (
-										<TypeList
-										key={index}
-										type={value}
-										onRemoveType={handleRemoveType}
-										/>
-									))}
+								<div className="smallContainerCreateEventRightSide">
+									<div>
+										<input className="inputNameEvent" type="text" value={eventName} onChange={handleEventNameChange}/>
+										<div className="selectContainer">
+											<Select
+												value={eventCategory}
+												onChange={handleEventCategoryChange}
+												options={categories}
+												getOptionLabel={(option) => option.category_name}
+												getOptionValue={(option) => option.category_name}
+												placeholder=""
+												isSearchable={true}
+												styles={{
+													control: (provided) => ({
+														...provided,
+														borderRadius: '10px',
+														fontSize: '10px',
+														margin: "10px"
+													}),
+												}}
+											/>
+											<img src={add} className="addIcon" alt="" onClick={setPopUpTrigger3}/>
+										</div>
+										<div className="selectContainer">
+											<Select
+												value={eventVenue}
+												onChange={handleEventVenueChange}
+												options={options}
+												getOptionLabel={(option) => option.venue_name}
+												getOptionValue={(option) => option}
+												placeholder=""
+												isSearchable={true}
+												styles={{
+													control: (provided) => ({
+													...provided,
+													borderRadius: '10px',
+													fontSize: '10px',
+													margin: "10px",
+													}),
+												}}
+											/>
+											<img src={add} className="addIcon" alt="" onClick={changeToAddVenue}/>
+										</div>
+										<div className="createEventDateInput">
+											<input className="inputFormCreateEvent" type="date" value={eventDateStart} onChange={handleEventDateStartChange}/>
+											<input className="dateFormCreateEvent2" type="date" value={eventDateEnd} onChange={handleEventDateEndChange} />
+										</div>
+										<div className="createEventDateInput">
+											<input className="inputFormCreateEvent" type="time" value={eventTimeStart} onChange={handleEventTimeStartChange} />
+											<input className="dateFormCreateEvent2" type="time" value={eventTimeEnd} onChange={handleEventTimeEndChange} />
+										</div>
+
+										
+									</div>
 								</div>
 							</div>
-							<div className="div2CreateEvent">
-								<div className="divCreateEventTitle">
-									<h2>Artist</h2>
-									<img src={AddButton} alt="" className="addIcon" onClick={() => setPopUpTrigger2(true)}/>
+
+							<div className="inputsFlexible">
+								<div className="flexibleLeftSide">
+									<div className="div1CreateEvent">
+										<div className="divCreateEventTitle">
+											<h3>Ticket Types</h3>
+											<img src={add} alt="" className="addIconToTitle" onClick={openPopType}/>
+										</div>
+									</div>
 								</div>
-								<div>
-									{artists.map((value, index) => (
-										<ArtistElem
-										key={index}
-										artist={value.artist_name}
-										onRemoveArtist={handleRemoveArtist}
-										/>
-									))}
+								<div className="flexibleRightSide">
+									
+									<div className="div2CreateEvent">
+										<div className="divCreateEventTitle">
+											<h3>Artist</h3>
+											<img src={add} alt="" className="addIconToTitle" onClick={() => setPopUpTrigger2(true)}/>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div className="divButtonCreatePromoter">
-							<h3 className="redH3">{message}</h3>
-						</div>
-						<div className="divButtonCreatePromoter">
-							<input className="button" type="submit" value="Submit" />
-						</div>
-					</form>
+
+
+							<div className="inputsFlexible">
+								<div className="flexibleLeftSide">
+									<div className="div1CreateEvent">
+										<div>
+											{types.map((value, index) => (
+												<TypeList
+													key={index}
+													type={value}
+													onRemoveType={handleRemoveType}
+												/>
+											))}
+										</div>
+									</div>
+								</div>
+								<div className="flexibleRightSide">
+									
+									<div className="div2CreateEvent">
+										<div>
+											{artists.map((value, index) => (
+												<ArtistElem
+													key={index}
+													artist={value.artist_name}
+													onRemoveArtist={handleRemoveArtist}
+												/>
+											))}
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<div className="divButtonCreatePromoter">
+								<h3 className="redH3">{message}</h3>
+							</div>
+							<div className="divButtonCreatePromoter">
+								<input className="button" type="submit" value="Submit" />
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	);
 }
+
+
+/**
+ * 
+ * 										
+
+
+
+										
+ * 
+ * 
+ */

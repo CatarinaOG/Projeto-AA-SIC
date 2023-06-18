@@ -1,7 +1,5 @@
-.formContainer {
-  display: flex;
-  flex-direction: column;
-}
+
+
 .CreateEventContainer {
   width: 90vw;
   max-width: 800px;
@@ -12,28 +10,59 @@
   padding: 40px;
 }
 
-.h1CreateEvent {
-  margin-bottom: 100px;
-}
 
 .divFormCreateEvent {
   display: flex;
   justify-content: space-between;
-  justify-self: center;
-  margin-bottom: 30px;
+  margin: 20px;
   padding: 10;
 }
 
-.h2FormCreateEvent {
+.createEventLabel {
+  font-size: 20px;
+  margin: 10px;
+}
+.createEventLabelSelect {
+  /*margin: 10px */
+  margin-left: 10px;
   margin-right: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
+.selectContainer{
+  display: flex;
+  align-items: center;
+  color: black;
+}
+
+
 .inputFormCreateEvent {
-  flex: 1;
-  max-width: 50%;
+  border-radius: 10px;
+  font-size: 16px;
+  margin: 10px;
+  width: 50%;
+}
+
+.inputNameEvent{
+  border-radius: 10px;
+  font-size: 16px;
+  margin: 10px;
+  width: 91%;
+}
+
+.dateFormCreateEvent2 {
+  margin: 10px;
   border: 1px solid var(--black);
   border-radius: 10px;
-  font-size: 22px;
+  font-size: 16px;
+  width: 50%;
+}
+
+.createEventDateInput{
+  display: flex;
+  width: 100%;
 }
 
 .dateFormContainer {
@@ -45,19 +74,59 @@
 }
 
 .dateFormCreateEvent {
-  flex: 1;
   margin-right: 10px; /* Add right margin for spacing */
   border: 1px solid var(--black);
   border-radius: 10px;
-  font-size: 22px;
+  font-size: 16px;
+  width: 50%;
 }
 
-.dateFormCreateEvent2 {
+.defaultContainerCreateEvent{
+  width: 90vw;
+  max-width: 800px;
+  margin-top: 30px;
+}
+
+.smallContainerCreateEventInputs{
+  display: flex;
+  height: 40vh;
+  text-align: start;
+}
+
+.inputsFlexible{
+  display: flex;
+  text-align: start;
+}
+
+.smallContainerCreateEventLeftSide{
   flex: 1;
-  margin-left: 10px; /* Add right margin for spacing */
-  border: 1px solid var(--black);
-  border-radius: 10px;
-  font-size: 22px;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  font-weight: bold;
+}
+
+.flexibleLeftSide{
+  flex: 1;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  font-weight: bold;
+}
+
+.smallContainerCreateEventRightSide{
+  align-items: center;
+  flex: 1;
+  display: flex;
+  align-items: center; 
+}
+
+.flexibleRightSide{
+  align-items: center;
+  flex: 1;
+  display: flex;
+  align-items: center; 
+
 }
 
 .divButtonCreatePromoter {
@@ -67,26 +136,20 @@
 }
 
 .div1CreateEvent {
-  flex: 1;
-  max-width: 50%;
   align-items: center;
   flex-direction: column;
-  padding: 10;
+  margin: 10px;
 }
 
 .div2CreateEvent {
-  flex: 1;
-  max-width: 50%;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
-  padding: 10;
+  margin: 10px;
 }
 
 .divCreateEventTitle {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  top: 0;
 }
 
 .typesListing {
@@ -112,34 +175,6 @@
 
 .typesListing-elem-3 {
   margin-right: 5px; /* Adjust this value to move it to the left */
-}
-
-.inputFormCreateEvent {
-  flex: 1;
-  max-width: 50%;
-  border: 1px solid var(--black);
-  border-radius: 10px;
-  font-size: 22px;
-}
-
-.inputVenueCreateEvent {
-  flex: 1;
-  border: 1px solid var(--black);
-  border-radius: 10px;
-  margin-left: auto; /* Add this line to push the element to the center */
-  margin-right: auto;
-  color: black;
-  font-size: 22px;
-  padding-right: 15;
-}
-
-.inputVenue {
-  flex: 1;
-  border: 1px solid var(--black);
-  border-radius: 20px;
-  color: black;
-  font-size: 22px;
-  padding-right: 15;
 }
 
 
@@ -187,4 +222,9 @@
 .promptAddArtist{
   text-decoration: underline;
   color: black;
+}
+
+.addIconToTitle{
+  height: 20px;
+  margin-left: 10px;
 }
