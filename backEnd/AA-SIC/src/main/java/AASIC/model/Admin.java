@@ -29,6 +29,8 @@ public class Admin implements UserDetails {
     private String email;
     @Column(name = "password")
     private String password;
+    @Column(name = "role")
+    private Role role;
 
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
     private List<Event> events;
