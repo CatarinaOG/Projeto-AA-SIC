@@ -126,17 +126,32 @@
   flex: 1;
   border: 1px solid var(--black);
   border-radius: 10px;
+  margin-left: auto; /* Add this line to push the element to the center */
+  margin-right: auto;
+  color: black;
   font-size: 22px;
   padding-right: 15;
 }
 
-.inputSelectArtist {
+.inputVenue {
   flex: 1;
   border: 1px solid var(--black);
+  border-radius: 20px;
+  color: black;
+  font-size: 22px;
+  padding-right: 15;
+}
+
+
+.inputSelectArtist {
+  flex: 1;
   border-radius: 10px;
   font-size: 22px;
   padding-right: 15;
   max-width: 50%;
+  margin-left: auto; /* Add this line to push the element to the center */
+  margin-right: auto;
+  color: black;
 }
 
 .inputPopUpAddType {
@@ -145,6 +160,7 @@
   font-size: 22px;
   margin: 10px; /* Add margin-bottom for vertical spacing */
   max-width: 40%;
+  
 }
 
 .inputPopUpAddTypePrice {

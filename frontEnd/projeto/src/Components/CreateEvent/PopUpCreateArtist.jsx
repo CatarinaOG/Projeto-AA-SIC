@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect ,useContext} from "react";
+import UserContext from "../../Contexts/UserContext";
 import "../../Styles/Profile.css";
 
 export default function PopUpCreateArtist(props) {
   const [artistName, setArtistName] = useState("");
-  const [message, setMessage] = useState("aaaaa");
+  const [message, setMessage] = useState("");
+  const {user} = useContext(UserContext);
 
+
+  
   useEffect(() => {
     if (props.trigger) {
       setArtistName("");
@@ -20,27 +24,39 @@ export default function PopUpCreateArtist(props) {
     if (artistName === "") {
       setMessage("Invalid artist name");
     } else {
-      props.onAddArtist(artistName);
+      postArtist();
       props.setPopUpTrigger(false);
+      props.setPopUpTriggerAdd(true);
     }
   };
 
 
+  const input = {
+    name : artistName
+  }
   function postArtist(){
-    fetch("http://localhost:8080/api/promoter/register", {
+    fetch("http://localhost:8080/api/promoter/create_artist", {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',        
+          'Authorization': `Bearer ${user.token}`
         },
-        body: JSON.stringify({name : {artistName}})
+        body: JSON.stringify(input)
     })
     .then(response => {
-        if(response.ok){
-          props.setPopUpTrigger(false);
-        }
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Error: ' + response.status);
+      }
+    })
+    .then(responseJSON => {
+      console.log("AAAAAA");
+      //setSuggestedEvents(responseJSON)
+      //console.log(responseJSON)
     })
     .catch(error => {
-        setMessage(error)
+      console.log('Error:', error);
     });
   }
 

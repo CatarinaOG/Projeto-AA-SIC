@@ -1,9 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect ,useContext} from "react";
+import Select from "react-select";
+import UserContext from "../../Contexts/UserContext";
 import "../../Styles/Profile.css";
 
 export default function PopUpAddArtist(props) {
   const [artist, setArtist] = useState(null);
-  const [message, setMessage] = useState("aaaaa");
+  const [message, setMessage] = useState("");
+  const {user} = useContext(UserContext);
+
 
   const [artistOptions, setArtistOptions] = useState([
     {
@@ -20,36 +24,47 @@ export default function PopUpAddArtist(props) {
     },
   ]);
 
-  function getArtists(){
-    fetch("http://localhost:8080/api/promoter/get_artists", {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer `
-        }
-    })
+	function getArtists(){
+		fetch("http://localhost:8080/api/promoter/get_artists", {
+			method: 'GET',
+			headers: {
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${user.token}`
+		}
+		})
     .then(response => {
-        if(response.ok)
-          setArtistOptions()
+      if (response.ok)
+        return response.json(); // Parse the response JSON
+      throw new Error('Network response was not ok.');
     })
-    .catch(error => {
-        console.log(error)
-    });
-  }
+    .then(data => {
+      const sortedOptions = data.sort((a, b) =>
+      a.artist_name.localeCompare(b.artist_name)
+    );
+    setArtistOptions(sortedOptions);
+      })
+		.catch(error => {
+			console.log(error)
+		});
+	}
 
   useEffect(() => {
     if (props.trigger) {
-      setArtist();
-      setMessage("");
+      getArtists();
+
     }
   }, [props.trigger]);
 
-  const handleArtistChange = (event) => {
-    const selectedArtist = artistOptions.find(
-      (artist) => artist.artist_name === event.target.value
-    );
-    console.log(selectedArtist.artist_name);
-    setArtist(selectedArtist);
+  const handleArtistChange = (selectedOption) => {
+    if (selectedOption) {
+      const selectedArtist = artistOptions.find(
+        (artist) => artist.artist_name === selectedOption.artist_name
+      );
+      if (selectedArtist) {
+        console.log(selectedArtist.artist_name);
+        setArtist(selectedArtist);
+      }
+    }
   };
 
   const submitType = () => {
@@ -68,17 +83,19 @@ export default function PopUpAddArtist(props) {
         <h2 className="editTitle">Select an Artist Name</h2>
         <form>
           <div>
-            <select className="inputSelectArtist" onChange={handleArtistChange}>
-              <option value=""></option>
-              {artistOptions.map((artist) => (
-                <option key={artist.artist_code} value={artist.artist_name}>
-                  {artist.artist_name}
-                </option>
-              ))}
-            </select>
+          <Select
+              className="inputSelectArtist"
+              value={artist}
+              onChange={handleArtistChange}
+              options={artistOptions}
+              getOptionLabel={(option) => option.artist_name}
+              getOptionValue={(option) => option}
+              placeholder=""
+              isSearchable={true}
+            />
             <h3
               className="redH3"
-              onClick={() => props.setPopUpTriggerCreate(true)}
+              onClick={() => {props.setPopUpTriggerCreate(true); props.setPopUpTrigger(false)}}
             >
               Create New
             </h3>

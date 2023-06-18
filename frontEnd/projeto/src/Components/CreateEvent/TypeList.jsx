@@ -8,9 +8,9 @@ function TypeList(props) {
   return (
     <div className="typesListing">
       <div className="typesListing-elem-1">
-        <h2>{props.type.typeName}</h2>
+        <h2>{props.type.ticket_type}</h2>
         <h4>
-          {props.type.dateStart} to {props.type.dateEnd}
+          {props.type.type_date_start} to {props.type.type_date_end}
         </h4>
       </div>
       <div className="typesListing-elem-2">

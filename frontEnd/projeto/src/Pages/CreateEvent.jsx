@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
 
 import { TypeList } from "../Components/CreateEvent/TypeList"; // Import TypeList component correctly
 
@@ -78,6 +79,8 @@ export default function CreateEvent(props) {
 	]);
 
 	useEffect(() => {
+		getCategories()
+		getVenues();
 		if (suggestedEvent.event_name !== undefined) {
 		console.log(suggestedEvent.event_name)
 		setEventName(suggestedEvent.event_name);
@@ -94,50 +97,87 @@ export default function CreateEvent(props) {
 			setEventTimeStart(addEventInfo.eventTimeStart);
 			setEventTimeEnd(addEventInfo.eventTimeEnd);
 			setEventCategory(addEventInfo.eventCategory);
+			setAddEventInfo("");
 		}
 	}, []);
+
+	useEffect(() => {
+		getCategories()
+	}, [popUpTrigger3]);
+
+
 
 	function getCategories(){
 		fetch("http://localhost:8080/api/promoter/get_categories", {
 			method: 'GET',
 			headers: {
 			'Content-Type': 'application/json',
-			'Authorization': `Bearer `
-			}
+			'Authorization': `Bearer ${user.token}`
+		}
 		})
 		.then(response => {
-			if(response.ok)
-				setCategories()
-		})
-		.catch(error => {
-			console.log(error)
-		});
+			if (response.ok)
+			  return response.json(); // Parse the response JSON
+			throw new Error('Network response was not ok.');
+		  })
+		  .then(data => {
+			setCategories(data); // Set the parsed JSON data
+		  })
+		  .catch(error => {
+			console.log(error);
+		  });
 	}
+
+
 
 	function getVenues(){
 		fetch("http://localhost:8080/api/promoter/get_venues", {
 			method: 'GET',
 			headers: {
 			'Content-Type': 'application/json',
-			'Authorization': `Bearer `
-			}
+			'Authorization': `Bearer ${user.token}`
+		}
 		})
 		.then(response => {
-			if(response.ok)
-				setOptions()
-		})
-		.catch(error => {
-			console.log(error)
-		});
+			if (response.ok)
+			  return response.json(); // Parse the response JSON
+			throw new Error('Network response was not ok.');
+		  })
+		  .then(data => {
+			setOptions(data); // Set the parsed JSON data
+		  })
+		  .catch(error => {
+			console.log(error);
+		  });
 	}
 
-	function sendCreateEventRequest(){
-		fetch("http://localhost:8080/", {
+	function postEvent(){
+		const artistCodes = artists.map((artist) => ({ artist_code: artist.artist_code }));
+		const event_date_start_unform = eventDateStart;
+		const [year, month, day] = event_date_start_unform.split('-');
+		const formattedStart = `${day}/${month}/${year} ${eventTimeStart}`;
+		const event_date_end_unform = eventDateEnd;
+		const [year2, month2, day2] = event_date_end_unform.split('-');
+		const formattedEnd = `${day2}/${month2}/${year2} ${eventTimeEnd}`;
+	
+		const input = {
+			event_name : eventName,
+			event_venue_id : eventVenue.venue_code,
+			event_category : eventCategory.category_code,
+			event_types : types,
+			event_artists : artistCodes,
+			event_date_start : formattedStart,
+			event_date_end : formattedEnd
+		}
+
+		fetch("http://localhost:8080/api/promoter/add_event", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${user.token}`
-            }
+            },
+			body: JSON.stringify(input)
+
         })
         .then(response => response.json())
         .then(responseJSON => {
@@ -171,15 +211,36 @@ export default function CreateEvent(props) {
 		setEventName(event.target.value);
 	}
 
-	function handleEventVenueChange(event) {
-		setEventVenue(event.target.value);
-	}
 
-	function handleEventCategortChange(event) {
-		setEventCategory(event.target.value);
-	}
+	const handleEventVenueChange = (selectedOption) => {
+		if (selectedOption) {
+		  const selectedVenue = options.find(
+			(venue) => venue.venue_name === selectedOption.venue_name
+		  );
+		  if (selectedVenue) {
+			console.log(selectedVenue.venue_name);
+			console.log(selectedVenue.venue_code);
+			setEventVenue(selectedVenue);
+		  }
+		}
+	  };
+
+	const handleEventCategoryChange = (selectedOption) => {
+		console.log(selectedOption)
+		if (selectedOption) {
+		  const selectedCategory = categories.find(
+			(category) => category.category_name === selectedOption.category_name
+		  );
+		  if (selectedCategory) {
+			console.log(selectedCategory.category_name);
+			console.log(selectedCategory.category_code);
+			setEventCategory(selectedCategory);
+		  }
+		}
+	  };
 
 	function handleEventDateStartChange(event) {
+		console.log(event.target.value);
 		setEventDateStart(event.target.value);
 	}
 
@@ -221,6 +282,26 @@ export default function CreateEvent(props) {
 		) {
 		setMessage("There are one or more fields empty");
 		setAddEventInfo("");
+		}else{
+			const artistCodes = artists.map((artist) => ({ artist_code: artist.artist_code }));
+			const event_date_start_unform = eventDateStart;
+			const [year, month, day] = event_date_start_unform.split('-');
+			const formattedStart = `${day}/${month}/${year} ${eventTimeStart}`;
+			const event_date_end_unform = eventDateEnd;
+			const [year2, month2, day2] = event_date_end_unform.split('-');
+			const formattedEnd = `${day2}/${month2}/${year2} ${eventTimeEnd}`;
+		
+			const input = {
+				event_name : eventName,
+				event_venue_id : eventVenue.venue_code,
+				event_category : eventCategory.category_code,
+				event_types : types,
+				event_artists : artistCodes,
+				event_date_start : formattedStart,
+				event_date_end : formattedEnd
+			}
+			console.log(JSON.stringify(input))
+			postEvent();
 		}
 	};
 
@@ -256,6 +337,8 @@ export default function CreateEvent(props) {
 				setPopUpTrigger={setPopUpTrigger2}
 				setPopUpTriggerCreate={setPopUpTrigger4}
 				onAddArtist={handleAddArtist}
+				triggerCreate={popUpTrigger4}
+
 				/>
 			)}
 
@@ -283,28 +366,34 @@ export default function CreateEvent(props) {
 						<div className="divFormCreatePromoter">
 							<h2 className="h2FormCreatePromoter">Category</h2>
 							<div className="dateFormContainer">
-								<select className="inputVenueCreateEvent" value={eventCategory} onChange={handleEventCategortChange}>
-									<option value=""></option>
-										{categories.map((option, index) => (
-											<option key={index} value={option.name}>
-											{option.name}
-											</option>
-										))}
-								</select>
+								<Select
+									className="inputVenueCreateEvent"
+									value={eventCategory}
+									onChange={handleEventCategoryChange}
+									options={categories}
+									getOptionLabel={(option) => option.category_name}
+									getOptionValue={(option) => option.category_name}
+									placeholder=""
+									isSearchable={true}
+									/>
+
 								<h4 className="underlined" onClick={setPopUpTrigger3}>Add New</h4>
 							</div>
 						</div>
 						<div className="divFormCreatePromoter">
 							<h2 className="h2FormCreatePromoter">Venue</h2>
 							<div className="dateFormContainer">
-								<select className="inputVenueCreateEvent" value={eventVenue} onChange={handleEventVenueChange}>
-									<option value=""></option>
-										{options.map((option, index) => (
-											<option key={index} value={option.venueCode}>
-											{option.venueName}
-											</option>
-										))}
-								</select>
+							
+								<Select
+									className="inputVenue"
+									value={eventVenue}
+									onChange={handleEventVenueChange}
+									options={options}
+									getOptionLabel={(option) => option.venue_name}
+									getOptionValue={(option) => option}
+									placeholder=""
+									isSearchable={true}
+									/>
 								<h4 className="underlined" onClick={changeToAddVenue}>Add New</h4>
 							</div>
 						</div>
