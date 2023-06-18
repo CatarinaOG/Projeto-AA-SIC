@@ -306,4 +306,25 @@ public class UserService {
         return response;
 
     }
+
+    public List<EventsSuggestedForSellingTicketResponse> get_events_suggested_for_selling_ticket() {
+
+        List<Event> eventList = eventRepo.findAll();
+        List<EventsSuggestedForSellingTicketResponse> response = new ArrayList<>();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+        for(Event e : eventList){
+            if (response.size() == 5){
+                return response;
+            }
+            else{
+                EventsSuggestedForSellingTicketResponse aux = new EventsSuggestedForSellingTicketResponse();
+                aux.setId(e.getId());
+                aux.setDate(e.getDate_start().format(formatter));
+                aux.setDuration("");
+            }
+        }
+        return null;
+    }
 }

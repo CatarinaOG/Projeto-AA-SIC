@@ -6,8 +6,10 @@ import AASIC.repositories.*;
 import AASIC.requests.*;
 import AASIC.responses.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -192,5 +194,9 @@ public class PromoterService {
                 .type("promoter")
                 .name(p.getName())
                 .build();
+    }
+
+    public void remove_event(RemoveEventRequest request){
+        eventRepo.deleteById(request.getEvent_id());
     }
 }

@@ -156,4 +156,9 @@ public class UserController {
         return ResponseEntity.ok(userService.get_sold_tickets_by_type_and_event(request));
     }
 
+    @GetMapping("/events_suggested_for_selling_ticket")
+    public ResponseEntity<List<EventsSuggestedForSellingTicketResponse>> get_events_suggested_for_selling_ticket(){
+        return ResponseEntity.ok(userService.get_events_suggested_for_selling_ticket());
+    }
+
 }

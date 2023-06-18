@@ -102,8 +102,8 @@ public class AuthenticationService {
             return AuthenticationResponse.builder()
                     .token(jwt)
                     .type("admin")
-                    .name(promoter.getName())
-                    .language(promoter.getLanguage())
+                    .name(admin.getName())
+                    .language(admin.getLanguage())
                     .build();
         }
 

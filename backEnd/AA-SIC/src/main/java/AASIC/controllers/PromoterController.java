@@ -4,6 +4,7 @@ import AASIC.config.JWTService;
 import AASIC.requests.AddEventRequest;
 import AASIC.requests.AddLocalRequest;
 import AASIC.requests.CreateArtistRequest;
+import AASIC.requests.RemoveEventRequest;
 import AASIC.responses.*;
 import AASIC.services.AuthenticationService;
 import AASIC.services.PromoterService;
@@ -97,5 +98,11 @@ public class PromoterController {
         var jwt = token.substring(7);
         String email = jwtService.extractUsername(jwt);
         return ResponseEntity.ok(promoterService.get_promoter(email));
+    }
+
+    @PostMapping("/remove_event")
+    public ResponseEntity<String> remove_event(RemoveEventRequest request){
+        promoterService.remove_event(request);
+        return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
     }
 }
