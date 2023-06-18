@@ -30,7 +30,7 @@ export default function SuggestedEvents(props){
 
     function sendGetSuggestedRequest(){
 
-        fetch("http://localhost:8080/", {
+        fetch("http://localhost:8080/api/user/get_suggested_events", {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

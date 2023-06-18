@@ -73,14 +73,12 @@ export default function Profile(){
                                     <h3>Phone Number</h3>
                                     { !user.phone && <img className="plusButton" onClick={addPhoneNumber} src={Plus} alt="" />}
                                 </div>
-                                <div className="displayHorizontally">
-                                    { user.phone &&
-                                        <div>
-                                            <p>{user.phone}</p>
-                                            <button className="editButton" onClick={editPhoneNumber}></button>
-                                        </div>
-                                    }
-                                </div>
+                                { user.phone &&
+                                    <div className="displayHorizontally">
+                                        <p>{user.phone}</p>
+                                        <button className="editButton" onClick={editPhoneNumber}></button>
+                                    </div>
+                                }
                             </div>
                         </div>
 
@@ -97,14 +95,12 @@ export default function Profile(){
                         <div className="lastEditSection">
                             <div className="editContent">
                                 <h3>Language</h3>
-                                <div className="displayHorizontally">
                                     { false && // para tirar pq vem sempre uma
-                                        <div>
+                                        <div className="displayHorizontally">
                                             <p>{user.language}</p>
                                             <button className="editButton" onClick={editLanguage}></button>
                                         </div>
                                     }
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -119,14 +115,12 @@ export default function Profile(){
                                 <h3>Bank Details</h3>
                                 { !user.card_number && <img className="plusButton" onClick={addCard} src={Plus} alt="" />}
                             </div>
-                            <div className="displayHorizontally">
                                 { user.card_number &&
-                                    <div>
+                                    <div className="displayHorizontally">
                                         <p>{"*".repeat(user.card_number.length - 4) + user.card_number.slice(-4)}</p>
                                         <button className="editButton" onClick={editBackDetails}></button>
                                     </div>
                                 }
-                            </div>
                         </div>
                     </div>
                 </div>

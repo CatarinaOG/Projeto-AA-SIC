@@ -1,15 +1,20 @@
+import { useRef, useEffect, useState, useContext } from "react"
+
 import SmallEventSelected from "./SmallEventSelected"
 import TicketTypeSelected from "./TicketTypeSelected"
 import TicketPrice from "./TicketPrice"
 import TicketDescription from "./TicketDescription"
+import UserContext from "../../Contexts/UserContext"
+
 
 import fileImage from "../../Images/file.png"
 
-import { useRef, useEffect, useState } from "react"
 
 export default function FaseFile(props){
 
     const {ticket,setTicket,setFase} = props
+    const {user} = useContext(UserContext);
+
 
     const toTitleRef = useRef(null)
     const [fileSaved,setFileSaved] = useState(false)
@@ -29,7 +34,40 @@ export default function FaseFile(props){
         }
     };
 
+
+    function sendSellTicketRequest(){
+
+        console.log({
+            event_id: ticket.event.id,
+            type_id: ticket.type.id,
+            price: ticket.price,
+            description: ticket.description,
+        })
+
+        fetch("http://localhost:8080/api/user/sell_ticket", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+                event_id: ticket.event.id,
+                type_id: ticket.type.id,
+                price: ticket.price,
+                description: ticket.description,
+            })
+        })
+        .then(response => response.json())
+        .then(responsejson => console.log(responsejson))
+        .catch(error => {
+            console.log(error)
+        });
+
+    }
+
+
     function hanfleConfirm(){
+        sendSellTicketRequest()
         setDone(oldDone => !oldDone)
     }
 

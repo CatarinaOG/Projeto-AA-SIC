@@ -7,6 +7,22 @@ import UserContext from "../Contexts/UserContext"
 
 import "../Styles/SuggestEvent.css"
 
+
+function orderDate(date){
+
+    const parts = date.split('-');
+
+    const year = parts[0];
+    const month = parts[1];
+    const day = parts[2];
+
+    const transformedDate = `${day}/${month}/${year}`;
+
+    return transformedDate;
+}
+
+
+
 export default function SuggestEvent(props){
 
     const {user} = useContext(UserContext);
@@ -28,11 +44,14 @@ export default function SuggestEvent(props){
 
     function sendSuggestEventRequest(){
 
-        const fullStartDate = inputs.start_date + " " + inputs.start_time
-        const fullEndDate = inputs.end_date + " " + inputs.end_time
+        const start_date_ordered = orderDate(inputs.start_date)
+        const end_date_ordered = orderDate(inputs.end_date)
+
+        const fullStartDate = start_date_ordered + " " + inputs.start_time + ":00"
+        const fullEndDate = end_date_ordered + " " + inputs.end_time + ":00"
+
 
         fetch("http://localhost:8080/api/user/suggest_event", {
-            mode: 'no-cors',
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -44,10 +63,6 @@ export default function SuggestEvent(props){
                 start_date: fullStartDate,
                 end_date: fullEndDate,
             })
-        })
-        .then(response => response.json())
-        .then(userResponse => {
-            console.log(userResponse)
         })
         .catch(error => {
             console.log(error)

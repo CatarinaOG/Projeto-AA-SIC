@@ -5,7 +5,7 @@ import BlackClose from "../../Images/blackClose.png"
 export default function AddPhone(props){
 
     const {setAddInfo} = props
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     const [temp,setTemp] = useState("")
     const [emptyURLError,setEmptyURLError] = useState(false)
@@ -36,7 +36,7 @@ export default function AddPhone(props){
             })
         })
         .then(response => {
-            console.log(response) 
+            setUser((oldUser) => ({...oldUser,phone: temp}))
         })
         .catch(error => {
             console.log(error)

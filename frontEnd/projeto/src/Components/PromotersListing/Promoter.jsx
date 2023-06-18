@@ -1,4 +1,6 @@
-import { useState } from "react"
+import { useState,useContext } from "react";
+
+import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
 import close from "../../Images/close.png"
 
@@ -6,6 +8,8 @@ import close from "../../Images/close.png"
 export default function Promoter(props){
 
     const {promoter} = props
+    const {user} = useContext(UserContext);
+
 
     const [showConfirmation,setShowConfirmation] = useState(false)
 
@@ -17,8 +21,30 @@ export default function Promoter(props){
         setShowConfirmation(false)
     }
 
+    function sendDeletePromoterRequest(){
+
+        fetch("http://localhost:8080/", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+                promoter_id: promoter.id
+            })
+        })
+        .then(response => response.json())
+        .then(userResponse => {
+            console.log(userResponse)
+        })
+        .catch(error => {
+            console.log(error)
+        });
+
+    }
+
     function deletePromoter(){
-        //fazer pedido
+        sendDeletePromoterRequest()
         setShowConfirmation(false)
     }
 
