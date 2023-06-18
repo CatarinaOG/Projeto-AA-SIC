@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "event_wanted")
-public class EventWanted {
+@Table(name = "event_followed")
+public class EventFollowed {
     @Id
     private int id;
 

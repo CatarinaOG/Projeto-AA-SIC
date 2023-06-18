@@ -1,14 +1,10 @@
 package AASIC.model;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.mapping.Set;
-
-import java.util.Date;
 
 @Entity
 @Data
@@ -26,8 +22,10 @@ public class Event{
     private LocalDateTime date_end;
     @Column(name = "accepted")
     private boolean accepted;
+    @Column(name = "number_of_followers")
+    private int number_of_followers;
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
-    private List<EventWanted> users;
+    private List<EventFollowed> users;
 
     @OneToMany(mappedBy = "event" , cascade = CascadeType.ALL)
     private List<Ad> ads;

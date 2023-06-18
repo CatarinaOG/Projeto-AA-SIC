@@ -6,6 +6,7 @@ import AASIC.model.SuggestedEvent;
 import AASIC.model.User;
 import AASIC.repositories.*;
 import AASIC.requests.EditProfileRequest;
+import AASIC.requests.RemoveTicketListingRequest;
 import AASIC.requests.SellTicketRequest;
 import AASIC.requests.SuggestEventRequest;
 import AASIC.responses.GetSuggestedEventsResponse;
@@ -141,5 +142,9 @@ public class UserService {
             response.add(aux);
         }
         return response;
+    }
+
+    public void remove_ticket_listing(RemoveTicketListingRequest request) {
+        adRepo.deleteById(request.getAd_id());
     }
 }

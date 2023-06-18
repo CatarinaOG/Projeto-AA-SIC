@@ -3,6 +3,7 @@ package AASIC.controllers;
 //import javax.annotation.Resource;
 import AASIC.config.JWTService;
 import AASIC.requests.EditProfileRequest;
+import AASIC.requests.RemoveTicketListingRequest;
 import AASIC.requests.SellTicketRequest;
 import AASIC.requests.SuggestEventRequest;
 import AASIC.responses.GetSuggestedEventsResponse;
@@ -72,10 +73,16 @@ public class UserController {
         return ResponseEntity.ok("\"confirmed\" : \"true\"");
     }
 
-    @PostMapping("/get_tickets_listed_by_user")
+    @GetMapping("/get_tickets_listed_by_user")
     public ResponseEntity<List<GetTicketsListedByUserResponse>> get_tickets_listed_by_user(@RequestHeader(name = "Authorization") String token){
         var jwt = token.substring(7);
         String email = jwtService.extractUsername(jwt);
         return ResponseEntity.ok(userService.get_tickets_listed_by_user(email));
+    }
+
+    @PostMapping("/remove_ticket_listing")
+    public ResponseEntity<String> remove_ticket_listing(@RequestBody RemoveTicketListingRequest request){
+        userService.remove_ticket_listing(request);
+        return ResponseEntity.ok("\"confirmed\" : \"true\"");
     }
 }

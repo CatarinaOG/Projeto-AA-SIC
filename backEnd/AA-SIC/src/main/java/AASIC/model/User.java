@@ -44,9 +44,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Ad> ads;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<SuggestedEvent> suggested_events;
+    private List<SuggestedEvent> suggested_events; // são os eventos que o utilizador guarda
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<EventWanted> events_wanted; //isto deverá ser events followed. events wanted será um atributo do event para ver quantas pessoas o seguem
+    private List<EventFollowed> events_followed; // isto deverá ser events followed. events wanted será um atributo do event para ver quantas pessoas o seguem
 
     /*
     * Os Setters e Getters esão definidos com a anotação @Data do lombok
