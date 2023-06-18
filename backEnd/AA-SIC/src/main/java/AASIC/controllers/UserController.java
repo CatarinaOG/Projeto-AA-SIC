@@ -93,7 +93,7 @@ public class UserController {
         return ResponseEntity.ok("\"confirmed\" : \"true\"");
     }
 
-    @GetMapping("get_saved_events")
+    @GetMapping("/get_saved_events")
     public ResponseEntity<List<GetSavedEventsResponse>> get_saved_events(@RequestHeader(name = "Authorization") String token){
         var jwt = token.substring(7);
         String email = jwtService.extractUsername(jwt);
@@ -108,10 +108,23 @@ public class UserController {
         return ResponseEntity.ok("\"confirmed\" : \"true\"");
     }
 
-    @GetMapping("get_followed_events")
+    @GetMapping("/get_followed_events")
     public ResponseEntity<List<GetFollowedEventsReponse>> get_followed_events(@RequestHeader(name = "Authorization") String token){
         var jwt = token.substring(7);
         String email = jwtService.extractUsername(jwt);
         return ResponseEntity.ok(userService.get_followed_events(email));
     }
+
+    @PostMapping("/remove_followed_event")
+    public ResponseEntity<String> remove_followed_event(@RequestBody RemoveFollowedEventRequest request){
+        userService.remove_followed_event(request);
+        return ResponseEntity.ok("\"confirmed\" : \"true\"");
+    }
+
+    @PostMapping("/remove_saved_event")
+    public ResponseEntity<String> remove_saved_event(@RequestBody RemoveSavedEventRequest request){
+        userService.remove_saved_event(request);
+        return ResponseEntity.ok("\"confirmed\" : \"true\"");
+    }
+
 }
