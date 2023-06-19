@@ -61,13 +61,11 @@ export default function Event(props){
         .then(responseJSON => {
             setArtists(responseJSON.artists)
             setEvent(responseJSON)
-            setEvent(old => ({...old,image:"https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg"})) // para retirar
         })
         .catch(error => {
             console.log(error)
         });
     }
-
 
     function sendGetTicketTypesRequest(){
 
@@ -126,21 +124,12 @@ export default function Event(props){
         })
         .then(response => response.json())
         .then(responseJSON => {
+            console.log(responseJSON)
             setSoldTickets(responseJSON)
         })
         .catch(error => {
             console.log(error)
         });
-    }
-
-
-
-    function showTicketsTypes(){
-        setShow("ticketsType")
-    }
-
-    function showInfo(){
-        setShow("info")
     }
 
     function sendSaveEventRequest(){
@@ -161,6 +150,16 @@ export default function Event(props){
         });
 
     }
+
+
+    function showTicketsTypes(){
+        setShow("ticketsType")
+    }
+
+    function showInfo(){
+        setShow("info")
+    }
+
 
     function saveEvent(){
         if(!event.event_saved)
@@ -202,6 +201,11 @@ export default function Event(props){
         />
     )
 
+    let background_img = "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg"
+
+    if(event && event.event_image)
+        background_img = event.event_image
+
    
     return event ? (
         <div>
@@ -210,12 +214,12 @@ export default function Event(props){
             { user.type === "promoter" && <NavBarPromoter selected="home"/>}
             { user.type === "admin" && <NavBarAdmin selected="home"/>}
             
-            <img className="wallpaperBlur" src={event.image} alt="" />
+            <img className="wallpaperBlur" src={background_img} alt="" />
 
             <div className="center">
                 <div>
                     <div className="overImageContainer">
-                        <img className="eventImage" src={event.image} alt="" />
+                        <img className="eventImage" src={background_img} alt="" />
                         <h2>{event.event_name}</h2>
                         <h3>{event.start_date} - {event.end_date}</h3>
                         <p>{event.event_place}</p>
@@ -268,6 +272,7 @@ export default function Event(props){
                                     <TicketAlert event={event} setUpdateEvent={setUpdateEvent}/>
                                 }
                                 <h2 className="marginTop">Tickets Available</h2>
+                                {showTheTickets.length === 0 && <p className="marginBottom">There are no tickets available...</p>}
                                 {showTheTickets}
 
                                 { showTheSoldTickets.length > 0 && <h2>Tickets Sold</h2>}

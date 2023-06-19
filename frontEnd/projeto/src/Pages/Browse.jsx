@@ -67,6 +67,8 @@ export default function Browse(props){
         }
     }
 
+    console.log(events)
+
     const show_events = events.map((event) => 
         <BrowseTicket 
             key={event.id}

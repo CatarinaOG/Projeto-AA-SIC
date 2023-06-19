@@ -31,7 +31,6 @@ export default function Filters(props){
         })
         .then(response => response.json())
         .then(responseJSON => {
-            console.log(responseJSON)
             setPlaceOptions(responseJSON.place)
             setCategoryOptions(responseJSON.category)
         })
