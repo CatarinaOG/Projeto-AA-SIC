@@ -134,12 +134,12 @@ public class EventService {
         String filter_category = request.getFilter_category();
 
         for(Event e : eventList){
-            if(filter_text != null || filter_text.equals("")){
+            if(filter_text != null || !filter_text.equals("")){
                 if (!e.getName().contains(filter_text)){
                     continue;
                 }
             }
-            if(filter_place != null || filter_place.equals("")){
+            if(filter_place != null || !filter_place.equals("")){
                 if (!e.getLocation().getName().equals(filter_place)){
                     continue;
                 }
@@ -148,7 +148,7 @@ public class EventService {
             //    LocalDateTime filter = LocalDateTime.parse(filter_text, formatter);
             //    if(!)
             //}
-            if(filter_category != null || filter_category.equals("")){
+            if(filter_category != null || !filter_category.equals("")){
                 if(!e.getCategory().getName().equals(filter_category)){
                     continue;
                 }
