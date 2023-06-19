@@ -73,41 +73,4 @@ export default function PopUpAddCategory(props) {
         </div>
     </div>
   ):("")
-
-
-  return props.trigger ? (
-    <div>
-      <div className="editContainter">
-        <h2 className="editTitle">Add Category</h2>
-        <form>
-          <input
-            className="inputPopUpAddType"
-            type="text"
-            placeholder="Category Name"
-            value={categoryName}
-          ></input>
-        </form>
-        <h3 className="redH3">{message}</h3>
-        <div className="popUpSellingListButton">
-          <button
-            className="button"
-            onClick={() => {
-              submitType();
-            }}
-          >
-            Yes
-          </button>
-          <button
-            className="button"
-            onClick={() => props.setPopUpTrigger(false)}
-          >
-            {" "}
-            Cancel
-          </button>
-        </div>
-      </div>
-    </div>
-  ) : (
-    ""
-  );
 }

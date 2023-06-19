@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import "../../Styles/Profile.css";
+import BlackClose from "../../Images/blackClose.png"
+
 
 export default function PopUpAddType(props) {
+  const {trigger, setPopUpTrigger, onAddType,dateStart,dateEnd} = props
+
   const [ticketType, setTicketType] = useState("");
   const [price, setPrice] = useState(null);
   const [dateStartType, setDateStartType] = useState(null);
@@ -9,15 +13,15 @@ export default function PopUpAddType(props) {
   const [timeStartType, setTimeStartType] = useState(null);
   const [timeEndType, setTimeEndType] = useState(null);
   const [message, setMessage] = useState("");
-  const dateStartCompare = new Date(props.dateStart);
-  const dateEndCompare = new Date(props.dateEnd);
+  const dateStartCompare = new Date(dateStart);
+  const dateEndCompare = new Date(dateEnd);
 
   useEffect(() => {
-    if (props.trigger) {
+    if (trigger) {
       setTicketType("");
       setPrice(null);
     }
-  }, [props.trigger]);
+  }, [trigger]);
 
   const handleTypeChange = (event) => {
     setTicketType(event.target.value);
@@ -81,7 +85,7 @@ export default function PopUpAddType(props) {
         type_date_end : formattedEnd,
       };
       console.log(JSON.stringify(newType))
-      props.onAddType(newType);
+      onAddType(newType);
     }
   };
 
@@ -89,10 +93,11 @@ export default function PopUpAddType(props) {
 
 
   
-  return props.trigger ? (
-    <div>
-      <div className="editContainter">
-        <h2 className="editTitle">Add Type Information</h2>
+  return trigger ? (
+    <div className="overlay">
+      <div className="containterAddType">
+      <img src={BlackClose} className="editClose" alt="" onClick={() => setPopUpTrigger(false)} />
+            <h3 className="editTitle">Add Category</h3>
         <form>
           <input
             className="inputPopUpAddType"
@@ -143,17 +148,10 @@ export default function PopUpAddType(props) {
             className="button"
             onClick={() => {
               submitType();
-              props.setPopUpTrigger(false);
+              setPopUpTrigger(false);
             }}
           >
             Add
-          </button>
-          <button
-            className="button"
-            onClick={() => props.setPopUpTrigger(false)}
-          >
-            {" "}
-            Cancel
           </button>
         </div>
       </div>
