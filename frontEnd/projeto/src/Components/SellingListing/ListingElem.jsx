@@ -8,8 +8,8 @@ export default function ListinElem(props) {
   	const { ticket, setPopUpTrigger, setPopUpID } = props;
 
 	function clickedClose() {
+		setPopUpID(ticket.ticket_id);
 		setPopUpTrigger(true);
-		setPopUpID(ticket.id);
 	}
 
 	return(
@@ -24,13 +24,13 @@ export default function ListinElem(props) {
 
             <div className="listingEventRightSide">
                 <h3>{ticket.ticket_price} $</h3>
-				{ticket.ticket_status  === "selling" ? 
+				{ticket.ticket_status  === "available" ? 
 					(<img src={selling} alt="" className="soldSellingIcon" />): 
 					(<img src={sold} alt="" className="soldSellingIcon" />)
 				}
             </div>
 			
-			{ticket.ticket_status === "selling" && (
+			{ticket.ticket_status === "available" && (
 				<div className="listingElemClose">
 					<img className="closeIcon" src={close} alt="" onClick={clickedClose}/>
 				</div>

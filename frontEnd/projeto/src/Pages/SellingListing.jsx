@@ -19,69 +19,7 @@ export default function SellingListing() {
 		getSellingListing()
 	}, []);
 
-	const [tickets, setTickets] = useState([
-		// para ser substituido pelo pedido com base no filtro
-		{
-			dayOfWeek: "Wednesday",
-			month: "May",
-			day: "8",
-			time: "9:25 PM",
-			ticketType: "Relvado",
-			eventName: "Coldplay - Music Of The Spheres World Tour",
-			eventPlace: "Estádio Cidade de Coimbra, Coimbra",
-			ticketPrice: "80.56",
-			id: 1,
-			status: "selling",
-		},
-		{
-			dayOfWeek: "Friday",
-			month: "May",
-			day: "19",
-			time: "08:00 PM",
-			ticketType: "Floor",
-			eventName: "Post Malone - Twelve Carat Tour",
-			eventPlace: "Ziggo Dome, Amsterdam",
-			ticketPrice: "109.02",
-			id: 2,
-			status: "selling",
-		},
-		{
-			dayOfWeek: "Thursday",
-			month: "Jul",
-			day: "7",
-			time: "03:00 PM",
-			ticketType: "1 Day Ticket | 7 July",
-			eventName: "NOS ALIVE'23",
-			eventPlace: "NOS Alive, Algés, Portugal",
-			ticketPrice: "91,07",
-			id: 3,
-			status: "sold",
-		},
-		{
-			dayOfWeek: "Thursday",
-			month: "Jul",
-			day: "7",
-			time: "03:00 PM",
-			ticketType: "1 Day Ticket | 8 July",
-			eventName: "NOS ALIVE'23",
-			eventPlace: "NOS Alive, Algés, Portugal",
-			ticketPrice: "91,07",
-			id: 4,
-			status: "selling",
-		},
-		{
-			dayOfWeek: "Thursday",
-			month: "Jul",
-			day: "7",
-			time: "03:00 PM",
-			ticketType: "1 Day Ticket | 6 July",
-			eventName: "NOS ALIVE'23",
-			eventPlace: "NOS Alive, Algés, Portugal",
-			ticketPrice: "91,07",
-			id: 5,
-			status: "sold",
-		},
-	]);
+	const [tickets, setTickets] = useState([]);
 
 	const [popUpTrigger, setPopUpTrigger] = useState(false);
 	const [popUpID, setPopUpID] = useState("");
@@ -114,6 +52,45 @@ export default function SellingListing() {
 	}
 
 
+	function removeListing(ticket_id){
+
+		console.log(popUpID)
+		const input = {
+			ad_id : ticket_id
+		}
+
+		console.log("Input was" + JSON.stringify(input))
+		console.log(user.token)
+
+		fetch("http://localhost:8080/api/user/remove_ticket_listing", {
+			method: 'POST',
+			headers: {
+			  'Content-Type': 'application/json',
+			  'Authorization': `Bearer ${user.token}`
+			},
+			body: JSON.stringify(input)
+		})
+		.then(response => {
+			if (response.ok) {
+			  return response.json();
+			} else {
+			  throw new Error('Error: ' + response.status);
+			}
+		  })
+		  .then(responseJSON => {
+			if (responseJSON.confirmed === "true"){
+				getSellingListing();
+				setPopUpTrigger(false);
+			}
+			else{
+				console.log("Correu Mal")
+			}
+		  })
+		  .catch(error => {
+			console.log('Error:', error);
+		  });
+	}
+
 
 
 
@@ -127,6 +104,7 @@ export default function SellingListing() {
 			ticket={ticket}
 			setPopUpTrigger={setPopUpTrigger}
 			setPopUpID={setPopUpID}
+			removeListing = {removeListing}
 		/>
 	);
 
@@ -153,7 +131,7 @@ export default function SellingListing() {
 						<h3 className="popUpInfoWithButtons">Are you sure you want to remove this ticket from listings?</h3>
 						<div className="center">
 							<div className="promoterButtons">
-								<button className="button">Yes</button>
+								<button className="button" onClick={() => removeListing(popUpID)}>Yes</button>
 								<button className="button">No</button>
 							</div>
 						</div>

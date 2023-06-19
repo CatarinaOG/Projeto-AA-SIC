@@ -1,34 +1,27 @@
 import "../../Styles/SellingListing.css";
-import close from "../../Images/close.png";
+import Close from "../../Images/close.png";
 
-function clickedClose(setPopUpTrigger) {
-  setPopUpTrigger(true);
-  console.log("Clicked");
-}
+export default function NotificationElem(props) {
+  const { notification , removeNotif} = props;
 
-export default function BoughtTicket(props) {
-  const { event, setPopUpTrigger } = props;
+
+  function clickedClose() {
+    removeNotif(notification.notification_id)    
+    console.log("Clicked");
+  }
+  
+  
+
 
   return (
-    <div className="listing">
-      <div className="listing-elem-1">
-        <h2>{event.eventName}</h2>
-        <h4>
-          {event.dayOfWeek}, {event.month} {event.day} | {event.eventPlace}{" "}
-        </h4>
-      </div>
-
-      <div className="listing-elem-2">
-        <h3>+ 1 ticket selling</h3>
-      </div>
-      <div className="listing-elem-3">
-        <img
-          className="closeIcon"
-          src={close}
-          alt=""
-          onClick={() => clickedClose(setPopUpTrigger)}
-        />
-      </div>
+    <div className="listingEvent">
+            <div className="listingEventLeftSide">
+                <h2>{notification.title}</h2>
+				<h4 className="colorGreen">{notification.content} | {notification.date} </h4>
+				<div className="listingElemClose">
+					<img className="closeIcon" src={Close} alt="" onClick={() => clickedClose()} />
+				</div>
+			</div>
     </div>
   );
 }
