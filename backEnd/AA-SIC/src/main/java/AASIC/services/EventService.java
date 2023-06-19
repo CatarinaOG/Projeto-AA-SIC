@@ -128,19 +128,19 @@ public class EventService {
         List<GetFilteredEventsResponse> response = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-        String filter_text = request.getFilter_text();
-        String filter_place = request.getFilter_place();
-        String filter_time = request.getFilter_time();
-        String filter_category = request.getFilter_category();
+        String filter_text = request.getFilter_text().toLowerCase();
+        String filter_place = request.getFilter_place().toLowerCase();
+        String filter_time = request.getFilter_time().toLowerCase();
+        String filter_category = request.getFilter_category().toLowerCase();
 
         for(Event e : eventList){
-            if(filter_text != null && !filter_text.isEmpty()){
-                if (!e.getName().contains(filter_text)){
+            if(!filter_text.isEmpty()){
+                if (!e.getName().toLowerCase().contains(filter_text)){
                     continue;
                 }
             }
-            if(filter_place != null && !filter_place.isEmpty()){
-                if (!e.getLocation().getName().equals(filter_place)){
+            if(!filter_place.isEmpty()){
+                if (!e.getLocation().getName().toLowerCase().equals(filter_place)){
                     continue;
                 }
             }
@@ -148,8 +148,8 @@ public class EventService {
             //    LocalDateTime filter = LocalDateTime.parse(filter_text, formatter);
             //    if(!)
             //}
-            if(filter_category != null && !filter_category.isEmpty()){
-                if(!e.getCategory().getName().equals(filter_category)){
+            if(!filter_category.isEmpty()){
+                if(!e.getCategory().getName().toLowerCase().equals(filter_category)){
                     continue;
                 }
             }
