@@ -3,9 +3,11 @@ import Filters from "../Components/Filters/Filters";
 import ListingElem from "../Components/SellingListing/ListingElem";
 import BlackClose from "../Images/blackClose.png"
 
-import { useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import UserContext from "../Contexts/UserContext"
 
 export default function SellingListing() {
+    const {user} = useContext(UserContext);
 
 	const [filters,setFilters] = useState({
         filter_place: "",
@@ -13,7 +15,11 @@ export default function SellingListing() {
         filter_category: "",
     })
 
-	const [events, setEvents] = useState([
+	useEffect(() => {
+		getSellingListing()
+	}, []);
+
+	const [tickets, setTickets] = useState([
 		// para ser substituido pelo pedido com base no filtro
 		{
 			dayOfWeek: "Wednesday",
@@ -81,17 +87,44 @@ export default function SellingListing() {
 	const [popUpID, setPopUpID] = useState("");
 
 	function handleRemoveEvents(id){
-		setEvents((prevEvents) => prevEvents.filter((item) => item.id !== id));
+		setTickets((prevEvents) => prevEvents.filter((item) => item.id !== id));
 	};
+
+
+	function getSellingListing(){
+		fetch("http://localhost:8080/api/user/get_tickets_listed_by_user", {
+			method: 'GET',
+			headers: {
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${user.token}`
+		}
+		})
+		.then(response => {
+			if (response.ok)
+			  return response.json(); // Parse the response JSON
+			throw new Error('Network response was not ok.');
+		  })
+		  .then(data => {
+			console.log(data)
+			setTickets(data); // Set the parsed JSON data
+		  })
+		  .catch(error => {
+			console.log(error);
+		  });
+	}
+
+
+
+
 
 	function closeConfirmation(){
 		setPopUpTrigger(false)
 	}
 
-	const eventsFiltered = events.map((event) =>
+	const eventsFiltered = tickets.map((ticket) =>
 		<ListingElem
-			key={event.id}
-			event={event}
+			key={ticket.ticket_id}
+			ticket={ticket}
 			setPopUpTrigger={setPopUpTrigger}
 			setPopUpID={setPopUpID}
 		/>
