@@ -23,6 +23,7 @@ export default function Event(props){
     const [show,setShow] = useState("ticketsType") // ticket / tickets / ticketsType / info
 
     const [event,setEvent] = useState()
+    const [ticketTypes,setTicketTypes] = useState([])
     const [ticketType,setTicketType] = useState()
     const [ticket,setTicket] = useState()
     const [update,setUpdate] = useState(false)
@@ -30,12 +31,12 @@ export default function Event(props){
 
     useEffect(() => {
         sendGetFullEventRequest()
-        //sendGetTicketTypesRequest()
+        sendGetTicketTypesRequest()
     },[update])
 
 
     function sendGetFullEventRequest(){
-        console.log(user.token)
+
         fetch("http://localhost:8080/api/event/get_full_event", {
             method: 'POST',
             headers: {
@@ -47,7 +48,6 @@ export default function Event(props){
         })
         .then(response => response.json())
         .then(responseJSON => {
-            console.log(responseJSON)
             setEvent(responseJSON)
             setEvent(old => ({...old,image:"https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg"})) // para retirar
         })
@@ -55,31 +55,59 @@ export default function Event(props){
             console.log(error)
         });
     }
-    
 
-    const [ticketTypes,setTicketTypes] = useState([
-        {
-            id: 1,
-            description: "2 Day Ticket | 6 & 7th July",
-			price: 198,
-            nr_selling: 2,
-        },
-        {
-            id: 2,
-            description: "1 Day Ticket | 7th July",
-			price: 88,
-            nr_selling: 2,
-        },
-        {
-            id: 3,
-            description: "2 Day Ticket | 7 & 8th July",
-			price: 200,
-            nr_selling: 3,
-        }
-    ])
+
+    function sendGetTicketTypesRequest(){
+
+        fetch("http://localhost:8080/api/event/get_ticket_types_event", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                event_id: eventId
+            })
+        })
+        .then(response => response.json())
+        .then(responseJSON => {
+            setTicketTypes(responseJSON)
+        })
+        .catch(error => {
+            console.log(error)
+        });
+    }
+    
+    function sendGetTicketsRequest(ticket_id){
+
+        console.log({
+            event_id: eventId,
+            ticket_type_id: ticket_id,
+        })
+
+        fetch("http://localhost:8080/api/user/get_tickets_by_type_and_event", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                event_id: eventId,
+                ticket_type_id: ticket_id,
+            })
+        })
+        .then(response => response.json())
+        .then(responseJSON => {
+            console.log(responseJSON)
+            //setTickets(responseJSON)
+            //setShow("tickets")
+        })
+        .catch(error => {
+            console.log(error)
+        });
+    }
+
 
     const [tickets,setTickets] = useState([
-        {
+        /*{
             id: 1,
             description: "nao posso ir",
             price: "89$",
@@ -102,7 +130,7 @@ export default function Event(props){
             description: "nao posso ir",
             price: "89$",
             user_image: "https://cdn-icons-png.flaticon.com/128/4988/4988350.png",
-        },
+        },*/
     ])
 
     const [artists,setArtists] = useState([
@@ -149,18 +177,18 @@ export default function Event(props){
 
     }
 
-
     function saveEvent(){
         if(!event.event_saved)
             sendSaveEventRequest()
     }
 
+
     const showTheTicketsTypes = ticketTypes.map((ticketType) => 
         <TicketType 
             key={ticketType.id}
             ticketType={ticketType}
+            sendGetTicketsRequest={sendGetTicketsRequest}
             setTicketType={setTicketType}
-            setShow={setShow}
         />
     )
     

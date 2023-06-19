@@ -33,13 +33,6 @@ export default function Browse(props){
 
     function sendGetEventsRequest(){
 
-        console.log({
-            filter_text: searchText,
-            filter_place: filters.filter_place,
-            filter_time: filters.filter_time,
-            filter_category: filters.filter_category,
-        })
-
         fetch("http://localhost:8080/api/event/get_filtered_events", {
             method: 'POST',
             headers: {

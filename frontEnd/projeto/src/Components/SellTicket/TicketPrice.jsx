@@ -6,12 +6,11 @@ export default function TicketPrice(props){
 
     const [error,setError] = useState(0)
 
-    const price = ticket.type.price
-    const maxPrice = price + price * 0.1
+    const max_price = ticket.type.max_price
 
     function handleEnter(event){
         if (event.key === "Enter") {
-            if(event.target.value < maxPrice){
+            if(event.target.value <= max_price){
                 setFase("description");
             }
             else
@@ -40,7 +39,7 @@ export default function TicketPrice(props){
                     <input className="inputPrice" onKeyDown={handleEnter} onChange={handleChange} value={ticket.price} type="number" readOnly={ done? true : false }/>
                 </div>
 
-                <p className="maxPrice">Max: {maxPrice}$</p>
+                <p className="maxPrice">Max: {max_price}$</p>
             </div>
 
             { error === 1 && 

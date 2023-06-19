@@ -10,13 +10,12 @@ export default function FaseType(props){
     const [types,setTypes] = useState([])
     const {user} = useContext(UserContext);
 
-    function sendGetTypesRequest(){
+    function sendGetTicketTypesRequest(){
 
         fetch("http://localhost:8080/api/event/get_ticket_types_event", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${user.token}`
             },
             body: JSON.stringify({
                 event_id: ticket.event.id
@@ -29,11 +28,10 @@ export default function FaseType(props){
         .catch(error => {
             console.log(error)
         });
-
     }
 
     useEffect(() => {
-        sendGetTypesRequest()
+        sendGetTicketTypesRequest()
     },[])
 
     const allTypes = types.map( type => 
