@@ -1,11 +1,12 @@
 import NavBarUser from "../Components/NavBar/NavBarUser";
 import PopUpRemoveListing from "../Components/SellingListing/PopUpRemoveListing";
 import SavedFollowElem from "../Components/General/EventElem.jsx";
+import { useTranslation } from "react-i18next";
 
 import { useState } from "react";
 
 export default function Notifications() {
-
+	const {t} = useTranslation();
   const [events, setEvents] = useState([
     // para ser substituido pelo pedido com base no filtro
     {
@@ -97,7 +98,7 @@ export default function Notifications() {
       
       <div className="center">
         <div className="defaultContainer">
-          <h1>Notifications</h1>
+          <h1>{t('notificationsH1')}</h1>
           <div className="eventsContainer">{eventsFiltered}</div>
         </div>
       </div>

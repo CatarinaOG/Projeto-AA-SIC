@@ -3,6 +3,7 @@ import UserContext from "../../Contexts/UserContext";
 import BlackClose from "../../Images/blackClose.png"
 
 import "../../Styles/Profile.css";
+import { useTranslation } from "react-i18next";
 
 export default function PopUpAddCategory(props) {
 
