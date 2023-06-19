@@ -61,11 +61,10 @@ export default function PopUpAddArtist(props) {
     } else {
       console.log(artist.artist_name);
       props.onAddArtist(artist);
-      //props.setPopUpTrigger(false);
+      props.setPopUpTrigger(false);
     }
   };
 
-  
   return props.trigger ? (
     <div>
     <div className="editContainter">
@@ -97,12 +96,13 @@ export default function PopUpAddArtist(props) {
               Not Listed? Click here!
             </h3>
             <h3 className="redH3">{message}</h3>
-            <button className="button" onClick={submitType}>Confirm</button>
         </form>
+        <button className="button" onClick={() => submitType()}>Confirm</button>
     </div>
 </div>
 
   ) : ("")
+
 
 
 
