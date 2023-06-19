@@ -1,10 +1,8 @@
 package AASIC.services;
 
-import AASIC.model.Ad;
-import AASIC.model.Event;
-import AASIC.model.Location;
-import AASIC.model.TicketType;
+import AASIC.model.*;
 import AASIC.repositories.EventRepo;
+import AASIC.repositories.UserRepo;
 import AASIC.requests.GetFilteredEventsRequest;
 import AASIC.requests.GetFullEventRequest;
 import AASIC.requests.GetTicketTypesEventRequest;
@@ -25,6 +23,7 @@ import java.util.stream.Collectors;
 public class EventService {
 
     private final EventRepo eventRepo;
+    private final UserRepo userRepo;
 
     public List<GetTicketTypesEventReponse> get_ticket_types_event(GetTicketTypesEventRequest request) {
 
@@ -55,11 +54,31 @@ public class EventService {
         return upcoming_events;
     }
 
-    public GetFullEventResponse get_full_event(GetFullEventRequest request) {
+    public GetFullEventResponse get_full_event(GetFullEventRequest request, String email) {
         Event e = eventRepo.findById(request.getEvent_id()).get();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         int tickets_sold = e.getAds().stream().filter(Ad::getSold).toList().size();
         int upcoming_events = get_upcoming_events(e.getLocation());
+        List<GetArtistsResponse> artists = new ArrayList<>();
+        
+        for(ArtistInEvent aie : e.getArtist_list()){
+            Artist a = aie.getArtist();
+            GetArtistsResponse aux = GetArtistsResponse
+                    .builder()
+                    .artist_code(a.getId())
+                    .artist_name(a.getName())
+                    .build();
+            artists.add(aux);
+        }
+
+        boolean event_followed = false;
+        boolean event_saved = false;
+        if(!email.isEmpty()){
+            User u = userRepo.findUserByEmail(email).get();
+            event_followed = e.getUsers_following().stream().map(EventFollowed::getUser).toList().contains(u);
+            event_saved = e.getUsers_saved().stream().map(EventSaved::getUser).toList().contains(u);
+        }
+
         return GetFullEventResponse
                 .builder()
                 .id(e.getId())
@@ -71,11 +90,12 @@ public class EventService {
                 .tickets_available(e.getAds().size())
                 .tickets_sold(tickets_sold)
                 .tickets_wanted(e.getUsers_saved().size())
-                .event_saved(!e.getUsers_saved().isEmpty())
-                .event_followed(!e.getUsers_following().isEmpty())
+                .event_saved(event_saved)
+                .event_followed(event_followed)
                 .lat(e.getLocation().getLatitude())
                 .lng(e.getLocation().getLongitude())
                 .upcoming_events(upcoming_events)
+                .artists(artists)
                 .build();
     }
 

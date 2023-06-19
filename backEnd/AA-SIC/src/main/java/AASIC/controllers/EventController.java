@@ -1,6 +1,7 @@
 package AASIC.controllers;
 
 //import javax.annotation.Resource;
+import AASIC.config.JWTService;
 import AASIC.requests.GetFilteredEventsRequest;
 import AASIC.requests.GetFullEventRequest;
 import AASIC.requests.GetTicketTypesEventRequest;
@@ -23,10 +24,17 @@ import java.util.List;
 public class EventController {
 
     private final EventService eventService;
+    private final JWTService jwtService;
 
     @PostMapping  ( "/get_full_event")
     public ResponseEntity<GetFullEventResponse> get_full_event(@RequestBody GetFullEventRequest request){
-        return ResponseEntity.ok(eventService.get_full_event(request));
+        String email = "";
+        if(request.getToken() != null){
+            var jwt = request.getToken();
+            email = jwtService.extractUsername(jwt);
+        }
+
+        return ResponseEntity.ok(eventService.get_full_event(request, email));
     }
 
     @PostMapping ("/get_ticket_types_event")

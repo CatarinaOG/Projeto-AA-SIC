@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,6 +28,7 @@ public class GetFullEventResponse {
     private String lat;
     private String lng;
     private int upcoming_events; // upcoming events da localização deste evento
+    private List<GetArtistsResponse> artists;
 
 
 }
