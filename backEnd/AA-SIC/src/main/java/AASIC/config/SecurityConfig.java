@@ -40,7 +40,8 @@ public class SecurityConfig {
                         "/api/event/get_full_event",
                         "/api/event/get_filters_event",
                         "/api/event/get_events",
-                        "/api/event/get_filtered_events"
+                        "/api/event/get_filtered_events",
+                        "/api/event/get_ticket_types_event"
                 ) // aqui vamos definir uma whitelist de requests onde não é preciso autenticação
                 .permitAll() // aqui vamos permitir todos os requests
                 .anyRequest() // todos os outros necessitam de autenticação
