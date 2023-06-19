@@ -119,7 +119,7 @@ export default function FollowedEvents(props) {
 		console.log(JSON.stringify(input))
 		console.log(user.token)
 
-		fetch("http://localhost:8080/api/user/remove_saved_event", {
+		fetch("http://localhost:8080/api/user/remove_followed_event", {
 			method: 'POST',
 			headers: {
 			  'Content-Type': 'application/json',
@@ -136,6 +136,8 @@ export default function FollowedEvents(props) {
 		  })
 		  .then(responseJSON => {
 			if (responseJSON.confirmed === "true"){
+				console.log("Correu bem")
+				getFollowed();
 			}
 			else{
 				console.log("Correu Mal")
