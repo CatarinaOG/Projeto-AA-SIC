@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class GetNotificationResponse {
+    private int notification_id;
     private String title;
     private String content;
     private String date;

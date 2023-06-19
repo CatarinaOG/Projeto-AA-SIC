@@ -389,6 +389,7 @@ public class UserService {
         for(Notification n : u.getNotifications()){
             GetNotificationResponse aux = GetNotificationResponse
                     .builder()
+                    .notification_id(n.getId())
                     .title(n.getTitle())
                     .content(n.getContent())
                     .date(n.getDate().format(formatter))
@@ -397,5 +398,11 @@ public class UserService {
             response.add(aux);
         }
         return response;
+    }
+
+    @Transactional
+    public String remove_notification(RemoveNotificationRequest request) {
+        notificationRepo.removeNotificationById(request.getNotification_id());
+        return "{\"confirmed\" : \"true\"}";
     }
 }

@@ -170,4 +170,9 @@ public class UserController {
         String email = jwtService.extractUsername(jwt);
         return ResponseEntity.ok(userService.get_notifications_by_user(email));
     }
+
+    @PostMapping("/remove_notification")
+    public ResponseEntity<String> remove_notification(@RequestBody RemoveNotificationRequest request){
+        return ResponseEntity.ok(userService.remove_notification(request));
+    }
 }
