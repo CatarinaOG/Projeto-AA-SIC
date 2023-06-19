@@ -5,31 +5,32 @@ import selling from "../../Images/onSaleIcon.png";
 
 export default function ListinElem(props) {
 
-  	const { event, setPopUpTrigger, setPopUpID } = props;
+  	const { ticket, setPopUpTrigger, setPopUpID } = props;
 
 	function clickedClose() {
 		setPopUpTrigger(true);
-		setPopUpID(event.id);
+		setPopUpID(ticket.id);
 	}
 
 	return(
 		<div className="listingEvent">
             <div>
-                <h3>{event.eventName}</h3>
-                <h3>{event.ticketType}</h3>
-                <p className="colorGreen">{event.dayOfWeek}, {event.month} {event.day} | {event.eventPlace}{" "} </p>
-                <p>{event.eventPlace}</p>
+                <h3>{ticket.event_name}</h3>
+                <h3>{ticket.ticket_type}</h3>
+                <p className="colorGreen"> Event Start: {ticket.start_date}  </p>
+				<p className="colorGreen">Date Created {ticket.created_date} {" "} </p>
+                <p>{ticket.eventPlace}</p>
             </div>
 
             <div className="listingEventRightSide">
-                <h3>{event.ticketPrice} $</h3>
-				{props.event.status === "selling" ? 
+                <h3>{ticket.ticket_price} $</h3>
+				{ticket.ticket_status  === "selling" ? 
 					(<img src={selling} alt="" className="soldSellingIcon" />): 
 					(<img src={sold} alt="" className="soldSellingIcon" />)
 				}
             </div>
 			
-			{props.event.status === "selling" && (
+			{ticket.ticket_status === "selling" && (
 				<div className="listingElemClose">
 					<img className="closeIcon" src={close} alt="" onClick={clickedClose}/>
 				</div>
