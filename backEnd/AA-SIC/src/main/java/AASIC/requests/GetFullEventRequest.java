@@ -8,5 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GetFullEventRequest {
+    private String token;
     private int event_id;
 }
