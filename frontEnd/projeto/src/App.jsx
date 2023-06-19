@@ -51,6 +51,7 @@ function App() {
 	const [suggestedEvent,setSuggestedEvent] = useState({})
 	const [addEventInfo,setAddEventInfo] = useState({})
 	const [searchText,setSearchText] = useState("")
+	const [ticketID, setTicketID] = useState()
 
 
 	function sendGetUserRequest(){
@@ -168,14 +169,14 @@ function App() {
 
 					<Route
 						path="/Event"element={
-						<Event eventId={eventId} />}
+						<Event eventId={eventId} setTicketID={setTicketID}/>}
 					/>
 
 					{ user.type === "user" &&
 
 						<Route
 							path="/PaymentMethods"element={
-							<PaymentMethods />}
+							<PaymentMethods ticketID={ticketID}/>}
 						/>
 					}
 
