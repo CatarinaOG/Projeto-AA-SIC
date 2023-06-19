@@ -30,7 +30,7 @@ public class EventController {
     public ResponseEntity<GetFullEventResponse> get_full_event(@RequestBody GetFullEventRequest request){
         String email = "";
         if(request.getToken() != null){
-            var jwt = request.getToken().substring(7);
+            var jwt = request.getToken();
             email = jwtService.extractUsername(jwt);
         }
 
