@@ -37,7 +37,7 @@ export default function TicketAlert(props){
     function addTicketAlert(){
         // enviar pedido event.id e user.id
 
-        if(!event.is_followed){
+        if(!event.event_followed){
             sendFollowRequest()
             setShowAdded(true)
         }
@@ -57,7 +57,7 @@ export default function TicketAlert(props){
             <div className="alertText">
                 <h3>Ticket Alerts</h3>
                 <p>Get notified when a ticket becomes available</p>
-                <img className="addImage" onClick={addTicketAlert} src={event.is_followed ? check : add} alt="" />
+                <img className="addImage" onClick={addTicketAlert} src={event.event_followed ? check : add} alt="" />
             </div>
 
             { showAdded &&

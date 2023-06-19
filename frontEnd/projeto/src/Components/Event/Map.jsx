@@ -9,9 +9,9 @@ export default function Map(props){
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     });
     
-    const center = useMemo(() => ({ lat: event.lat, lng: event.lng }), []);
+    const center = useMemo(() => ({ lat: Number(event.lat), lng: Number(event.lng) }), []);
     
-
+    
     return(
         <div className="map">
         {!isLoaded ? (
@@ -22,7 +22,7 @@ export default function Map(props){
                 center={center}
                 zoom={10}
             > 
-                <MarkerF position={{ lat: event.lat, lng: event.lng }} />
+                <MarkerF position={{ lat: Number(event.lat), lng: Number(event.lng) }} />
             </GoogleMap>
         )}
         </div>

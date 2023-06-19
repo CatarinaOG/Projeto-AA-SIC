@@ -1,12 +1,40 @@
-import { useRef, useEffect } from "react"
-
+import { useRef, useEffect, useState, useContext} from "react"
+import UserContext from "../../Contexts/UserContext"
 import SmallEventSelected from "./SmallEventSelected"
 
 import TicketType from "./TicketType"
 
 export default function FaseType(props){
 
-    const {events,ticket,setTicket,setFase,types} = props
+    const {ticket,setTicket,setFase} = props
+    const [types,setTypes] = useState([])
+    const {user} = useContext(UserContext);
+
+    function sendGetTypesRequest(){
+
+        fetch("http://localhost:8080/api/event/get_ticket_types_event", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify({
+                event_id: ticket.event.id
+            })
+        })
+        .then(response => response.json())
+        .then(responseJSON => {
+            setTypes(responseJSON)
+        })
+        .catch(error => {
+            console.log(error)
+        });
+
+    }
+
+    useEffect(() => {
+        sendGetTypesRequest()
+    },[])
 
     const allTypes = types.map( type => 
         <TicketType 
@@ -32,7 +60,6 @@ export default function FaseType(props){
                 <p className="gray">Which event do you want to sell tickets for?</p>
 
                 <SmallEventSelected 
-                    events={events} 
                     ticket={ticket} 
                     setTicket={setTicket}
                     setFase={setFase}

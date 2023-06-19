@@ -17,9 +17,9 @@ export default function BrowseTicket(props){
         <div className="eventClickable" onClick={goToEvent}>
             <div className="eventLeftSide">
                 <img className="eventCalendar" src={Calendar} alt="" />
-                <h3>{event.eventName}</h3>
-                <p className='colorGreen'>{event.dayOfWeek}, {event.month} {event.day} | {event.time} </p>
-                <p>{event.eventPlace}</p>
+                <h3>{event.event_name}</h3>
+                <p className='colorGreen'>{event.start_date} - {event.end_date}</p>
+                <p>{event.event_place}</p>
             </div>
         </div>
     )
