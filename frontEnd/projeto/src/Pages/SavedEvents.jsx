@@ -141,7 +141,6 @@ export default function SavedEvents(props) {
 			console.log(responseJSON)
 			if (responseJSON.confirmed === "true"){
 				getSaved();
-
 			}
 			else{
 				console.log("Correu Mal")

@@ -2,10 +2,11 @@ import { useState, useEffect ,useContext} from "react";
 import Select from "react-select";
 import UserContext from "../../Contexts/UserContext";
 import "../../Styles/Profile.css";
+import BlackClose from "../../Images/blackClose.png"
 import { useTranslation } from "react-i18next";
 
 export default function PopUpAddArtist(props) {
-  const [artist, setArtist] = useState(null);
+  const [artist, setArtist] = useState("");
   const [message, setMessage] = useState("");
   const {user} = useContext(UserContext);
 
@@ -37,9 +38,10 @@ export default function PopUpAddArtist(props) {
   useEffect(() => {
     if (props.trigger) {
       getArtists();
-
     }
   }, [props.trigger]);
+
+
 
   const handleArtistChange = (selectedOption) => {
     if (selectedOption) {
@@ -62,6 +64,49 @@ export default function PopUpAddArtist(props) {
       props.setPopUpTrigger(false);
     }
   };
+
+  return props.trigger ? (
+    <div>
+    <div className="editContainter">
+        <img src={BlackClose} className="editClose" alt="" onClick={() => props.setPopUpTrigger(false)} />
+        <h3 className="editTitle">Add Artist</h3>
+        <form>
+        <Select
+              className="inputSelectArtist"
+              value={artist}
+              onChange={handleArtistChange}
+              options={artistOptions}
+              getOptionLabel={(option) => option.artist_name}
+              getOptionValue={(option) => option}
+              placeholder=""
+              isSearchable={true}
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                  borderRadius: '10px',
+                  fontSize: '15px',
+                  margin: "10px",
+                }),
+              }}
+            />
+            <h3
+              className="promptAddArtist"
+              onClick={() => {props.setPopUpTriggerCreate(true); props.setPopUpTrigger(false)}}
+            >
+              Not Listed? Click here!
+            </h3>
+            <h3 className="redH3">{message}</h3>
+        </form>
+        <button className="button" onClick={() => submitType()}>Confirm</button>
+    </div>
+</div>
+
+  ) : ("")
+
+
+
+
+
 
   return props.trigger ? (
     <div>
