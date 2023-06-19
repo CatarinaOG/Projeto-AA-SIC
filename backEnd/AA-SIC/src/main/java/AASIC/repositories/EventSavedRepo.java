@@ -15,8 +15,8 @@ public interface EventSavedRepo extends JpaRepository<EventSaved, Integer> {
     Optional<EventSaved> findEventSavedByEventId(Integer id);
 
     @Modifying
-    @Query(value = "DELETE FROM event_saved WHERE event_id = ?", nativeQuery = true)
-    void removeEventSavedByEventId(Integer id);
+    @Query(value = "DELETE FROM event_saved WHERE id = ?", nativeQuery = true)
+    void removeEventSavedById(Integer id);
 
 
 }

@@ -17,6 +17,6 @@ public interface EventFollowedRepo extends JpaRepository<EventFollowed, Integer>
     Optional<EventFollowed> findEventFollowedByEventId(Integer id);
 
     @Modifying
-    @Query(value = "DELETE FROM event_followed es WHERE es.event_id = ?", nativeQuery = true)
-    void removeEventFollowedByEventId(Integer id);
+    @Query(value = "DELETE FROM event_followed es WHERE id = ?", nativeQuery = true)
+    void removeEventFollowedById(Integer id);
 }
