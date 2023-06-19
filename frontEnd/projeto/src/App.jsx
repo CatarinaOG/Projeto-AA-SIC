@@ -52,6 +52,7 @@ function App() {
 	const [addEventInfo,setAddEventInfo] = useState({})
 	const [searchText,setSearchText] = useState("")
 	const [ticketID, setTicketID] = useState()
+    const [updateEvent,setUpdateEvent] = useState(false)
 
 
 	function sendGetUserRequest(){
@@ -108,7 +109,7 @@ function App() {
 					{ user.type === "user" &&
 						<Route
 							path="/HomeUser" element={
-							<HomeUser setEventId={setEventId} />}
+							<HomeUser setEventId={setEventId} setSearchText={setSearchText}/>}
 						/>
 					}
 					{ user.type === "user" &&
@@ -169,7 +170,7 @@ function App() {
 
 					<Route
 						path="/Event"element={
-						<Event eventId={eventId} setTicketID={setTicketID}/>}
+						<Event eventId={eventId} setTicketID={setTicketID} updateEvent={updateEvent} setUpdateEvent={setUpdateEvent}/>}
 					/>
 
 					{ user.type === "user" &&
@@ -182,7 +183,7 @@ function App() {
 
 					{ user.type === "promoter" &&
 						<Route path="/HomePromoter" element={
-							<HomePromoter setEventId={setEventId}/>} 
+							<HomePromoter setEventId={setEventId} setSearchText={setSearchText}/>} 
 						/>
 					}
 					{ user.type === "promoter" &&
@@ -212,7 +213,7 @@ function App() {
 
 					{ user.type === "admin" &&
 						<Route path="/HomeAdmin" element={
-							<HomeAdmin setEventId={setEventId}/>} 
+							<HomeAdmin setEventId={setEventId} setSearchText={setSearchText}/>} 
 						/>
 					}
 					{ user.type === "admin" &&

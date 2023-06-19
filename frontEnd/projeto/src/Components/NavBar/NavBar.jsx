@@ -144,7 +144,7 @@ export default function NavBar(){
         <div>
             <nav className="navBar">
                 
-                <Link to="/"><img className="logoImage" onClick={showNone} src={Logo} alt="" /></Link>
+                <Link to="/"><img className="logoImage" src={Logo} alt="" /></Link>
 
                 <div className="navBarRighSide">
 

@@ -10,84 +10,16 @@ import EventListElem from "../Components/EventsListing/EventListElem";
 export default function EventsListing() {
 	const {user} = useContext(UserContext);
 
-	const [events, setEvents] = useState([
-		// para ser substituido pelo pedido com base no filtro
-		{
-			dayOfWeek: "Wednesday",
-			month: "May",
-			day: "8",
-			time: "9:25 PM",
-			ticketType: "Relvado",
-			eventName: "Coldplay - Music Of The Spheres World Tour",
-			eventPlace: "Estádio Cidade de Coimbra, Coimbra",
-			ticketPrice: "80.56",
-		},
-		{
-			dayOfWeek: "Friday",
-			month: "May",
-			day: "19",
-			time: "08:00 PM",
-			ticketType: "Floor",
-			eventName: "Post Malone - Twelve Carat Tour",
-			eventPlace: "Ziggo Dome, Amsterdam",
-			ticketPrice: "109.02",
-		},
-		{
-			dayOfWeek: "Thursday",
-			month: "Jul",
-			day: "7",
-			time: "03:00 PM",
-			ticketType: "1 Day Ticket | 7 July",
-			eventName: "NOS ALIVE'23",
-			eventPlace: "NOS Alive, Algés, Portugal",
-			ticketPrice: "91,07",
-		},
-		{
-			dayOfWeek: "Thursday",
-			month: "Jul",
-			day: "7",
-			time: "03:00 PM",
-			ticketType: "1 Day Ticket | 7 July",
-			eventName: "NOS ALIVE'23",
-			eventPlace: "NOS Alive, Algés, Portugal",
-			ticketPrice: "91,07",
-		},
-		{
-			dayOfWeek: "Thursday",
-			month: "Jul",
-			day: "7",
-			time: "03:00 PM",
-			ticketType: "1 Day Ticket | 7 July",
-			eventName: "NOS ALIVE'23",
-			eventPlace: "NOS Alive, Algés, Portugal",
-			ticketPrice: "91,07",
-		},
-		{
-			dayOfWeek: "Thursday",
-			month: "Jul",
-			day: "7",
-			time: "03:00 PM",
-			ticketType: "1 Day Ticket | 7 July",
-			eventName: "NOS ALIVE'23",
-			eventPlace: "NOS Alive, Algés, Portugal",
-			ticketPrice: "91,07",
-		},
-		{
-			dayOfWeek: "Thursday",
-			month: "Jul",
-			day: "7",
-			time: "03:00 PM",
-			ticketType: "1 Day Ticket | 7 July",
-			eventName: "NOS ALIVE'23",
-			eventPlace: "NOS Alive, Algés, Portugal",
-			ticketPrice: "91,07",
-		},
-	]);
+	const [events, setEvents] = useState([]);
 
 	const [popUpTrigger, setPopUpTrigger] = useState(false);
 
 	const showEvents = events.map((event) =>
-		<EventListElem event={event} type = "created" method={removeEventPromoter}/>
+		<EventListElem 
+			key={event.event_id}
+			event={event} 
+			type = "created" 
+			method={removeEventPromoter}/>
 	);
 	
 	useEffect(() => {
@@ -104,12 +36,10 @@ export default function EventsListing() {
 		}
 		})
     .then(response => {
-      if (response.ok)
-        return response.json(); // Parse the response JSON
-      throw new Error('Network response was not ok.');
+      if (response.ok) return response.json(); // Parse the response JSON
+      else throw new Error('Network response was not ok.');
     })
     .then(data => {
-		console.log(data)
     	setEvents(data);
       })
 		.catch(error => {
@@ -118,11 +48,6 @@ export default function EventsListing() {
 	}
 
 	function removeEventPromoter( event_id){
-		const input = {
-			event_id : event_id
-		}
-		console.log(JSON.stringify(input))
-		console.log(user.token)
 
 		fetch("http://localhost:8080/api/promoter/remove_event", {
 			method: 'POST',
@@ -130,14 +55,13 @@ export default function EventsListing() {
 			  'Content-Type': 'application/json',        
 			  'Authorization': `Bearer ${user.token}`
 			},
-			body: JSON.stringify(input)
+			body: JSON.stringify({
+				event_id : event_id
+			})
 		})
 		.then(response => {
-		  if (response.ok) {
-			return response.json();
-		  } else {
-			throw new Error('Error: ' + response.status);
-		  }
+			if (response.ok) return response.json();
+			else throw new Error('Error: ' + response.status);
 		})
 		.then(responseJSON => {
 		  console.log(responseJSON.confirmed);

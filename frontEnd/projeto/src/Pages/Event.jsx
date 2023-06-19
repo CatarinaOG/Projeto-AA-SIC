@@ -17,39 +17,49 @@ import "../Styles/Event.css";
 
 export default function Event(props){
 
-    const {eventId,setTicketID} = props
+    const {eventId,setTicketID,updateEvent,setUpdateEvent} = props
     const {user} = useContext(UserContext);
 
     const [show,setShow] = useState("ticketsType") // ticket / tickets / ticketsType / info
 
     const [event,setEvent] = useState()
+    const [artists,setArtists] = useState([])
     const [ticketTypes,setTicketTypes] = useState([])
     const [ticketType,setTicketType] = useState()
     const [tickets,setTickets] = useState([])
     const [soldTickets,setSoldTickets] = useState([])
     const [ticket,setTicket] = useState()
-    const [update,setUpdate] = useState(false)
 
 
     useEffect(() => {
         sendGetFullEventRequest()
         sendGetTicketTypesRequest()
-    },[update])
+    },[updateEvent])
 
 
     function sendGetFullEventRequest(){
+
+        let input = {
+            event_id: eventId
+        }
+
+        if(user.type === "user"){
+            input = {
+                event_id: eventId,
+                token: user.token
+            }
+        }
 
         fetch("http://localhost:8080/api/event/get_full_event", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                event_id: eventId
-            })
+            body: JSON.stringify(input)
         })
         .then(response => response.json())
         .then(responseJSON => {
+            setArtists(responseJSON.artists)
             setEvent(responseJSON)
             setEvent(old => ({...old,image:"https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg"})) // para retirar
         })
@@ -94,6 +104,7 @@ export default function Event(props){
         .then(response => response.json())
         .then(responseJSON => {
             setTickets(responseJSON)
+            sendGetTicketsSoldRequest(ticket_id)
             setShow("tickets")
         })
         .catch(error => {
@@ -124,23 +135,6 @@ export default function Event(props){
 
 
 
-    const [artists,setArtists] = useState([
-        {
-            id: 1,
-            name: "Coldplay",
-            upcoming_events: 2,    
-            image: "https://static.globalnoticias.pt/jn/image.jpg?brand=JN&type=generate&guid=a3d8e6d8-d0c8-4b35-a3a5-959fb88711bf&w=744&h=495&t=20220819135537"
-        },
-        {
-            id: 2,
-            name: "Coldplay",
-            upcoming_events: 2,  
-            image: "https://static.globalnoticias.pt/jn/image.jpg?brand=JN&type=generate&guid=a3d8e6d8-d0c8-4b35-a3a5-959fb88711bf&w=744&h=495&t=20220819135537"
-        },
-    ])
-
-
-
     function showTicketsTypes(){
         setShow("ticketsType")
     }
@@ -161,7 +155,7 @@ export default function Event(props){
                 event_id: event.id
             })
         })
-        .then(setUpdate(old => !old))
+        .then(setUpdateEvent(old => !old))
         .catch(error => {
             console.log(error)
         });
@@ -200,14 +194,13 @@ export default function Event(props){
             ticketType={ticketType}
         />
     )
-
+    
     const showArtists = artists.map((artist) =>
         <Artist 
-            key={artist.id}
+            key={artist.artist_code}
             artist={artist}
         />
     )
-
 
    
     return event ? (
@@ -262,7 +255,7 @@ export default function Event(props){
                         { show === "ticketsType" &&
                             <div className="marginBottom">
                                 {user.type === "user" &&
-                                    <TicketAlert event={event} setUpdate={setUpdate}/>
+                                    <TicketAlert event={event} setUpdateEvent={setUpdateEvent}/>
                                 }      
                                 <h2 className="marginTop">Tickets Types</h2>
                                 {showTheTicketsTypes}
@@ -272,7 +265,7 @@ export default function Event(props){
                         { show === "tickets" &&
                             <div>
                                 {user.type === "user" &&
-                                    <TicketAlert event={event} setUpdate={setUpdate}/>
+                                    <TicketAlert event={event} setUpdateEvent={setUpdateEvent}/>
                                 }
                                 <h2 className="marginTop">Tickets Available</h2>
                                 {showTheTickets}

@@ -31,6 +31,8 @@ export default function CreateEvent(props) {
 	const [eventTimeEnd,setEventTimeEnd] = useState("");
 	const [types, setTypes] = useState([]);
 	const [artists, setArtists] = useState([]);
+	const [image, setImage] = useState("");
+
 
 	const [popUpTrigger1, setPopUpTrigger1] = useState(false);
 	const [popUpTrigger2, setPopUpTrigger2] = useState(false);
@@ -332,7 +334,9 @@ export default function CreateEvent(props) {
 			)}
 
 			{popUpAddPhoto &&
-			<AddPictureEvent ></AddPictureEvent>}
+				<AddPictureEvent 
+					setPopUpAddPhoto={setPopUpAddPhoto}
+					setImage={setImage}/>}
 
       		<PopUpCreateEvent trigger={popUpConfirm} setPopUpTrigger={setPopUpConfirm} />
 
@@ -340,6 +344,7 @@ export default function CreateEvent(props) {
 				trigger={popUpTrigger3}
 				setPopUpTrigger={setPopUpTrigger3}
 			/>
+			
 			
 			<div className="center">
 				<div className="defaultContainerCreateEvent">

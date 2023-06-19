@@ -13,7 +13,6 @@ import Magnifier from "../Images/magnifier.png"
 import "../Styles/Browse.css"
 
 
-
 export default function Browse(props){
 
     const {searchText,setSearchText,setEventId} = props
@@ -55,15 +54,17 @@ export default function Browse(props){
 
     }
 
-
     useEffect(() => {
         if(events.length === 0)
             sendGetEventsRequest()
 
     },[])
 
-    function searchEvents(){
-        sendGetEventsRequest()
+
+    function handleEnter(event){
+        if (event.key === 'Enter') {
+            sendGetEventsRequest()
+        }
     }
 
     const show_events = events.map((event) => 
@@ -91,9 +92,7 @@ export default function Browse(props){
                         <div className="searchBarBrowse">
                             <div>
                                 <img className="magnifier" src={Magnifier} alt="" />
-                                <form onSubmit={searchEvents}>
-                                    <input className="inputBrowse" type="text" placeholder="Where do you want to go?" value={searchText} onChange={(event) => setSearchText(event.target.value)}/>              
-                                </form>
+                                <input className="inputBrowse" type="text" placeholder="Where do you want to go?" value={searchText} onChange={(event) => setSearchText(event.target.value)} onKeyDown={handleEnter}/>              
                             </div>
                         </div>
 

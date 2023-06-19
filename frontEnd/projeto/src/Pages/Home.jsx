@@ -18,9 +18,11 @@ export default function Home(props){
     const navigate = useNavigate();
 
 
-    function handleFormSubmit(){
-        setSearchText(tmp)
-        navigate("/Browse")
+    function handleEnter(event){
+        if (event.key === 'Enter') {
+            setSearchText(tmp)
+            navigate("/Browse")
+        }
     }
 
 
@@ -33,9 +35,13 @@ export default function Home(props){
 
                     <div className="input-wrapper">
                         <img className="magnifier" src={Magnifier} alt="" />
-                        <form onSubmit={handleFormSubmit}>
-                            <input className="inputHome" type="text" placeholder="Where do you want to go?" onChange={(event) => setTmp(event.target.value)}/>              
-                        </form>
+                            <input 
+                                className="inputHome" 
+                                type="text" 
+                                placeholder="Where do you want to go?" 
+                                onChange={(event) => setTmp(event.target.value)} 
+                                onKeyDown={handleEnter}
+                            />              
                     </div>
                 </div>
 

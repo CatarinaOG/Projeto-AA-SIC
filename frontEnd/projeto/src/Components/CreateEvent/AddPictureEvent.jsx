@@ -7,8 +7,9 @@ import BlackClose from "../../Images/blackClose.png"
 import fileImage from "../../Images/doc.png"
 
 
-export default function AddPictureEvent(){
+export default function AddPictureEvent(props){
 
+    const {setPopUpAddPhoto,setImage} = props
     const {user,setUser} = useContext(UserContext);
 
     const [fileSaved,setFileSaved] = useState(false)
@@ -20,6 +21,7 @@ export default function AddPictureEvent(){
     }
 
     function closeEdit(){
+        setPopUpAddPhoto(false)
     }
 
     function handleFile(){
@@ -37,36 +39,16 @@ export default function AddPictureEvent(){
             (err) => console.log(err),
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-
+                    setImage(url)
+                    setPopUpAddPhoto(false)
                 });
             }
         );
 
     }
 
-    function sendEditInfoRequest(url){
 
-        fetch("http://localhost:8080/api/user/profile_edit", {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${user.token}`
-            },
-            body: JSON.stringify({
-                picture: url,
-            })
-        })
-        .then(response => {
-            if(response.ok)
-                setUser(oldUser => ({...oldUser,profilePic:temp}))
-        })
-        .catch(error => {
-            console.log(error)
-        });
-
-    }
-
-    function changePicture(event){
+    function choosePicture(event){
         event.preventDefault();
         handleFile()
     }
@@ -77,7 +59,7 @@ export default function AddPictureEvent(){
             <div className="editContainter">
                 <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
                 <h3 className="editTitle">Change profile Picture</h3>
-                <form action="/submit" onSubmit={changePicture}>
+                <form action="/submit" onSubmit={choosePicture}>
                     { !fileSaved && 
                         <div>
                             <div className="file-input-container">

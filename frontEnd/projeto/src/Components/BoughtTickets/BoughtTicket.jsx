@@ -9,15 +9,15 @@ export default function BoughtTicket(props){
         <div className="event">
             <div className="eventLeftSide">
                 <img className="eventCalendar" src={Calendar} alt="" />
-                <h3>{ticket.eventName}</h3>
-                <h3>{ticket.ticketType}</h3>
-                <p className="colorGreen">{ticket.dayOfWeek}, {ticket.month} {ticket.day} | {ticket.time} </p>
-                <p>{ticket.eventPlace}</p>
+                <h3>{ticket.event_name}</h3>
+                <h3>{ticket.ticket_type}</h3>
+                <p className="colorGreen">{ticket.start_date} - {ticket.end_date}</p>
+                <p>{ticket.event_place}</p>
             </div>
 
             <div className="eventRightSide">
-                <h3>{ticket.ticketPrice} $</h3>
-                <a href={ticket.file} download>
+                <h3>{ticket.ticket_price} $</h3>
+                <a href={ticket.ticket_file} download>
                     <img src={Ticket}  className="downloadButton" alt="" />
                 </a>
             </div>

@@ -1,23 +1,45 @@
 import Filter from "./Filter"
 
 import "../../Styles/Filters.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { resolvePath } from "react-router-dom"
 
 export default function Filters(props){
 
     const {setFilters,filtersChanged} = props
 
-    const [placeOptions,setPlaceOptions] = useState([
-        "Lisboa","Porto"
-    ])
+    const [placeOptions,setPlaceOptions] = useState([])
 
     const [timeOptions,setTimeOptions] = useState([
-        "next week","this month","next month","this year","next year"
+        "this week","next week","this month","next month","this year","next year"
     ])
 
-    const [categoryOptions,setCategoryOptions] = useState([
-        "Concert","Festival"
-    ])
+    const [categoryOptions,setCategoryOptions] = useState([])
+
+    useEffect(() => {
+        sendGetOptionsRequest()
+    },[])
+
+
+    function sendGetOptionsRequest(){
+
+        fetch("http://localhost:8080/api/event/get_filters_events", {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+        })
+        .then(response => response.json())
+        .then(responseJSON => {
+            console.log(responseJSON)
+            setPlaceOptions(responseJSON.place)
+            setCategoryOptions(responseJSON.category)
+        })
+        .catch(error => {
+            console.log(error)
+        });
+
+    }
 
 
     return(

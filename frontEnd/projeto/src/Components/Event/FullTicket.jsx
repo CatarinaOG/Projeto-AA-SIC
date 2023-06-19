@@ -15,7 +15,6 @@ export default function FullTicket(props){
     const [loginMandatory,setLoginMandatory] = useState(false)
     const [onlyUser,setOnlyUser] = useState(false)
 
-
     const navigate = useNavigate();
 
     function goBack(){
@@ -62,7 +61,7 @@ export default function FullTicket(props){
                     <div className="userSection">
                         <img className="userImageBuySection" src={profile_pic} alt="" />
                         <div className="userInfoSection">
-                            <h3>{user.name}</h3>
+                            <h3>{ticket.user_name}</h3>
                             <p>"{ticket.description !== "" ? ticket.description : "** No description **"}"</p>
                         </div>
                     </div>
