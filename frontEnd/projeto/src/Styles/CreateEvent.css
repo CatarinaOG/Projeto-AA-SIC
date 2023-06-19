@@ -139,6 +139,14 @@
   margin-bottom: 10px;
 }
 
+.divButtonsCreatePromoter {
+  margin-top: 20px; /* Optional margin for spacing */
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}
+
 .div1CreateEvent {
   align-items: center;
   flex-direction: column;
@@ -239,3 +247,13 @@
   transform: scale(1.2);
 }
 
+.editInputCategory{
+  background-color: var(--grey);
+  border: none;
+  border-radius: 10px;
+  width: 400px;
+  height: 30px;
+  margin-top: 6vh;
+  text-align: center;
+  margin-bottom: 6vh;
+}

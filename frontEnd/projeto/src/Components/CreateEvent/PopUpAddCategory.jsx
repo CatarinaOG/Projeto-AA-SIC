@@ -12,7 +12,7 @@ export default function PopUpAddCategory(props) {
   const [temp,setTemp] = useState("")
 
   const [categoryName, setCategoryName] = useState("");
-  const [message, setMessage] = useState("aaaaa");
+  const [message, setMessage] = useState("");
   const {user} = useContext(UserContext);
 
   useEffect(() => {
@@ -48,21 +48,16 @@ export default function PopUpAddCategory(props) {
         })
     })
     .then(response => {
-		if (response.ok) return response.json();
-		else throw new Error('Error: ' + response.status);
+      if (response.ok) return response.json();
+      else throw new Error('Error: ' + response.status);
     })
     .then(responseJSON => {
-		if(responseJSON.confirmed) props.setPopUpTrigger(false)
-		else setMessage("Category already exists!")
+      if(responseJSON.confirmed) setPopUpTrigger(false)
+      else setMessage("Category already exists!")
     })
     .catch(error => {
 		console.log('Error:', error);
     });
-  }
-
-  function addCategory(){
-    postCategory()
-    setPopUpTrigger(false)
   }
 
 
@@ -71,8 +66,9 @@ export default function PopUpAddCategory(props) {
             <div className="editContainter">
                 <img src={BlackClose} className="editClose" alt="" onClick={() => setPopUpTrigger(false)} />
                 <h3 className="editTitle">Add Category</h3>
-                <form onSubmit={addCategory}>
-                    <input className="editInput" onChange={saveTemp}  placeholder="Insert your new pcategory" type="number"/>
+                <form onSubmit={postCategory}>
+                    <input className="editInputNumber" onChange={saveTemp}  placeholder="Insert your new category" type="text"/>
+                    <p className={message !== "" ? "urlError" : "urlErrorNotVisible"}>{message}</p>
                     <button className="button" type="submit">Confirm</button>
                 </form>
             </div>

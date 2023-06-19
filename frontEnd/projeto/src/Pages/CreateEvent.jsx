@@ -473,9 +473,11 @@ export default function CreateEvent(props) {
 							<div className="divButtonCreatePromoter">
 								<h3 className="redH3">{message}</h3>
 							</div>
-							<div className="divButtonCreatePromoter">
-								<input className="button" type="submit" value="Submit" />
-								<button className="button"  value="Add Photo" onClick={() => setPopUpAddPhoto(true)}>Add Photo</button>
+							<div className="center">
+								<div className="divButtonsCreatePromoter">
+									<input className="button" type="submit" value="Submit" />
+									<button className="button"  value="Add Photo" onClick={() => setPopUpAddPhoto(true)}>Add Photo</button>
+								</div>
 							</div>
 
 						</form>
