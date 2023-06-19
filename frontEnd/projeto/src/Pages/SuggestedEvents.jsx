@@ -12,11 +12,12 @@ export default function SuggestedEvents(props){
     const {user} = useContext(UserContext);
 
     const [suggestedEvents,setSuggestedEvents] = useState([])
+    const [update,setUpdate] = useState(false)
 
 
     useEffect(() => {
         sendGetSuggestedRequest()
-    },[])
+    },[update])
 
     function sendGetSuggestedRequest(){
 
@@ -42,6 +43,7 @@ export default function SuggestedEvents(props){
             key={event.id} 
             event={event} 
             setSuggestedEvent={setSuggestedEvent}
+            setUpdate={setUpdate}
         />
     )
 

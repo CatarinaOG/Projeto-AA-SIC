@@ -144,6 +144,7 @@ export default function Event(props){
 
     }
 
+
     function saveEvent(){
         if(!event.event_saved)
             sendSaveEventRequest()
@@ -237,7 +238,7 @@ export default function Event(props){
                         { show === "ticketsType" &&
                             <div className="marginBottom">
                                 {user.type === "user" &&
-                                    <TicketAlert event={event} />
+                                    <TicketAlert event={event} setEvent={setEvent}/>
                                 }      
                                 <h2 className="marginTop">Tickets Types</h2>
                                 {showTheTicketsTypes}
@@ -247,7 +248,7 @@ export default function Event(props){
                         { show === "tickets" &&
                             <div>
                                 {user.type === "user" &&
-                                    <TicketAlert event={event} />
+                                    <TicketAlert event={event} setEvent={setEvent}/>
                                 }
                                 <h2 className="marginTop">Tickets Available</h2>
                                 {showTheTickets}

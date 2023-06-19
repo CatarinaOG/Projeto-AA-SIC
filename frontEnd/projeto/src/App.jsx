@@ -160,18 +160,17 @@ function App() {
 							<SuggestEvent />}
 						/>
 					}
-					{ user.type === "user" &&
-						<Route
-							path="/Browse" element={
-							<Browse searchText={searchText} setSearchText={setSearchText} setEventId={setEventId}/>}
-						/>
-					}
-					{ user.type === "user" &&
-						<Route
-							path="/Event"element={
-							<Event eventId={eventId} />}
-						/>
-					}
+
+					<Route
+						path="/Browse" element={
+						<Browse searchText={searchText} setSearchText={setSearchText} setEventId={setEventId}/>}
+					/>
+
+					<Route
+						path="/Event"element={
+						<Event eventId={eventId} />}
+					/>
+
 					{ user.type === "user" &&
 
 						<Route

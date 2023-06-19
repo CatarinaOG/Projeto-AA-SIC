@@ -9,7 +9,7 @@ import { useState,useContext } from "react"
 
 export default function TicketAlert(props){
 
-    const {event} = props
+    const {event,setEvent} = props
     const {user} = useContext(UserContext);
 
 
@@ -27,6 +27,7 @@ export default function TicketAlert(props){
                 event_id: event.id
             })
         })
+        .then(response => setEvent(old => ({...old,event_followed: true})))
         .catch(error => {
             console.log(error)
         });

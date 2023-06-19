@@ -7,7 +7,7 @@ import BlackClose from "../../Images/blackClose.png"
 
 export default function SuggestedEvent(props){
 
-    const {event,setSuggestedEvent} = props
+    const {event,setSuggestedEvent,setUpdate} = props
     const {user} = useContext(UserContext);
 
     const navigate = useNavigate()
@@ -21,7 +21,7 @@ export default function SuggestedEvent(props){
 
     function sendRemoveSuggestionRequest(){
 
-        fetch("http://localhost:8080/", {
+        fetch("http://localhost:8080/api/promoter/remove_suggestion", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -31,17 +31,14 @@ export default function SuggestedEvent(props){
                 suggestion_id: event.id
             })
         })
-        .then(response => response.json())
-        .then(userResponse => {
-            console.log(userResponse)
-        })
+        .then(reponse => setUpdate(old => !old))
         .catch(error => {
             console.log(error)
         });
     }
 
     function removeSuggestion(){
-        //sendRemoveSuggestionRequest
+        sendRemoveSuggestionRequest()
         setShowConfirmation(false)
     }
 
