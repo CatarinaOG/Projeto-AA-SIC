@@ -241,15 +241,17 @@ public class UserService {
     }
 
     @Transactional
-    public void remove_saved_event(RemoveSavedEventRequest request) {
-        EventSaved eventSaved = eventSavedRepo.findEventSavedByEventId(request.getEvent_id()).get();
-        eventSavedRepo.deleteById(eventSaved.getId());
+    public void remove_saved_event(RemoveSavedEventRequest request, String email) {
+        User u = userRepo.findUserByEmail(email).get();
+        EventSaved e = u.getEvents_saved().stream().filter(es -> es.getEvent().getId() == request.getEvent_id()).findFirst().get();
+        eventSavedRepo.deleteById(e.getId());
     }
 
     @Transactional
-    public void remove_followed_event(RemoveFollowedEventRequest request){
-        EventFollowed eventFollowed = eventFollowedRepo.findEventFollowedByEventId(request.getEvent_id()).get();
-        eventFollowedRepo.removeEventFollowedByEventId(eventFollowed.getId());
+    public void remove_followed_event(RemoveFollowedEventRequest request, String email){
+        User u = userRepo.findUserByEmail(email).get();
+        EventFollowed e = u.getEvents_followed().stream().filter(ef -> ef.getEvent().getId() == request.getEvent_id()).findFirst().get();
+        eventFollowedRepo.deleteById(e.getId());
     }
 
     public AuthenticationResponse get_user(String email) {

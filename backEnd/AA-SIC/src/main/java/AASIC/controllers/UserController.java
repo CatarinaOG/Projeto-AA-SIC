@@ -112,14 +112,18 @@ public class UserController {
     }
 
     @PostMapping("/remove_followed_event")
-    public ResponseEntity<String> remove_followed_event(@RequestBody RemoveFollowedEventRequest request){
-        userService.remove_followed_event(request);
+    public ResponseEntity<String> remove_followed_event(@RequestBody RemoveFollowedEventRequest request, @RequestHeader(name = "Authorization") String token){
+        var jwt = token.substring(7);
+        String email = jwtService.extractUsername(jwt);
+        userService.remove_followed_event(request,email);
         return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
     }
 
     @PostMapping("/remove_saved_event")
-    public ResponseEntity<String> remove_saved_event(@RequestBody RemoveSavedEventRequest request){
-        userService.remove_saved_event(request);
+    public ResponseEntity<String> remove_saved_event(@RequestBody RemoveSavedEventRequest request, @RequestHeader(name="Authorization") String token){
+        var jwt = token.substring(7);
+        String email = jwtService.extractUsername(jwt);
+        userService.remove_saved_event(request, email);
         return ResponseEntity.ok("{\"confirmed\" : \"true\"}");
     }
 
