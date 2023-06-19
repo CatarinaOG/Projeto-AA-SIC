@@ -145,10 +145,8 @@ export default function Event(props){
     }
 
     function saveEvent(){
-        if(event.is_saved)
+        if(!event.event_saved)
             sendSaveEventRequest()
-        //else
-            //sendDeSaveEventRequest()
     }
 
     const showTheTicketsTypes = ticketTypes.map((ticketType) => 
