@@ -38,7 +38,7 @@ public class SecurityConfig {
                         "/api/*/register",
                         "/api/*/login",
                         "/api/event/get_full_event",
-                        "/api/event/get_filters_event",
+                        "/api/event/get_filters_events",
                         "/api/event/get_events",
                         "/api/event/get_filtered_events",
                         "/api/event/get_ticket_types_event",

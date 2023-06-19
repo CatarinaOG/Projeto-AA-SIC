@@ -290,16 +290,17 @@ public class UserService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         for(Ad a : ads){
-            GetBoughtTicketsByUserResponse aux = new GetBoughtTicketsByUserResponse();
-            aux.setId(a.getId());
-            aux.setStart_date(a.getEvent().getDate_start().format(formatter));
-            aux.setEnd_date(a.getEvent().getDate_end().format(formatter));
-            aux.setTicket_type(a.getTicket_type().getType());
-            aux.setEvent_name(a.getEvent().getName());
-            aux.setEvent_place(a.getEvent().getLocation().getName());
-            aux.setTicket_price(a.getPrice());
-            aux.setTicket_file(a.getTicket());
-
+            GetBoughtTicketsByUserResponse aux = GetBoughtTicketsByUserResponse
+                    .builder()
+                    .id(a.getId())
+                    .start_date(a.getEvent().getDate_start().format(formatter))
+                    .end_date(a.getEvent().getDate_end().format(formatter))
+                    .ticket_type(a.getTicket_type().getType())
+                    .event_name(a.getEvent().getName())
+                    .event_place(a.getEvent().getLocation().getName())
+                    .ticket_price(a.getPrice())
+                    .ticket_file(a.getTicket())
+                    .build();
             response.add(aux);
         }
         return response;
