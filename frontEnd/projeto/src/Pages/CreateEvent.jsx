@@ -415,7 +415,7 @@ export default function CreateEvent(props) {
 
 							<div className="inputsFlexible">
 								<div className="flexibleLeftSide">
-									<div className="div1CreateEvent">
+									<div className="div2CreateEvent">
 										<div className="divCreateEventTitle">
 											<h3>Ticket Types</h3>
 											<img src={add} alt="" className="addIconToTitle" onClick={openPopType}/>

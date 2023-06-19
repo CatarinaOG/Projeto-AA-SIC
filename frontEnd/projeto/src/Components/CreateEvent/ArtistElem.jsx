@@ -9,15 +9,10 @@ export default function ArtistElem(props) {
   return (
     <div className="typesListing">
       <div className="typesListing-elem-1">
-        <h2>{props.artist}</h2>
+        <h3>{props.artist}</h3>
       </div>
       <div className="typesListing-elem-3">
-        <img
-          className="closeIcon"
-          src={close}
-          alt=""
-          onClick={handleRemoveArtist}
-        />
+        <img className="closeIcon" src={close} alt="" onClick={handleRemoveArtist}/>
       </div>
     </div>
   );

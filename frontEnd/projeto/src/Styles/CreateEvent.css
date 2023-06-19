@@ -85,6 +85,7 @@
   width: 90vw;
   max-width: 800px;
   margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .smallContainerCreateEventInputs{
@@ -122,17 +123,16 @@
 }
 
 .flexibleRightSide{
-  align-items: center;
   flex: 1;
   display: flex;
   align-items: center; 
-
+  justify-content: center;
+  font-weight: bold;
 }
 
 .divButtonCreatePromoter {
-  display: flex;
-  justify-content: center; /* Center the button horizontally */
   margin-top: 20px; /* Optional margin for spacing */
+  margin-bottom: 10px;
 }
 
 .div1CreateEvent {
@@ -155,13 +155,13 @@
 .typesListing {
   border: 1px solid var(--white);
   border-radius: 10px;
-  margin: 20px;
-  padding: 10px;
-  padding-left: 40px;
+  width: 250px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding-left: 20px;
+  margin-top: 10px;
 }
 
 .typesListing-elem-1 {

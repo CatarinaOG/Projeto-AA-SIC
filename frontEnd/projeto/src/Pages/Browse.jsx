@@ -1,4 +1,4 @@
-import { useState,useContext } from "react"
+import { useState,useContext, useEffect } from "react"
 
 import Filters from "../Components/Filters/Filters"
 import NavBarUser from "../Components/NavBar/NavBarUser"
@@ -19,71 +19,38 @@ export default function Browse(props){
     const {searchText,setSearchText,setEventId} = props
     const {user} = useContext(UserContext);
 
-    const [events,setEvents] =useState([ // para ser substituido pelo pedido com base no filtro
-        {
-            id: 1,
-            dayOfWeek: "Wednesday",
-            month: "May",
-            day: "8",
-            time: "9:25 PM",
-            eventName: "Coldplay - Music Of The Spheres World Tour",
-            eventPlace: "Estádio Cidade de Coimbra, Coimbra",
-        },
-        {
-            id: 2,
-            dayOfWeek: "Friday",
-            month: "May",
-            day: "19",
-            time: "08:00 PM",
-            eventName: "Post Malone - Twelve Carat Tour",
-            eventPlace: "Ziggo Dome, Amsterdam",
-        },
-        {
-            id: 3,
-            dayOfWeek: "Thursday",
-            month: "Jul",
-            day: "7",
-            time: "03:00 PM",
-            eventName: "NOS ALIVE'23",
-            eventPlace: "NOS Alive, Algés, Portugal",
-        },
-        {
-            id: 4,
-            dayOfWeek: "Thursday",
-            month: "Jul",
-            day: "7",
-            time: "03:00 PM",
-            eventName: "NOS ALIVE'23",
-            eventPlace: "NOS Alive, Algés, Portugal",
-        },
-        {
-            id: 5,
-            dayOfWeek: "Thursday",
-            month: "Jul",
-            day: "7",
-            time: "03:00 PM",
-            eventName: "NOS ALIVE'23",
-            eventPlace: "NOS Alive, Algés, Portugal",
-        },
-        {
-            id: 6,
-            dayOfWeek: "Thursday",
-            month: "Jul",
-            day: "7",
-            time: "03:00 PM",
-            eventName: "NOS ALIVE'23",
-            eventPlace: "NOS Alive, Algés, Portugal",
-        },
-        {
-            id: 7,
-            dayOfWeek: "Thursday",
-            month: "Jul",
-            day: "7",
-            time: "03:00 PM",
-            eventName: "NOS ALIVE'23",
-            eventPlace: "NOS Alive, Algés, Portugal",
-        },
-    ])
+    const [events,setEvents] =useState([])
+
+    function sendGetEventsRequest(){
+
+        fetch("http://localhost:8080/api/event/get_filtered_events", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                filter_text: "",
+                filter_place: "",
+                filter_time: "",
+                filter_category: "",
+            })
+        })
+        .then(response => response.json())
+        .then(responseJSON => {
+            setEvents(responseJSON)
+        })
+        .catch(error => {
+            console.log(error)
+        });
+
+    }
+
+
+    useEffect(() => {
+        if(events.length === 0)
+            sendGetEventsRequest()
+
+    },[])
 
     function searchEvents(){
     }
