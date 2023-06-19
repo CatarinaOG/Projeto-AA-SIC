@@ -55,7 +55,7 @@ public class PromoterService {
         Promoter promoter = promoterRepo.findPromoterByEmail(email).get();
         event.setPromoter(promoter);
         event.setCategory(categoryRepo.findById(Integer.parseInt(request.getEvent_category())).get());
-        //TODO -> event.setImage(request.getImage());
+        event.setImage(request.getImage());
         eventRepo.save(event);
 
         for (TicketTypeRequest ttr : request.getEvent_types()){

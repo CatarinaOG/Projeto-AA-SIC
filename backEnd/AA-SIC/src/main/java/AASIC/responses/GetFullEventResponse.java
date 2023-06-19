@@ -19,7 +19,8 @@ public class GetFullEventResponse {
     private String end_date;
     private String event_name;
     private String event_place;
-    private String image;
+    private String map_image;
+    private String event_image;
     private int tickets_available;
     private int tickets_sold;
     private int tickets_wanted;

@@ -48,7 +48,7 @@ public class EventService {
         return response;
     }
 
-    private int get_upcoming_events(Location location){
+    private int get_upcoming_events_location(Location location){
         int upcoming_events = 0;
         for (Event e : location.getEvents()){
             if (e.getDate_start().isAfter(LocalDateTime.now())){
@@ -58,19 +58,24 @@ public class EventService {
         return upcoming_events;
     }
 
+    private int get_upcoming_events_artist(ArtistInEvent artistInEvent){
+        return artistInEvent.getArtist().getEvent_list().size();
+    }
+
     public GetFullEventResponse get_full_event(GetFullEventRequest request, String email) {
         Event e = eventRepo.findById(request.getEvent_id()).get();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         int tickets_sold = e.getAds().stream().filter(Ad::getSold).toList().size();
-        int upcoming_events = get_upcoming_events(e.getLocation());
+        int upcoming_events_location = get_upcoming_events_location(e.getLocation());
         List<GetArtistsResponse> artists = new ArrayList<>();
-        
         for(ArtistInEvent aie : e.getArtist_list()){
             Artist a = aie.getArtist();
+            int upcoming_events_artist = get_upcoming_events_artist(aie);
             GetArtistsResponse aux = GetArtistsResponse
                     .builder()
                     .artist_code(a.getId())
                     .artist_name(a.getName())
+                    .upcoming_events(upcoming_events_artist)
                     .build();
             artists.add(aux);
         }
@@ -83,6 +88,8 @@ public class EventService {
             event_saved = e.getUsers_saved().stream().map(EventSaved::getUser).toList().contains(u);
         }
 
+
+
         return GetFullEventResponse
                 .builder()
                 .id(e.getId())
@@ -90,7 +97,8 @@ public class EventService {
                 .end_date(e.getDate_end().format(formatter))
                 .event_name(e.getName())
                 .event_place(e.getLocation().getName())
-                .image(e.getLocation().getMap())
+                .map_image(e.getLocation().getMap())
+                .event_image(e.getImage())
                 .tickets_available(e.getAds().size())
                 .tickets_sold(tickets_sold)
                 .tickets_wanted(e.getUsers_saved().size())
@@ -98,7 +106,7 @@ public class EventService {
                 .event_followed(event_followed)
                 .lat(e.getLocation().getLatitude())
                 .lng(e.getLocation().getLongitude())
-                .upcoming_events(upcoming_events)
+                .upcoming_events(upcoming_events_location)
                 .artists(artists)
                 .build();
     }
@@ -115,10 +123,12 @@ public class EventService {
 
             if(!place_filters.contains(e.getLocation().getName())){
                 place_filters.add(e.getLocation().getName());
+                place_filters.add(e.getLocation().getCity());
             }
-            if(!place_filters.contains(e.getCategory().getName())) {
+            if(!category_filters.contains(e.getCategory().getName())) {
                 category_filters.add(e.getCategory().getName());
             }
+
         }
 
         return GetFiltersResponse

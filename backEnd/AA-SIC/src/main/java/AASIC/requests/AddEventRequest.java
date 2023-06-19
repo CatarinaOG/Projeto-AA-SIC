@@ -19,7 +19,7 @@ public class AddEventRequest {
     private String event_category;
     private List<TicketTypeRequest> event_types;
     private List<ArtistRequest> event_artists;
-    //TODO -> private String image;
+    private String image;
 }
 
 

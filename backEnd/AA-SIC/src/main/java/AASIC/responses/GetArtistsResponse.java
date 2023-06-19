@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class GetArtistsResponse {
     private String artist_name;
     private int artist_code;
+    private int upcoming_events;
 }
 
