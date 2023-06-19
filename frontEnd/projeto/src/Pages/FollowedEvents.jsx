@@ -81,7 +81,7 @@ export default function FollowedEvents(props) {
 	]);
 
 	const eventsFiltered = events.map((event) =>
-		<SavedFollowElem key={event.id} event={event} setEventId={setEventId} type="followed"/>
+		<SavedFollowElem key={event.id} event={event} method = {removeFollowed} type="followed"/>
 	);
 
 	function getFollowed(){
@@ -103,6 +103,46 @@ export default function FollowedEvents(props) {
 		  })
 		  .catch(error => {
 			console.log(error);
+		  });
+	}
+
+
+	function removeFollowed(event_id){
+
+		const input = {
+			event_id : event_id
+		}
+		console.log({
+			event_id: event_id
+		})
+
+		console.log(JSON.stringify(input))
+		console.log(user.token)
+
+		fetch("http://localhost:8080/api/user/remove_saved_event", {
+			method: 'POST',
+			headers: {
+			  'Content-Type': 'application/json',
+			  'Authorization': `Bearer ${user.token}`
+			},
+			body: JSON.stringify(input)
+		})
+		.then(response => {
+			if (response.ok) {
+			  return response.json();
+			} else {
+			  throw new Error('Error: ' + response.status);
+			}
+		  })
+		  .then(responseJSON => {
+			if (responseJSON.confirmed === "true"){
+			}
+			else{
+				console.log("Correu Mal")
+			}
+		  })
+		  .catch(error => {
+			console.log('Error:', error);
 		  });
 	}
 

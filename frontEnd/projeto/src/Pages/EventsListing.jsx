@@ -3,7 +3,6 @@ import UserContext from "../Contexts/UserContext";
 
 import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
 import PopUpRemoveListing from "../Components/SellingListing/PopUpRemoveListing";
-import EventElem from "../Components/General/EventElem.jsx";
 
 import AddPrompt from "../Components/EventsListing/AddPrompt";
 import EventListElem from "../Components/EventsListing/EventListElem";
@@ -88,7 +87,7 @@ export default function EventsListing() {
 	const [popUpTrigger, setPopUpTrigger] = useState(false);
 
 	const showEvents = events.map((event) =>
-		<EventListElem event={event}/>
+		<EventListElem event={event} type = "created" method={removeEventPromoter}/>
 	);
 	
 	useEffect(() => {
@@ -118,6 +117,44 @@ export default function EventsListing() {
 		});
 	}
 
+	function removeEventPromoter( event_id){
+		const input = {
+			event_id : event_id
+		}
+		console.log(JSON.stringify(input))
+		console.log(user.token)
+
+		fetch("http://localhost:8080/api/promoter/remove_event", {
+			method: 'POST',
+			headers: {
+			  'Content-Type': 'application/json',        
+			  'Authorization': `Bearer ${user.token}`
+			},
+			body: JSON.stringify(input)
+		})
+		.then(response => {
+		  if (response.ok) {
+			return response.json();
+		  } else {
+			throw new Error('Error: ' + response.status);
+		  }
+		})
+		.then(responseJSON => {
+		  console.log(responseJSON.confirmed);
+		  if (responseJSON.confirmed === "true"){
+			console.log("AAAAAAAAAAA")
+			getEvents();
+		  }
+		  else{
+			console.log("BBBBBBBBBBB")
+
+		  }
+		})
+		.catch(error => {
+		  console.log('Error:', error);
+		});
+	  }
+	
 
 
 	return (

@@ -10,7 +10,7 @@ export default function SavedEvents(props) {
 
 	const {setEventId} = props
     const {user} = useContext(UserContext);
-
+	const [useEffectTrigger,setUseEffectTrigger] = useState("");
   
 	useEffect(() => {
 		getSaved()
@@ -86,7 +86,7 @@ export default function SavedEvents(props) {
 			key={event.id}
 			event={event} 
 			type="saved" 
-			setEventId={setEventId}
+			method={removeSaved}
 		/>
 	);
 
@@ -111,6 +111,45 @@ export default function SavedEvents(props) {
 		  .catch(error => {
 			console.log(error);
 		  });
+	}
+
+
+	function removeSaved(event_id){
+
+		const input = {
+			event_id:event_id
+		}
+		console.log(user.token)
+		console.log(JSON.stringify(input))
+
+		fetch("http://localhost:8080/api/user/remove_saved_event", {
+			method: 'POST',
+			headers: {
+			  'Content-Type': 'application/json',
+			  'Authorization': `Bearer ${user.token}`
+			},
+			body: JSON.stringify(input)
+		})
+		.then(response => {
+			if (response.ok) {
+			  return response.json();
+			} else {
+			  throw new Error('Error: ' + response.status);
+			}
+		  })
+		  .then(responseJSON => {
+			console.log(responseJSON)
+			if (responseJSON.confirmed === "true"){
+				getSaved();
+
+			}
+			else{
+				console.log("Correu Mal")
+			}
+		  })
+		  .catch(error => {
+			console.log('Error:', error);
+		  })
 	}
 
 

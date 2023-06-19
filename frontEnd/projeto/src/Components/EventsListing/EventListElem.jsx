@@ -7,7 +7,7 @@ import { useState,useContext,useEffect } from "react";
 import UserContext from "../../Contexts/UserContext"
 
 export default function EventListElem(props) {
-	const {event} = props; // saved / followed
+	const {event,method} = props; // saved / followed
     const {user} = useContext(UserContext);
 
 	const [showConfirmation,setShowConfirmation] = useState(false)
@@ -26,19 +26,19 @@ export default function EventListElem(props) {
 		navigate("/Event")
 	}
 
-	let confirmationStatment = ""
+	let confirmationStatment = "Are you sure you want to remove?"
 	function yesClick(){
-	removeEventPromoter()
-	
+		method(event.event_id)
 	}
 
 	const input = {
 		event : event.event_id
 	  }
 
-      
-
 	  function removeEventPromoter(){
+		console.log(JSON.stringify(input))
+		console.log(user.token)
+
 		fetch("http://localhost:8080/api/promoter/remove_event", {
 			method: 'POST',
 			headers: {
@@ -56,7 +56,7 @@ export default function EventListElem(props) {
 		})
 		.then(responseJSON => {
 		  console.log(responseJSON.confirmed);
-		  if (responseJSON.confirmed === true){
+		  if (responseJSON.confirmed === "true"){
 			console.log("AAAAAAAAAAA")
 		  }
 		  else{

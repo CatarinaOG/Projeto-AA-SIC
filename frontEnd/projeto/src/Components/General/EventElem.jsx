@@ -7,7 +7,7 @@ import { useState,useContext,useEffect } from "react";
 import UserContext from "../../Contexts/UserContext"
 
 export default function EventElem(props) {
-	const {event,type,setEventId} = props; // saved / followed
+	const {event,type,setEventId,method} = props; // saved / followed
     const {user} = useContext(UserContext);
 
 	const [showConfirmation,setShowConfirmation] = useState(false)
@@ -42,52 +42,16 @@ export default function EventElem(props) {
 	function yesClick(){
 		switch(type){
 			case "saved":
+				method(event.event_id);
 				break
 			case "followed":
-				removeFollowed();
+				method(event.event_id);
 				break
 			case "created":
-				removeEventPromoter()
+				method(event.event_id);
 				break
 		}
 	
-	}
-
-
-
-	function removeSaved(){
-
-		console.log({
-			event_id:event.event_id
-		})
-
-		fetch("http://localhost:8080/api/user/remove_saved_event", {
-			method: 'POST',
-			headers: {
-			'Content-Type': 'application/json',
-			'Authorization': `Bearer ${user.token}`,
-			body : JSON.stringify({
-				event_id:event.id
-			})
-		}
-		})
-		.then(response => {
-			if (response.ok) {
-			  return response.json();
-			} else {
-			  throw new Error('Error: ' + response.status);
-			}
-		  })
-		  .then(responseJSON => {
-			if (responseJSON.confirmed === true){
-			}
-			else{
-				console.log("Correu Mal")
-			}
-		  })
-		  .catch(error => {
-			console.log('Error:', error);
-		  });
 	}
 
 
@@ -100,10 +64,12 @@ export default function EventElem(props) {
 			event_id:event.event_id
 		})
 
-		fetch("http://localhost:8080/api/user/remove_followed_event", {
+		console.log(JSON.stringify(input))
+
+		fetch("http://localhost:8080/api/user/remove_saved_event", {
 			method: 'POST',
 			headers: {
-			  'Content-Type': 'application/json',        
+			  'Content-Type': 'application/json',
 			  'Authorization': `Bearer ${user.token}`
 			},
 			body: JSON.stringify(input)
@@ -116,7 +82,7 @@ export default function EventElem(props) {
 			}
 		  })
 		  .then(responseJSON => {
-			if (responseJSON.confirmed === true){
+			if (responseJSON.confirmed === "true"){
 			}
 			else{
 				console.log("Correu Mal")
@@ -131,8 +97,9 @@ export default function EventElem(props) {
 	const input = {
 		event : event.event_id
 	  }
+
 	  function removeEventPromoter(){
-		fetch("http://localhost:8080/api/promoter/create_artist", {
+		fetch("http://localhost:8080/api/promoter/remove_event", {
 			method: 'POST',
 			headers: {
 			  'Content-Type': 'application/json',        

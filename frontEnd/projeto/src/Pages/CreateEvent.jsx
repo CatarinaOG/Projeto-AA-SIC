@@ -14,6 +14,7 @@ import PopUpAddCategory from "../Components/CreateEvent/PopUpAddCategory";
 import PopUpCreateArtist from "../Components/CreateEvent/PopUpCreateArtist";
 import PopUpCreateEvent from "../Components/CreateEvent/PopUpCreateEvent";
 import add from "../Images/plus.png"
+import AddPictureEvent from "../Components/CreateEvent/AddPictureEvent";
 
 export default function CreateEvent(props) {
 	const navigate = useNavigate()
@@ -36,6 +37,7 @@ export default function CreateEvent(props) {
 	const [popUpTrigger3, setPopUpTrigger3] = useState(false);
 	const [popUpTrigger4, setPopUpTrigger4] = useState(false);
 	const [popUpConfirm, setPopUpConfirm] = useState(false);
+	const [popUpAddPhoto,setPopUpAddPhoto] = useState(false);
 
 	const {t} = useTranslation();
 
@@ -331,6 +333,9 @@ export default function CreateEvent(props) {
 				/>
 			)}
 
+			{popUpAddPhoto &&
+			<AddPictureEvent ></AddPictureEvent>}
+
       		<PopUpCreateEvent trigger={popUpConfirm} setPopUpTrigger={setPopUpConfirm} />
 
 			<PopUpAddCategory
@@ -372,7 +377,7 @@ export default function CreateEvent(props) {
 													control: (provided) => ({
 														...provided,
 														borderRadius: '10px',
-														fontSize: '10px',
+														fontSize: '15px',
 														margin: "10px",
 													}),
 												}}
@@ -392,7 +397,7 @@ export default function CreateEvent(props) {
 													control: (provided) => ({
 													...provided,
 													borderRadius: '10px',
-													fontSize: '10px',
+													fontSize: '15px',
 													margin: "10px",
 													}),
 												}}
@@ -470,7 +475,9 @@ export default function CreateEvent(props) {
 							</div>
 							<div className="divButtonCreatePromoter">
 								<input className="button" type="submit" value="Submit" />
+								<button className="button"  value="Add Photo" onClick={() => setPopUpAddPhoto(true)}>Add Photo</button>
 							</div>
+
 						</form>
 					</div>
 				</div>
