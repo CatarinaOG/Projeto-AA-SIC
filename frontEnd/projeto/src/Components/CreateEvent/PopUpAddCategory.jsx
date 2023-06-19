@@ -69,7 +69,7 @@ export default function PopUpAddCategory(props) {
             <form>
                 <input className="editInputNumber" onChange={saveTemp}  placeholder="Insert your new category" type="text"/>
                 <p className={message !== "" ? "urlError" : "urlErrorNotVisible"}>{message}</p>
-                <button className="button" type="submit" onClick={submitType}>Confirm</button>
+                <button className="button" onClick={postCategory}>Confirm</button>
             </form>
         </div>
     </div>
