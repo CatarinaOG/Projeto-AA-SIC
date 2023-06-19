@@ -13,9 +13,13 @@
   padding: 40px;
 }
 
-.h1CreateVenue {
-  margin-bottom: 100px;
+.smallContainerInputsCreateVenue{
+  display: flex;
+  height: 50vh;
+  text-align: start;
 }
+
+
 .divFormCreateVenue {
   display: flex;
   justify-content: space-between;

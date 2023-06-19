@@ -5,14 +5,14 @@ import { useState } from "react"
 
 export default function Filters(props){
 
-    const {setFilters} = props // ambos vao ser usados
+    const {setFilters,filtersChanged} = props
 
     const [placeOptions,setPlaceOptions] = useState([
         "Lisboa","Porto"
     ])
 
     const [timeOptions,setTimeOptions] = useState([
-        "Next Month","Tomorrow"
+        "next week","this month","next month","this year","next year"
     ])
 
     const [categoryOptions,setCategoryOptions] = useState([
@@ -27,19 +27,22 @@ export default function Filters(props){
                 key="Place"
                 type="filter_place" 
                 setFilters={setFilters} 
-                options={placeOptions}/>
+                options={placeOptions}
+                filtersChanged={filtersChanged}/>
 
             <Filter 
                 key="Time"
                 type="filter_time" 
                 setFilters={setFilters} 
-                options={timeOptions}/>
+                options={timeOptions}
+                filtersChanged={filtersChanged}/>
 
             <Filter 
                 key="Category"
                 type="filter_category" 
                 setFilters={setFilters} 
-                options={categoryOptions}/>
+                options={categoryOptions}
+                filtersChanged={filtersChanged}/>
 
         </div>
     )

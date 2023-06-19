@@ -112,75 +112,51 @@ export default function AddVenue() {
   
   return (
     <div>
-			<NavBarPromoter selected="events"/>
-      <PopUpAddVenue trigger={popUpTrigger} setPopUpTrigger={setPopUpTrigger} />
-      <div className="center">
-        <div className="CreateVenueContainer">
-          <h1 className="h1CreateVenue">{t('addVenue')}</h1>
-          <form className="formContainer" onSubmit={handleSubmit}>
-            <div className="divFormCreateVenue">
-              <h2 className="h2FormCreateVenue">{t('name')}</h2>
-              <input
-                className="inputFormCreateVenue"
-                type="text"
-                value={name}
-                onChange={handleNameChange}
-              ></input>
-            </div>
-            <div className="divFormCreateVenue">
-              <h2 className="h2FormCreateVenue">{t('address')}</h2>
-              <input
-                className="inputFormCreateVenue"
-                type="text"
-                value={address}
-                onChange={handleAddressChange}
-              ></input>
-            </div>
-            <div className="divFormCreateVenue">
-              <h2 className="h2FormCreateVenue">{t('city')}</h2>
-              <input
-                className="inputFormCreateVenue"
-                type="text"
-                value={city}
-                onChange={handleCityChange}
-              ></input>
-            </div>
-            <div className="divFormCreateVenue">
-              <h2 className="h2FormCreateVenue">{t('capacity')}</h2>
-              <input
-                className="inputFormCreateVenue"
-                type="number"
-                value={capacity}
-                onChange={handleCapacityChange}
-              ></input>
-            </div>
-            <div className="divFormCreateVenue">
-              <h2 className="h2FormCreateVenue">{t('coordinatesVenue')}</h2>
-              <div className="coordFormContainer">
-                <input
-                  className="coordFormCreateEvent"
-                  type="number"
-                  value={latitude}
-                  onChange={handleLatitudeChange}
-                ></input>
-                <input
-                  className="coordFormCreateEvent2"
-                  type="number"
-                  value={longitude}
-                  onChange={handleLongitudeChange}
-                ></input>
-              </div>
-            </div>
-            <div className="divButtonCreatePromoter">
-              <h3 className="redH3">{message}</h3>
-            </div>
-            <div className="divButtonCreatePromoter">
-              <input className="button" type="submit" value="Submit" />
-              <input className="button" type="submit" value="Cancel" onClick={cancel} />
-            </div>
-          </form>
-        </div>
-      </div>
+		<NavBarPromoter selected="events"/>
+		<PopUpAddVenue trigger={popUpTrigger} setPopUpTrigger={setPopUpTrigger} />
+		<div className="center">
+			<div className="defaultContainer">
+			<h1>{t('addVenue')}</h1>
+				<form onSubmit={handleSubmit}>
+					<div className="smallContainer">
+
+						<div className="smallContainerInputsCreateVenue">
+							<div className="smallContainerLeftSide">
+								<div>
+									<p className="suggestEventLabel">{t('name')}</p>
+									<p className="suggestEventLabel">{t('address')}</p>
+									<p className="suggestEventLabel">{t('city')}</p>
+									<p className="suggestEventLabel">{t('capacity')}</p>
+									<p className="suggestEventLabel">{t('coordinatesVenue')}</p>
+								</div>
+							</div>
+
+							<div className="smallContainerRightSide">
+								<div>
+									<input className="suggestEventInput" type="text" value={name} onChange={handleNameChange}></input>
+									<input className="suggestEventInput" type="text" value={address} onChange={handleAddressChange}></input>
+									<input className="suggestEventInput" type="text" value={city} onChange={handleCityChange}></input>
+									<input className="suggestEventInput" type="number" value={capacity} onChange={handleCapacityChange}></input>
+
+									<div className="displayHorizontally">
+										<input className="suggestEventInputDate" type="number" value={latitude} onChange={handleLatitudeChange}></input>
+										<input className="suggestEventInputDate" type="number" value={longitude} onChange={handleLongitudeChange}></input>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<h3 className="redH3">{message}</h3>
+						<div className="center">
+							<div className="divButtonsCreatePromoter">
+								<input className="button" type="submit" value="Submit" />
+								<input className="button" type="submit" value="Cancel" onClick={cancel} />
+							</div>
+						</div>
+          			</div>
+            	</form>
+        	</div>
+      	</div>
     </div>
   );
 }

@@ -20,8 +20,25 @@ export default function Browse(props){
     const {user} = useContext(UserContext);
 
     const [events,setEvents] =useState([])
+    const [filters,setFilters] = useState({
+        filter_place: "",
+        filter_time: "",
+        filter_category: "",
+    })
+
+
+    function filtersChanged(){
+        sendGetEventsRequest()
+    }
 
     function sendGetEventsRequest(){
+
+        console.log({
+            filter_text: searchText,
+            filter_place: filters.filter_place,
+            filter_time: filters.filter_time,
+            filter_category: filters.filter_category,
+        })
 
         fetch("http://localhost:8080/api/event/get_filtered_events", {
             method: 'POST',
@@ -29,10 +46,10 @@ export default function Browse(props){
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                filter_text: "",
-                filter_place: "",
-                filter_time: "",
-                filter_category: "",
+                filter_text: searchText,
+                filter_place: filters.filter_place,
+                filter_time: filters.filter_time,
+                filter_category: filters.filter_category,
             })
         })
         .then(response => response.json())
@@ -53,6 +70,7 @@ export default function Browse(props){
     },[])
 
     function searchEvents(){
+        sendGetEventsRequest()
     }
 
     const show_events = events.map((event) => 
@@ -86,7 +104,7 @@ export default function Browse(props){
                             </div>
                         </div>
 
-                        <Filters />
+                        <Filters setFilters={setFilters} filtersChanged={filtersChanged}/>
 
                         { events.length > 0 && 
                             <div className="eventsContainer">

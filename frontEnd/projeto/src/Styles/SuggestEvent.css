@@ -1,6 +1,7 @@
 
 .smallContainer{
     margin-top: 5vh;
+    margin-bottom: 5vh;
     min-height: 70vh;
     background-color: var(--dark-blue);
     border-radius: 15px;
@@ -42,6 +43,7 @@
     width: 270px;
     height: 30px;
     padding-left: 10px;
+    text-align: center;
 }
 
 .suggestEventInputDate{
@@ -52,6 +54,7 @@
     border-radius: 10px;
     width: 120px;
     height: 30px;
+    text-align: center;
 }
 
 .suggestEventInputTime{

@@ -57,6 +57,10 @@ export default function SuggestedEvents(props){
 
                     <h1>Events Suggested By Users</h1>
                     {showTheSuggestedEvents}
+                    {showTheSuggestedEvents.length === 0 &&
+                        <p>No events have been suggested</p>
+                    }
+                    
                 </div>
             </div>
         </div>

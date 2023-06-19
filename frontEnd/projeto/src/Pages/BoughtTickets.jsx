@@ -16,6 +16,11 @@ export default function BoughtTickets(){
         filter_category: "",
     })
 
+    function filtersChanged(){
+        console.log(filters)
+        //sendGetBoughtTicketsRequest()
+    }
+
 
     const [tickets,setTickets] =useState([
         {
@@ -80,7 +85,7 @@ export default function BoughtTickets(){
                 <div className="defaultContainer">
                     <h1>Bought Tickets</h1>
 
-                    <Filters type="boughtTickets" setFilters={setFilters}/>
+                    <Filters setFilters={setFilters} filtersChanged={filtersChanged}/>
 
                     <div className="eventsContainer">
                         {ticketrsFiltered}
