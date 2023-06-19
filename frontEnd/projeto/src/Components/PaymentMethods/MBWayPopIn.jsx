@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useContext} from "react";
+import UserContext from "../../Contexts/UserContext";
 
 export default function MBWayPopIn({
   setPaymentType,
   setPaymentInfo,
   setMessage,
+  ticketID
 }) {
+
+  const {user} = useContext(UserContext);
+
   const [number, setNumber] = useState(0);
 
   const handleKeyDown = (event) => {
@@ -23,12 +28,45 @@ export default function MBWayPopIn({
     event.preventDefault();
     if (number > 100000000) {
       setPaymentInfo({ phoneNumber: number });
-      setPaymentType("");
-      setMessage("Success");
+      postTicketBuy()
     } else {
       setMessage("Phone Number isn't valid");
     }
   };
+
+  function postTicketBuy(){
+
+    fetch("http://localhost:8080/api/user/buy_ticket", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',        
+          'Authorization': `Bearer ${user.token}`
+        },
+        body: JSON.stringify({
+          ticket_id: ticketID
+        })
+    })
+    .then(response => {
+      if (response.ok) return response.json();
+      else throw new Error('Error: ' + response.status);
+    })
+    .then(responseJSON => {
+      console.log(responseJSON)
+      if(responseJSON.confirmed === "true"){
+        setPaymentType("");
+        setMessage("Success");
+      } 
+      else setMessage("Category already exists!")
+    })
+    .catch(error => {
+		console.log('Error:', error);
+    });
+  }
+
+
+
+
+
 
   return (
     <div className="MBWayPaymentMethod">

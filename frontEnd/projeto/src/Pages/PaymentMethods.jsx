@@ -40,6 +40,7 @@ export default function PaymentMethods(props) {
 					setPaymentType={setPaymentType}
 					setPaymentInfo={setPaymentInfo}
 					setMessage={setMessage}
+					ticketID={ticketID}
 				/>
 				)}
 
