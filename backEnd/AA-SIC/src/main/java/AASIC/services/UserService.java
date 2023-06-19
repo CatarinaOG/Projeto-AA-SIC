@@ -314,7 +314,7 @@ public class UserService {
             if (a.getTicket_type().getId() == type_id && a.getEvent().getId() == event_id){
                 GetTicketsTypeEventResponse aux = new GetTicketsTypeEventResponse();
                 aux.setId(a.getId());
-                aux.setDescription(a.getTicket());
+                aux.setDescription(a.getDescription());
                 aux.setPrice(a.getPrice());
                 aux.setUser_image(a.getUser().getProfile_pic());
                 aux.setUser_name(a.getUser().getName());
@@ -337,7 +337,7 @@ public class UserService {
             if (a.getTicket_type().getId() == type_id && a.getEvent().getId() == event_id && a.getSold()){
                 GetTicketsTypeEventResponse aux = new GetTicketsTypeEventResponse();
                 aux.setId(a.getId());
-                aux.setDescription(a.getTicket());
+                aux.setDescription(a.getDescription());
                 aux.setPrice(a.getPrice());
                 aux.setUser_image(a.getUser().getProfile_pic());
                 aux.setUser_name(a.getUser().getName());
