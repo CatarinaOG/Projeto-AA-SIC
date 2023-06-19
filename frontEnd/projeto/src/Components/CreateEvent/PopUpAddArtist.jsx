@@ -2,6 +2,7 @@ import { useState, useEffect ,useContext} from "react";
 import Select from "react-select";
 import UserContext from "../../Contexts/UserContext";
 import "../../Styles/Profile.css";
+import { useTranslation } from "react-i18next";
 
 export default function PopUpAddArtist(props) {
   const [artist, setArtist] = useState(null);

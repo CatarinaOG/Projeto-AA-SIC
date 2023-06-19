@@ -1,11 +1,14 @@
 import "../../Styles/SellingListing.css";
 import BlackClose from "../../Images/blackClose.png";
 import Close from "../../Images/close.png";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { useState,useContext,useEffect } from "react";
+import UserContext from "../../Contexts/UserContext"
 
 export default function EventElem(props) {
 	const {event,type,setEventId} = props; // saved / followed
+    const {user} = useContext(UserContext);
 
 	const [showConfirmation,setShowConfirmation] = useState(false)
 
@@ -20,7 +23,7 @@ export default function EventElem(props) {
 	}
 
 	function goToEvent(){
-		setEventId(event.id)
+		setEventId(event.event_id)
 		navigate("/Event")
 	}
 
@@ -35,11 +38,140 @@ export default function EventElem(props) {
 			break
 	}
 
+
+	function yesClick(){
+		switch(type){
+			case "saved":
+				break
+			case "followed":
+				removeFollowed();
+				break
+			case "created":
+				removeEventPromoter()
+				break
+		}
+	
+	}
+
+
+
+	function removeSaved(){
+
+		console.log({
+			event_id:event.event_id
+		})
+
+		fetch("http://localhost:8080/api/user/remove_saved_event", {
+			method: 'POST',
+			headers: {
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${user.token}`,
+			body : JSON.stringify({
+				event_id:event.id
+			})
+		}
+		})
+		.then(response => {
+			if (response.ok) {
+			  return response.json();
+			} else {
+			  throw new Error('Error: ' + response.status);
+			}
+		  })
+		  .then(responseJSON => {
+			if (responseJSON.confirmed === true){
+			}
+			else{
+				console.log("Correu Mal")
+			}
+		  })
+		  .catch(error => {
+			console.log('Error:', error);
+		  });
+	}
+
+
+	function removeFollowed(){
+
+		const input = {
+			event_id : event.event_id
+		}
+		console.log({
+			event_id:event.event_id
+		})
+
+		fetch("http://localhost:8080/api/user/remove_followed_event", {
+			method: 'POST',
+			headers: {
+			  'Content-Type': 'application/json',        
+			  'Authorization': `Bearer ${user.token}`
+			},
+			body: JSON.stringify(input)
+		})
+		.then(response => {
+			if (response.ok) {
+			  return response.json();
+			} else {
+			  throw new Error('Error: ' + response.status);
+			}
+		  })
+		  .then(responseJSON => {
+			if (responseJSON.confirmed === true){
+			}
+			else{
+				console.log("Correu Mal")
+			}
+		  })
+		  .catch(error => {
+			console.log('Error:', error);
+		  });
+	}
+
+
+	const input = {
+		event : event.event_id
+	  }
+	  function removeEventPromoter(){
+		fetch("http://localhost:8080/api/promoter/create_artist", {
+			method: 'POST',
+			headers: {
+			  'Content-Type': 'application/json',        
+			  'Authorization': `Bearer ${user.token}`
+			},
+			body: JSON.stringify(input)
+		})
+		.then(response => {
+		  if (response.ok) {
+			return response.json();
+		  } else {
+			throw new Error('Error: ' + response.status);
+		  }
+		})
+		.then(responseJSON => {
+		  console.log(responseJSON.confirmed);
+		  if (responseJSON.confirmed){
+			console.log("AAAAAAAAAAA")
+		  }
+		  else{
+			console.log("BBBBBBBBBBB")
+
+		  }
+		})
+		.catch(error => {
+		  console.log('Error:', error);
+		});
+	  }
+	
+
+
+
+
+
 	return(
-		<div className="listingEvent" onClick={goToEvent}>
+		<div className="listingEvent">
             <div className="listingEventLeftSide">
-                <h2>{event.name}</h2>
-				<h4 className="colorGreen">{event.date} | {event.venue_name}|{event.city} {" "} </h4>
+                <h2>{event.event_name}</h2>
+				<h4 className="colorGreen">{event.start_date} | {event.event_place} </h4>
 				<div className="listingElemClose">
 					<img className="closeIcon" src={Close} alt="" onClick={deleteEvent}/>
 				</div>
@@ -53,8 +185,8 @@ export default function EventElem(props) {
 						<h3 className="popUpInfoWithButtons">{confirmationStatment}</h3>
 						<div className="center">
 							<div className="promoterButtons">
-								<button className="button">Yes</button>
-								<button className="button">No</button>
+								<button className="button" onClick={yesClick}>Yes</button>
+								<button className="button" onClick={closeConfirmation}>No</button>
 							</div>
 						</div>
 

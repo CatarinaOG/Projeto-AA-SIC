@@ -1,13 +1,21 @@
 import NavBarUser from "../Components/NavBar/NavBarUser";
 import PopUpRemoveListing from "../Components/SellingListing/PopUpRemoveListing";
 import EventElem from "../Components/General/EventElem.jsx";
+import UserContext from "../Contexts/UserContext"
 
-import { useState } from "react";
+import { useState,useContext,useEffect } from "react";
 import PopUpSaved from "../Components/General/PopUpSaved";
 
 export default function SavedEvents(props) {
 
 	const {setEventId} = props
+    const {user} = useContext(UserContext);
+
+  
+	useEffect(() => {
+		getSaved()
+	  }, []);
+
 
 	const [events, setEvents] = useState([
 		// para ser substituido pelo pedido com base no filtro
@@ -81,6 +89,32 @@ export default function SavedEvents(props) {
 			setEventId={setEventId}
 		/>
 	);
+
+
+	function getSaved(){
+		fetch("http://localhost:8080/api/user/get_saved_events", {
+			method: 'GET',
+			headers: {
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${user.token}`
+		}
+		})
+		.then(response => {
+			if (response.ok)
+			  return response.json(); // Parse the response JSON
+			throw new Error('Network response was not ok.');
+		  })
+		  .then(data => {
+			console.log(JSON.stringify(data))
+			setEvents(data); // Set the parsed JSON data
+		  })
+		  .catch(error => {
+			console.log(error);
+		  });
+	}
+
+
+
 
 	return (
 		<div>

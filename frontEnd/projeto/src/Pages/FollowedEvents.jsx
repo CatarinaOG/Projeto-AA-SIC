@@ -2,12 +2,19 @@ import NavBarUser from "../Components/NavBar/NavBarUser";
 import SavedFollowElem from "../Components/General/EventElem.jsx";
 import { useTranslation } from "react-i18next";
 
-import { useState } from "react";
+import UserContext from "../Contexts/UserContext"
+
+import { useState,useContext,useEffect } from "react";
 
 export default function FollowedEvents(props) {
 	const {t} = useTranslation();
+    const {user} = useContext(UserContext);
 
 	const {setEventId} = props
+
+	useEffect(() => {
+		getFollowed()
+	  }, []);
 
 	const [events, setEvents] = useState([
 		// para ser substituido pelo pedido com base no filtro
@@ -76,6 +83,30 @@ export default function FollowedEvents(props) {
 	const eventsFiltered = events.map((event) =>
 		<SavedFollowElem key={event.id} event={event} setEventId={setEventId} type="followed"/>
 	);
+
+	function getFollowed(){
+		fetch("http://localhost:8080/api/user/get_followed_events", {
+			method: 'GET',
+			headers: {
+			'Content-Type': 'application/json',
+			'Authorization': `Bearer ${user.token}`
+		}
+		})
+		.then(response => {
+			if (response.ok)
+			  return response.json(); // Parse the response JSON
+			throw new Error('Network response was not ok.');
+		  })
+		  .then(data => {
+			console.log(JSON.stringify(data))
+			setEvents(data); // Set the parsed JSON data
+		  })
+		  .catch(error => {
+			console.log(error);
+		  });
+	}
+
+
 
 
 	return (

@@ -6,6 +6,7 @@ import PopUpRemoveListing from "../Components/SellingListing/PopUpRemoveListing"
 import EventElem from "../Components/General/EventElem.jsx";
 
 import AddPrompt from "../Components/EventsListing/AddPrompt";
+import EventListElem from "../Components/EventsListing/EventListElem";
 
 export default function EventsListing() {
 	const {user} = useContext(UserContext);
@@ -87,7 +88,7 @@ export default function EventsListing() {
 	const [popUpTrigger, setPopUpTrigger] = useState(false);
 
 	const showEvents = events.map((event) =>
-		<EventElem event={event} setPopUpTrigger={setPopUpTrigger} />
+		<EventListElem event={event}/>
 	);
 	
 	useEffect(() => {
@@ -109,7 +110,8 @@ export default function EventsListing() {
       throw new Error('Network response was not ok.');
     })
     .then(data => {
-    setEvents(data);
+		console.log(data)
+    	setEvents(data);
       })
 		.catch(error => {
 			console.log(error)

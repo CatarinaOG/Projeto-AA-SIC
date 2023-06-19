@@ -33,6 +33,7 @@ export default function Event(props){
 
 
     function sendGetFullEventRequest(){
+        console.log(user.token)
         fetch("http://localhost:8080/api/event/get_full_event", {
             method: 'POST',
             headers: {
@@ -44,6 +45,7 @@ export default function Event(props){
         })
         .then(response => response.json())
         .then(responseJSON => {
+            console.log(responseJSON)
             setEvent(responseJSON)
             setEvent(old => ({...old,image:"https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg"})) // para retirar
         })

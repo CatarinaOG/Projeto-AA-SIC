@@ -101,9 +101,9 @@ export default function NavBar(){
         })
         .then(response => response.json())
         .then(userResponse => {
-            setUser({...userResponse,email: inputs.email})
+            setUser({...userResponse,email: inputs.email,type:"user"})
             cookies.set('token',userResponse.token)
-            cookies.set('type',userResponse.type)
+            cookies.set('type',"user")
             navigate('/HomeUser')
         })
         .catch(error => {
