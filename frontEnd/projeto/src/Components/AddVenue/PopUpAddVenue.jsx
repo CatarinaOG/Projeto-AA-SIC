@@ -1,7 +1,10 @@
 import "../../Styles/Profile.css";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function PopUpAddVenue(props) {
+	const {t} = useTranslation();
+
   const navigate = useNavigate();
   const handleRemoveList = () => {
     props.setPopUpTrigger(false);
@@ -11,12 +14,12 @@ export default function PopUpAddVenue(props) {
   return props.trigger ? (
     <div>
       <div className="editContainter">
-        <h3 className="editTitle">Successful!</h3>
+        <h3 className="editTitle">{t('venueSuccess')}</h3>
         <div className="popUpSellingListButton">
           <button className="button" onClick={handleRemoveList}>
             {" "}
-            Back to Event Creation!
-          </button>
+            {t('venuePopUpButton')}          
+            </button>
         </div>
       </div>
     </div>

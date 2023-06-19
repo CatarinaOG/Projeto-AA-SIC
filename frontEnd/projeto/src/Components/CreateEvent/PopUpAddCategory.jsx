@@ -1,6 +1,7 @@
 import { useState, useEffect ,useContext} from "react";
 import UserContext from "../../Contexts/UserContext";
 import "../../Styles/Profile.css";
+import { useTranslation } from "react-i18next";
 
 export default function PopUpAddCategory(props) {
   const [categoryName, setCategoryName] = useState("");

@@ -34,9 +34,13 @@
 .selectContainer{
   display: flex;
   align-items: center;
+  ;
   color: black;
 }
 
+.selectContainer > :first-child {
+  flex-grow: 1; /* Take up all available space */
+}
 
 .inputFormCreateEvent {
   border-radius: 10px;

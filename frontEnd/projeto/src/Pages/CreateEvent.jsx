@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 
 import { TypeList } from "../Components/CreateEvent/TypeList"; // Import TypeList component correctly
+import { useTranslation } from "react-i18next";
 
 import UserContext from "../Contexts/UserContext"
 import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
-import AddButton from "../Images/add.png";
 import PopUpAddType from "../Components/CreateEvent/PopUpAddType";
 import PopUpAddArtist from "../Components/CreateEvent/PopUpAddArtist";
 import ArtistElem from "../Components/CreateEvent/ArtistElem";
@@ -37,6 +37,7 @@ export default function CreateEvent(props) {
 	const [popUpTrigger4, setPopUpTrigger4] = useState(false);
 	const [popUpConfirm, setPopUpConfirm] = useState(false);
 
+	const {t} = useTranslation();
 
 
 	const [message, setMessage] = useState("");
@@ -148,7 +149,7 @@ export default function CreateEvent(props) {
 			setPopUpConfirm(true)
         })
         .catch(error => {
-			setMessage("There was an error")
+			setMessage(t('thereWasAnError'))
         });
 	}
 
@@ -204,7 +205,7 @@ export default function CreateEvent(props) {
 		if (eventDateEnd !== ""){
 			const dateCompare = new Date(eventDateEnd);
 			if (dateTemp > dateCompare) {
-				setMessage("Date is not possible");
+				setMessage(t('messageDateNotPossible'));
 				setEventDateStart("");
 			  } else {
 				setMessage("");
@@ -222,7 +223,7 @@ export default function CreateEvent(props) {
 		if (eventDateStart !== ""){
 			const dateCompare = new Date(eventDateStart);
 			if (dateTemp < dateCompare) {
-				setMessage("Date is not possible");
+				setMessage(t('messageDateNotPossible'));
 				setEventDateEnd("");
 			  } else {
 				setMessage("");
@@ -245,12 +246,10 @@ export default function CreateEvent(props) {
 
 	function openPopType() {
 		if (eventDateStart !== "" && eventDateEnd !== "") {
-		setPopUpTrigger1(true);
-
-		if (message === "Add dates first") {
+			setPopUpTrigger1(true);
 			setMessage("");
 		}
-		} else setMessage("Add dates first");
+		else setMessage(t('messageDateNotPossible'));
 	}
 
 	const handleSubmit = (event) => {
@@ -264,7 +263,7 @@ export default function CreateEvent(props) {
 		types.length === 0 ||
 		artists === 0
 		) {
-		setMessage("There are one or more fields empty");
+		setMessage(t('messageDateNotPossible'));
 		setAddEventInfo("");
 		}else{
 			const artistCodes = artists.map((artist) => ({ artist_code: artist.artist_code }));
@@ -347,11 +346,11 @@ export default function CreateEvent(props) {
 							<div className="smallContainerCreateEventInputs">
 								<div className="smallContainerCreateEventLeftSide">
                                 	<div>
-										<h3 className="createEventLabel">Event Name</h3>
-										<h3 className="createEventLabelSelect">Category</h3>
-										<h3 className="createEventLabelSelect">Venue</h3>
-										<h3 className="createEventLabel">Date(Start/End)</h3>
-										<h3 className="createEventLabel">Time(Start/End)</h3>
+										<h3 className="createEventLabel">{t('eventName')}</h3>
+										<h3 className="createEventLabelSelect">{t('eventCategory')}</h3>
+										<h3 className="createEventLabelSelect">{t('eventVenue')}</h3>
+										<h3 className="createEventLabel">{t('eventDate')}</h3>
+										<h3 className="createEventLabel">{t('eventTime')}</h3>
 									
 										
 									</div>
@@ -373,7 +372,7 @@ export default function CreateEvent(props) {
 														...provided,
 														borderRadius: '10px',
 														fontSize: '10px',
-														margin: "10px"
+														margin: "10px",
 													}),
 												}}
 											/>

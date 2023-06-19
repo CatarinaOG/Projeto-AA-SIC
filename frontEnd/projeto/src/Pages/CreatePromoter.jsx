@@ -28,8 +28,14 @@ export default function CreatePromoter() {
 		const {name,value} = event.target
 		setInput((oldInput) => ({...oldInput,[name]:value}))
 
+		console.log(value);
 		if(name === "password"){
-			if(value !== input.confirmPassword.value) setMessage(t('messagePasswordsDontMatch')); 
+			console.log("Value is" + value)
+			if(value !== input.confirmPassword) setMessage(t('messagePasswordsDontMatch')); 
+			else setMessage("");
+		}
+		if(name === "confirmPassword"){
+			if(value !== input.password) setMessage(t('messagePasswordsDontMatch')); 
 			else setMessage("");
 		}
 	}
@@ -120,11 +126,11 @@ export default function CreatePromoter() {
 						<div className="overlay"></div>
 						<div className="popUpContainer">
 							<img src={BlackClose} className="editClose" alt="" onClick={closePopUp} />
-							<h3 className="popUpInfoWithButtons">Are you sure you want to create this promoter?</h3>
+							<h3 className="popUpInfoWithButtons">{t('promoterAreYouSure')}</h3>
 							<div className="center">
 								<div className="promoterButtons">
-									<button className="button" onClick={sendCreatePromoterRequest}>Yes</button>
-									<button className="button" onClick={closePopUp}>No</button>
+									<button className="button" onClick={sendCreatePromoterRequest}>{t('yes')}</button>
+									<button className="button" onClick={closePopUp}>{t('no')}</button>
 								</div>
 							</div>
 						</div>
@@ -136,7 +142,7 @@ export default function CreatePromoter() {
 						<div className="overlay"></div>
 						<div className="popUpContainer">
 							<img src={BlackClose} className="editClose" alt="" onClick={goHome} />
-							<h3 className="popUpInfoWithButtons">This promoter was created with success!</h3>
+							<h3 className="popUpInfoWithButtons">{t('promoterSuccessMessage')}</h3>
 						</div>
 					</div>
 				}
