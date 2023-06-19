@@ -84,6 +84,7 @@ export default function EditBankDetails(props){
                             <input className="editInputCVC" onChange={saveTemp2} onFocus={setErrorToFalse} placeholder="CVC" type="text"/>
                         </div>
                     </div>
+                    <p className={emptyURLError? "urlError" : "urlErrorNotVisible"}>{error}</p>
                     <button className="button" type="submit">Confirm</button>
                 </form>
             </div>

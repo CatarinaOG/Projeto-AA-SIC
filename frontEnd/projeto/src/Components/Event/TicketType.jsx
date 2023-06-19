@@ -3,11 +3,11 @@ import ticket from "../../Images/ticket.png"
 
 export default function TicketType(props){
 
-    const {ticketType,setTicketType,setShow} = props
+    const {ticketType,sendGetTicketsRequest,setTicketType} = props
 
     function selectTicketType(){
         setTicketType(ticketType)
-        setShow("tickets")
+        sendGetTicketsRequest(ticketType.id)
     }
 
 

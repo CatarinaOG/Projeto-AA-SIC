@@ -11,7 +11,7 @@ export default function TicketType(props){
 
     return(
         <div className="blackContainer" onClick={addTypeToTicket}>
-            <h3>{type.description} - {type.price}</h3>
+            <h3>{type.description} - {type.price}$</h3>
         </div>
     )
 
