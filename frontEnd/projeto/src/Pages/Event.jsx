@@ -17,7 +17,7 @@ import "../Styles/Event.css";
 
 export default function Event(props){
 
-    const {eventId} = props
+    const {eventId,setTicketID} = props
     const {user} = useContext(UserContext);
 
     const [show,setShow] = useState("ticketsType") // ticket / tickets / ticketsType / info
@@ -25,6 +25,8 @@ export default function Event(props){
     const [event,setEvent] = useState()
     const [ticketTypes,setTicketTypes] = useState([])
     const [ticketType,setTicketType] = useState()
+    const [tickets,setTickets] = useState([])
+    const [soldTickets,setSoldTickets] = useState([])
     const [ticket,setTicket] = useState()
     const [update,setUpdate] = useState(false)
 
@@ -79,11 +81,6 @@ export default function Event(props){
     
     function sendGetTicketsRequest(ticket_id){
 
-        console.log({
-            event_id: eventId,
-            ticket_type_id: ticket_id,
-        })
-
         fetch("http://localhost:8080/api/user/get_tickets_by_type_and_event", {
             method: 'POST',
             headers: {
@@ -96,9 +93,29 @@ export default function Event(props){
         })
         .then(response => response.json())
         .then(responseJSON => {
-            console.log(responseJSON)
-            //setTickets(responseJSON)
-            //setShow("tickets")
+            setTickets(responseJSON)
+            setShow("tickets")
+        })
+        .catch(error => {
+            console.log(error)
+        });
+    }
+
+    function sendGetTicketsSoldRequest(ticket_id){
+
+        fetch("http://localhost:8080/api/user/get_sold_tickets_by_type_and_event", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                event_id: eventId,
+                ticket_type_id: ticket_id,
+            })
+        })
+        .then(response => response.json())
+        .then(responseJSON => {
+            setSoldTickets(responseJSON)
         })
         .catch(error => {
             console.log(error)
@@ -106,32 +123,6 @@ export default function Event(props){
     }
 
 
-    const [tickets,setTickets] = useState([
-        /*{
-            id: 1,
-            description: "nao posso ir",
-            price: "89$",
-            user_image: "https://cdn-icons-png.flaticon.com/128/2335/2335153.png",
-        },
-        {
-            id: 2,
-            description: "nao posso ir",
-            price: "89$",
-            user_image: "https://cdn-icons-png.flaticon.com/128/949/949666.png",
-        },
-        {
-            id: 3,
-            description: "nao posso ir",
-            price: "89$",
-            user_image: "https://cdn-icons-png.flaticon.com/128/921/921089.png",
-        },
-        {
-            id: 4,
-            description: "nao posso ir",
-            price: "89$",
-            user_image: "https://cdn-icons-png.flaticon.com/128/4988/4988350.png",
-        },*/
-    ])
 
     const [artists,setArtists] = useState([
         {
@@ -202,7 +193,7 @@ export default function Event(props){
         />
     )
 
-    const showTheSoldTickets = tickets.map((ticketSold) => 
+    const showTheSoldTickets = soldTickets.map((ticketSold) => 
         <TicketSold 
             key={ticketSold.id}
             ticketSold={ticketSold}
@@ -285,7 +276,8 @@ export default function Event(props){
                                 }
                                 <h2 className="marginTop">Tickets Available</h2>
                                 {showTheTickets}
-                                <h2>Tickets Sold</h2>
+
+                                { showTheSoldTickets.length > 0 && <h2>Tickets Sold</h2>}
                                 {showTheSoldTickets}
                             </div>
                         }
@@ -296,6 +288,7 @@ export default function Event(props){
                                     ticket={ticket}
                                     ticketType={ticketType}
                                     setShow={setShow}
+                                    setTicketID={setTicketID}
                                 />
                             </div>
                         }

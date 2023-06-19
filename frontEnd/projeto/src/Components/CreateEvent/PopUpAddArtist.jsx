@@ -92,12 +92,12 @@ export default function PopUpAddArtist(props) {
                   }),
                 }}
               />
-              <h3
+              <h4
                 className="promptAddArtist"
                 onClick={() => {setPopUpTriggerCreate(true); setPopUpTrigger(false)}}
               >
                 Not Listed? Click here!
-              </h3>
+              </h4>
               <h3 className="redH3">{message}</h3>
           </form>
           <button className="button" onClick={() => submitType()}>Confirm</button>

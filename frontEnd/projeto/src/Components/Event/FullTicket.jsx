@@ -7,9 +7,10 @@ import BlackClose from "../../Images/blackClose.png"
 
 export default function FullTicket(props){
 
-    const {ticket,ticketType,setShow} = props
+    const {ticket,ticketType,setShow,setTicketID} = props
     const {user} = useContext(UserContext);
 
+    const profile_pic = ticket.user_image ? ticket.user_image : "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
 
     const [loginMandatory,setLoginMandatory] = useState(false)
     const [onlyUser,setOnlyUser] = useState(false)
@@ -29,6 +30,7 @@ export default function FullTicket(props){
         }
 
         if(user.type === "user"){
+            setTicketID(ticket.id)
             navigate('/PaymentMethods')
             return
         }
@@ -54,14 +56,14 @@ export default function FullTicket(props){
             <div className="center">
                 <div>
                     <div className="buySection">
-                        <h2>{ticket.price}</h2>
+                        <h2>{ticket.price}$</h2>
                         <button className="button" onClick={buyTicket}>Buy</button>
                     </div>
                     <div className="userSection">
-                        <img className="userImageBuySection" src={ticket.user_image} alt="" />
+                        <img className="userImageBuySection" src={profile_pic} alt="" />
                         <div className="userInfoSection">
                             <h3>{user.name}</h3>
-                            <p>"{ticket.description}"</p>
+                            <p>"{ticket.description !== "" ? ticket.description : "** No description **"}"</p>
                         </div>
                     </div>
                 </div>

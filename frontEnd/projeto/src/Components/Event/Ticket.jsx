@@ -9,12 +9,14 @@ export default function Ticket(props){
         setShow("ticket")
     }
 
+    const profile_pic = ticket.user_image ? ticket.user_image : "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
+
     return(
         <div className="eventTicketContainer" onClick={goToTicket}>
-            <img className="ticketUserImage" src={ticket.user_image} alt="" />
+            <img className="ticketUserImage" src={profile_pic} alt=""/>
             <h3 className="ticketContent">{ticketType.description}</h3>
-            <p className="ticketContent">"{ticket.description}"</p>
-            <h2 className="ticketPrice">{ticket.price}</h2>
+            <p className="ticketContent">"{ticket.description !== "" ? ticket.description : "** No description **"}"</p>
+            <h2 className="ticketPrice">{ticket.price}$</h2>
         </div>
     )
 }

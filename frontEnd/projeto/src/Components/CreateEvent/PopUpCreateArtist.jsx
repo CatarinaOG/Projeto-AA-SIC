@@ -1,6 +1,7 @@
 import { useState, useEffect ,useContext} from "react";
 import UserContext from "../../Contexts/UserContext";
 import "../../Styles/Profile.css";
+import BlackClose from "../../Images/blackClose.png"
 
 export default function PopUpCreateArtist(props) {
   const [artistName, setArtistName] = useState("");
@@ -33,6 +34,8 @@ export default function PopUpCreateArtist(props) {
   const input = {
     name : artistName
   }
+
+
   function postArtist(){
     fetch("http://localhost:8080/api/promoter/create_artist", {
         method: 'POST',
@@ -51,7 +54,7 @@ export default function PopUpCreateArtist(props) {
     })
     .then(responseJSON => {
       console.log(responseJSON.confirmed);
-      if (responseJSON.confirmed){
+      if (responseJSON.confirmed === "true"){
         props.setPopUpTrigger(false);
         props.setPopUpTriggerAdd(true);
       }
@@ -63,6 +66,23 @@ export default function PopUpCreateArtist(props) {
       console.log('Error:', error);
     });
   }
+
+
+  return props.trigger ? (
+    <div>
+        <div className="editContainter">
+            <img src={BlackClose} className="editClose" alt="" onClick={() => props.setPopUpTrigger(false)} />
+            <h3 className="editTitle">Add new Artist</h3>
+            <form>
+                <input className="editInputNumber" onChange={handleArtistChange}  placeholder="Insert artist name" type="text"/>
+                <p className={message !== "" ? "urlError" : "urlErrorNotVisible"}>{message}</p>
+            </form>
+            <button className="button" onClick={postArtist}>Confirm</button>
+
+        </div>
+    </div>
+  ):("")
+
 
 
 

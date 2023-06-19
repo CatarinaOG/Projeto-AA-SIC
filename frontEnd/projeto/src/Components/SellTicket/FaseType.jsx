@@ -23,6 +23,7 @@ export default function FaseType(props){
         })
         .then(response => response.json())
         .then(responseJSON => {
+            console.log(responseJSON)
             setTypes(responseJSON)
         })
         .catch(error => {
