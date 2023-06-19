@@ -49,7 +49,7 @@ public class User implements UserDetails {
     private List<EventFollowed> events_followed; // isto deverá ser events followed. events wanted será um atributo do event para ver quantas pessoas o seguem
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<EventSaved> events_saved;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
     private List<Ad> tickets_bought;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Notification> notifications;

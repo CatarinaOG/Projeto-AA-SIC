@@ -33,11 +33,13 @@ public class EventService {
         List<GetTicketTypesEventReponse> response = new ArrayList<>();
 
         for (TicketType tt : ticketTypeList){
-            GetTicketTypesEventReponse aux = new GetTicketTypesEventReponse();
-            aux.setId(tt.getId());
-            aux.setDescription(tt.getType());
-            aux.setPrice(tt.getPrice());
-            aux.setMax_price(tt.getRange());
+            GetTicketTypesEventReponse aux = GetTicketTypesEventReponse
+                    .builder()
+                    .id(tt.getId())
+                    .description(tt.getType())
+                    .price(tt.getPrice())
+                    .max_price(tt.getRange())
+                    .build();
 
             response.add(aux);
         }
