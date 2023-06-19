@@ -25,11 +25,13 @@ export default function Event(props){
     const [event,setEvent] = useState()
     const [ticketType,setTicketType] = useState()
     const [ticket,setTicket] = useState()
+    const [update,setUpdate] = useState(false)
+
 
     useEffect(() => {
         sendGetFullEventRequest()
         //sendGetTicketTypesRequest()
-    },[])
+    },[update])
 
 
     function sendGetFullEventRequest(){
@@ -140,6 +142,7 @@ export default function Event(props){
                 event_id: event.id
             })
         })
+        .then(setUpdate(old => !old))
         .catch(error => {
             console.log(error)
         });
@@ -240,7 +243,7 @@ export default function Event(props){
                         { show === "ticketsType" &&
                             <div className="marginBottom">
                                 {user.type === "user" &&
-                                    <TicketAlert event={event} setEvent={setEvent}/>
+                                    <TicketAlert event={event} setUpdate={setUpdate}/>
                                 }      
                                 <h2 className="marginTop">Tickets Types</h2>
                                 {showTheTicketsTypes}
@@ -250,7 +253,7 @@ export default function Event(props){
                         { show === "tickets" &&
                             <div>
                                 {user.type === "user" &&
-                                    <TicketAlert event={event} setEvent={setEvent}/>
+                                    <TicketAlert event={event} setUpdate={setUpdate}/>
                                 }
                                 <h2 className="marginTop">Tickets Available</h2>
                                 {showTheTickets}
