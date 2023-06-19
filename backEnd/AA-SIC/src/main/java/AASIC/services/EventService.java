@@ -36,7 +36,7 @@ public class EventService {
             aux.setId(tt.getId());
             aux.setDescription(tt.getType());
             aux.setPrice(tt.getPrice());
-            aux.setPrice(tt.getRange());
+            aux.setMax_price(tt.getRange());
 
             response.add(aux);
         }
