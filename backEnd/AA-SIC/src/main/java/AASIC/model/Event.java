@@ -23,6 +23,8 @@ public class Event{
     private LocalDateTime date_end;
     @Column(name = "accepted")
     private boolean accepted;
+    @Column(name = "image")
+    private String image;
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<EventFollowed> users_following;
 

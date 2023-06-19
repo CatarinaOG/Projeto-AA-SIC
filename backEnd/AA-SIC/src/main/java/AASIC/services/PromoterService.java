@@ -55,6 +55,7 @@ public class PromoterService {
         Promoter promoter = promoterRepo.findPromoterByEmail(email).get();
         event.setPromoter(promoter);
         event.setCategory(categoryRepo.findById(Integer.parseInt(request.getEvent_category())).get());
+        //TODO -> event.setImage(request.getImage());
         eventRepo.save(event);
 
         for (TicketTypeRequest ttr : request.getEvent_types()){
@@ -121,6 +122,7 @@ public class PromoterService {
         location.setLongitude(request.getLongitude());
         location.setCapacity(request.getCapacity());
         location.setCity(request.getCity());
+        //TODO -> location.setMap(request.getMap());
         locationRepo.save(location);
         return "{\"confirmed\" : \"true\"}";
     }
@@ -205,7 +207,6 @@ public class PromoterService {
 
     @Transactional
     public void remove_suggestion(RemoveSugestionRequest request) {
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"+request.getSuggestion_id());
         SuggestedEvent se = suggestedEventRepo.findById(request.getSuggestion_id()).get();
         suggestedEventRepo.deleteById(se.getId());
     }
