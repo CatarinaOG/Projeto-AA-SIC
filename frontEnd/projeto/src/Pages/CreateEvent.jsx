@@ -19,7 +19,7 @@ import AddPictureEvent from "../Components/CreateEvent/AddPictureEvent";
 export default function CreateEvent(props) {
 	const navigate = useNavigate()
 
-	const {suggestedEvent,addEventInfo,setAddEventInfo} = props
+	const {suggestedEvent,setSuggestedEvent,addEventInfo,setAddEventInfo} = props
     const {user} = useContext(UserContext);
 
 	const [eventName, setEventName] = useState("");
@@ -66,11 +66,7 @@ export default function CreateEvent(props) {
 		getVenues();
 		if (suggestedEvent.name !== undefined) {
 			setEventName(suggestedEvent.name);
-			//setEventDateStart(suggestedEvent.start_date);
-			setEventDateEnd(suggestedEvent.end_date);
-			setEventTimeStart(suggestedEvent.start_time);
-			setEventTimeEnd(suggestedEvent.end_time);
-			//createStartInputs()
+			setSuggestedEvent({})
 		}
 		else if (addEventInfo.eventName !== undefined || addEventInfo.eventDateStart !== undefined || addEventInfo.eventDateEnd !== undefined || addEventInfo.eventTimeStart !== undefined || addEventInfo.eventTimeEnd !== undefined || addEventInfo.eventCategory !== undefined){	
 			setEventName(addEventInfo.eventName);
@@ -150,9 +146,11 @@ export default function CreateEvent(props) {
 			event_types : types,
 			event_artists : artistCodes,
 			event_date_start : formattedStart,
-			event_date_end : formattedEnd
+			event_date_end : formattedEnd,		
+			image : image
 		}
 
+		console.log(input)
 		fetch("http://localhost:8080/api/promoter/add_event", {
             method: 'POST',
             headers: {
@@ -299,9 +297,9 @@ export default function CreateEvent(props) {
 				event_types : types,
 				event_artists : artistCodes,
 				event_date_start : formattedStart,
-				event_date_end : formattedEnd
+				event_date_end : formattedEnd, 
+				event_image : image
 			}
-			console.log(input)
 
 			postEvent();
 		}
@@ -441,7 +439,7 @@ export default function CreateEvent(props) {
 								<div className="flexibleLeftSide">
 									<div className="div2CreateEvent">
 										<div className="divCreateEventTitle">
-											<h3>Ticket Types</h3>
+											<h3>{t('tickeTypesHeader')}</h3>
 											<img src={add} alt="" className="addIconToTitle" onClick={openPopType}/>
 										</div>
 									</div>
@@ -450,7 +448,7 @@ export default function CreateEvent(props) {
 									
 									<div className="div2CreateEvent">
 										<div className="divCreateEventTitle">
-											<h3>Artist</h3>
+											<h3>{t('artists')}</h3>
 											<img src={add} alt="" className="addIconToTitle" onClick={() => setPopUpTrigger2(true)}/>
 										</div>
 									</div>
@@ -495,7 +493,7 @@ export default function CreateEvent(props) {
 						</form>
 						<div className="center">
 								<div className="divButtonsCreatePromoter">
-									<button className="button" onClick={handleSubmit} >Submit</button>
+									<button className="button" onClick={handleSubmit} >{t('submit')}</button>
 									<button className="button"  value="Add Photo" onClick={() => setPopUpAddPhoto(true)}>Add Photo</button>
 								</div>
 							</div>

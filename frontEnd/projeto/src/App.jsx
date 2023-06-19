@@ -33,8 +33,8 @@ import CreateEvent from "./Pages/CreateEvent";
 import HomeAdmin from "./Pages/HomeAdmin";
 import PromotersListing from "./Pages/PromotersListing";
 import CreatePromoter from "./Pages/CreatePromoter";
-
 import AddVenue from "./Pages/AddVenue";
+
 
 import "./Styles/General.css";
 
@@ -201,7 +201,7 @@ function App() {
 					{ user.type === "promoter" &&
 						<Route
 							path="/AddEvent" element={
-							<CreateEvent suggestedEvent={suggestedEvent} addEventInfo={addEventInfo} setAddEventInfo={setAddEventInfo}/>}
+							<CreateEvent suggestedEvent={suggestedEvent} setSuggestedEvent={setSuggestedEvent} addEventInfo={addEventInfo} setAddEventInfo={setAddEventInfo}/>}
 						/>
 					}
 					{ user.type === "promoter" &&

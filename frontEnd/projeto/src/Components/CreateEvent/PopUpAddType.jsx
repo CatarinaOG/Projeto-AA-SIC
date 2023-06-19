@@ -142,7 +142,7 @@ export default function PopUpAddType(props) {
             ></input>
           </div>
         </form>
-        <h3 className="redH3">{message}</h3>
+        <p className={message !== "" ? "urlError" : "urlErrorNotVisible"}>{message}</p>
         <div className="popUpSellingListButton">
           <button
             className="button"
