@@ -29,7 +29,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.get_full_event(request));
     }
 
-    @GetMapping("/get_ticket_types_event")
+    @PostMapping ("/get_ticket_types_event")
     public ResponseEntity<List<GetTicketTypesEventReponse>> get_ticket_types_event(@RequestBody GetTicketTypesEventRequest request){
         return ResponseEntity.ok(eventService.get_ticket_types_event(request));
 
