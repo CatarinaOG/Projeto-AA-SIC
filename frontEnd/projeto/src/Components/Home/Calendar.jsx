@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import "../../Styles/Home.css"
 
@@ -9,7 +9,7 @@ export default function Calendar(props){
     const {setEventId} = props
 
     const [events,setEvents] = useState([
-        {
+        /*{
             id: 1,
             dates: "July 6th",
             name: "NOS Alive",
@@ -38,8 +38,32 @@ export default function Calendar(props){
             dates: "July 6th",
             name: "NOS Alive",
             place: "Passeio Marítimo de algés, Lisboa"
-        },
+        },*/
     ])
+
+    function sendGetCalendarEventsRequest(){
+
+        fetch("http://localhost:8080/api/event/get_events", {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(responseJSON => {
+            setEvents(responseJSON)
+        })
+        .catch(error => {
+            console.log(error)
+        });
+
+    }
+
+
+    useEffect(() => {
+        sendGetCalendarEventsRequest()
+    },[])
+
 
     const showEvents = events.map( event => {
             return (

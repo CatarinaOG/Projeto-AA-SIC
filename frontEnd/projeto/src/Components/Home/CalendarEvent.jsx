@@ -18,9 +18,9 @@ export default function CalendarEvent(props){
     return(
         <div className="calendarEvent" onClick={goToEvent}>
             <img className="calendarImage" src={Calendar} alt="" />
-            <p className="calendarEventDates">{event.dates}</p>
             <h3 className="calendarEventName">{event.name}</h3>
-            <p className="calendarEventPlace">{event.place}</p>
+            <p className="calendarEventDates">{event.start_date} - {event.end_date}</p>
+            <p className="calendarEventPlace">{event.address}</p>
         </div>
     )
 }

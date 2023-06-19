@@ -338,6 +338,7 @@ export default function CreateEvent(props) {
 				trigger={popUpTrigger3}
 				setPopUpTrigger={setPopUpTrigger3}
 			/>
+			
 			<div className="center">
 				<div className="defaultContainerCreateEvent">
 					<h1>Event Information</h1>

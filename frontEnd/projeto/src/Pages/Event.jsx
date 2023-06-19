@@ -1,5 +1,5 @@
 
-import { useState,useContext } from "react"
+import { useState,useContext, useEffect } from "react"
 import NavBarAdmin from "../Components/NavBar/NavBarAdmin"
 import NavBarPromoter from "../Components/NavBar/NavBarPromoter"
 import NavBarUser from "../Components/NavBar/NavBarUser"
@@ -20,30 +20,38 @@ export default function Event(props){
     const {eventId} = props
     const {user} = useContext(UserContext);
 
-
     const [show,setShow] = useState("ticketsType") // ticket / tickets / ticketsType / info
 
+    const [event,setEvent] = useState()
     const [ticketType,setTicketType] = useState()
     const [ticket,setTicket] = useState()
 
-    const event = {
-        id: 7,
-        dayOfWeek: "Thursday",
-        month: "Jul",
-        day: "7",
-        time: "03:00 PM",
-        eventName: "NOS ALIVE'23",
-        eventPlace: "NOS Alive, Algés, Portugal",
-        image: "https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg",
-        tickets_avaiable: 3,
-        tickets_sold: 4,
-        tickets_wanted: 200,
-        is_saved: true,
-        is_followed: true,
-        lat: 41.528169,
-        lng: -8.583342,
-        upcoming_events: 2,
+    useEffect(() => {
+        sendGetFullEventRequest()
+        //sendGetTicketTypesRequest()
+    },[])
+
+
+    function sendGetFullEventRequest(){
+        fetch("http://localhost:8080/api/event/get_full_event", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                event_id: eventId
+            })
+        })
+        .then(response => response.json())
+        .then(responseJSON => {
+            setEvent(responseJSON)
+            setEvent(old => ({...old,image:"https://w0.peakpx.com/wallpaper/378/616/HD-wallpaper-night-party-concert-night-club-fans-dancing-people-dancing-party.jpg"})) // para retirar
+        })
+        .catch(error => {
+            console.log(error)
+        });
     }
+    
 
     const [ticketTypes,setTicketTypes] = useState([
         {
@@ -65,6 +73,7 @@ export default function Event(props){
             nr_selling: 3,
         }
     ])
+
     const [tickets,setTickets] = useState([
         {
             id: 1,
@@ -177,7 +186,8 @@ export default function Event(props){
     )
 
 
-    return(
+   
+    return event ? (
         <div>
             { !user.type && <NavBar />}
             { user.type === "user" && <NavBarUser selected="home"/>}
@@ -190,13 +200,13 @@ export default function Event(props){
                 <div>
                     <div className="overImageContainer">
                         <img className="eventImage" src={event.image} alt="" />
-                        <h2>{event.eventName}</h2>
-                        <h3>{event.dayOfWeek}, {event.month} {event.day} | {event.time} </h3>
-                        <p>{event.eventPlace}</p>
+                        <h2>{event.event_name}</h2>
+                        <h3>{event.start_date} - {event.end_date}</h3>
+                        <p>{event.event_place}</p>
 
                         {user.type === "user" &&
                             <button className="saveEventButton" onClick={saveEvent}>
-                                {event.is_saved? "You saved this event!" : "Save Event"}
+                                {event.event_saved? "You saved this event!" : "Save Event"}
                             </button>
                         }
                     </div>
@@ -211,7 +221,7 @@ export default function Event(props){
 
                             <div className="eventNavBarRighSide">
                                 <div className="ticketsInfoSection">
-                                    <p>{event.tickets_avaiable}</p>
+                                    <p>{event.tickets_available}</p>
                                     <p className="gray">available</p>
                                 </div>
                                 <div className="ticketsInfoSection">
@@ -269,7 +279,7 @@ export default function Event(props){
                                     <div className="displayHorizontally">
                                         <Map event={event}/>
                                         <div className="mapInfo">
-                                            <h3>{event.eventPlace}</h3>
+                                            <h3>{event.event_place}</h3>
                                             <p>{event.upcoming_events} upcoming events</p>
                                         </div>
                                     </div>
@@ -280,7 +290,8 @@ export default function Event(props){
                 </div>
             </div>
         </div>
-    )
+    ):("")
+
 }
 
 

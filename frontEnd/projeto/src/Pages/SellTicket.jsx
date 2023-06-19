@@ -11,40 +11,7 @@ import "../Styles/SellTicket.css"
 
 export default function SellTicket(){
 
-    const [events,setEvents] = useState([
-        {
-            id: 1,
-            dates: "July 6th",
-            name: "NOS Alive",
-            place: "Passeio Marítimo de algés, Lisboa"
-        },
-        {
-            id: 2,
-            dates: "July 18th",
-            name: "Harry Styles",
-            place: "Passeio Marítimo de algés, Lisboa"
-        },
-        {
-            id: 3,
-            dates: "May 13th",
-            name: "Hanz Zimmer",
-            place: "Altice Arena, Lisboa"
-        },
-        {
-            id: 4,
-            dates: "May 17th",
-            name: "Coldplay",
-            place: "Passeio Marítimo de algés, Lisboa"
-        },
-        {
-            id: 5,
-            dates: "July 6th",
-            name: "NOS Alive",
-            place: "Passeio Marítimo de algés, Lisboa"
-        },
-    ])
-
-    const [types,setTypes] = useState([
+    /*const [types,setTypes] = useState([
         {
             id: 1,
             description: "2 Day Ticket | 6 & 7th July",
@@ -60,22 +27,8 @@ export default function SellTicket(){
             description: "2 Day Ticket | 7 & 8th July",
 			price: 200
         }
-    ])
+    ])*/
 
-    const [suggested,setSuggested] = useState([
-        {
-            id: 1,
-            dates: "July 6th",
-            name: "NOS Alive",
-            place: "Passeio Marítimo de algés, Lisboa"
-        },
-        {
-            id: 2,
-            dates: "July 18th",
-            name: "Harry Styles",
-            place: "Passeio Marítimo de algés, Lisboa"
-        }
-    ])
 
     const [ticket,setTicket] = useState({
         event: null,
@@ -99,18 +52,14 @@ export default function SellTicket(){
 
                     {fase === "event" && 
                         <FaseEvent 
-                            events={events} 
                             setTicket={setTicket} 
-                            setFase={setFase} 
-                            suggested={suggested}/>}
+                            setFase={setFase}/>}
 
                     {fase === "type" && 
                         <FaseType 
-                            events={events} // para retirar
                             ticket={ticket}
                             setTicket={setTicket} 
-                            setFase={setFase} 
-                            types={types}/>}
+                            setFase={setFase}/>}
 
                     {fase === "price" && 
                         <FasePrice 

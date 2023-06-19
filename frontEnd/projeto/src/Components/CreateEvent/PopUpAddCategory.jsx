@@ -1,8 +1,15 @@
 import { useState, useEffect ,useContext} from "react";
 import UserContext from "../../Contexts/UserContext";
+import BlackClose from "../../Images/blackClose.png"
+
 import "../../Styles/Profile.css";
 
 export default function PopUpAddCategory(props) {
+
+  const {setPopUpTrigger} = props
+
+  const [temp,setTemp] = useState("")
+
   const [categoryName, setCategoryName] = useState("");
   const [message, setMessage] = useState("aaaaa");
   const {user} = useContext(UserContext);
@@ -14,8 +21,8 @@ export default function PopUpAddCategory(props) {
     }
   }, [props.trigger]);
 
-  const handleCategoryChange = (event) => {
-    setCategoryName(event.target.value);
+  function saveTemp(event){
+    setTemp(event.target.value);
   };
 
   const submitType = () => {
@@ -26,41 +33,50 @@ export default function PopUpAddCategory(props) {
     }
   };
 
-  const input = {
-    name : categoryName
-  }
+
   function postCategory(){
+
     fetch("http://localhost:8080/api/promoter/create_category", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',        
           'Authorization': `Bearer ${user.token}`
         },
-        body: JSON.stringify(input)
+        body: JSON.stringify({
+          name: temp
+        })
     })
     .then(response => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error('Error: ' + response.status);
-      }
+		if (response.ok) return response.json();
+		else throw new Error('Error: ' + response.status);
     })
     .then(responseJSON => {
-      if(responseJSON.confirmed){
-        props.setPopUpTrigger(false)
-      }
-      else{
-        setMessage("Category already exists!")
-      }
+		if(responseJSON.confirmed) props.setPopUpTrigger(false)
+		else setMessage("Category already exists!")
     })
     .catch(error => {
-      console.log('Error:', error);
+		console.log('Error:', error);
     });
   }
 
+  function addCategory(){
+    postCategory()
+    setPopUpTrigger(false)
+  }
 
 
-
+  return props.trigger ? (
+    <div>
+            <div className="editContainter">
+                <img src={BlackClose} className="editClose" alt="" onClick={() => setPopUpTrigger(false)} />
+                <h3 className="editTitle">Add Category</h3>
+                <form onSubmit={addCategory}>
+                    <input className="editInput" onChange={saveTemp}  placeholder="Insert your new pcategory" type="number"/>
+                    <button className="button" type="submit">Confirm</button>
+                </form>
+            </div>
+        </div>
+  ):("")
 
 
   return props.trigger ? (
@@ -73,7 +89,6 @@ export default function PopUpAddCategory(props) {
             type="text"
             placeholder="Category Name"
             value={categoryName}
-            onChange={handleCategoryChange}
           ></input>
         </form>
         <h3 className="redH3">{message}</h3>

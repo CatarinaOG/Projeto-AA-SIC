@@ -227,4 +227,11 @@
 .addIconToTitle{
   height: 20px;
   margin-left: 10px;
+  cursor: pointer;
 }
+
+.addIconToTitle:hover{
+  transition: transform 0.2s ease-in-out;
+  transform: scale(1.2);
+}
+
