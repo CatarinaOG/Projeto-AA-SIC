@@ -55,7 +55,7 @@ export default function AddPictureEvent(props){
 
 
     return(
-        <div>
+        <div className="overlay">
             <div className="editContainter">
                 <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
                 <h3 className="editTitle">Change profile Picture</h3>

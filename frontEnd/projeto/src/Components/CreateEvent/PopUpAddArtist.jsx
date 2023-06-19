@@ -69,7 +69,7 @@ export default function PopUpAddArtist(props) {
   };
 
     return trigger ? (
-      <div>
+      <div className="overlay">
       <div className="editContainter">
           <img src={BlackClose} className="editClose" alt="" onClick={() => setPopUpTrigger(false)} />
           <h3 className="editTitle">Add Artist</h3>

@@ -9,13 +9,14 @@ export default function PopUpCreateArtist(props) {
   const {user} = useContext(UserContext);
 
 
+  const {trigger,setPopUpTrigger,setPopUpTriggerAdd,onAddArtist} = props
   
   useEffect(() => {
-    if (props.trigger) {
+    if (trigger) {
       setArtistName("");
       setMessage("");
     }
-  }, [props.trigger]);
+  }, [trigger]);
 
   const handleArtistChange = (event) => {
     setArtistName(event.target.value);
@@ -55,8 +56,8 @@ export default function PopUpCreateArtist(props) {
     .then(responseJSON => {
       console.log(responseJSON.confirmed);
       if (responseJSON.confirmed === "true"){
-        props.setPopUpTrigger(false);
-        props.setPopUpTriggerAdd(true);
+        setPopUpTrigger(false);
+        setPopUpTriggerAdd(true);
       }
       else{
         setMessage("There is already an artist with that name")
@@ -68,10 +69,10 @@ export default function PopUpCreateArtist(props) {
   }
 
 
-  return props.trigger ? (
-    <div>
+  return trigger ? (
+    <div className="overlay">
         <div className="editContainter">
-            <img src={BlackClose} className="editClose" alt="" onClick={() => props.setPopUpTrigger(false)} />
+            <img src={BlackClose} className="editClose" alt="" onClick={() => setPopUpTrigger(false)} />
             <h3 className="editTitle">Add new Artist</h3>
             <form>
                 <input className="editInputNumber" onChange={handleArtistChange}  placeholder="Insert artist name" type="text"/>
@@ -82,43 +83,4 @@ export default function PopUpCreateArtist(props) {
         </div>
     </div>
   ):("")
-
-
-
-
-
-  return (
-    <div>
-      <div className="editContainter">
-        <h2 className="editTitle">Add Artist Name</h2>
-        <form>
-          <input
-            className="inputPopUpAddType"
-            type="text"
-            placeholder="Artist"
-            value={artistName}
-            onChange={handleArtistChange}
-          ></input>
-        </form>
-        <h3 className="redH3">{message}</h3>
-        <div className="popUpSellingListButton">
-          <button
-            className="button"
-            onClick={() => {
-              submitType();
-            }}
-          >
-            Yes
-          </button>
-          <button
-            className="button"
-            onClick={() => props.setPopUpTrigger(false)}
-          >
-            {" "}
-            Cancel
-          </button>
-        </div>
-      </div>
-    </div>
-  );
 }

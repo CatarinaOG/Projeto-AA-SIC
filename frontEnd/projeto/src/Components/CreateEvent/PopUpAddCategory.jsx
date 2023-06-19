@@ -6,8 +6,7 @@ import "../../Styles/Profile.css";
 import { useTranslation } from "react-i18next";
 
 export default function PopUpAddCategory(props) {
-
-  const {setPopUpTrigger} = props
+  const {trigger,setPopUpTrigger} = props
 
   const [temp,setTemp] = useState("")
 
@@ -61,8 +60,8 @@ export default function PopUpAddCategory(props) {
   }
 
 
-  return props.trigger ? (
-    <div>
+  return trigger ? (
+    <div className="overlay">
         <div className="editContainter">
             <img src={BlackClose} className="editClose" alt="" onClick={() => setPopUpTrigger(false)} />
             <h3 className="editTitle">Add Category</h3>

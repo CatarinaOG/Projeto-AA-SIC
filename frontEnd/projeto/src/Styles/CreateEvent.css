@@ -140,7 +140,7 @@
 }
 
 .divButtonsCreatePromoter {
-  margin-top: 20px; /* Optional margin for spacing */
+  margin-top: 10px; /* Optional margin for spacing */
   margin-bottom: 10px;
   display: flex;
   justify-content: space-around;

@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
 
 export default function PopUpCreateEvent(props) {
+
+  const {trigger,setPopUpTrigger} = props
   const navigate = useNavigate();
   const confirmButton = () => {
-    props.setPopUpTrigger(false);
+    setPopUpTrigger(false);
 		navigate("/Events")
   };
 
-  return props.trigger ? (
-    <div>
+  return trigger ? (
+    <div className="overlay">
       <div className="editContainter">
         <h3 className="editTitle">Successful!</h3>
         <div className="popUpSellingListButton">

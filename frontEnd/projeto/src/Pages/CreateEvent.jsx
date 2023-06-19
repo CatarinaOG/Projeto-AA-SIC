@@ -25,14 +25,13 @@ export default function CreateEvent(props) {
 	const [eventName, setEventName] = useState("");
 	const [eventVenue, setEventVenue] = useState("");
 	const [eventCategory, setEventCategory] = useState("");
-	const [eventDateStart, setEventDateStart] = useState("");
+	const [eventDateStart, setEventDateStart] =  useState(createStartInputs());
 	const [eventDateEnd, setEventDateEnd] = useState("");
 	const [eventTimeStart,setEventTimeStart] = useState("");
 	const [eventTimeEnd,setEventTimeEnd] = useState("");
 	const [types, setTypes] = useState([]);
 	const [artists, setArtists] = useState([]);
 	const [image, setImage] = useState("");
-
 
 	const [popUpTrigger1, setPopUpTrigger1] = useState(false);
 	const [popUpTrigger2, setPopUpTrigger2] = useState(false);
@@ -49,15 +48,29 @@ export default function CreateEvent(props) {
 	const [options, setOptions] = useState([]);
 	const [categories, setCategories] = useState([]);
 
+
+	function createStartInputs(){
+		if(suggestedEvent.start_date !== undefined){
+			const start = suggestedEvent.start_date.split(" ");
+			const dateStartVal = start[0].replace(/\//g, "-");
+		console.log("DATE START VAL IS : " + dateStartVal )
+
+			return dateStartVal
+		}
+		return "";
+	}
+
+
 	useEffect(() => {
 		getCategories()
 		getVenues();
-		if (suggestedEvent.event_name !== undefined) {
-			setEventName(suggestedEvent.event_name);
-			setEventDateStart(suggestedEvent.start_date);
+		if (suggestedEvent.name !== undefined) {
+			setEventName(suggestedEvent.name);
+			//setEventDateStart(suggestedEvent.start_date);
 			setEventDateEnd(suggestedEvent.end_date);
 			setEventTimeStart(suggestedEvent.start_time);
 			setEventTimeEnd(suggestedEvent.end_time);
+			//createStartInputs()
 		}
 		else if (addEventInfo.eventName !== undefined || addEventInfo.eventDateStart !== undefined || addEventInfo.eventDateEnd !== undefined || addEventInfo.eventTimeStart !== undefined || addEventInfo.eventTimeEnd !== undefined || addEventInfo.eventCategory !== undefined){	
 			setEventName(addEventInfo.eventName);
@@ -68,7 +81,8 @@ export default function CreateEvent(props) {
 			setEventCategory(addEventInfo.eventCategory);
 			setAddEventInfo("");
 		}
-	}, []);
+
+	}, [suggestedEvent]);
 
 	useEffect(() => {
 		getCategories()
@@ -267,7 +281,7 @@ export default function CreateEvent(props) {
 		types.length === 0 ||
 		artists === 0
 		) {
-		setMessage(t('messageDateNotPossible'));
+		setMessage(t('messageOneOrMoreIncomplete'));
 		setAddEventInfo("");
 		}else{
 			const artistCodes = artists.map((artist) => ({ artist_code: artist.artist_code }));
@@ -287,6 +301,8 @@ export default function CreateEvent(props) {
 				event_date_start : formattedStart,
 				event_date_end : formattedEnd
 			}
+			console.log(input)
+
 			postEvent();
 		}
 	};
@@ -350,7 +366,7 @@ export default function CreateEvent(props) {
 				<div className="defaultContainerCreateEvent">
 					<h1>Event Information</h1>
                     <div className="smallContainer">
-						<form onSubmit={handleSubmit}>
+						<form >
 
 							<div className="smallContainerCreateEventInputs">
 								<div className="smallContainerCreateEventLeftSide">
@@ -366,7 +382,7 @@ export default function CreateEvent(props) {
 								</div>
 								<div className="smallContainerCreateEventRightSide">
 									<div>
-										<input className="inputNameEvent" type="text" value={eventName} onChange={handleEventNameChange}/>
+										<input className="inputNameEvent" type="text" value={eventName} onChange={handleEventNameChange} />
 										<div className="selectContainer">
 											<Select
 												value={eventCategory}
@@ -476,14 +492,13 @@ export default function CreateEvent(props) {
 							<div className="divButtonCreatePromoter">
 								<h3 className="redH3">{message}</h3>
 							</div>
-							<div className="center">
+						</form>
+						<div className="center">
 								<div className="divButtonsCreatePromoter">
-									<input className="button" type="submit" value="Submit" />
+									<button className="button" onClick={handleSubmit} >Submit</button>
 									<button className="button"  value="Add Photo" onClick={() => setPopUpAddPhoto(true)}>Add Photo</button>
 								</div>
 							</div>
-
-						</form>
 					</div>
 				</div>
 			</div>
