@@ -17,7 +17,7 @@ export default function TicketAlert(props){
 
     function sendFollowRequest(){
 
-        fetch("http://localhost:8080/api/user/save_event", {
+        fetch("http://localhost:8080/api/user/follow_event", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
