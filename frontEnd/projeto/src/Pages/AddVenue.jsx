@@ -3,8 +3,11 @@ import UserContext from "../Contexts/UserContext";
 import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
 import PopUpAddVenue from "../Components/AddVenue/PopUpAddVenue";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function AddVenue() {
+  const {t} = useTranslation();
+
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [latitude, setLatitude] = useState("");
@@ -45,8 +48,11 @@ export default function AddVenue() {
       setMessage("");
     } else {
       console.log("Incorrect");
+      //setMessage("Capacity values must be positive integers");
+      setMessage(t('messageCapacityError')); 
 
-      setMessage("Capacity values must be positive integers");
+      setCapacity("");
+
     }
   };
 
@@ -60,7 +66,9 @@ export default function AddVenue() {
       capacity === "" ||
       city === ""
     ) {
-      setMessage("One or More inputs incomplete");
+      //setMessage("One or More inputs incomplete");
+      setMessage(t('messageOneOrMoreIncomplete')); 
+
     } else {
       postVenue()
       console.log(name, address, latitude, longitude, capacity);
@@ -108,10 +116,10 @@ export default function AddVenue() {
       <PopUpAddVenue trigger={popUpTrigger} setPopUpTrigger={setPopUpTrigger} />
       <div className="center">
         <div className="CreateVenueContainer">
-          <h1 className="h1CreateVenue">Add a Venue</h1>
+          <h1 className="h1CreateVenue">{t('addVenue')}</h1>
           <form className="formContainer" onSubmit={handleSubmit}>
             <div className="divFormCreateVenue">
-              <h2 className="h2FormCreateVenue">Name</h2>
+              <h2 className="h2FormCreateVenue">{t('name')}</h2>
               <input
                 className="inputFormCreateVenue"
                 type="text"
@@ -120,7 +128,7 @@ export default function AddVenue() {
               ></input>
             </div>
             <div className="divFormCreateVenue">
-              <h2 className="h2FormCreateVenue">Address</h2>
+              <h2 className="h2FormCreateVenue">{t('address')}</h2>
               <input
                 className="inputFormCreateVenue"
                 type="text"
@@ -129,7 +137,7 @@ export default function AddVenue() {
               ></input>
             </div>
             <div className="divFormCreateVenue">
-              <h2 className="h2FormCreateVenue">City</h2>
+              <h2 className="h2FormCreateVenue">{t('city')}</h2>
               <input
                 className="inputFormCreateVenue"
                 type="text"
@@ -138,7 +146,7 @@ export default function AddVenue() {
               ></input>
             </div>
             <div className="divFormCreateVenue">
-              <h2 className="h2FormCreateVenue">Capacity</h2>
+              <h2 className="h2FormCreateVenue">{t('capacity')}</h2>
               <input
                 className="inputFormCreateVenue"
                 type="number"
@@ -147,7 +155,7 @@ export default function AddVenue() {
               ></input>
             </div>
             <div className="divFormCreateVenue">
-              <h2 className="h2FormCreateVenue">Coordinates(Lat/Lng)</h2>
+              <h2 className="h2FormCreateVenue">{t('coordinatesVenue')}</h2>
               <div className="coordFormContainer">
                 <input
                   className="coordFormCreateEvent"

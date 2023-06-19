@@ -1,9 +1,11 @@
 import NavBarUser from "../Components/NavBar/NavBarUser";
 import SavedFollowElem from "../Components/General/EventElem.jsx";
+import { useTranslation } from "react-i18next";
 
 import { useState } from "react";
 
 export default function FollowedEvents(props) {
+	const {t} = useTranslation();
 
 	const {setEventId} = props
 
