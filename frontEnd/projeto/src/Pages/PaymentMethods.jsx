@@ -22,6 +22,10 @@ export default function PaymentMethods(props) {
 		navigate('/Event')
 	}
 
+	function returnHome(){
+		navigate('/HomeUser')
+	}
+
 	return (
 		<div>
 		<NavBarUser selected="home"/>
@@ -54,6 +58,8 @@ export default function PaymentMethods(props) {
 					setPaymentType={setPaymentType}
 					setPaymentInfo={setPaymentInfo}
 					setMessage={setMessage}
+					ticketID={ticketID}
+
 				/>
 				)}
 
@@ -67,6 +73,7 @@ export default function PaymentMethods(props) {
 					setPaymentType={setPaymentType}
 					setPaymentInfo={setPaymentInfo}
 					setMessage={setMessage}
+					ticketID={ticketID}
 				/>
 				)}
 			</div>
@@ -87,7 +94,7 @@ export default function PaymentMethods(props) {
 					</h3>
 				</div>
 				<div className="buttonContainerPayment">
-					<button className="button">Return to Main</button>
+					<button className="button" onClick={returnHome}>Return to Main</button>
 				</div>
 				</div>
 			)}

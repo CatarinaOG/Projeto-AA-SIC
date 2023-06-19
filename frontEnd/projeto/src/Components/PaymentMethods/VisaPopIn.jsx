@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useContext} from "react";
+import UserContext from "../../Contexts/UserContext";
 
 export default function VisaPopIn({
   setPaymentType,
   setPaymentInfo,
   setMessage,
+  ticketID
 }) {
+
+  const {user} = useContext(UserContext);
+
   const [ccv, setCCV] = useState("");
   const [number, setNumber] = useState("");
 
@@ -17,9 +22,7 @@ export default function VisaPopIn({
     } else if (number === "") {
       setMessage("Incomplete Number");
     } else {
-      setPaymentType("");
-      setPaymentInfo({ number: number, ccv: ccv });
-      setMessage("Success");
+      postTicketBuy();
     }
   };
 
@@ -36,6 +39,40 @@ export default function VisaPopIn({
     event.target.value = cappedValue;
     setNumber(event.target.value);
   };
+
+
+
+  function postTicketBuy(){
+
+    fetch("http://localhost:8080/api/user/buy_ticket", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',        
+          'Authorization': `Bearer ${user.token}`
+        },
+        body: JSON.stringify({
+          ticket_id: ticketID
+        })
+    })
+    .then(response => {
+      if (response.ok) return response.json();
+      else throw new Error('Error: ' + response.status);
+    })
+    .then(responseJSON => {
+      console.log(responseJSON)
+      if(responseJSON.confirmed === "true"){
+        setPaymentType("");
+        setPaymentInfo({ number: number, ccv: ccv });
+        setMessage("Success");
+      } 
+      else setMessage("Category already exists!")
+    })
+    .catch(error => {
+		console.log('Error:', error);
+    });
+  }
+
+
 
   return (
     <div className="VisaPaymentMethod">

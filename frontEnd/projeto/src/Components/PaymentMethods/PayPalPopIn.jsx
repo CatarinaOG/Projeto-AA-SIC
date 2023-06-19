@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useState, useContext} from "react";
+import UserContext from "../../Contexts/UserContext";
 
 export default function PayPalPopIn({
   setPaymentType,
   setPaymentInfo,
   setMessage,
+  ticketID={ticketID}
 }) {
+  const {user} = useContext(UserContext);
+
   const [email, setEmail] = useState("");
 
   const handleEmailChange = (event) => {
@@ -13,9 +17,42 @@ export default function PayPalPopIn({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setPaymentType("");
-    setPaymentInfo({ email: email });
+    postTicketBuy()
   };
+
+
+
+
+  function postTicketBuy(){
+
+    fetch("http://localhost:8080/api/user/buy_ticket", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',        
+          'Authorization': `Bearer ${user.token}`
+        },
+        body: JSON.stringify({
+          ticket_id: ticketID
+        })
+    })
+    .then(response => {
+      if (response.ok) return response.json();
+      else throw new Error('Error: ' + response.status);
+    })
+    .then(responseJSON => {
+      console.log(responseJSON)
+      if(responseJSON.confirmed === "true"){
+         setPaymentType("");
+    setPaymentInfo({ email: email });
+      } 
+      else setMessage("Category already exists!")
+    })
+    .catch(error => {
+		console.log('Error:', error);
+    });
+  }
+
+
 
   return (
     <div className="PayPalPaymentMethod">
