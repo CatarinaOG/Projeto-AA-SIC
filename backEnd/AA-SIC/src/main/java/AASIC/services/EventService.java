@@ -10,8 +10,10 @@ import AASIC.requests.GetFullEventRequest;
 import AASIC.requests.GetTicketTypesEventRequest;
 import AASIC.responses.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -144,10 +146,39 @@ public class EventService {
                     continue;
                 }
             }
-            //if(filter_time != null){
-            //    LocalDateTime filter = LocalDateTime.parse(filter_text, formatter);
-            //    if(!)
-            //}
+            // "next week", "this month", "next month", "this year", "next year"
+            if(!filter_time.isEmpty()){
+                LocalDateTime event = e.getDate_start();
+                LocalDateTime today = LocalDateTime.now();
+                LocalDateTime weekToday = today.plusWeeks(1);
+                LocalDateTime nextWeek = weekToday.plusWeeks(1);
+                LocalDateTime monthToday = today.plusMonths(1);
+                LocalDateTime nextMonth = monthToday.plusMonths(1);
+                LocalDateTime yearToday = today.plusYears(1);
+                LocalDateTime nextYear = yearToday.plusYears(1);
+                switch (filter_time){
+                    case "this week":
+                        if(!(!today.isAfter(event) && event.isBefore(weekToday))) continue;
+                        break;
+                    case "next week":
+                        if (!(!weekToday.isAfter(event) && event.isBefore(nextWeek))) continue;
+                        break;
+                    case "this month":
+                        if(!(!today.isAfter(event) && event.isBefore(monthToday))) continue;
+                        break;
+                    case "next month":
+                        if(!(!monthToday.isAfter(event) && event.isBefore(nextMonth))) continue;
+                        break;
+                    case "this year":
+                        if(!(!today.isAfter(event) && event.isBefore(yearToday))) continue;
+                        break;
+                    case "next year":
+                        if(!(!yearToday.isAfter(event) && event.isBefore(nextYear))) continue;
+                        break;
+                    default:
+                        break;
+                }
+            }
             if(!filter_category.isEmpty()){
                 if(!e.getCategory().getName().toLowerCase().equals(filter_category)){
                     continue;

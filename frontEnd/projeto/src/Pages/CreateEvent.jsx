@@ -319,8 +319,6 @@ export default function CreateEvent(props) {
 				setPopUpTrigger={setPopUpTrigger2}
 				setPopUpTriggerCreate={setPopUpTrigger4}
 				onAddArtist={handleAddArtist}
-				triggerCreate={popUpTrigger4}
-
 				/>
 			)}
 

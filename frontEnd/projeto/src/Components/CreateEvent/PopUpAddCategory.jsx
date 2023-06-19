@@ -52,7 +52,7 @@ export default function PopUpAddCategory(props) {
       else throw new Error('Error: ' + response.status);
     })
     .then(responseJSON => {
-      if(responseJSON.confirmed) setPopUpTrigger(false)
+      if(responseJSON.confirmed === "true") setPopUpTrigger(false)
       else setMessage("Category already exists!")
     })
     .catch(error => {
@@ -69,8 +69,8 @@ export default function PopUpAddCategory(props) {
             <form>
                 <input className="editInputNumber" onChange={saveTemp}  placeholder="Insert your new category" type="text"/>
                 <p className={message !== "" ? "urlError" : "urlErrorNotVisible"}>{message}</p>
-                <button className="button" onClick={postCategory}>Confirm</button>
             </form>
+            <button className="button" onClick={postCategory}>Confirm</button>
         </div>
     </div>
   ):("")

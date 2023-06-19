@@ -6,6 +6,9 @@ import BlackClose from "../../Images/blackClose.png"
 import { useTranslation } from "react-i18next";
 
 export default function PopUpAddArtist(props) {
+
+  const {trigger,setPopUpTrigger,setPopUpTriggerCreate,onAddArtist} = props
+
   const [artist, setArtist] = useState("");
   const [message, setMessage] = useState("");
   const {user} = useContext(UserContext);
@@ -36,10 +39,10 @@ export default function PopUpAddArtist(props) {
 	}
 
   useEffect(() => {
-    if (props.trigger) {
+    if (trigger) {
       getArtists();
     }
-  }, [props.trigger]);
+  }, [trigger]);
 
 
 
@@ -60,99 +63,45 @@ export default function PopUpAddArtist(props) {
       setMessage("Please select a option");
     } else {
       console.log(artist.artist_name);
-      props.onAddArtist(artist);
-      props.setPopUpTrigger(false);
+      onAddArtist(artist);
+      setPopUpTrigger(false);
     }
   };
 
-  return props.trigger ? (
-    <div>
-    <div className="editContainter">
-        <img src={BlackClose} className="editClose" alt="" onClick={() => props.setPopUpTrigger(false)} />
-        <h3 className="editTitle">Add Artist</h3>
-        <form>
-        <Select
-              className="inputSelectArtist"
-              value={artist}
-              onChange={handleArtistChange}
-              options={artistOptions}
-              getOptionLabel={(option) => option.artist_name}
-              getOptionValue={(option) => option}
-              placeholder=""
-              isSearchable={true}
-              styles={{
-                control: (provided) => ({
-                  ...provided,
-                  borderRadius: '10px',
-                  fontSize: '15px',
-                  margin: "10px",
-                }),
-              }}
-            />
-            <h3
-              className="promptAddArtist"
-              onClick={() => {props.setPopUpTriggerCreate(true); props.setPopUpTrigger(false)}}
-            >
-              Not Listed? Click here!
-            </h3>
-            <h3 className="redH3">{message}</h3>
-        </form>
-        <button className="button" onClick={() => submitType()}>Confirm</button>
-    </div>
-</div>
-
-  ) : ("")
-
-
-
-
-
-
-  return props.trigger ? (
-    <div>
+    return trigger ? (
+      <div>
       <div className="editContainter">
-        <h2 className="editTitle">Select an Artist Name</h2>
-        <form>
-          <div>
+          <img src={BlackClose} className="editClose" alt="" onClick={() => setPopUpTrigger(false)} />
+          <h3 className="editTitle">Add Artist</h3>
+          <form>
           <Select
-              className="inputSelectArtist"
-              value={artist}
-              onChange={handleArtistChange}
-              options={artistOptions}
-              getOptionLabel={(option) => option.artist_name}
-              getOptionValue={(option) => option}
-              placeholder=""
-              isSearchable={true}
-            />
-            <h3
-              className="promptAddArtist"
-              onClick={() => {props.setPopUpTriggerCreate(true); props.setPopUpTrigger(false)}}
-            >
-              Not Listed? Click here!
-            </h3>
-          </div>
-        </form>
-        <h3 className="redH3">{message}</h3>
-        <div className="popUpSellingListButton">
-          <button
-            className="button"
-            onClick={() => {
-              submitType();
-            }}
-          >
-            Yes
-          </button>
-          <button
-            className="button"
-            onClick={() => props.setPopUpTrigger(false)}
-          >
-            {" "}
-            Cancel
-          </button>
-        </div>
+                className="inputSelectArtist"
+                value={artist}
+                onChange={handleArtistChange}
+                options={artistOptions}
+                getOptionLabel={(option) => option.artist_name}
+                getOptionValue={(option) => option}
+                placeholder=""
+                isSearchable={true}
+                styles={{
+                  control: (provided) => ({
+                    ...provided,
+                    borderRadius: '10px',
+                    fontSize: '15px',
+                    margin: "10px",
+                  }),
+                }}
+              />
+              <h4
+                className="promptAddArtist"
+                onClick={() => {setPopUpTriggerCreate(true); setPopUpTrigger(false)}}
+              >
+                Not Listed? Click here!
+              </h4>
+              <h3 className="redH3">{message}</h3>
+          </form>
+          <button className="button" onClick={() => submitType()}>Confirm</button>
       </div>
-    </div>
-  ) : (
-    ""
-  );
+  </div>
+  ) : ("")
 }
