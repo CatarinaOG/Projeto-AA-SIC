@@ -26,11 +26,7 @@ export default function PopUpConfirm({trigger,setPopUpTrigger,email,password,nam
     email : email, 
     password : password
   }
-
-	function postPromoter(){
-		
-  }
-
+  
   return trigger ? (
     <div className="editContainter">
       {phase === 1 ? (

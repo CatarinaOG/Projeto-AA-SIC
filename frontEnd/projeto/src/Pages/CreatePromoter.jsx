@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "../Contexts/UserContext";
 import NavBarAdmin from "../Components/NavBar/NavBarAdmin";
 import BlackClose from "../Images/blackClose.png"
+import { useTranslation } from "react-i18next";
 
 export default function CreatePromoter() {
-	
+	const {t} = useTranslation();
 	const {user} = useContext(UserContext);
 	const navigate = useNavigate()
 
@@ -28,7 +29,7 @@ export default function CreatePromoter() {
 		setInput((oldInput) => ({...oldInput,[name]:value}))
 
 		if(name === "password"){
-			if(value !== input.password) setMessage("Passwords don't match");
+			if(value !== input.confirmPassword.value) setMessage(t('messagePasswordsDontMatch')); 
 			else setMessage("");
 		}
 	}
@@ -37,7 +38,8 @@ export default function CreatePromoter() {
 		event.preventDefault();
 
 		if (input.name === "" || input.password === "" || input.confirmPassword === "")
-			setMessage("One or more fields incomplete");
+			setMessage(t('messageOneOrMoreIncomplete')); 
+
 		else setPopUpTrigger(true);
 	};
 
@@ -72,7 +74,7 @@ export default function CreatePromoter() {
 
 	function goHome(){
 		setShowConfirmation(false)
-		navigate("/HomeAdmin")
+		navigate("/Promoters")
 	}
 
 	return (
@@ -81,10 +83,10 @@ export default function CreatePromoter() {
 
 			<div className="center">
 				<div className="CreatePromoterContainer">
-					<h1 className="h1CreatePromoter">Create Promoter</h1>
+					<h1 className="h1CreatePromoter">{t('createPromoter')}</h1>
 					<form className="formContainer" onSubmit={handleSubmit}>
 						<div className="divFormCreatePromoter">
-							<h2 className="h2FormCreatePromoter">Name</h2>
+							<h2 className="h2FormCreatePromoter">{t('name')}</h2>
 							<input className="inputFormCreatePromoter" type="text" name="name" value={input.name} onChange={handleChangeInput}/>
 						</div>
 						<div className="divFormCreatePromoter">
@@ -92,11 +94,11 @@ export default function CreatePromoter() {
 							<input className="inputFormCreatePromoter" type="email" name="email" value={input.email} onChange={handleChangeInput}/>
 						</div>
 						<div className="divFormCreatePromoter">
-							<h2 className="h2FormCreatePromoter">Password</h2>
+							<h2 className="h2FormCreatePromoter">{t('password')}</h2>
 							<input className="inputFormCreatePromoter" type="password" name="password" value={input.password} onChange={handleChangeInput}/>
 						</div>
 						<div className="divFormCreatePromoter">
-							<h2 className="h2FormCreatePromoter">Confirm Password</h2>
+							<h2 className="h2FormCreatePromoter">{t('confirmPassword')}</h2>
 							<input className="inputFormCreatePromoter" type="password" name="confirmPassword" value={input.confirmPassword} onChange={handleChangeInput}/>
 						</div>
 						{message !== "" ? (
