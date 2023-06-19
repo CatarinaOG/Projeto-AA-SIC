@@ -15,5 +15,6 @@ public class GetTicketTypesEventReponse {
     private String description;
     private float price;
     private float max_price;
+    private int nr_available;
 
 }
