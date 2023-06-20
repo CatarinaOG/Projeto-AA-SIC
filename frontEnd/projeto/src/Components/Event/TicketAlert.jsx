@@ -5,12 +5,14 @@ import BlackClose from "../../Images/blackClose.png"
 import UserContext from "../../Contexts/UserContext"
 
 import { useState,useContext } from "react"
+import { useTranslation } from "react-i18next";
 
 
 export default function TicketAlert(props){
 
     const {event,setUpdateEvent} = props
     const {user} = useContext(UserContext);
+	const {t} = useTranslation();
 
 
     const [showAdded,setShowAdded] = useState(false)
@@ -56,8 +58,8 @@ export default function TicketAlert(props){
             <img src={bell} className="bellImage" alt="" />
 
             <div className="alertText">
-                <h3>Ticket Alerts</h3>
-                <p>Get notified when a ticket becomes available</p>
+                <h3>{t('ticketAlerts')}</h3>
+                <p>{t('getNotified')}</p>
                 <img className="addImage" onClick={addTicketAlert} src={event.event_followed ? check : add} alt="" />
             </div>
 
@@ -67,7 +69,7 @@ export default function TicketAlert(props){
                 <div className="overlay"></div>
                 <div className="popUpContainer">
                     <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
-                    <h3 className="popUpInfo">You are now following this event!</h3>
+                    <h3 className="popUpInfo">{t('youAreNowFollowing')}</h3>
                 </div>
             </div>
             

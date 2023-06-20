@@ -2,14 +2,16 @@ import { useState, useEffect ,useContext} from "react";
 import UserContext from "../../Contexts/UserContext";
 import "../../Styles/Profile.css";
 import BlackClose from "../../Images/blackClose.png"
+import { useTranslation } from "react-i18next";
+
+
 
 export default function PopUpCreateArtist(props) {
   const [artistName, setArtistName] = useState("");
   const [message, setMessage] = useState("");
   const {user} = useContext(UserContext);
-
-
-  const {trigger,setPopUpTrigger,setPopUpTriggerAdd,onAddArtist} = props
+	const {t} = useTranslation();
+  const {trigger,setPopUpTrigger,setPopUpTriggerAdd} = props
   
   useEffect(() => {
     if (trigger) {
@@ -24,7 +26,7 @@ export default function PopUpCreateArtist(props) {
 
   const submitType = () => {
     if (artistName === "") {
-      setMessage("Invalid artist name");
+      setMessage(t('invalidArtistName'));
     } else {
       postArtist();
 
@@ -60,7 +62,7 @@ export default function PopUpCreateArtist(props) {
         setPopUpTriggerAdd(true);
       }
       else{
-        setMessage("There is already an artist with that name")
+        setMessage(t('thereAlreadyIsArtist'));
       }
     })
     .catch(error => {
@@ -73,12 +75,12 @@ export default function PopUpCreateArtist(props) {
     <div className="overlay">
         <div className="editContainter">
             <img src={BlackClose} className="editClose" alt="" onClick={() => setPopUpTrigger(false)} />
-            <h3 className="editTitle">Add new Artist</h3>
+            <h3 className="editTitle">{t('createNewArtist')}</h3>
             <form>
                 <input className="editInputNumber" onChange={handleArtistChange}  placeholder="Insert artist name" type="text"/>
                 <p className={message !== "" ? "urlError" : "urlErrorNotVisible"}>{message}</p>
             </form>
-            <button className="button" onClick={postArtist}>Confirm</button>
+            <button className="button" onClick={submitType}>{t('submit')}</button>
 
         </div>
     </div>

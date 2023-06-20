@@ -53,7 +53,6 @@ export default function CreateEvent(props) {
 		if(suggestedEvent.start_date !== undefined){
 			const start = suggestedEvent.start_date.split(" ");
 			const dateStartVal = start[0].replace(/\//g, "-");
-		console.log("DATE START VAL IS : " + dateStartVal )
 
 			return dateStartVal
 		}
@@ -282,25 +281,6 @@ export default function CreateEvent(props) {
 		setMessage(t('messageOneOrMoreIncomplete'));
 		setAddEventInfo("");
 		}else{
-			const artistCodes = artists.map((artist) => ({ artist_code: artist.artist_code }));
-			const event_date_start_unform = eventDateStart;
-			const [year, month, day] = event_date_start_unform.split('-');
-			const formattedStart = `${day}/${month}/${year} ${eventTimeStart}`;
-			const event_date_end_unform = eventDateEnd;
-			const [year2, month2, day2] = event_date_end_unform.split('-');
-			const formattedEnd = `${day2}/${month2}/${year2} ${eventTimeEnd}`;
-		
-			const input = {
-				event_name : eventName,
-				event_venue_id : eventVenue.venue_code,
-				event_category : eventCategory.category_code,
-				event_types : types,
-				event_artists : artistCodes,
-				event_date_start : formattedStart,
-				event_date_end : formattedEnd, 
-				event_image : image
-			}
-
 			postEvent();
 		}
 	};
@@ -495,7 +475,7 @@ export default function CreateEvent(props) {
 						<div className="center">
 								<div className="divButtonsCreatePromoter">
 									<button className="button" onClick={handleSubmit} >{t('submit')}</button>
-									<button className="button"  value="Add Photo" onClick={() => setPopUpAddPhoto(true)}>Add Photo</button>
+									<button className="button"  value="Add Photo" onClick={() => setPopUpAddPhoto(true)}>{t('addEventPhoto')}</button>
 								</div>
 							</div>
 					</div>
@@ -504,15 +484,3 @@ export default function CreateEvent(props) {
 		</div>
 	);
 }
-
-
-/**
- * 
- * 										
-
-
-
-										
- * 
- * 
- */

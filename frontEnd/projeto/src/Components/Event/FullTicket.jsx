@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import UserContext from "../../Contexts/UserContext"
 import goBackImg from "../../Images/goBack.png"
 import BlackClose from "../../Images/blackClose.png"
+import { useTranslation } from "react-i18next";
 
 export default function FullTicket(props){
+	const {t} = useTranslation();
 
     const {ticket,ticketType,setShow,setTicketID} = props
     const {user} = useContext(UserContext);
@@ -30,7 +32,7 @@ export default function FullTicket(props){
         }
 
 
-        if(user.id !== ticket.user_id){
+        if(user.id === ticket.user_id){
             setBuyUserTicket(true)
             return
         }
@@ -64,7 +66,7 @@ export default function FullTicket(props){
                 <div>
                     <div className="buySection">
                         <h2>{ticket.price}$</h2>
-                        <button className="button" onClick={buyTicket}>Buy</button>
+                        <button className="button" onClick={buyTicket}>{t('buy')}</button>
                     </div>
                     <div className="userSection">
                         <img className="userImageBuySection" src={profile_pic} alt="" />
@@ -82,7 +84,7 @@ export default function FullTicket(props){
                     <div className="overlay"></div>
                     <div className="popUpContainer">
                         <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
-                        <h3 className="popUpInfo">Log in to buy a ticket!</h3>
+                        <h3 className="popUpInfo">{t('logInToBuy')}</h3>
                     </div>
                 </div>
             }
@@ -93,7 +95,7 @@ export default function FullTicket(props){
                     <div className="overlay"></div>
                     <div className="popUpContainer">
                         <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
-                        <h3 className="popUpInfo">Only users can buy a ticket!</h3>
+                        <h3 className="popUpInfo">{t('onlyUsers')}</h3>
                     </div>
                 </div>
             }
@@ -104,7 +106,7 @@ export default function FullTicket(props){
                     <div className="overlay"></div>
                     <div className="popUpContainer">
                         <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
-                        <h3 className="popUpInfo">You can not buy your own tickets</h3>
+                        <h3 className="popUpInfo">{t('onlyUsers')}</h3>
                     </div>
                 </div>
             }

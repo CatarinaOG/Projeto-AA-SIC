@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 import NavBarUser from "../Components/NavBar/NavBarUser";
 import PaymentMethodElem from "../Components/PaymentMethods/PaymentMethodElem";
@@ -8,7 +9,8 @@ import PayPalPopIn from "../Components/PaymentMethods/PayPalPopIn";
 import VisaPopIn from "../Components/PaymentMethods/VisaPopIn";
 
 export default function PaymentMethods(props) {
-  
+	const {t} = useTranslation();
+
 	const {ticketID} = props
 
 	const [paymentType, setPaymentType] = useState("");
@@ -32,7 +34,7 @@ export default function PaymentMethods(props) {
 
 		<div className="center">
 			<div className="defaultContainer">
-			<h1>Payment Methods</h1>
+			<h1>{t('paymentMethods')}</h1>
 			<div className="eventsContainer">
 				<PaymentMethodElem
 				type={"MBWay"}
@@ -83,18 +85,18 @@ export default function PaymentMethods(props) {
 					<h3 className="redH3">{message}</h3>
 				</div>
 				<div className="buttonContainerPayment">
-					<button className="button" onClick={goBack}>Go back</button>
+					<button className="button" onClick={goBack}>{t('goBack')}</button>
 				</div>
 				</div>
 			) : (
 				<div>
 				<div className="buttonContainerPayment">
 					<h3 className="greenH3">
-					Success! you may return to the main page
+					{t('successYouMayReturn')}
 					</h3>
 				</div>
 				<div className="buttonContainerPayment">
-					<button className="button" onClick={returnHome}>Return to Main</button>
+					<button className="button" onClick={returnHome}> {t('returnHome')}</button>
 				</div>
 				</div>
 			)}

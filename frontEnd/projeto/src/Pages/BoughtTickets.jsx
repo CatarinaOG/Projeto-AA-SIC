@@ -2,13 +2,15 @@ import NavBarUser from "../Components/NavBar/NavBarUser"
 import Filters from "../Components/Filters/Filters"
 import BoughtTicket from "../Components/BoughtTickets/BoughtTicket"
 import UserContext from "../Contexts/UserContext"
+import { useTranslation } from "react-i18next";
+
 
 import "../Styles/BoughTickets.css"
 
 import { useState,useContext, useEffect } from "react"
 
 export default function BoughtTickets(){
-
+	const {t} = useTranslation();
     const {user} = useContext(UserContext);
     const [tickets,setTickets] =useState([])
 
@@ -46,11 +48,11 @@ export default function BoughtTickets(){
             
             <div className="center">
                 <div className="defaultContainer">
-                    <h1>Bought Tickets</h1>
+                    <h1>{t('boughtTickets')} </h1>
 
                     <div className="eventsContainer">
                         { tickets.length > 0 ? 
-                            ticketrsFiltered : <p>You didn't buy any tickets yet</p>}
+                            ticketrsFiltered : <p>{t('noTicketsYet')}</p>}
                     </div>
 
                 </div>

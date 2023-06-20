@@ -1,5 +1,6 @@
 import { useState, useContext} from "react";
 import UserContext from "../../Contexts/UserContext";
+import { useTranslation } from "react-i18next";
 
 export default function MBWayPopIn({
   setPaymentType,
@@ -7,6 +8,7 @@ export default function MBWayPopIn({
   setMessage,
   ticketID
 }) {
+  const {t} = useTranslation();
 
   const {user} = useContext(UserContext);
 
@@ -30,7 +32,7 @@ export default function MBWayPopIn({
       setPaymentInfo({ phoneNumber: number });
       postTicketBuy()
     } else {
-      setMessage("Phone Number isn't valid");
+      setMessage(t('phoneNumberNotValid'));
     }
   };
 
@@ -56,7 +58,7 @@ export default function MBWayPopIn({
         setPaymentType("");
         setMessage("Success");
       } 
-      else setMessage("Category already exists!")
+      else setMessage(t('errorTryAgain'))
     })
     .catch(error => {
 		console.log('Error:', error);
@@ -71,7 +73,7 @@ export default function MBWayPopIn({
   return (
     <div className="MBWayPaymentMethod">
       <div className="MBWayHeaderDiv">
-        <h2>Enter your phone Number:</h2>
+        <h2>{t('enterPhoneNumber')}</h2>
       </div>
       <div className="listing-elem-3-Payment">
         <form onSubmit={handleSubmit}>

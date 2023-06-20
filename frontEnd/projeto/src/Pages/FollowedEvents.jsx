@@ -100,11 +100,11 @@ export default function FollowedEvents(props) {
 					<div className="overlay"></div>
 					<div className="popUpContainer">
 						<img src={BlackClose} className="editClose" alt="" onClick={closeConfirmation} />
-						<h3 className="popUpInfoWithButtons">Are you sure you want to remove?</h3>
+						<h3 className="popUpInfoWithButtons">{t('sureYouWantToRemove')}</h3>
 						<div className="center">
 							<div className="promoterButtons">
-								<button className="button" onClick={yesClick}>Yes</button>
-								<button className="button" onClick={closeConfirmation}>No</button>
+								<button className="button" onClick={yesClick}>{t('yes')}</button>
+								<button className="button" onClick={closeConfirmation}>{t('no')}</button>
 							</div>
 						</div>
 
@@ -116,7 +116,7 @@ export default function FollowedEvents(props) {
 
 			<div className="center">
 				<div className="defaultContainer">
-					<h1>Followed Events</h1>
+					<h1>{t('followedEvents')}</h1>
 					<div className="eventsContainer">{eventsFiltered}</div>
 				</div>
 			</div>

@@ -12,6 +12,7 @@ import FullTicket from "../Components/Event/FullTicket"
 import Artist from "../Components/Event/Artist"
 import Map from "../Components/Event/Map"
 import UserContext from "../Contexts/UserContext"
+import { useTranslation } from "react-i18next";
 
 import "../Styles/Event.css";
 
@@ -29,6 +30,7 @@ export default function Event(props){
     const [tickets,setTickets] = useState([])
     const [soldTickets,setSoldTickets] = useState([])
     const [ticket,setTicket] = useState()
+	const {t} = useTranslation();
 
 
     useEffect(() => {
@@ -229,7 +231,7 @@ export default function Event(props){
 
                         {user.type === "user" &&
                             <button className="saveEventButton" onClick={saveEvent}>
-                                {event.event_saved? "You saved this event!" : "Save Event"}
+                                {event.event_saved ? t('youSavedThis') :  t('saveEvent')}
                             </button>
                         }
                     </div>
@@ -238,22 +240,22 @@ export default function Event(props){
                         <div className="eventNavBar">
 
                             <div className="eventNavBarLeftSide">
-                                <h2 onClick={showTicketsTypes} className={show !== "info"? "eventTabSelected" : "eventTab"}>Tickets</h2>
+                                <h2 onClick={showTicketsTypes} className={show !== "info"? "eventTabSelected" : "eventTab"}> {t('tickets')}</h2>
                                 <h2 onClick={showInfo} className={show === "info"? "eventTabSelected" : "eventTab"} >Info</h2>
                             </div>
 
                             <div className="eventNavBarRighSide">
                                 <div className="ticketsInfoSection">
                                     <p>{event.tickets_available}</p>
-                                    <p className="gray">available</p>
+                                    <p className="gray"> {t('available')}</p>
                                 </div>
                                 <div className="ticketsInfoSection">
                                     <p>{event.tickets_sold}</p>
-                                    <p className="gray">sold</p>
+                                    <p className="gray"> {t('sold')}</p>
                                 </div>
                                 <div className="ticketsInfoSection">
                                     <p>{event.tickets_wanted}</p>
-                                    <p className="gray">wanted</p>
+                                    <p className="gray"> {t('wanted')}</p>
                                 </div>
                             </div>
                         </div>
@@ -264,7 +266,7 @@ export default function Event(props){
                                 {user.type === "user" &&
                                     <TicketAlert event={event} setUpdateEvent={setUpdateEvent}/>
                                 }      
-                                <h2 className="marginTop">Tickets Types</h2>
+                                <h2 className="marginTop"> {t('tickeTypesHead')}</h2>
                                 {showTheTicketsTypes}
                             </div>
                         }
@@ -274,11 +276,11 @@ export default function Event(props){
                                 {user.type === "user" &&
                                     <TicketAlert event={event} setUpdateEvent={setUpdateEvent}/>
                                 }
-                                <h2 className="marginTop">Tickets Available</h2>
-                                {showTheTickets.length === 0 && <p className="marginBottom">There are no tickets available...</p>}
+                                <h2 className="marginTop"> {t('ticketAvailable')}</h2>
+                                {showTheTickets.length === 0 && <p className="marginBottom">{t('noTicketsAvailable')}</p>}
                                 {showTheTickets}
 
-                                { showTheSoldTickets.length > 0 && <h2>Tickets Sold</h2>}
+                                { showTheSoldTickets.length > 0 && <h2>{t('ticketsSold')}</h2>}
                                 {showTheSoldTickets}
                             </div>
                         }
@@ -297,16 +299,16 @@ export default function Event(props){
                         { show === "info" &&
                             <div className="marginBottom">
                                 <div className="artistsSection">
-                                    <h2>Artists</h2>
+                                    <h2>{t('artists')}</h2>
                                     {showArtists}
                                 </div>
                                 <div>
-                                    <h2>Location</h2>
+                                    <h2>{t('eventVenue')}</h2>
                                     <div className="displayHorizontally">
                                         <Map event={event}/>
                                         <div className="mapInfo">
                                             <h3>{event.event_place}</h3>
-                                            <p>{event.upcoming_events} upcoming events</p>
+                                            <p>{event.upcoming_events}</p>
                                         </div>
                                     </div>
                                 </div>

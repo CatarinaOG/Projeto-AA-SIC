@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "../../Styles/Profile.css";
 import BlackClose from "../../Images/blackClose.png"
+import { useTranslation } from "react-i18next";
 
 
 export default function PopUpAddType(props) {
@@ -15,6 +16,7 @@ export default function PopUpAddType(props) {
   const [message, setMessage] = useState("");
   const dateStartCompare = new Date(dateStart);
   const dateEndCompare = new Date(dateEnd);
+	const {t} = useTranslation();
 
   useEffect(() => {
     if (trigger) {
@@ -34,7 +36,8 @@ export default function PopUpAddType(props) {
   const handleDateStartChange = (event) => {
     const dateTemp = new Date(event.target.value);
     if (dateTemp > dateEndCompare || dateTemp < dateStartCompare) {
-      setMessage("Date's are not possible");
+      
+      setMessage(t('dateNotPossible'));
       setDateStartType("");
     } else {
       setMessage("");
@@ -45,7 +48,7 @@ export default function PopUpAddType(props) {
   const handleDateEndChange = (event) => {
     const dateTemp = new Date(event.target.value);
     if (dateTemp > dateEndCompare || dateTemp < dateStartCompare) {
-      setMessage("Date's are not possible");
+      setMessage(t('dateNotPossible'));
       setDateEndType("");
     } else {
       setMessage("");
@@ -69,7 +72,7 @@ export default function PopUpAddType(props) {
       dateEndType === "" ||
       price === null
     ) {
-      setMessage("One or more fields Incomplete");
+      setMessage(t('messageOneOrMoreIncomplete'));
     } else {
       const event_date_start_unform = dateStartType;
       const [year, month, day] = event_date_start_unform.split('-');
@@ -97,7 +100,7 @@ export default function PopUpAddType(props) {
     <div className="overlay">
       <div className="containterAddType">
       <img src={BlackClose} className="editClose" alt="" onClick={() => setPopUpTrigger(false)} />
-            <h3 className="editTitle">Add Category</h3>
+            <h3 className="editTitle">{t('addTicketType')}</h3>
         <form>
           <input
             className="inputPopUpAddType"
@@ -151,7 +154,7 @@ export default function PopUpAddType(props) {
               setPopUpTrigger(false);
             }}
           >
-            Add
+            {t('submit')}
           </button>
         </div>
       </div>

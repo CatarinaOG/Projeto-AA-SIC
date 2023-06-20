@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 export default function PopUpAddArtist(props) {
 
   const {trigger,setPopUpTrigger,setPopUpTriggerCreate,onAddArtist,artists} = props
+	const {t} = useTranslation();
 
   const [artist, setArtist] = useState("");
   const [message, setMessage] = useState("");
@@ -60,12 +61,12 @@ export default function PopUpAddArtist(props) {
 
   const submitArtist = () => {
     if (artist === "") {
-      setMessage("Please select a option");
+      setMessage(t('addArtistMessage'));
     }
     const foundObject = artists.find(obj => obj.artist_name === artist.artist_name); 
     console.log(foundObject)
     if (foundObject){
-      setMessage("This artist was already added");
+      setMessage(t('addArtistMessage2'));
     }
     else {
       console.log(artist.artist_name);
@@ -80,7 +81,7 @@ export default function PopUpAddArtist(props) {
       <div className="overlay">
       <div className="editContainter">
           <img src={BlackClose} className="editClose" alt="" onClick={() => setPopUpTrigger(false)} />
-          <h3 className="editTitle">Add Artist</h3>
+          <h3 className="editTitle">{t('addArtistTitle')}</h3>
           <form>
           <Select
                 className="inputSelectArtist"
@@ -104,11 +105,11 @@ export default function PopUpAddArtist(props) {
                 className="promptAddArtist"
                 onClick={() => {setPopUpTriggerCreate(true); setPopUpTrigger(false)}}
               >
-                Not Listed? Click here!
+                {t('addArtistNotListed')}
               </h4>
               <h3 className="redH3">{message}</h3>
           </form>
-          <button className="button" onClick={() => submitArtist()}>Confirm</button>
+          <button className="button" onClick={() => submitArtist()}>{t('submit')}</button>
       </div>
   </div>
   ) : ("")

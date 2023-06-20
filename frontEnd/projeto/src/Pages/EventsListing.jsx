@@ -6,6 +6,8 @@ import PopUpRemoveListing from "../Components/SellingListing/PopUpRemoveListing"
 
 import AddPrompt from "../Components/EventsListing/AddPrompt";
 import EventListElem from "../Components/EventsListing/EventListElem";
+import { useTranslation } from "react-i18next";
+
 
 export default function EventsListing() {
 	const {user} = useContext(UserContext);
@@ -26,6 +28,7 @@ export default function EventsListing() {
 		getEvents()
 	  }, []);
 
+	  const {t} = useTranslation();
 
 	function getEvents(){
 		fetch("http://localhost:8080/api/promoter/get_events_by_promoter", {
@@ -94,7 +97,7 @@ export default function EventsListing() {
 			<div className="center">
 				<div className="defaultContainer">
 					<div className="headerButtonEventListing">
-						<h1> Events</h1>
+						<h1> {t('events')}</h1>
 						<AddPrompt />
 					</div>
 					<div className="eventsContainer">

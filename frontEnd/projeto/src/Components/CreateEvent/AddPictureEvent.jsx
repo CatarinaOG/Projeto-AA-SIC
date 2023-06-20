@@ -5,9 +5,11 @@ import storage from "../../firebaseConfig"
 import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
 import fileImage from "../../Images/doc.png"
+import { useTranslation } from "react-i18next";
 
 
 export default function AddPictureEvent(props){
+	const {t} = useTranslation();
 
     const {setPopUpAddPhoto,setImage} = props
     const {user,setUser} = useContext(UserContext);
@@ -58,12 +60,12 @@ export default function AddPictureEvent(props){
         <div className="overlay">
             <div className="editContainter">
                 <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
-                <h3 className="editTitle">Add Event Picture</h3>
+                <h3 className="editTitle">{t('addEventPhoto')}</h3>
                 <form action="/submit" onSubmit={choosePicture}>
                     { !fileSaved && 
                         <div>
                             <div className="file-input-container">
-                                <label className="file-input-label" htmlFor="my-file-input">Choose a file</label>
+                                <label className="file-input-label" htmlFor="my-file-input">{t('chooseAFile')}</label>
                                 <input className="file-input" onChange={saveTemp} type="file" id="my-file-input" />
                             </div>
                         </div>
@@ -75,7 +77,7 @@ export default function AddPictureEvent(props){
                             </div>
                         </div>
                     }
-                    <button className="button" type="submit">Confirm</button>
+                    <button className="button" type="submit">{t('submit')}</button>
                 </form>
             </div>
         </div>

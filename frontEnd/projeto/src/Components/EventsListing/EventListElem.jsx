@@ -5,12 +5,15 @@ import { useNavigate } from "react-router-dom";
 
 import { useState,useContext,useEffect } from "react";
 import UserContext from "../../Contexts/UserContext"
+import { useTranslation } from "react-i18next";
+
 
 export default function EventListElem(props) {
 	const {event,method} = props; // saved / followed
     const {user} = useContext(UserContext);
 
 	const [showConfirmation,setShowConfirmation] = useState(false)
+	const {t} = useTranslation();
 
 	const navigate = useNavigate()
 
@@ -26,7 +29,7 @@ export default function EventListElem(props) {
 		navigate("/Event")
 	}
 
-	let confirmationStatment = "Are you sure you want to remove?"
+	let confirmationStatment = t('sureYouWantToRemove')
 	function yesClick(){
 		method(event.event_id)
 	}
@@ -92,8 +95,8 @@ export default function EventListElem(props) {
 						<h3 className="popUpInfoWithButtons">{confirmationStatment}</h3>
 						<div className="center">
 							<div className="promoterButtons">
-								<button className="button" onClick={yesClick}>Yes</button>
-								<button className="button" onClick={closeConfirmation}>No</button>
+								<button className="button" onClick={yesClick}>{t('yes')}</button>
+								<button className="button" onClick={closeConfirmation}>{t('no')}</button>
 							</div>
 						</div>
 

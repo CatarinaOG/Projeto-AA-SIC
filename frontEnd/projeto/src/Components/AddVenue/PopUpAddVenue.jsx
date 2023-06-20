@@ -7,11 +7,11 @@ export default function PopUpAddVenue(props) {
 
   const navigate = useNavigate();
   const handleRemoveList = () => {
-    props.setPopUpTrigger(false);
+    props.setPopUpTrigger(0);
 		navigate("/AddEvent")
   };
 
-  return props.trigger ? (
+  return props.trigger === 2 ? (
     <div>
       <div className="editContainter">
         <h3 className="editTitle">{t('venueSuccess')}</h3>

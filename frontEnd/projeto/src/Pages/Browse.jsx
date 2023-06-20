@@ -12,8 +12,10 @@ import Magnifier from "../Images/magnifier.png"
 
 import "../Styles/Browse.css"
 
+import { useTranslation } from "react-i18next";
 
 export default function Browse(props){
+	const {t} = useTranslation();
 
     const {searchText,setSearchText,setEventId} = props
     const {user} = useContext(UserContext);
@@ -92,8 +94,8 @@ export default function Browse(props){
             <div className="center">
                 <div className="defaultContainer">
                     <div>
-                        <h1>Browse Events</h1>
-                        <p className="gray">Find events off all types from any date in any place!</p>
+                        <h1>{t('browseEvents')}</h1>
+                        <p className="gray">{t('findEventsBrowseText')}</p>
 
 
                         <div className="searchBarBrowse">
@@ -113,8 +115,8 @@ export default function Browse(props){
                         
                         { events.length === 0 &&
                             <div>
-                                <h2 className="marginTop">No Events Found</h2>
-                                <p>Your filters did not yield any results</p>
+                                <h2 className="marginTop">{t('noEventsFoundTitle')}</h2>
+                                <p>{t('noEventsFoundFiltreText')}</p>
                             </div>
                         }
                     </div>

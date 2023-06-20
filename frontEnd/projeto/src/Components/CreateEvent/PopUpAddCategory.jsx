@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 
 export default function PopUpAddCategory(props) {
   const {trigger,setPopUpTrigger} = props
+	const {t} = useTranslation();
 
   const [temp,setTemp] = useState("")
 
@@ -24,15 +25,6 @@ export default function PopUpAddCategory(props) {
   function saveTemp(event){
     setTemp(event.target.value);
   };
-
-  const submitType = () => {
-    if (categoryName === "") {
-      setMessage("Invalid artist name");
-    } else {
-      postCategory();
-    }
-  };
-
 
   function postCategory(){
 
@@ -52,7 +44,7 @@ export default function PopUpAddCategory(props) {
     })
     .then(responseJSON => {
       if(responseJSON.confirmed === "true") setPopUpTrigger(false)
-      else setMessage("Category already exists!")
+      else setMessage(t('categoryAlreadyExists'))
     })
     .catch(error => {
 		console.log('Error:', error);
@@ -64,10 +56,10 @@ export default function PopUpAddCategory(props) {
     <div className="overlay">
         <div className="editContainter">
             <img src={BlackClose} className="editClose" alt="" onClick={() => setPopUpTrigger(false)} />
-            <h3 className="editTitle">Add Category</h3>
+            <h3 className="editTitle">{t('addCategory')}</h3>
                 <input className="editInputNumber" onChange={saveTemp}  placeholder="Insert your new category" type="text"/>
                 <p className={message !== "" ? "urlError" : "urlErrorNotVisible"}>{message}</p>
-            <button className="button" onClick={postCategory}>Confirm</button>
+            <button className="button" onClick={postCategory}>{t('submit')}</button>
         </div>
     </div>
   ):("")

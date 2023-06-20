@@ -2,6 +2,7 @@ import { useState,useContext } from "react"
 import { useNavigate,Link } from 'react-router-dom';
 import { Cookies } from "react-cookie";
 import UserContext from "../../Contexts/UserContext"
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 import Logo from "../../Images/logo.png"
 import Info from "../../Images/info.png"
@@ -51,7 +52,7 @@ export default function NavBar(){
     function sendLoginRequest(){
 
 
-        fetch("http://localhost:8080/api/user/login", {
+        fetch(`${GLOBAL_VARIABLE}/user/login`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -92,7 +93,7 @@ export default function NavBar(){
 
     function sendSignUpRequest(){
 
-        fetch("http://localhost:8080/api/user/register", {
+        fetch(`${GLOBAL_VARIABLE}/user/register`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -101,6 +102,7 @@ export default function NavBar(){
         })
         .then(response => response.json())
         .then(userResponse => {
+            console.log(userResponse)
             setUser({...userResponse,email: inputs.email,type:"user"})
             cookies.set('token',userResponse.token)
             cookies.set('type',"user")

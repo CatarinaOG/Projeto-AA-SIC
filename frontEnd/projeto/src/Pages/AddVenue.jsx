@@ -16,11 +16,11 @@ export default function AddVenue() {
   const [capacity, setCapacity] = useState("");
   const [city, setCity] = useState("");
   const [message, setMessage] = useState("");
-  const [popUpTrigger, setPopUpTrigger] = useState(false);
-	const [popUpAddPhoto,setPopUpAddPhoto] = useState(false);
   const {user} = useContext(UserContext);
   const navigate = useNavigate();
 	const [image, setImage] = useState("");
+
+  const [popUpTriggers,setPopUpTriggers] = useState("");
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -47,11 +47,8 @@ export default function AddVenue() {
 
     if (value === "" || /^\d+$/.test(value)) {
       setCapacity(value);
-      console.log("Correct");
       setMessage("");
     } else {
-      console.log("Incorrect");
-      //setMessage("Capacity values must be positive integers");
       setMessage(t('messageCapacityError')); 
 
       setCapacity("");
@@ -69,12 +66,10 @@ export default function AddVenue() {
       capacity === "" ||
       city === ""
     ) {
-      //setMessage("One or More inputs incomplete");
       setMessage(t('messageOneOrMoreIncomplete')); 
 
     } else {
       postVenue()
-      console.log(name, address, latitude, longitude, capacity);
     }
   };
 
@@ -89,7 +84,6 @@ export default function AddVenue() {
       city : city,
       map:image
     }
-    console.log(JSON.stringify(input))
     fetch("http://localhost:8080/api/promoter/add_location", {
         method: 'POST',
         headers: {
@@ -100,7 +94,7 @@ export default function AddVenue() {
     })
     .then(response => {
         if(response.ok)
-          setPopUpTrigger(true);
+          setPopUpTriggers(2);
 
     })
     .catch(error => {
@@ -117,12 +111,12 @@ export default function AddVenue() {
   return (
     <div>
 
-    {popUpAddPhoto &&
+    {popUpTriggers === 1 &&
 				<AddPictureVenue 
-					setPopUpAddPhoto={setPopUpAddPhoto}
+					setPopUpAddPhoto={setPopUpTriggers}
 					setImage={setImage}/>}
 		<NavBarPromoter selected="events"/>
-		<PopUpAddVenue trigger={popUpTrigger} setPopUpTrigger={setPopUpTrigger} />
+		<PopUpAddVenue trigger={popUpTriggers} setPopUpTrigger={setPopUpTriggers} />
 		<div className="center">
 			<div className="defaultContainer">
 			<h1>{t('addVenue')}</h1>
@@ -158,9 +152,9 @@ export default function AddVenue() {
 						<h3 className="redH3">{message}</h3>
             <div className="centerVenueButtons">
 								<div className="divButtonsCreatePromoter">
-                <button className="buttonAddVenue"   onClick={handleSubmit} >Submit</button> 
-								<button className="buttonAddVenue"   onClick={cancel} > Cancel </button> 
-                <button className="buttonAddVenue"  value="Add Photo" onClick={() => setPopUpAddPhoto(true)}>Add Seating Plan</button>
+                <button className="buttonAddVenue"   onClick={handleSubmit} >{t('submit')}</button> 
+								<button className="buttonAddVenue"   onClick={cancel} >{t('cancel')}</button> 
+                <button className="buttonAddVenue"  value="Add Photo" onClick={() => setPopUpTriggers(1)}>{t('addSeatingPlan')}</button>
 								</div>
 							</div>
           			</div>
