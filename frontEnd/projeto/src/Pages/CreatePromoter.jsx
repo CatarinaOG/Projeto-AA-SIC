@@ -55,7 +55,7 @@ export default function CreatePromoter() {
 
 	function sendCreatePromoterRequest(){
 
-		fetch("http://localhost:8080/api/admin/create_promoter", {
+		fetch(`${GLOBAL_VARIABLE}/admin/create_promoter`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

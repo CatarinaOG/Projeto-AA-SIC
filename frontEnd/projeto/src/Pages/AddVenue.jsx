@@ -84,7 +84,7 @@ export default function AddVenue() {
       city : city,
       map:image
     }
-    fetch("http://localhost:8080/api/promoter/add_location", {
+    fetch(`${GLOBAL_VARIABLE}/promoter/add_location`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -18,7 +18,7 @@ export default function PopUpAddArtist(props) {
   const [artistOptions, setArtistOptions] = useState([]);
 
 	function getArtists(){
-		fetch("http://localhost:8080/api/promoter/get_artists", {
+		fetch(`${GLOBAL_VARIABLE}/promoter/get_artists`, {
 			method: 'GET',
 			headers: {
 			'Content-Type': 'application/json',

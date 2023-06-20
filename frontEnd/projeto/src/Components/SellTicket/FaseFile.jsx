@@ -38,7 +38,7 @@ export default function FaseFile(props){
 
     function sendSellTicketRequest(url){
 
-        fetch("http://localhost:8080/api/user/sell_ticket", {
+        fetch(`${GLOBAL_VARIABLE}/user/sell_ticket`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

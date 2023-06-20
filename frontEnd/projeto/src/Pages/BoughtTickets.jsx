@@ -21,7 +21,7 @@ export default function BoughtTickets(){
 
     function sendGetBoughtTicketsRequest(){
 
-        fetch("http://localhost:8080/api/user/get_bought_tickets", {
+        fetch(`${GLOBAL_VARIABLE}/user/get_bought_tickets`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

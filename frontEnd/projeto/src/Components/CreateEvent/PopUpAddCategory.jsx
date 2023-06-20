@@ -28,7 +28,7 @@ export default function PopUpAddCategory(props) {
 
   function postCategory(){
 
-    fetch("http://localhost:8080/api/promoter/create_category", {
+    fetch(`${GLOBAL_VARIABLE}/promoter/create_category`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',        

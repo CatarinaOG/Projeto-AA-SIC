@@ -86,7 +86,7 @@ export default function CreateEvent(props) {
 
 
 	function getCategories(){
-		fetch("http://localhost:8080/api/promoter/get_categories", {
+		fetch(`${GLOBAL_VARIABLE}/promoter/get_categories`, {
 			method: 'GET',
 			headers: {
 			'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ export default function CreateEvent(props) {
 
 
 	function getVenues(){
-		fetch("http://localhost:8080/api/promoter/get_venues", {
+		fetch(`${GLOBAL_VARIABLE}/promoter/get_venues`, {
 			method: 'GET',
 			headers: {
 			'Content-Type': 'application/json',
@@ -150,7 +150,7 @@ export default function CreateEvent(props) {
 		}
 
 		console.log(input)
-		fetch("http://localhost:8080/api/promoter/add_event", {
+		fetch(`${GLOBAL_VARIABLE}/promoter/add_event`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

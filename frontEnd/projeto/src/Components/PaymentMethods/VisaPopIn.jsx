@@ -41,7 +41,7 @@ export default function VisaPopIn({
 
   function postTicketBuy(){
 
-    fetch("http://localhost:8080/api/user/buy_ticket", {
+    fetch(`${GLOBAL_VARIABLE}/user/buy_ticket`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',        

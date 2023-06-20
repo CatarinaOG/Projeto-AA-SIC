@@ -38,7 +38,7 @@ export default function FaseEvent(props){
 
     function sendGetSuggestedRequest(){
 
-        fetch("http://localhost:8080/api/user/events_suggested_for_selling_ticket", {
+        fetch(`${GLOBAL_VARIABLE}/user/events_suggested_for_selling_ticket`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export default function FaseEvent(props){
 
     function sendGetEventsRequest(){
 
-        fetch("http://localhost:8080/api/event/get_filtered_events", {
+        fetch(`${GLOBAL_VARIABLE}/event/get_filtered_events`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

@@ -21,7 +21,7 @@ export default function PromotersListing(){
 
     function sendGetPromotersRequest(){
 
-        fetch("http://localhost:8080/api/admin/get_promoters", {
+        fetch(`${GLOBAL_VARIABLE}/admin/get_promoters`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

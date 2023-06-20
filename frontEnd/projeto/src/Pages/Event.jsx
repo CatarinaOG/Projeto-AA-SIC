@@ -52,7 +52,7 @@ export default function Event(props){
             }
         }
 
-        fetch("http://localhost:8080/api/event/get_full_event", {
+        fetch(`${GLOBAL_VARIABLE}/event/get_full_event`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ export default function Event(props){
 
     function sendGetTicketTypesRequest(){
 
-        fetch("http://localhost:8080/api/event/get_ticket_types_event", {
+        fetch(`${GLOBAL_VARIABLE}/event/get_ticket_types_event`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export default function Event(props){
     
     function sendGetTicketsRequest(ticket_id){
 
-        fetch("http://localhost:8080/api/user/get_tickets_by_type_and_event", {
+        fetch(`${GLOBAL_VARIABLE}/user/get_tickets_by_type_and_event`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ export default function Event(props){
 
         console.log()
 
-        fetch("http://localhost:8080/api/user/get_sold_tickets_by_type_and_event", {
+        fetch(`${GLOBAL_VARIABLE}/user/get_sold_tickets_by_type_and_event`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -137,7 +137,7 @@ export default function Event(props){
 
     function sendSaveEventRequest(){
 
-        fetch("http://localhost:8080/api/user/save_event", {
+        fetch(`${GLOBAL_VARIABLE}/user/save_event`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

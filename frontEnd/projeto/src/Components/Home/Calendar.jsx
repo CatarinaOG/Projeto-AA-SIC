@@ -15,7 +15,7 @@ export default function Calendar(props){
 
     function sendGetCalendarEventsRequest(){
 
-        fetch("http://localhost:8080/api/event/get_events", {
+        fetch(`${GLOBAL_VARIABLE}/event/get_events`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

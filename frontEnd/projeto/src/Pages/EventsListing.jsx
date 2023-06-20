@@ -31,7 +31,7 @@ export default function EventsListing() {
 	  const {t} = useTranslation();
 
 	function getEvents(){
-		fetch("http://localhost:8080/api/promoter/get_events_by_promoter", {
+		fetch(`${GLOBAL_VARIABLE}/promoter/get_events_by_promoter`, {
 			method: 'GET',
 			headers: {
 			'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ export default function EventsListing() {
 
 	function removeEventPromoter( event_id){
 
-		fetch("http://localhost:8080/api/promoter/remove_event", {
+		fetch(`${GLOBAL_VARIABLE}/promoter/remove_event`, {
 			method: 'POST',
 			headers: {
 			  'Content-Type': 'application/json',        

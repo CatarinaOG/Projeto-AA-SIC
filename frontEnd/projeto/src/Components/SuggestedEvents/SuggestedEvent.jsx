@@ -23,7 +23,7 @@ export default function SuggestedEvent(props){
 
     function sendRemoveSuggestionRequest(){
 
-        fetch("http://localhost:8080/api/promoter/remove_suggestion", {
+        fetch(`${GLOBAL_VARIABLE}/promoter/remove_suggestion`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

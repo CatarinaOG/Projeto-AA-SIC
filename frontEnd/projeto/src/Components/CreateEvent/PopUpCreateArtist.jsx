@@ -40,7 +40,7 @@ export default function PopUpCreateArtist(props) {
 
 
   function postArtist(){
-    fetch("http://localhost:8080/api/promoter/create_artist", {
+    fetch(`${GLOBAL_VARIABLE}/promoter/create_artist`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',        

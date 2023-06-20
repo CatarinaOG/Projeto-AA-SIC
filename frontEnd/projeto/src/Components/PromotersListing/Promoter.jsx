@@ -25,7 +25,7 @@ export default function Promoter(props){
 
     function sendDeletePromoterRequest(){
 
-        fetch("http://localhost:8080/api/admin/remove_promoter", {
+        fetch(`${GLOBAL_VARIABLE}/admin/remove_promoter`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

@@ -26,7 +26,7 @@ export default function Notifications() {
   });
 
   function getNotifications(){
-		fetch("http://localhost:8080/api/user/get_notifications", {
+		fetch(`${GLOBAL_VARIABLE}/user/get_notifications`, {
 			method: 'GET',
 			headers: {
 			'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ export default function Notifications() {
 		console.log("Input was" + JSON.stringify(input))
 		console.log(user.token)
 
-		fetch("http://localhost:8080/api/user/remove_notification", {
+		fetch(`${GLOBAL_VARIABLE}/user/remove_notification`, {
 			method: 'POST',
 			headers: {
 			  'Content-Type': 'application/json',

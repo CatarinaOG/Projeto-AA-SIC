@@ -38,7 +38,7 @@ export default function SavedEvents(props) {
 
 
 	function getSaved(){
-		fetch("http://localhost:8080/api/user/get_saved_events", {
+		fetch(`${GLOBAL_VARIABLE}/user/get_saved_events`, {
 			method: 'GET',
 			headers: {
 			'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export default function SavedEvents(props) {
 
 	function removeSaved(event_id){
 
-		fetch("http://localhost:8080/api/user/remove_saved_event", {
+		fetch(`${GLOBAL_VARIABLE}/user/remove_saved_event`, {
 			method: 'POST',
 			headers: {
 			  'Content-Type': 'application/json',

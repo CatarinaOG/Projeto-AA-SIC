@@ -23,7 +23,7 @@ export default function Filters(props){
 
     function sendGetOptionsRequest(){
 
-        fetch("http://localhost:8080/api/event/get_filters_events", {
+        fetch(`${GLOBAL_VARIABLE}/event/get_filters_events`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'

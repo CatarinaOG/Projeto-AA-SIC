@@ -29,7 +29,7 @@ export default function FollowedEvents(props) {
 	);
 
 	function getFollowed(){
-		fetch("http://localhost:8080/api/user/get_followed_events", {
+		fetch(`${GLOBAL_VARIABLE}/user/get_followed_events`, {
 			method: 'GET',
 			headers: {
 			'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ export default function FollowedEvents(props) {
 
 	function removeFollowed(event_id){
 
-		fetch("http://localhost:8080/api/user/remove_followed_event", {
+		fetch(`${GLOBAL_VARIABLE}/user/remove_followed_event`, {
 			method: 'POST',
 			headers: {
 			  'Content-Type': 'application/json',

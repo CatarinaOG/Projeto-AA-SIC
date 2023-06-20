@@ -41,7 +41,7 @@ export default function Browse(props){
             }
         }
 
-        fetch("http://localhost:8080/api/event/get_filtered_events", {
+        fetch(`${GLOBAL_VARIABLE}/event/get_filtered_events`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

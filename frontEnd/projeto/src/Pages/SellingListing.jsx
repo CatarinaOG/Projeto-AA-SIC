@@ -25,7 +25,7 @@ export default function SellingListing() {
 
 	function getSellingListing(){
 
-		fetch("http://localhost:8080/api/user/get_tickets_listed_by_user", {
+		fetch(`${GLOBAL_VARIABLE}/user/get_tickets_listed_by_user`, {
 			method: 'GET',
 			headers: {
 			'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export default function SellingListing() {
 			ad_id : ticket_id
 		}
 
-		fetch("http://localhost:8080/api/user/remove_ticket_listing", {
+		fetch(`${GLOBAL_VARIABLE}/user/remove_ticket_listing`, {
 			method: 'POST',
 			headers: {
 			  'Content-Type': 'application/json',

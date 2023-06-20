@@ -52,7 +52,7 @@ export default function EditPic(props){
 
     function sendEditInfoRequest(url){
 
-        fetch("http://localhost:8080/api/user/profile_edit", {
+        fetch(`${GLOBAL_VARIABLE}/user/profile_edit`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

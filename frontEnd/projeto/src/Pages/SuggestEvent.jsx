@@ -53,7 +53,7 @@ export default function SuggestEvent(props){
         const fullEndDate = end_date_ordered + " " + inputs.end_time + ":00"
 
 
-        fetch("http://localhost:8080/api/user/suggest_event", {
+        fetch(`${GLOBAL_VARIABLE}/user/suggest_event`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

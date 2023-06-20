@@ -12,7 +12,7 @@ export default function FaseType(props){
 
     function sendGetTicketTypesRequest(){
 
-        fetch("http://localhost:8080/api/event/get_ticket_types_event", {
+        fetch(`${GLOBAL_VARIABLE}/event/get_ticket_types_event`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

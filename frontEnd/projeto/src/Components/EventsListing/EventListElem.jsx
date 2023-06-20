@@ -42,7 +42,7 @@ export default function EventListElem(props) {
 		console.log(JSON.stringify(input))
 		console.log(user.token)
 
-		fetch("http://localhost:8080/api/promoter/remove_event", {
+		fetch(`${GLOBAL_VARIABLE}/promoter/remove_event`, {
 			method: 'POST',
 			headers: {
 			  'Content-Type': 'application/json',        
