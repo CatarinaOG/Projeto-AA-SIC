@@ -99,7 +99,7 @@ public class EventService {
                 .event_place(e.getLocation().getName())
                 .map_image(e.getLocation().getMap())
                 .event_image(e.getImage())
-                .tickets_available(e.getAds().size())
+                .tickets_available(Long.valueOf(e.getAds().stream().filter(a -> !a.getSold()).count()).intValue())
                 .tickets_sold(tickets_sold)
                 .tickets_wanted(e.getUsers_saved().size())
                 .event_saved(event_saved)
