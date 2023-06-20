@@ -308,7 +308,7 @@ public class UserService {
 
     public List<GetTicketsTypeEventResponse> get_tickets_by_type_and_event(GetTicketsTypeEventRequest request) {
 
-        List<Ad> ads = adRepo.findAll();
+        List<Ad> ads = adRepo.findAll().stream().filter(a -> !a.getSold()).toList();
         int type_id = request.getTicket_type_id();
         int event_id = request.getEvent_id();
         List<GetTicketsTypeEventResponse> response = new ArrayList<>();
@@ -331,7 +331,7 @@ public class UserService {
 
     public List<GetTicketsTypeEventResponse> get_sold_tickets_by_type_and_event(GetTicketsTypeEventRequest request) {
 
-        List<Ad> ads = adRepo.findAll();
+        List<Ad> ads = adRepo.findAll().stream().filter(Ad::getSold).toList();
         int type_id = request.getTicket_type_id();
         int event_id = request.getEvent_id();
         List<GetTicketsTypeEventResponse> response = new ArrayList<>();
