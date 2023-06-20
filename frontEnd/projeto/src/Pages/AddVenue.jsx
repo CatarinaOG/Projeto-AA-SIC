@@ -164,14 +164,9 @@ export default function AddVenue() {
 								</div>
 							</div>
           			</div>
-
-            	</form>
-
-          
+            	</form>          
         	</div>
-          
       	</div>
- 
     </div>
   );
 }

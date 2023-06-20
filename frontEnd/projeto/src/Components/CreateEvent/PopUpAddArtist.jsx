@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 export default function PopUpAddArtist(props) {
 
-  const {trigger,setPopUpTrigger,setPopUpTriggerCreate,onAddArtist} = props
+  const {trigger,setPopUpTrigger,setPopUpTriggerCreate,onAddArtist,artists} = props
 
   const [artist, setArtist] = useState("");
   const [message, setMessage] = useState("");
@@ -58,15 +58,23 @@ export default function PopUpAddArtist(props) {
     }
   };
 
-  const submitType = () => {
+  const submitArtist = () => {
     if (artist === "") {
       setMessage("Please select a option");
-    } else {
+    }
+    const foundObject = artists.find(obj => obj.artist_name === artist.artist_name); 
+    console.log(foundObject)
+    if (foundObject){
+      setMessage("This artist was already added");
+    }
+    else {
       console.log(artist.artist_name);
       onAddArtist(artist);
       setPopUpTrigger(false);
     }
   };
+
+
 
     return trigger ? (
       <div className="overlay">
@@ -100,7 +108,7 @@ export default function PopUpAddArtist(props) {
               </h4>
               <h3 className="redH3">{message}</h3>
           </form>
-          <button className="button" onClick={() => submitType()}>Confirm</button>
+          <button className="button" onClick={() => submitArtist()}>Confirm</button>
       </div>
   </div>
   ) : ("")
