@@ -42,7 +42,6 @@ export default function FollowedEvents(props) {
 			throw new Error('Network response was not ok.');
 		  })
 		  .then(data => {
-			console.log(JSON.stringify(data))
 			setEvents(data); // Set the parsed JSON data
 		  })
 		  .catch(error => {
@@ -53,23 +52,15 @@ export default function FollowedEvents(props) {
 
 	function removeFollowed(event_id){
 
-		const input = {
-			event_id : event_id
-		}
-		console.log({
-			event_id: event_id
-		})
-
-		console.log(JSON.stringify(input))
-		console.log(user.token)
-
 		fetch("http://localhost:8080/api/user/remove_followed_event", {
 			method: 'POST',
 			headers: {
 			  'Content-Type': 'application/json',
 			  'Authorization': `Bearer ${user.token}`
 			},
-			body: JSON.stringify(input)
+			body: JSON.stringify({
+				event_id : event_id
+			})
 		})
 		.then(response => {
 			if (response.ok) {
@@ -80,7 +71,6 @@ export default function FollowedEvents(props) {
 		  })
 		  .then(responseJSON => {
 			if (responseJSON.confirmed === "true"){
-				console.log("Correu bem")
 				setShowConfirmation(false)
 				getFollowed();
 			}
@@ -105,22 +95,22 @@ export default function FollowedEvents(props) {
 
 	return (
 		<div>
-					{ showConfirmation && (
-			<div>
-				<div className="overlay"></div>
-				<div className="popUpContainer">
-					<img src={BlackClose} className="editClose" alt="" onClick={closeConfirmation} />
-					<h3 className="popUpInfoWithButtons">Are you sure you want to remove?</h3>
-					<div className="center">
-						<div className="promoterButtons">
-							<button className="button" onClick={yesClick}>Yes</button>
-							<button className="button" onClick={closeConfirmation}>No</button>
+			{ showConfirmation && (
+				<div>
+					<div className="overlay"></div>
+					<div className="popUpContainer">
+						<img src={BlackClose} className="editClose" alt="" onClick={closeConfirmation} />
+						<h3 className="popUpInfoWithButtons">Are you sure you want to remove?</h3>
+						<div className="center">
+							<div className="promoterButtons">
+								<button className="button" onClick={yesClick}>Yes</button>
+								<button className="button" onClick={closeConfirmation}>No</button>
+							</div>
 						</div>
-					</div>
 
-				</div>
-			</div>)
-		}
+					</div>
+				</div>)
+			}
 		<div>
 			<NavBarUser selected="home"/>
 

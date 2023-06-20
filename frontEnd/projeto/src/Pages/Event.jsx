@@ -208,6 +208,7 @@ export default function Event(props){
     if(event && event.event_image)
         background_img = event.event_image
 
+    console.log(event)
    
     return event ? (
         <div>
@@ -299,7 +300,7 @@ export default function Event(props){
                                     <h2>Artists</h2>
                                     {showArtists}
                                 </div>
-                                <div className="locationSection">
+                                <div>
                                     <h2>Location</h2>
                                     <div className="displayHorizontally">
                                         <Map event={event}/>
@@ -309,6 +310,13 @@ export default function Event(props){
                                         </div>
                                     </div>
                                 </div>
+
+                                { event.map_image && 
+                                    <div className="marginTop">
+                                        <h2>Map</h2>
+                                        <img className="mapImage" src={event.map_image} alt="" />
+                                    </div>
+                                }
                             </div>
                         }
                     </div>
