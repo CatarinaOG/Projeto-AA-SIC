@@ -70,3 +70,8 @@
 .suggestDateContainer{
     display: flex;
 }
+
+.mapImage{
+    margin-top: 20px;
+    width: 100%;
+}
