@@ -15,15 +15,10 @@ export default function VisaPopIn({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (ccv < 100 && number < 100000000000) {
-      setMessage("Both fields Incomplete");
-    } else if (ccv === "") {
-      setMessage("Incomplete CCV");
-    } else if (number === "") {
-      setMessage("Incomplete Number");
-    } else {
-      postTicketBuy();
-    }
+    if (ccv < 100 && number < 100000000000) setMessage("Both fields Incomplete");
+    else if (ccv === "") setMessage("Incomplete CCV");
+    else if (number === "") setMessage("Incomplete Number");
+    else postTicketBuy();
   };
 
   const handleCCVChange = (event) => {
@@ -59,7 +54,6 @@ export default function VisaPopIn({
       else throw new Error('Error: ' + response.status);
     })
     .then(responseJSON => {
-      console.log(responseJSON)
       if(responseJSON.confirmed === "true"){
         setPaymentType("");
         setPaymentInfo({ number: number, ccv: ccv });
@@ -68,7 +62,7 @@ export default function VisaPopIn({
       else setMessage("Category already exists!")
     })
     .catch(error => {
-		console.log('Error:', error);
+		  console.log('Error:', error);
     });
   }
 

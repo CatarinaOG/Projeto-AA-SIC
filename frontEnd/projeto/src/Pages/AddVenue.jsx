@@ -4,6 +4,7 @@ import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
 import PopUpAddVenue from "../Components/AddVenue/PopUpAddVenue";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import AddPictureVenue from "../Components/AddVenue/AddPictureVenue";
 
 export default function AddVenue() {
   const {t} = useTranslation();
@@ -16,8 +17,10 @@ export default function AddVenue() {
   const [city, setCity] = useState("");
   const [message, setMessage] = useState("");
   const [popUpTrigger, setPopUpTrigger] = useState(false);
+	const [popUpAddPhoto,setPopUpAddPhoto] = useState(false);
   const {user} = useContext(UserContext);
   const navigate = useNavigate();
+	const [image, setImage] = useState("");
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -83,7 +86,8 @@ export default function AddVenue() {
       latitude : latitude,
       longitude : longitude,
       capacity : capacity,
-      city : city
+      city : city,
+      map:image
     }
     console.log(JSON.stringify(input))
     fetch("http://localhost:8080/api/promoter/add_location", {
@@ -112,12 +116,17 @@ export default function AddVenue() {
   
   return (
     <div>
+
+    {popUpAddPhoto &&
+				<AddPictureVenue 
+					setPopUpAddPhoto={setPopUpAddPhoto}
+					setImage={setImage}/>}
 		<NavBarPromoter selected="events"/>
 		<PopUpAddVenue trigger={popUpTrigger} setPopUpTrigger={setPopUpTrigger} />
 		<div className="center">
 			<div className="defaultContainer">
 			<h1>{t('addVenue')}</h1>
-				<form onSubmit={handleSubmit}>
+				<form >
 					<div className="smallContainer">
 
 						<div className="smallContainerInputsCreateVenue">
@@ -147,14 +156,16 @@ export default function AddVenue() {
 						</div>
 
 						<h3 className="redH3">{message}</h3>
-						<div className="center">
-							<div className="divButtonsCreatePromoter">
-								<input className="button" type="submit" value="Submit" />
-								<input className="button" type="submit" value="Cancel" onClick={cancel} />
-							</div>
-						</div>
           			</div>
             	</form>
+							
+            <div className="center">
+								<div className="divButtonsCreatePromoter">
+                <button className="button"   onClick={handleSubmit} >Submit</button> 
+								<button className="button"   onClick={cancel} > Cancel </button> 
+                <button className="button"  value="Add Photo" onClick={() => setPopUpAddPhoto(true)}>Add Photo</button>
+								</div>
+							</div>
         	</div>
       	</div>
     </div>

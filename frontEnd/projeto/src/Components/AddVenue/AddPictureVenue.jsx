@@ -7,7 +7,7 @@ import BlackClose from "../../Images/blackClose.png"
 import fileImage from "../../Images/doc.png"
 
 
-export default function AddPictureEvent(props){
+export default function AddPictureVenue(props){
 
     const {setPopUpAddPhoto,setImage} = props
     const {user,setUser} = useContext(UserContext);
@@ -58,7 +58,7 @@ export default function AddPictureEvent(props){
         <div className="overlay">
             <div className="editContainter">
                 <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
-                <h3 className="editTitle">Add Event Picture</h3>
+                <h3 className="editTitle">Add Venue Blueprint </h3>
                 <form action="/submit" onSubmit={choosePicture}>
                     { !fileSaved && 
                         <div>
