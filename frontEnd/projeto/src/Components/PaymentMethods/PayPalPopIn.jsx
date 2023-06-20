@@ -1,5 +1,6 @@
 import { useState, useContext} from "react";
 import UserContext from "../../Contexts/UserContext";
+import { useTranslation } from "react-i18next";
 
 export default function PayPalPopIn({
   setPaymentType,
@@ -8,6 +9,7 @@ export default function PayPalPopIn({
   ticketID={ticketID}
 }) {
   const {user} = useContext(UserContext);
+  const {t} = useTranslation();
 
   const [email, setEmail] = useState("");
 
@@ -45,7 +47,7 @@ export default function PayPalPopIn({
          setPaymentType("");
     setPaymentInfo({ email: email });
       } 
-      else setMessage("Category already exists!")
+      else setMessage("There was an error")
     })
     .catch(error => {
 		console.log('Error:', error);
@@ -57,7 +59,7 @@ export default function PayPalPopIn({
   return (
     <div className="PayPalPaymentMethod">
       <div className="MBWayHeaderDiv">
-        <h2>Enter your email:</h2>
+        <h2>{t('enterEmail')}</h2>
       </div>
       <div className="listing-elem-3-Payment">
         <form onSubmit={handleSubmit}>

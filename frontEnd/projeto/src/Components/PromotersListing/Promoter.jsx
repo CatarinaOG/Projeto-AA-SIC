@@ -3,12 +3,14 @@ import { useState,useContext } from "react";
 import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
 import close from "../../Images/close.png"
+import { useTranslation } from "react-i18next";
 
 
 export default function Promoter(props){
 
     const {promoter} = props
     const {user} = useContext(UserContext);
+    const {t} = useTranslation();
 
 
     const [showConfirmation,setShowConfirmation] = useState(false)
@@ -68,11 +70,11 @@ export default function Promoter(props){
                         <div className="overlay"></div>
                         <div className="popUpContainer">
                             <img src={BlackClose} className="editClose" alt="" onClick={closeConfirmation} />
-                            <h3 className="popUpInfoWithButtons">Are you sure you want to delete this promoter?</h3>
+                            <h3 className="popUpInfoWithButtons">{t('deletePromoterMessage')}</h3>
                             <div className="center">
                                 <div className="promoterButtons">
-                                    <button className="button" onClick={deletePromoter}>Yes</button>
-                                    <button className="button" onClick={closeConfirmation}>No</button>
+                                    <button className="button" onClick={deletePromoter}>{t('yes')}</button>
+                                    <button className="button" onClick={closeConfirmation}>{t('no')}</button>
                                 </div>
                             </div>
                         </div>

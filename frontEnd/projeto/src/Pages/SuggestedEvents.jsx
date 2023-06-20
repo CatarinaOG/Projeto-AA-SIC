@@ -3,10 +3,12 @@ import UserContext from "../Contexts/UserContext"
 
 import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
 import SuggestedEvent from "../Components/SuggestedEvents/SuggestedEvent"
+import { useTranslation } from "react-i18next";
 
 import "../Styles/SuggestedEvents.css"
 
 export default function SuggestedEvents(props){
+	const {t} = useTranslation();
 
     const {setSuggestedEvent} = props
     const {user} = useContext(UserContext);
@@ -55,10 +57,10 @@ export default function SuggestedEvents(props){
             <div className="center">
                 <div className="defaultContainer">
 
-                    <h1>Events Suggested By Users</h1>
+                    <h1>{t('eventsSuggestedByUsers')}</h1>
                     {showTheSuggestedEvents}
                     {showTheSuggestedEvents.length === 0 &&
-                        <p>No events have been suggested</p>
+                        <p>{t('noEventsSuggested')}</p>
                     }
                     
                 </div>

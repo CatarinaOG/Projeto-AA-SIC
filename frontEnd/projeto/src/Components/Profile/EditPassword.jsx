@@ -1,16 +1,18 @@
 import { useState,useContext } from "react"
 import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
+import { useTranslation } from "react-i18next";
 
 export default function EditPassword(props){
 
     const {setEditInfo} = props
     const { user,setUser } = useContext(UserContext);
+    const {t} = useTranslation();
 
     const [temp,setTemp] = useState("")
     const [temp2,setTemp2] = useState("")
     const [emptyURLError,setEmptyURLError] = useState(false)
-    const [error,setError] = useState("Insert both password before confirming")
+    const [error,setError] = useState(t('insertBothPassBeforeConfirming'))
 
     function saveTemp(event){
         setTemp(event.target.value)
@@ -58,7 +60,7 @@ export default function EditPassword(props){
 
             if(temp !== temp2){
                 setEmptyURLError(old => !old);
-                setError("Passwords don't match")
+                setError(t('passwordsDontMatch'))
             }
             else{
                 sendEditInfoRequest()
@@ -67,7 +69,7 @@ export default function EditPassword(props){
         }
         else{
             setEmptyURLError(old => !old);
-            setError("Insert both password before confirming")
+            setError(t('insertBothPassBeforeConfirming'))
         }
     }
 
@@ -75,12 +77,12 @@ export default function EditPassword(props){
         <div>
             <div className="editContainterPassword">
                 <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
-                <h3 className="editTitle">Change Password</h3>
+                <h3 className="editTitle">{t('changePassword')}</h3>
                 <form action="/submit" onSubmit={changePassword}>
                     <input className="editInput" onChange={saveTemp} onFocus={setErrorToFalse} placeholder="Insert your new password" type="password"/>
                     <input className="editInputSecondPassword" onChange={saveTemp2} onFocus={setErrorToFalse} placeholder="Repeat your password" type="password"/>
                     <p className={emptyURLError? "urlError" : "urlErrorNotVisible"}>{error}</p>
-                    <button className="button" type="submit">Confirm</button>
+                    <button className="button" type="submit">{t('submit')}</button>
                 </form>
             </div>
         </div>

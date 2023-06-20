@@ -6,6 +6,7 @@ import BlackClose from "../Images/blackClose.png"
 import UserContext from "../Contexts/UserContext"
 
 import "../Styles/SuggestEvent.css"
+import { useTranslation } from "react-i18next";
 
 
 function orderDate(date){
@@ -26,6 +27,7 @@ function orderDate(date){
 export default function SuggestEvent(props){
 
     const {user} = useContext(UserContext);
+    const {t} = useTranslation();
 
 
     const [inputs,setInputs] = useState({
@@ -94,16 +96,16 @@ export default function SuggestEvent(props){
 
             <div className="center">
                 <div className="defaultContainer">
-                    <h1>Suggest an Event</h1>   
+                    <h1>{t('suggestEvent')}</h1>   
                     <div className="smallContainer">
 
                         <div className="smallContainerInputs">
                             <div className="smallContainerLeftSide">
                                 <div>
-                                    <p className="suggestEventLabel">Event Name</p>
-                                    <p className="suggestEventLabel">Place</p>
-                                    <p className="suggestEventLabel">Start Date</p>
-                                    <p className="suggestEventLabel">End Date</p>
+                                    <p className="suggestEventLabel">{t('eventName')}</p>
+                                    <p className="suggestEventLabel">{t('venue')}</p>
+                                    <p className="suggestEventLabel">{t('startDate')}</p>
+                                    <p className="suggestEventLabel">{t('endDate')}</p>
                                 </div>
                             </div>
 
@@ -123,7 +125,7 @@ export default function SuggestEvent(props){
                             </div>
                         </div>
 
-                        <button className="button" onClick={suggestTheEvent}>Confirm</button>
+                        <button className="button" onClick={suggestTheEvent}>{t('submit')}</button>
 
                     </div>  
                 </div>
@@ -134,7 +136,7 @@ export default function SuggestEvent(props){
                     <div className="overlay"></div>
                     <div className="popUpContainer">
                         <img src={BlackClose} className="editClose" alt="" onClick={closeConfirmation} />
-                        <h3 className="popUpInfo">Your suggestion has been sent!</h3>
+                        <h3 className="popUpInfo">{t('suggestionHasBeenSent')}</h3>
                     </div>
                 </div>
             }

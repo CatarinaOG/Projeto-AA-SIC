@@ -4,8 +4,10 @@ import UserContext from "../../Contexts/UserContext"
 
 import close from "../../Images/close.png";
 import BlackClose from "../../Images/blackClose.png"
+import { useTranslation } from "react-i18next";
 
 export default function SuggestedEvent(props){
+    const {t} = useTranslation();
 
     const {event,setSuggestedEvent,setUpdate} = props
     const {user} = useContext(UserContext);
@@ -61,7 +63,7 @@ export default function SuggestedEvent(props){
                     <p className="colorGreen">{event.start_date} - {event.end_date}</p>
                 </div>
                 <div className="buttonSuggestedContainer">
-                    <button className="button" onClick={addSuggestedEvent}>Add</button>
+                    <button className="button" onClick={addSuggestedEvent}>{t('add')}</button>
                 </div>
 				<img className="smallCloseIcon" src={close} onClick={showTheConfirmation} alt=""/>
             </div>
@@ -71,17 +73,16 @@ export default function SuggestedEvent(props){
                     <div className="overlay"></div>
                     <div className="popUpContainer">
                         <img src={BlackClose} className="editClose" alt="" onClick={showNothing} />
-                        <h3 className="popUpInfoWithButtons">Are you sure you want to delete this suggestion?</h3>
+                        <h3 className="popUpInfoWithButtons">{t('sureDeleteSuggestion')}</h3>
                         <div className="center">
                             <div className="promoterButtons">
-                                <button className="button" onClick={removeSuggestion}>Yes</button>
-                                <button className="button" onClick={showNothing}>No</button>
+                                <button className="button" onClick={removeSuggestion}>{t('yes')}</button>
+                                <button className="button" onClick={showNothing}>{t('no')}</button>
                             </div>
                         </div>
                     </div>
                 </div>
             }
-
         </div>
     )
 }

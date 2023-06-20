@@ -2,10 +2,12 @@ import "../../Styles/SellingListing.css";
 import close from "../../Images/close.png";
 import sold from "../../Images/soldIcon.png";
 import selling from "../../Images/onSaleIcon.png";
+import { useTranslation } from "react-i18next";
 
 export default function ListinElem(props) {
 
   	const { ticket, setPopUpTrigger, setPopUpID } = props;
+	const {t} = useTranslation();
 
 	function clickedClose() {
 		setPopUpID(ticket.ticket_id);
@@ -17,8 +19,8 @@ export default function ListinElem(props) {
             <div>
                 <h3>{ticket.event_name}</h3>
                 <h3>{ticket.ticket_type}</h3>
-                <p className="colorGreen"> Event Start: {ticket.start_date}  </p>
-				<p className="colorGreen">Date Created {ticket.created_date} {" "} </p>
+                <p className="colorGreen">{t('eventStart')} {ticket.start_date}  </p>
+				<p className="colorGreen">{t('dateCreated')} {ticket.created_date} {" "} </p>
                 <p>{ticket.eventPlace}</p>
             </div>
 

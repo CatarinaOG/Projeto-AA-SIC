@@ -1,15 +1,17 @@
 import { useState,useContext } from "react"
 import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
+import { useTranslation } from "react-i18next";
 
 export default function AddPhone(props){
 
     const {setAddInfo} = props
     const { user, setUser } = useContext(UserContext);
+    const {t} = useTranslation();
 
     const [temp,setTemp] = useState("")
     const [emptyURLError,setEmptyURLError] = useState(false)
-    const [error,setError] = useState("Insert a phone number before confirming")
+    const [error,setError] = useState(t('insertPhoneBeforeConfirming'))
 
     function saveTemp(event){
         setTemp(event.target.value)
@@ -50,7 +52,7 @@ export default function AddPhone(props){
 
             if(temp.length !== 9){
                 setEmptyURLError(old => !old);
-                setError("Insert a phone number with 9 digits")
+                setError(t('insertANumberWith9'))
             }
             else{
                 sendEditInfoRequest()
@@ -59,7 +61,7 @@ export default function AddPhone(props){
         }
         else{
             setEmptyURLError(old => !old);
-            setError("Insert a phone number before confirming")
+            setError(t('insertPhoneBeforeConfirming'))
         }
     }
 
@@ -67,11 +69,11 @@ export default function AddPhone(props){
         <div>
             <div className="editContainter">
                 <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
-                <h3 className="editTitle">Add Phone Number</h3>
+                <h3 className="editTitle">{t('addPhoneNumber')}</h3>
                 <form action="/submit" onSubmit={addPhone}>
                     <input className="editInputNumber" onChange={saveTemp} onFocus={setErrorToFalse} placeholder="Insert your new phone number" type="number"/>
                     <p className={emptyURLError? "urlError" : "urlErrorNotVisible"}>{error}</p>
-                    <button className="button" type="submit">Confirm</button>
+                    <button className="button" type="submit">{t('submit')}</button>
                 </form>
             </div>
         </div>

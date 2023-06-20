@@ -23,18 +23,6 @@ export default function EventElem(props) {
 		navigate("/Event")
 	}
 
-	let confirmationStatment = ""
-
-	switch(type){
-		case "saved":
-			confirmationStatment = "Are you sure you want to remove this event from Saved?"
-			break
-		case "followed":
-			confirmationStatment = "Are you sure you want to remove this event from Followed?"
-			break
-	}
-
-
 	return(
 		<div className="listingEvent">
             <div className="listingEventLeftSide" onClick={goToEvent}>

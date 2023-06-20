@@ -1,4 +1,6 @@
 import "../../Styles/Profile.css";
+import { useTranslation } from "react-i18next";
+
 
 export default function PopUpConfirmPay(props) {
   const handleRemoveList = () => {
@@ -6,15 +8,16 @@ export default function PopUpConfirmPay(props) {
     props.setPopUpTrigger(false);
     props.setPopUpID("");
   };
+  const {t} = useTranslation();
 
   return props.trigger ? (
     <div>
       <div className="editContainter">
-        <h3 className="editTitle">Payment Info Submitted</h3>
+        <h3 className="editTitle">{t('paymentSubmitted')}</h3>
         <div className="popUpSellingListButton">
           <button className="button" onClick={handleRemoveList}>
             {" "}
-            Yes
+            {t('yes')}
           </button>
         </div>
         <div className="popUpSellingListButton">
@@ -23,7 +26,7 @@ export default function PopUpConfirmPay(props) {
             onClick={() => props.setPopUpTrigger(false)}
           >
             {" "}
-            No
+            {t('no')}
           </button>
         </div>
       </div>

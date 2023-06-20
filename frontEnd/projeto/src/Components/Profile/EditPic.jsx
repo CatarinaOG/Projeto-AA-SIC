@@ -5,9 +5,11 @@ import storage from "../../firebaseConfig"
 import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
 import fileImage from "../../Images/doc.png"
+import { useTranslation } from "react-i18next";
 
 
 export default function EditPic(props){
+    const {t} = useTranslation();
 
     const {setEditInfo} = props
     const {user,setUser} = useContext(UserContext);
@@ -80,7 +82,7 @@ export default function EditPic(props){
         <div>
             <div className="editContainter">
                 <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
-                <h3 className="editTitle">Change profile Picture</h3>
+                <h3 className="editTitle">{t('changeProfilePic')}</h3>
                 <form action="/submit" onSubmit={changePicture}>
                     { !fileSaved && 
                         <div>
@@ -97,7 +99,7 @@ export default function EditPic(props){
                             </div>
                         </div>
                     }
-                    <button className="button" type="submit">Confirm</button>
+                    <button className="button" type="submit">{t('submit')}</button>
                 </form>
             </div>
         </div>

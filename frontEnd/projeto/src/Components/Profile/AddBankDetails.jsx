@@ -2,18 +2,20 @@
 import { useState,useContext } from "react"
 import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
+import { useTranslation } from "react-i18next";
 
 
 export default function AddBankDetails(props){
 
     const {setAddInfo} = props
     const { user,setUser } = useContext(UserContext);
+    const {t} = useTranslation();
 
 
     const [temp,setTemp] = useState("")
     const [temp2,setTemp2] = useState("")
     const [emptyURLError,setEmptyURLError] = useState(false)
-    const [error, setError] = useState("Insert an bank account number before confirming")
+    const [error, setError] = useState(t('insertNumberBeforeConfirming'))
 
     function saveTemp(event){
         setTemp(event.target.value)
@@ -59,7 +61,7 @@ export default function AddBankDetails(props){
 
             if(temp.length !== 10 || temp2.length !== 3){
                 setEmptyURLError(old => !old);
-                setError("Insert a valid bank account number and CVC")
+                setError(t('insertAValidBankNumber'))
             }
             else{
                 sendEditInfoRequest()
@@ -68,7 +70,7 @@ export default function AddBankDetails(props){
         }
         else{
             setEmptyURLError(old => !old);
-            setError("Insert an bank account number before confirming")
+            setError(t('insertNumberBeforeConfirming'))
         }
     }
 
@@ -76,7 +78,7 @@ export default function AddBankDetails(props){
         <div>
             <div className="editContainter">
                 <img src={BlackClose} className="editClose" alt="" onClick={closeAdd} />
-                <h3 className="editTitle">Add Bank Details</h3>
+                <h3 className="editTitle">{t('addBankDetails')}</h3>
                 <form action="/submit" onSubmit={changeEmail}>
                     <div className="center">
                         <div className="bankInputContainer">
@@ -85,7 +87,7 @@ export default function AddBankDetails(props){
                         </div>
                     </div>
                     <p className={emptyURLError? "urlError" : "urlErrorNotVisible"}>{error}</p>
-                    <button className="button" type="submit">Confirm</button>
+                    <button className="button" type="submit">{t('submit')}</button>
                 </form>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import { useState, useContext} from "react";
 import UserContext from "../../Contexts/UserContext";
+import { useTranslation } from "react-i18next";
 
 export default function VisaPopIn({
   setPaymentType,
@@ -7,6 +8,7 @@ export default function VisaPopIn({
   setMessage,
   ticketID
 }) {
+  const {t} = useTranslation();
 
   const {user} = useContext(UserContext);
 
@@ -15,9 +17,9 @@ export default function VisaPopIn({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (ccv < 100 && number < 100000000000) setMessage("Both fields Incomplete");
-    else if (ccv === "") setMessage("Incomplete CCV");
-    else if (number === "") setMessage("Incomplete Number");
+    if (ccv < 100 && number < 100000000000) setMessage(t('bothFieldsIncomplete'));
+    else if (ccv === "") setMessage(t('incompleteCCV'));
+    else if (number === "") setMessage(t('incompleteNumber'));
     else postTicketBuy();
   };
 
@@ -59,7 +61,7 @@ export default function VisaPopIn({
         setPaymentInfo({ number: number, ccv: ccv });
         setMessage("Success");
       } 
-      else setMessage("Category already exists!")
+      else setMessage("There was an error")
     })
     .catch(error => {
 		  console.log('Error:', error);
@@ -71,7 +73,7 @@ export default function VisaPopIn({
   return (
     <div className="VisaPaymentMethod">
       <div className="MBWayHeaderDiv">
-        <h2>Enter your card data:</h2>
+        <h2>{t('enterCardData')}</h2>
       </div>
       <div className="listing-elem-3-Payment">
         <form onSubmit={handleSubmit}>

@@ -1,11 +1,15 @@
 import { useState,useContext } from "react"
 import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
+import { useTranslation } from "react-i18next";
+
+
 
 export default function EditLanguage(props){
 
     const {setEditInfo} = props
     const { user,setUser } = useContext(UserContext);
+    const {t} = useTranslation();
 
     function closeEdit(){
         setEditInfo("none")
@@ -44,7 +48,7 @@ export default function EditLanguage(props){
         <div>
             <div className="editContainter">
                 <img src={BlackClose} className="editClose" alt="" onClick={closeEdit} />
-                <h3 className="editTitle">Change Email Address</h3>
+                <h3 className="editTitle">{t('changeLanguageH3')}</h3>
                 <select className="editInputLanguage" value={user.language} onChange={handleOptionChange}>
                     <option value="English">English</option>
                     <option value="Português">Português</option>

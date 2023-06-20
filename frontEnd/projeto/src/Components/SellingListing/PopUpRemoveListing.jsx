@@ -1,6 +1,8 @@
 import "../../Styles/Profile.css";
+import { useTranslation } from "react-i18next";
 
 export default function PopUpRemoveListing(props) {
+  const {t} = useTranslation();
   const handleRemoveList = () => {
     props.onRemove(props.popUpID);
     props.setPopUpTrigger(false);
@@ -11,12 +13,12 @@ export default function PopUpRemoveListing(props) {
     <div>
       <div className="editContainter">
         <h3 className="editTitle">
-          Are you sure you want to remove the listing?
+        {t('sureYouWantToRemove')}
         </h3>
         <div className="popUpSellingListButton">
           <button className="button" onClick={handleRemoveList}>
             {" "}
-            Yes
+            {t('yes')} 
           </button>
         </div>
         <div className="popUpSellingListButton">
@@ -25,7 +27,7 @@ export default function PopUpRemoveListing(props) {
             onClick={() => props.setPopUpTrigger(false)}
           >
             {" "}
-            No
+            {t('no')}
           </button>
         </div>
       </div>

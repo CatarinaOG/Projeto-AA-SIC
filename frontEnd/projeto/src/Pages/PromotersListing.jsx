@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import UserContext from "../Contexts/UserContext"
 import NavBarAdmin from "../Components/NavBar/NavBarAdmin"
 import Promoter from "../Components/PromotersListing/Promoter"
+import { useTranslation } from "react-i18next";
 
 import add from "../Images/plus.png"
 
@@ -13,6 +14,7 @@ export default function PromotersListing(){
 
     const navigate = useNavigate();
     const {user} = useContext(UserContext);
+    const {t} = useTranslation();
 
 
     const [promoters,setPromoters] = useState([])
@@ -61,7 +63,7 @@ export default function PromotersListing(){
                         <h1>Promoters</h1>
                         <div className="displayHorizontally">
                             <img className="addPromoterImg" src={add} alt="" />
-                            <p className="addPromoter" onClick={addPromoter}>Add Promoter</p>
+                            <p className="addPromoter" onClick={addPromoter}>{t('addPromoters')}</p>
                         </div>
                     </div>
                     {showPromoters}

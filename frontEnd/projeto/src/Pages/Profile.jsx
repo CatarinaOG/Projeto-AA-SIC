@@ -1,5 +1,6 @@
 import { useState,useContext, useEffect } from "react"
 import UserContext from "../Contexts/UserContext"
+import { useTranslation } from "react-i18next";
 
 import NavBarUser from "../Components/NavBar/NavBarUser"
 import EditPic from "../Components/Profile/EditPic"
@@ -22,6 +23,7 @@ export default function Profile(){
 
     const profile_pic = user.profile_pic? user.profile_pic : "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
 
+    const {t} = useTranslation();
 
     function editProfilePic(){
         setEditInfo("picture")
@@ -73,7 +75,7 @@ export default function Profile(){
                         <div className="editSection">
                             <div className="editContent">
                                 <div className="displayHorizontally">
-                                    <h3>Phone Number</h3>
+                                    <h3>{t('phoneNumberH3')}</h3>
                                     { !user.phone && <img className="plusButton" onClick={addPhoneNumber} src={Plus} alt="" />}
                                 </div>
                                 { user.phone &&
@@ -87,7 +89,7 @@ export default function Profile(){
 
                         <div className="editSection">
                             <div className="editContent">
-                                <h3>Password</h3>
+                                <h3>{t('passwordH3')}</h3>
                                 <div className="displayHorizontally">
                                     <p>**********</p>
                                     <button className="editButton" onClick={editPassword}></button>
@@ -97,7 +99,7 @@ export default function Profile(){
 
                         <div className="lastEditSection">
                             <div className="editContent">
-                                <h3>Language</h3>
+                                <h3>{t('languageH3')}</h3>
                                     <div className="displayHorizontally">
                                         <p>{user.language}</p>
                                         <button className="editButton" onClick={editLanguage}></button>
@@ -107,13 +109,13 @@ export default function Profile(){
                     </div>
 
                     <div className="financialTitleContainer">
-                        <h2 className="financialTitle">Financial</h2>
+                        <h2 className="financialTitle">{t('financialH3')}</h2>
                     </div>
 
                     <div className="financialInfo">
                         <div className="editContent">
                             <div className="displayHorizontally">
-                                <h3>Bank Details</h3>
+                                <h3>{t('bankDetailsH3')}</h3>
                                 { !user.card_number && <img className="plusButton" onClick={addCard} src={Plus} alt="" />}
                             </div>
                                 { user.card_number &&
