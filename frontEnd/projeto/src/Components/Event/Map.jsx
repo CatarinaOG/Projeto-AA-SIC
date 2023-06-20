@@ -9,13 +9,14 @@ export default function Map(props){
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_API_KEY,
     });
     
+
     const center = useMemo(() => ({ lat: Number(event.lat), lng: Number(event.lng) }), []);
     
     
     return(
         <div className="map">
         {!isLoaded ? (
-            <h1>Loading...</h1>
+            <p>Loading...</p>
         ) : (
             <GoogleMap
                 mapContainerClassName="map-container"

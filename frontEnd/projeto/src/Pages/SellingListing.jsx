@@ -9,20 +9,13 @@ import UserContext from "../Contexts/UserContext"
 export default function SellingListing() {
     const {user} = useContext(UserContext);
 
-	const [filters,setFilters] = useState({
-        filter_place: "",
-        filter_time: "",
-        filter_category: "",
-    })
+	const [popUpTrigger, setPopUpTrigger] = useState(false);
+	const [popUpID, setPopUpID] = useState("");
+	const [tickets, setTickets] = useState([]);
 
 	useEffect(() => {
 		getSellingListing()
 	}, []);
-
-	const [tickets, setTickets] = useState([]);
-
-	const [popUpTrigger, setPopUpTrigger] = useState(false);
-	const [popUpID, setPopUpID] = useState("");
 
 	function handleRemoveEvents(id){
 		setTickets((prevEvents) => prevEvents.filter((item) => item.id !== id));
@@ -30,22 +23,19 @@ export default function SellingListing() {
 
 
 	function getSellingListing(){
+
 		fetch("http://localhost:8080/api/user/get_tickets_listed_by_user", {
 			method: 'GET',
 			headers: {
 			'Content-Type': 'application/json',
 			'Authorization': `Bearer ${user.token}`
-		}
+			},
 		})
 		.then(response => {
-			if (response.ok)
-			  return response.json(); // Parse the response JSON
+			if (response.ok) return response.json();
 			throw new Error('Network response was not ok.');
 		  })
-		  .then(data => {
-			console.log(data)
-			setTickets(data); // Set the parsed JSON data
-		  })
+		  .then(data => setTickets(data))
 		  .catch(error => {
 			console.log(error);
 		  });
@@ -54,13 +44,9 @@ export default function SellingListing() {
 
 	function removeListing(ticket_id){
 
-		console.log(popUpID)
 		const input = {
 			ad_id : ticket_id
 		}
-
-		console.log("Input was" + JSON.stringify(input))
-		console.log(user.token)
 
 		fetch("http://localhost:8080/api/user/remove_ticket_listing", {
 			method: 'POST',
@@ -71,11 +57,9 @@ export default function SellingListing() {
 			body: JSON.stringify(input)
 		})
 		.then(response => {
-			if (response.ok) {
-			  return response.json();
-			} else {
-			  throw new Error('Error: ' + response.status);
-			}
+			if (response.ok) return response.json();
+			else throw new Error('Error: ' + response.status);
+			
 		  })
 		  .then(responseJSON => {
 			if (responseJSON.confirmed === "true"){
@@ -115,7 +99,6 @@ export default function SellingListing() {
 			<div className="center">
 				<div className="defaultContainer">
 					<h1>Tickets Listed</h1>
-					<Filters setFilters={setFilters}/>
 					
 					<div className="eventsContainer">
 						{eventsFiltered}

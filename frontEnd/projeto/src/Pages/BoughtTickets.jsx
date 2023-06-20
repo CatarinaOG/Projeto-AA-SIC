@@ -11,22 +11,10 @@ export default function BoughtTickets(){
 
     const {user} = useContext(UserContext);
     const [tickets,setTickets] =useState([])
-    const [filters,setFilters] = useState({
-        filter_place: "",
-        filter_time: "",
-        filter_category: "",
-    })
-
-    function filtersChanged(){
-        console.log(filters)
-        //sendGetBoughtTicketsRequest()
-    }
-
 
     useEffect(() => {
         sendGetBoughtTicketsRequest()
     },[])
-
 
 
     function sendGetBoughtTicketsRequest(){
@@ -40,7 +28,6 @@ export default function BoughtTickets(){
         })
         .then(response => response.json())
         .then(userResponse => {
-            console.log(userResponse)
             setTickets(userResponse)
         })
         .catch(error => {
@@ -61,11 +48,9 @@ export default function BoughtTickets(){
                 <div className="defaultContainer">
                     <h1>Bought Tickets</h1>
 
-                    <Filters setFilters={setFilters} filtersChanged={filtersChanged}/>
-
                     <div className="eventsContainer">
                         { tickets.length > 0 ? 
-                            ticketrsFiltered : <p>Your search did not yield any results</p>}
+                            ticketrsFiltered : <p>You didn't buy any tickets yet</p>}
                     </div>
 
                 </div>
