@@ -112,6 +112,8 @@ export default function Event(props){
 
     function sendGetTicketsSoldRequest(ticket_id){
 
+        console.log()
+
         fetch("http://localhost:8080/api/user/get_sold_tickets_by_type_and_event", {
             method: 'POST',
             headers: {
@@ -124,7 +126,6 @@ export default function Event(props){
         })
         .then(response => response.json())
         .then(responseJSON => {
-            console.log(responseJSON)
             setSoldTickets(responseJSON)
         })
         .catch(error => {
@@ -208,7 +209,6 @@ export default function Event(props){
     if(event && event.event_image)
         background_img = event.event_image
 
-    console.log(event)
    
     return event ? (
         <div>

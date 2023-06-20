@@ -323,7 +323,7 @@ public class UserService {
                 aux.setPrice(a.getPrice());
                 aux.setUser_image(a.getUser().getProfile_pic());
                 aux.setUser_name(a.getUser().getName());
-                aux.setUser_id(a.getId());
+                aux.setUser_id(a.getUser().getId());
 
                 response.add(aux);
             }

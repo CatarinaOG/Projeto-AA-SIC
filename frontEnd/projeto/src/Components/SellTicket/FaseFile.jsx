@@ -77,17 +77,14 @@ export default function FaseFile(props){
                 getDownloadURL(uploadTask.snapshot.ref).then((url) => {
                     setTicket(oldTicket => ({...oldTicket,download_url:url})) 
                     sendSellTicketRequest(url)
+                    setDone(oldDone => !oldDone)
+
                 });
             }
         );
 
     }
 
-
-    function hanfleConfirm(){
-        handleFile()
-        setDone(oldDone => !oldDone)
-    }
 
     return(
         <div className="center">
@@ -147,7 +144,7 @@ export default function FaseFile(props){
                         </div>
                         
                         <div className="center">
-                            <button className="button" onClick={hanfleConfirm}>Confirm</button>
+                            <button className="button" onClick={handleFile}>Confirm</button>
                         </div>
                     </div>
                 }
