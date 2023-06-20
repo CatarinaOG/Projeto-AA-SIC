@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class AuthenticationResponse {
 
     private String token;
+    private int user_id;
     private String type;
     private String profile_pic;
     private String name;

@@ -13,4 +13,5 @@ public class GetTicketsTypeEventResponse {
     private float price;
     private String user_image;
     private String user_name;
+    private int user_id;
 }

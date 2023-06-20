@@ -259,6 +259,7 @@ public class UserService {
         return AuthenticationResponse
                 .builder()
                 .type("user")
+                .user_id(u.getId())
                 .profile_pic(u.getProfile_pic())
                 .name(u.getName())
                 .phone(u.getPhone())
@@ -315,12 +316,14 @@ public class UserService {
 
         for(Ad a : ads){
             if (a.getTicket_type().getId() == type_id && a.getEvent().getId() == event_id){
+
                 GetTicketsTypeEventResponse aux = new GetTicketsTypeEventResponse();
                 aux.setId(a.getId());
                 aux.setDescription(a.getDescription());
                 aux.setPrice(a.getPrice());
                 aux.setUser_image(a.getUser().getProfile_pic());
                 aux.setUser_name(a.getUser().getName());
+                aux.setUser_id(a.getId());
 
                 response.add(aux);
             }
