@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import add from "../Images/plus.png"
 
 import "../Styles/PromotersListing.css"
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 export default function PromotersListing(){
 

@@ -3,6 +3,7 @@ import { useState,useRef, useEffect,useContext } from "react"
 import UserContext from "../../Contexts/UserContext"
 import SmallEvent from "./SmallEvent"
 import Magnifier from "../../Images/magnifier.png"
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 
 

@@ -2,6 +2,7 @@ import { useState,useContext } from "react"
 import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function EditPhone(props){
 

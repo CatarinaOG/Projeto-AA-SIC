@@ -7,6 +7,7 @@ import FasePrice from "../Components/SellTicket/FasePrice"
 import FaseDescription from "../Components/SellTicket/FaseDescription"
 import FaseFile from "../Components/SellTicket/FaseFile"
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 import "../Styles/SellTicket.css"
 

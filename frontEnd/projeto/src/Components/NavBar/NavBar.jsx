@@ -2,12 +2,11 @@ import { useState,useContext } from "react"
 import { useNavigate,Link } from 'react-router-dom';
 import { Cookies } from "react-cookie";
 import UserContext from "../../Contexts/UserContext"
-import { GLOBAL_VARIABLE } from '../../backendIP.js';
-
 import Logo from "../../Images/logo.png"
 import Info from "../../Images/info.png"
 
 import "../../Styles/NavBar.css"
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function NavBar(){
 

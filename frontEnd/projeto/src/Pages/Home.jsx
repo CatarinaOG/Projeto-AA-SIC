@@ -8,6 +8,7 @@ import Magnifier from "../Images/magnifier.png"
 
 import "../Styles/Home.css"
 import { useState } from 'react';
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 
 export default function Home(props){

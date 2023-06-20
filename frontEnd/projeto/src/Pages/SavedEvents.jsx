@@ -5,6 +5,7 @@ import BlackClose from "../Images/blackClose.png";
 import { useTranslation } from "react-i18next";
 
 import { useState,useContext,useEffect } from "react";
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 export default function SavedEvents(props) {
 

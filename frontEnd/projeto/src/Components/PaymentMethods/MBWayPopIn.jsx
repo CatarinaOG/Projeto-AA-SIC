@@ -1,6 +1,7 @@
 import { useState, useContext} from "react";
 import UserContext from "../../Contexts/UserContext";
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function MBWayPopIn({
   setPaymentType,

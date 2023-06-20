@@ -3,6 +3,7 @@ import close from "../../Images/close.png";
 import sold from "../../Images/soldIcon.png";
 import selling from "../../Images/onSaleIcon.png";
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function ListinElem(props) {
 

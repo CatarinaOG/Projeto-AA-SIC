@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import AddButton from "../../Images/plus.png"
 
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 
 

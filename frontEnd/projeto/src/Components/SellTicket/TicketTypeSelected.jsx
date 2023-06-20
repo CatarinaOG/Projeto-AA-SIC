@@ -1,4 +1,5 @@
 import Close from "../../Images/close.png"
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function TicketTypeSelected(props){
 

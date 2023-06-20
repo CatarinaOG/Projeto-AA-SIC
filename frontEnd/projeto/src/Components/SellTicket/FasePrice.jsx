@@ -3,6 +3,7 @@ import TicketTypeSelected from "./TicketTypeSelected"
 import TicketPrice from "./TicketPrice"
 
 import { useRef, useEffect } from "react"
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function FasePrice(props){
 

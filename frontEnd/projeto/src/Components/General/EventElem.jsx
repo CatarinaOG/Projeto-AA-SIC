@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useState,useContext,useEffect } from "react";
 import UserContext from "../../Contexts/UserContext"
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function EventElem(props) {
 	const {event,type,setEventId,method,setShowConfirmation,setEventRemoveID} = props; // saved / followed

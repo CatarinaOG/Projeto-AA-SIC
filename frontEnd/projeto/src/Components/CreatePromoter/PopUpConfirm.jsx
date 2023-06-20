@@ -1,6 +1,7 @@
 import { useState, useContext} from "react";
 import "../../Styles/Profile.css";
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 
 export default function PopUpConfirm({trigger,setPopUpTrigger,email,password,name,setMessage}) {

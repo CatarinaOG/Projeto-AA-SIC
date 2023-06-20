@@ -3,6 +3,7 @@ import Filter from "./Filter"
 import "../../Styles/Filters.css"
 import { useEffect, useState } from "react"
 import { resolvePath } from "react-router-dom"
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function Filters(props){
 

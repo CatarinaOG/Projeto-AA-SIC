@@ -3,6 +3,7 @@ import UserContext from "../../Contexts/UserContext"
 import SmallEventSelected from "./SmallEventSelected"
 
 import TicketType from "./TicketType"
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function FaseType(props){
 

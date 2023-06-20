@@ -1,5 +1,6 @@
 import "../../Styles/SellingListing.css";
 import close from "../../Images/close.png";
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 function TypeList(props) {
   const handleRemoveType = () => {

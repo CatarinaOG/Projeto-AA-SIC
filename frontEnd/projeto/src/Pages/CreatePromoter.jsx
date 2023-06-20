@@ -4,6 +4,7 @@ import UserContext from "../Contexts/UserContext";
 import NavBarAdmin from "../Components/NavBar/NavBarAdmin";
 import BlackClose from "../Images/blackClose.png"
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 export default function CreatePromoter() {
 	const {t} = useTranslation();

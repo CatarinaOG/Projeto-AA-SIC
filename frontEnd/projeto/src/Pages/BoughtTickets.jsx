@@ -3,6 +3,7 @@ import Filters from "../Components/Filters/Filters"
 import BoughtTicket from "../Components/BoughtTickets/BoughtTicket"
 import UserContext from "../Contexts/UserContext"
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 
 import "../Styles/BoughTickets.css"

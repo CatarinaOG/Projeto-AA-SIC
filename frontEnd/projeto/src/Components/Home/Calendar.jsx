@@ -4,6 +4,7 @@ import "../../Styles/Home.css"
 
 import CalendarEvent from "./CalendarEvent"
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function Calendar(props){
 	const {t} = useTranslation();

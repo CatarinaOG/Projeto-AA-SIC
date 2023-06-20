@@ -13,6 +13,7 @@ import AddBankDetails from "../Components/Profile/AddBankDetails"
 import Plus from "../Images/plus.png"
 
 import "../Styles/Profile.css"
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 
 export default function Profile(){

@@ -13,6 +13,7 @@ import Magnifier from "../Images/magnifier.png"
 import "../Styles/Browse.css"
 
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 export default function Browse(props){
 	const {t} = useTranslation();

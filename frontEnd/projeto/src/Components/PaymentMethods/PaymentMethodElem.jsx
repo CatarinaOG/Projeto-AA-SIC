@@ -5,6 +5,7 @@ import { ReactComponent as MBWayLogo } from "../../Images/Logo_MBWay.svg";
 import { ReactComponent as PayPalLogo } from "../../Images/PayPal.svg";
 import { ReactComponent as VisaLogo } from "../../Images/Visa.svg";
 import { useState } from "react";
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function PaymentMethodElem(props) {
   const { type, paymentType, setPaymentType } = props;

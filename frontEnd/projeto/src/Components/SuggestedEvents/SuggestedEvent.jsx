@@ -5,6 +5,7 @@ import UserContext from "../../Contexts/UserContext"
 import close from "../../Images/close.png";
 import BlackClose from "../../Images/blackClose.png"
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function SuggestedEvent(props){
     const {t} = useTranslation();

@@ -1,6 +1,7 @@
 import Place from "../../Images/place.png"
 import Calendar from "../../Images/calendar.png"
 import Category from "../../Images/category.png"
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 
 export default function Filter(props){

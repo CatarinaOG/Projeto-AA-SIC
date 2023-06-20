@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function Artist(props){
 	const {t} = useTranslation();

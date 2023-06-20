@@ -1,3 +1,4 @@
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 import ticket from "../../Images/ticket.png"
 

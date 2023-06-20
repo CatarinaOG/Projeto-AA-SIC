@@ -1,5 +1,6 @@
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 import { useMemo } from "react";
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function Map(props){
 

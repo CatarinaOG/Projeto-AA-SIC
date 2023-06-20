@@ -7,6 +7,7 @@ import PopUpRemoveListing from "../Components/SellingListing/PopUpRemoveListing"
 import AddPrompt from "../Components/EventsListing/AddPrompt";
 import EventListElem from "../Components/EventsListing/EventListElem";
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 
 export default function EventsListing() {

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useState,useContext,useEffect } from "react";
 import UserContext from "../../Contexts/UserContext"
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 
 export default function EventListElem(props) {

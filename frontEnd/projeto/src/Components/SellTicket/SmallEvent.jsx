@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function SmallEvent(props){
 

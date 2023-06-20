@@ -5,6 +5,7 @@ import PopUpAddVenue from "../Components/AddVenue/PopUpAddVenue";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AddPictureVenue from "../Components/AddVenue/AddPictureVenue";
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 export default function AddVenue() {
   const {t} = useTranslation();

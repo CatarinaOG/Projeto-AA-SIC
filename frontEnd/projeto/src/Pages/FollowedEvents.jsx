@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import BlackClose from "../Images/blackClose.png";
 
 import UserContext from "../Contexts/UserContext"
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 import { useState,useContext,useEffect } from "react";
 

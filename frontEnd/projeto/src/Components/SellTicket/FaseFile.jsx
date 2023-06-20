@@ -9,6 +9,7 @@ import TicketDescription from "./TicketDescription"
 import UserContext from "../../Contexts/UserContext"
 
 import fileImage from "../../Images/file.png"
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 
 export default function FaseFile(props){

@@ -15,6 +15,7 @@ import PopUpCreateArtist from "../Components/CreateEvent/PopUpCreateArtist";
 import PopUpCreateEvent from "../Components/CreateEvent/PopUpCreateEvent";
 import add from "../Images/plus.png"
 import AddPictureEvent from "../Components/CreateEvent/AddPictureEvent";
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 export default function CreateEvent(props) {
 	const navigate = useNavigate()

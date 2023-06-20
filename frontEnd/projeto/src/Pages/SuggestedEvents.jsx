@@ -4,6 +4,7 @@ import UserContext from "../Contexts/UserContext"
 import NavBarPromoter from "../Components/NavBar/NavBarPromoter";
 import SuggestedEvent from "../Components/SuggestedEvents/SuggestedEvent"
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 import "../Styles/SuggestedEvents.css"
 

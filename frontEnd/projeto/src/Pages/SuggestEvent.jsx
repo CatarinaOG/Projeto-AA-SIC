@@ -7,7 +7,7 @@ import UserContext from "../Contexts/UserContext"
 
 import "../Styles/SuggestEvent.css"
 import { useTranslation } from "react-i18next";
-
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 function orderDate(date){
 

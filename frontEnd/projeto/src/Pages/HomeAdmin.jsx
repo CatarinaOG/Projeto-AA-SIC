@@ -6,6 +6,7 @@ import NavBarAdmin from "../Components/NavBar/NavBarAdmin"
 
 import Wallpaper from "../Images/wallpaper.png"
 import Magnifier from "../Images/magnifier.png"
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 
 export default function Home(props){

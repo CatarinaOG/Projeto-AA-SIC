@@ -4,6 +4,7 @@ import BlackClose from "../../Images/blackClose.png"
 
 import "../../Styles/Profile.css";
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function PopUpAddCategory(props) {
   const {trigger,setPopUpTrigger} = props

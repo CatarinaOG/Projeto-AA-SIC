@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useState ,useContext , useEffect} from "react";
 import UserContext from "../Contexts/UserContext";
 import NotificationElem from "../Components/Notifications/NotificationElem";
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 
 

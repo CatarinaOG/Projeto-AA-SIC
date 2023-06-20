@@ -13,6 +13,7 @@ import Artist from "../Components/Event/Artist"
 import Map from "../Components/Event/Map"
 import UserContext from "../Contexts/UserContext"
 import { useTranslation } from "react-i18next";
+import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 import "../Styles/Event.css";
 

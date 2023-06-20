@@ -1,5 +1,6 @@
 import Calendar from "../../Images/calendar.png"
 import Ticket from "../../Images/blueticket.png"
+import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function BoughtTicket(props){
 
