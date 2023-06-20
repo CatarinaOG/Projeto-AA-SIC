@@ -1,6 +1,7 @@
 import NavBarUser from "../Components/NavBar/NavBarUser";
 import SavedFollowElem from "../Components/General/EventElem.jsx";
 import { useTranslation } from "react-i18next";
+import BlackClose from "../Images/blackClose.png";
 
 import UserContext from "../Contexts/UserContext"
 
@@ -12,76 +13,19 @@ export default function FollowedEvents(props) {
 
 	const {setEventId} = props
 
+	const [showConfirmation, setShowConfirmation] = useState(false);
+	const [eventRemoveID,setEventRemoveID] = useState("");
+
 	useEffect(() => {
 		getFollowed()
 	  }, []);
 
 	const [events, setEvents] = useState([
-		// para ser substituido pelo pedido com base no filtro
-		{
-		dayOfWeek: "Wednesday",
-		month: "May",
-		day: "8",
-		time: "9:25 PM",
-		ticketType: "Relvado",
-		eventName: "Coldplay - Music Of The Spheres World Tour",
-		eventPlace: "Estádio Cidade de Coimbra, Coimbra",
-		ticketPrice: "80.56",
-		id: 1,
-		status: "selling",
-		},
-		{
-		dayOfWeek: "Friday",
-		month: "May",
-		day: "19",
-		time: "08:00 PM",
-		ticketType: "Floor",
-		eventName: "Post Malone - Twelve Carat Tour",
-		eventPlace: "Ziggo Dome, Amsterdam",
-		ticketPrice: "109.02",
-		id: 2,
-		status: "selling",
-		},
-		{
-		dayOfWeek: "Thursday",
-		month: "Jul",
-		day: "8",
-		time: "03:00 PM",
-		ticketType: "1 Day Ticket | 7 July",
-		eventName: "NOS ALIVE'23",
-		eventPlace: "NOS Alive, Algés, Portugal",
-		ticketPrice: "91,07",
-		id: 3,
-		status: "sold",
-		},
-		{
-		dayOfWeek: "Thursday",
-		month: "Jul",
-		day: "7",
-		time: "03:00 PM",
-		ticketType: "1 Day Ticket | 8 July",
-		eventName: "NOS ALIVE'23",
-		eventPlace: "NOS Alive, Algés, Portugal",
-		ticketPrice: "91,07",
-		id: 4,
-		status: "selling",
-		},
-		{
-		dayOfWeek: "Thursday",
-		month: "Jul",
-		day: "6",
-		time: "03:00 PM",
-		ticketType: "1 Day Ticket | 6 July",
-		eventName: "NOS ALIVE'23",
-		eventPlace: "NOS Alive, Algés, Portugal",
-		ticketPrice: "91,07",
-		id: 5,
-		status: "sold",
-		},
 	]);
 
 	const eventsFiltered = events.map((event) =>
-		<SavedFollowElem key={event.id} event={event} method = {removeFollowed} type="followed"/>
+		<SavedFollowElem key={event.id} event={event} method = {removeFollowed} setShowConfirmation={setShowConfirmation} setEventRemoveID={setEventRemoveID} type="followed" setEventId={setEventId}
+		/>
 	);
 
 	function getFollowed(){
@@ -137,6 +81,7 @@ export default function FollowedEvents(props) {
 		  .then(responseJSON => {
 			if (responseJSON.confirmed === "true"){
 				console.log("Correu bem")
+				setShowConfirmation(false)
 				getFollowed();
 			}
 			else{
@@ -150,8 +95,32 @@ export default function FollowedEvents(props) {
 
 
 
+	function closeConfirmation(){
+		setShowConfirmation(false)
+	}
+
+	function yesClick(){
+		removeFollowed(eventRemoveID);
+	}
 
 	return (
+		<div>
+					{ showConfirmation && (
+			<div>
+				<div className="overlay"></div>
+				<div className="popUpContainer">
+					<img src={BlackClose} className="editClose" alt="" onClick={closeConfirmation} />
+					<h3 className="popUpInfoWithButtons">Are you sure you want to remove?</h3>
+					<div className="center">
+						<div className="promoterButtons">
+							<button className="button" onClick={yesClick}>Yes</button>
+							<button className="button" onClick={closeConfirmation}>No</button>
+						</div>
+					</div>
+
+				</div>
+			</div>)
+		}
 		<div>
 			<NavBarUser selected="home"/>
 
@@ -162,5 +131,7 @@ export default function FollowedEvents(props) {
 				</div>
 			</div>
 		</div>
+		</div>
+		
 	);
 }

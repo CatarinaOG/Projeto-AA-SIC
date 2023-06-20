@@ -16,9 +16,9 @@
 }
 
 
-.listingEventRightSide{
-  margin-right: 30px;
-  text-align: center;
+.listingEventLeftSide{
+  flex: 1;
+  max-width: 90%;
 }
 
 

@@ -65,10 +65,8 @@ export default function PopUpAddCategory(props) {
         <div className="editContainter">
             <img src={BlackClose} className="editClose" alt="" onClick={() => setPopUpTrigger(false)} />
             <h3 className="editTitle">Add Category</h3>
-            <form>
                 <input className="editInputNumber" onChange={saveTemp}  placeholder="Insert your new category" type="text"/>
                 <p className={message !== "" ? "urlError" : "urlErrorNotVisible"}>{message}</p>
-            </form>
             <button className="button" onClick={postCategory}>Confirm</button>
         </div>
     </div>

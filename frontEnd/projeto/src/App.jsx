@@ -10,6 +10,8 @@ import "./Styles/CreatePromoter.css";
 import "./Styles/EventsListing.css";
 import "./Styles/CreateEvent.css";
 import "./Styles/AddVenue.css";
+import "./Styles/SellingListing.css";
+
 
 import Home from "./Pages/Home";
 import HomeUser from "./Pages/HomeUser";

@@ -1,6 +1,7 @@
 import NavBarUser from "../Components/NavBar/NavBarUser";
 import EventElem from "../Components/General/EventElem.jsx";
 import UserContext from "../Contexts/UserContext"
+import BlackClose from "../Images/blackClose.png";
 
 import { useState,useContext,useEffect } from "react";
 
@@ -15,6 +16,8 @@ export default function SavedEvents(props) {
 
 
 	const [events, setEvents] = useState([]);
+	const [showConfirmation, setShowConfirmation] = useState(false);
+	const [eventRemoveID,setEventRemoveID] = useState("");
 
 	const eventsFiltered = events.map((event) =>
 		<EventElem 
@@ -22,8 +25,15 @@ export default function SavedEvents(props) {
 			event={event} 
 			type="saved" 
 			method={removeSaved}
+			setShowConfirmation = {setShowConfirmation}
+			setEventRemoveID = {setEventRemoveID}
+			setEventId={setEventId}
 		/>
 	);
+
+	function yesClick(){
+		removeSaved(eventRemoveID);
+	}
 
 
 	function getSaved(){
@@ -64,7 +74,10 @@ export default function SavedEvents(props) {
 			else throw new Error('Error: ' + response.status);
 		})
 		.then(responseJSON => {
-			if (responseJSON.confirmed === "true") getSaved();
+			if (responseJSON.confirmed === "true"){
+				getSaved();
+				setShowConfirmation(false);
+			} 
 			else console.log("Correu Mal")
 		})
 		.catch(error => {
@@ -73,9 +86,29 @@ export default function SavedEvents(props) {
 	}
 
 
+	function closeConfirmation(){
+		setShowConfirmation(false)
+	}
 
 
 	return (
+		<div>
+		{ showConfirmation && (
+			<div>
+				<div className="overlay"></div>
+				<div className="popUpContainer">
+					<img src={BlackClose} className="editClose" alt="" onClick={closeConfirmation} />
+					<h3 className="popUpInfoWithButtons">Are you sure you want to remove?</h3>
+					<div className="center">
+						<div className="promoterButtons">
+							<button className="button" onClick={yesClick}>Yes</button>
+							<button className="button" onClick={closeConfirmation}>No</button>
+						</div>
+					</div>
+
+				</div>
+			</div>)
+		}
 		<div>
 			<NavBarUser selected="home"/>
 			
@@ -86,5 +119,8 @@ export default function SavedEvents(props) {
 				</div>
 			</div>
 		</div>
+
+		</div>
+		
 	);
 }
