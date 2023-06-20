@@ -121,8 +121,7 @@ public class EventService {
 
         for(Event e : eventList){
 
-            if(!place_filters.contains(e.getLocation().getName())){
-                place_filters.add(e.getLocation().getName());
+            if(!place_filters.contains(e.getLocation().getCity())){
                 place_filters.add(e.getLocation().getCity());
             }
             if(!category_filters.contains(e.getCategory().getName())) {
