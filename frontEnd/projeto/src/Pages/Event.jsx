@@ -144,7 +144,9 @@ export default function Event(props){
                 event_id: event.id
             })
         })
-        .then(setUpdateEvent(old => !old))
+        .then( response => 
+            setUpdateEvent(old => !old)
+        )
         .catch(error => {
             console.log(error)
         });

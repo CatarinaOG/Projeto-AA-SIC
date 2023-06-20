@@ -5,7 +5,7 @@ import Category from "../../Images/category.png"
 
 export default function Filter(props){
 
-    const {type,setFilters,options,filtersChanged} = props
+    const {type,setFilters,options,sendGetEventsRequest} = props
 
     let showFilter = ""
 
@@ -26,8 +26,7 @@ export default function Filter(props){
     }
 
     function handleSelectChange(event){
-        setFilters(oldFilter => ({...oldFilter,[type]:event.target.value}))
-        filtersChanged()
+        sendGetEventsRequest(type,event.target.value)
     }
 
     const optionsList = options.map( option => 

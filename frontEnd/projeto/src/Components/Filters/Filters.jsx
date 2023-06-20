@@ -6,7 +6,7 @@ import { resolvePath } from "react-router-dom"
 
 export default function Filters(props){
 
-    const {setFilters,filtersChanged} = props
+    const {setFilters,sendGetEventsRequest} = props
 
     const [placeOptions,setPlaceOptions] = useState([])
 
@@ -49,21 +49,21 @@ export default function Filters(props){
                 type="filter_place" 
                 setFilters={setFilters} 
                 options={placeOptions}
-                filtersChanged={filtersChanged}/>
+                sendGetEventsRequest={sendGetEventsRequest}/>
 
             <Filter 
                 key="Time"
                 type="filter_time" 
                 setFilters={setFilters} 
                 options={timeOptions}
-                filtersChanged={filtersChanged}/>
+                sendGetEventsRequest={sendGetEventsRequest}/>
 
             <Filter 
                 key="Category"
                 type="filter_category" 
                 setFilters={setFilters} 
                 options={categoryOptions}
-                filtersChanged={filtersChanged}/>
+                sendGetEventsRequest={sendGetEventsRequest}/>
 
         </div>
     )

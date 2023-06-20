@@ -26,11 +26,18 @@ export default function Browse(props){
     })
 
 
-    function filtersChanged(){
-        sendGetEventsRequest()
-    }
+    function sendGetEventsRequest(type,value){
 
-    function sendGetEventsRequest(){
+        let updatedFilters = filters
+
+        if(type){
+            setFilters(oldFilter => ({...oldFilter,[type]:value}))
+
+            updatedFilters = {
+                ...filters,
+                [type]:value
+            }
+        }
 
         fetch("http://localhost:8080/api/event/get_filtered_events", {
             method: 'POST',
@@ -39,9 +46,9 @@ export default function Browse(props){
             },
             body: JSON.stringify({
                 filter_text: searchText,
-                filter_place: filters.filter_place,
-                filter_time: filters.filter_time,
-                filter_category: filters.filter_category,
+                filter_place: updatedFilters.filter_place,
+                filter_time: updatedFilters.filter_time,
+                filter_category: updatedFilters.filter_category,
             })
         })
         .then(response => response.json())
@@ -66,8 +73,6 @@ export default function Browse(props){
             sendGetEventsRequest()
         }
     }
-
-    console.log(events)
 
     const show_events = events.map((event) => 
         <BrowseTicket 
@@ -98,7 +103,7 @@ export default function Browse(props){
                             </div>
                         </div>
 
-                        <Filters setFilters={setFilters} filtersChanged={filtersChanged}/>
+                        <Filters setFilters={setFilters} sendGetEventsRequest={sendGetEventsRequest}/>
 
                         { events.length > 0 && 
                             <div className="eventsContainer">
