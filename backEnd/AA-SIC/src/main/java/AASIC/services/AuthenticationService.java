@@ -77,6 +77,7 @@ public class AuthenticationService {
             return AuthenticationResponse.builder()
                     .token(jwt)
                     .type("user")
+                    .user_id(user.getId())
                     .profile_pic(user.getProfile_pic())
                     .name(user.getName())
                     .phone(user.getPhone())
