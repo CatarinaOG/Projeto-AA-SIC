@@ -122,6 +122,7 @@ public class PromoterService {
         location.setLongitude(request.getLongitude());
         location.setCapacity(request.getCapacity());
         location.setCity(request.getCity());
+        location.setMap(request.getMap());
         //TODO -> location.setMap(request.getMap());
         locationRepo.save(location);
         return "{\"confirmed\" : \"true\"}";

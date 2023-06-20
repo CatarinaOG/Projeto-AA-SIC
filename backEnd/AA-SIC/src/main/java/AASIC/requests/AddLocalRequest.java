@@ -14,7 +14,7 @@ public class AddLocalRequest {
     private String longitude;
     private int capacity;
     private String city;
-    //TODO -> private String map
+    private String map;
 }
 
 /**
