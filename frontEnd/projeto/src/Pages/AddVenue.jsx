@@ -156,18 +156,22 @@ export default function AddVenue() {
 						</div>
 
 						<h3 className="redH3">{message}</h3>
-          			</div>
-            	</form>
-							
-            <div className="center">
+            <div className="centerVenueButtons">
 								<div className="divButtonsCreatePromoter">
-                <button className="button"   onClick={handleSubmit} >Submit</button> 
-								<button className="button"   onClick={cancel} > Cancel </button> 
-                <button className="button"  value="Add Photo" onClick={() => setPopUpAddPhoto(true)}>Add Photo</button>
+                <button className="buttonAddVenue"   onClick={handleSubmit} >Submit</button> 
+								<button className="buttonAddVenue"   onClick={cancel} > Cancel </button> 
+                <button className="buttonAddVenue"  value="Add Photo" onClick={() => setPopUpAddPhoto(true)}>Add Seating Plan</button>
 								</div>
 							</div>
+          			</div>
+
+            	</form>
+
+          
         	</div>
+          
       	</div>
+ 
     </div>
   );
 }

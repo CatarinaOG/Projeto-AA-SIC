@@ -71,3 +71,34 @@
   background-color: white;
   max-width: 45%;
 }
+
+
+.centerVenueButtons{
+  display: flex;
+  justify-content: center;
+}
+
+.divButtonsCreatePromoter {
+  display: flex;
+  width: 70%;
+}
+
+.buttonAddVenue{
+  background-color: var(--light-blue);
+  border: none;
+  width: 150px;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  margin-right: 10px; /* Optional margin for spacing */
+  margin-left: 10px; /* Optional margin for spacing */
+
+}
+
+.buttonAddVenue:active{
+  background-color: var(--lighter-blue);
+}
