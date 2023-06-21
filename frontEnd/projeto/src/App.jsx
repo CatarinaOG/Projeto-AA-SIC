@@ -39,6 +39,7 @@ import AddVenue from "./Pages/AddVenue";
 
 
 import "./Styles/General.css";
+import { GLOBAL_VARIABLE } from './backendIP.js';
 
 
 function App() {
@@ -64,13 +65,13 @@ function App() {
 
 		switch(cookiesSave.type){
 			case "user":
-				url = "http://localhost:8080/api/user/get_user"
+				url = `${GLOBAL_VARIABLE}/user/get_user`
 				break
 			case "promoter":
-				url = "http://localhost:8080/api/promoter/get_user"
+				url = `${GLOBAL_VARIABLE}/promoter/get_user`
 				break
 			case "admin":
-				url = "http://localhost:8080/api/admin/get_user"
+				url = `${GLOBAL_VARIABLE}/admin/get_user`
 				break
 		}
 
