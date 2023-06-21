@@ -5,7 +5,6 @@ import Wallpaper from "../Images/wallpaper.png"
 import Magnifier from "../Images/magnifier.png"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
-import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 export default function HomePromoter(props){
 

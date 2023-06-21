@@ -1,5 +1,4 @@
 
-import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function Ticket(props){
 

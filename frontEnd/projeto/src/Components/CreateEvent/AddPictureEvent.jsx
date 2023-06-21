@@ -1,12 +1,11 @@
 
-import { useState,useContext,useRef } from "react"
+import { useState,useContext } from "react"
 import { ref,uploadBytesResumable,getDownloadURL } from "firebase/storage"
 import storage from "../../firebaseConfig"
 import UserContext from "../../Contexts/UserContext"
 import BlackClose from "../../Images/blackClose.png"
 import fileImage from "../../Images/doc.png"
 import { useTranslation } from "react-i18next";
-import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 
 export default function AddPictureEvent(props){

@@ -1,5 +1,4 @@
 import NavBarUser from "../Components/NavBar/NavBarUser"
-import Filters from "../Components/Filters/Filters"
 import BoughtTicket from "../Components/BoughtTickets/BoughtTicket"
 import UserContext from "../Contexts/UserContext"
 import { useTranslation } from "react-i18next";

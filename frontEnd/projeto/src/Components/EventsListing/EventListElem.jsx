@@ -3,7 +3,7 @@ import BlackClose from "../../Images/blackClose.png";
 import Close from "../../Images/close.png";
 import { useNavigate } from "react-router-dom";
 
-import { useState,useContext,useEffect } from "react";
+import { useState,useContext } from "react";
 import UserContext from "../../Contexts/UserContext"
 import { useTranslation } from "react-i18next";
 import { GLOBAL_VARIABLE } from '../../backendIP.js';

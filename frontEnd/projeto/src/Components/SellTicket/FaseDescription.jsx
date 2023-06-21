@@ -4,7 +4,6 @@ import TicketPrice from "./TicketPrice"
 import TicketDescription from "./TicketDescription"
 
 import { useRef, useEffect } from "react"
-import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function FaseDescription(props){
 

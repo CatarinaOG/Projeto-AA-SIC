@@ -7,7 +7,6 @@ import PaymentMethodElem from "../Components/PaymentMethods/PaymentMethodElem";
 import MBWayPopIn from "../Components/PaymentMethods/MBWayPopIn";
 import PayPalPopIn from "../Components/PaymentMethods/PayPalPopIn";
 import VisaPopIn from "../Components/PaymentMethods/VisaPopIn";
-import { GLOBAL_VARIABLE } from '../backendIP.js';
 
 export default function PaymentMethods(props) {
 	const {t} = useTranslation();

@@ -7,7 +7,6 @@ import Logo from "../../Images/logo.png"
 import Out from "../../Images/logout.png"
 
 import "../../Styles/NavBar.css"
-import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function NavBarPromoter(props){
 

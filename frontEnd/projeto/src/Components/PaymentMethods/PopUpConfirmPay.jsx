@@ -1,6 +1,5 @@
 import "../../Styles/Profile.css";
 import { useTranslation } from "react-i18next";
-import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 
 export default function PopUpConfirmPay(props) {

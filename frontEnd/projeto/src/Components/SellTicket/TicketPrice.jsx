@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function TicketPrice(props){
 

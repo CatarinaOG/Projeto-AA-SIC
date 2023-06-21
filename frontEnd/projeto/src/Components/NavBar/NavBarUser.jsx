@@ -3,7 +3,6 @@ import { useState,useContext } from "react"
 import { useNavigate,Link } from "react-router-dom"
 import { Cookies } from "react-cookie"
 import UserContext from "../../Contexts/UserContext"
-import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 
 import Logo from "../../Images/logo.png"

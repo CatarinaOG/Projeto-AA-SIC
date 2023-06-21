@@ -1,5 +1,4 @@
 import "../../Styles/Profile.css";
-import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function PopUpSaved(props) {
   const handleRemoveList = () => {

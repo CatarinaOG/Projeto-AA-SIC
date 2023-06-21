@@ -1,6 +1,3 @@
-import { GLOBAL_VARIABLE } from '../../backendIP.js';
-
-
 export default function TicketSold(props){
 
     const {ticketSold,ticketType} = props

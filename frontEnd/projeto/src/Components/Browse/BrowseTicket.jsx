@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 
 import Calendar from "../../Images/calendar.png"
 
-import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function BrowseTicket(props){
 
