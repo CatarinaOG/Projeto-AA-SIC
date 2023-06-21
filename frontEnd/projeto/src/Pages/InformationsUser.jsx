@@ -32,7 +32,7 @@ export default function InformationsUser(props){
             <div className="innerDiv">
                 <img  src={fair} alt="" />
                 <div className="textsDiv2">
-                    <h3>{t('fair')}FAIR!</h3>
+                    <h3>{t('fair')}</h3>
                     <h4 className="descriptionH4">{t('fairDescription')}</h4>
                 </div>
             </div>
