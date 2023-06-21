@@ -55,7 +55,7 @@ export default function NavBarUser(props){
 
                 <div className="navBarRighSide">
 
-                    <Link to="" className="iconTab"><img src={Info} alt="" /></Link>
+                    <Link to="/InformationsUser" className="iconTab"><img src={Info} alt="" /></Link>
                     <Link to="/Listings" className={selected === "listings"? "tabSelected" : "tab"}>My Listings</Link>
                     <Link to="/MyTickets" className={selected === "boughtTickets"? "tabSelected" : "tab"}>My Tickets</Link>
                     <Link to=""><img className="profileTab" onClick={showOptionsFunction} src={profile_pic} alt="" /></Link>

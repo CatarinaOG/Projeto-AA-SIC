@@ -10,8 +10,8 @@ export default function Artist(props){
             <img className="artistImage" src={artist.image} alt="" />
             <div className="artistInfo">
                 <h3>{artist.artist_name}</h3>
-                <p>{artist.upcoming_events}
-                {t('upcomingEvents')}</p>
+                <p>{t('upcomingEvents')} {artist.upcoming_events}
+                </p>
             </div>
         </div>
     )

@@ -1,0 +1,71 @@
+
+.headersInfoUser{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.titleInfoUser{
+    margin:20px;
+    font-size: 45px;
+}
+
+.subtitleInfoUser{
+    margin:20px;
+    font-size: 25px;
+    font-weight: normal;
+
+}
+.descriptionH4{
+    font-weight: normal;
+}
+
+.reasonsTitle{
+    margin-top: 10px;
+    font-size: 30px;
+}
+.backgroundGreyInfoUser{
+    background-color: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.backgroundDarkBlueInfoUser{
+    background-color: var(--dark-blue);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.innerDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 60%;
+    margin: 30px;
+}
+
+.rowTicketPurchase{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 70%;
+    margin: 30px;
+}
+
+.textsDiv{
+    margin-left:20px;
+}
+
+.textsDivPurchase{
+    text-align: center;
+    max-width: 100%;
+}
+
+.textsDiv2{
+    margin-left:10px;
+}
+
+.widthImageInfoUser{
+    min-width:100px
+}

@@ -277,7 +277,7 @@ export default function CreateEvent(props) {
 		eventDateStart === "" ||
 		eventDateEnd === "" ||
 		types.length === 0 ||
-		artists === 0
+		artists.length === 0
 		) {
 		setMessage(t('messageOneOrMoreIncomplete'));
 		setAddEventInfo("");

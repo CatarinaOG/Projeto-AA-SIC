@@ -11,7 +11,7 @@ import "./Styles/EventsListing.css";
 import "./Styles/CreateEvent.css";
 import "./Styles/AddVenue.css";
 import "./Styles/SellingListing.css";
-
+import "./Styles/InformationsUser.css";
 
 import Home from "./Pages/Home";
 import HomeUser from "./Pages/HomeUser";
@@ -36,7 +36,7 @@ import HomeAdmin from "./Pages/HomeAdmin";
 import PromotersListing from "./Pages/PromotersListing";
 import CreatePromoter from "./Pages/CreatePromoter";
 import AddVenue from "./Pages/AddVenue";
-
+import  InformationsUser  from "./Pages/InformationsUser";
 
 import "./Styles/General.css";
 import { GLOBAL_VARIABLE } from './backendIP.js';
@@ -184,6 +184,16 @@ function App() {
 							<PaymentMethods ticketID={ticketID}/>}
 						/>
 					}
+
+					
+
+						<Route
+							path="/InformationsUser"element={
+							<InformationsUser />}
+						/>
+					
+
+
 
 					{ user.type === "promoter" &&
 						<Route path="/HomePromoter" element={

@@ -309,7 +309,7 @@ export default function Event(props){
                                         <Map event={event}/>
                                         <div className="mapInfo">
                                             <h3>{event.event_place}</h3>
-                                            <p>{event.upcoming_events}</p>
+                                            <p>{t('upcomingEvents')}{event.upcoming_events}</p>
                                         </div>
                                     </div>
                                 </div>
