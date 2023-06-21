@@ -149,7 +149,7 @@ export default function NavBar(){
 
                 <div className="navBarRighSide">
 
-                    <Link to="" className="iconTab"><img src={Info} alt="" /></Link>
+                    <Link to="/InformationsUser" className="iconTab"><img src={Info} alt="" /></Link>
                     <Link to="" className="tab" onClick={showLogin}>Login</Link>
                     <Link to="" className="sellTab" onClick={showLogin}>Sell Tickets!</Link>
                     

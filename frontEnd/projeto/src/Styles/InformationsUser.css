@@ -21,6 +21,12 @@
 
 .reasonsTitle{
     margin-top: 10px;
+
+    font-size: 30px;
+}
+
+.purchaseTitle{
+    margin-top: 10px;
     font-size: 30px;
 }
 .backgroundGreyInfoUser{
@@ -60,6 +66,7 @@
 .textsDivPurchase{
     text-align: center;
     max-width: 100%;
+    margin: 10px;
 }
 
 .textsDiv2{
@@ -68,4 +75,12 @@
 
 .widthImageInfoUser{
     min-width:100px
+}
+.tutorialPurchase{
+    margin: 10px;
+    font-weight: 500;
+}
+
+.textsDivTutorialPurchase{
+    max-width: 90%;
 }

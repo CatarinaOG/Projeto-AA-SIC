@@ -38,6 +38,7 @@ import CreatePromoter from "./Pages/CreatePromoter";
 import AddVenue from "./Pages/AddVenue";
 import  InformationsUser  from "./Pages/InformationsUser";
 
+
 import "./Styles/General.css";
 import { GLOBAL_VARIABLE } from './backendIP.js';
 
@@ -189,9 +190,9 @@ function App() {
 
 						<Route
 							path="/InformationsUser"element={
-							<InformationsUser />}
+							<InformationsUser type={user.type}/>}
 						/>
-					
+
 
 
 
