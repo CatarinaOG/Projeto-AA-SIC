@@ -4,11 +4,11 @@ import selected from "../../Images/selected.png";
 import { ReactComponent as MBWayLogo } from "../../Images/Logo_MBWay.svg";
 import { ReactComponent as PayPalLogo } from "../../Images/PayPal.svg";
 import { ReactComponent as VisaLogo } from "../../Images/Visa.svg";
-import { useState } from "react";
-import { GLOBAL_VARIABLE } from '../../backendIP.js';
+import { useState ,useEffect} from "react";
+
 
 export default function PaymentMethodElem(props) {
-  const { type, paymentType, setPaymentType } = props;
+  const { type, paymentType, setPaymentType,block } = props;
 
   const types = {
     MBWay: {
@@ -28,16 +28,23 @@ export default function PaymentMethodElem(props) {
   function select() {
     setPaymentType(type);
   }
+	useEffect(() => {
+    console.log("Block is"+block)
+	}, []);
+
 
   return (
     <div className="listingPaymentMethod">
-      <div className="listing-elem-1-Payment">
-        {paymentType === type ? (
+    <div className="listing-elem-1-Payment">
+      {block === false ? 
+        (paymentType === type ? (
           <img className="task" src={selected} alt="" />
         ) : (
           <img className="task" src={unselected} alt="" onClick={select} />
-        )}
-      </div>
+        ))
+        : <img className="task" src={unselected} alt=""/>
+      }
+    </div>
 
       <div className="listing-elem-2-Payment">{types[type].component}</div>
       <div className="listing-elem-3-Payment">{types[type].typeString}</div>

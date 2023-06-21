@@ -7,13 +7,14 @@ export default function MBWayPopIn({
   setPaymentType,
   setPaymentInfo,
   setMessage,
-  ticketID
+  ticketID,
+  setBlock
 }) {
   const {t} = useTranslation();
 
   const {user} = useContext(UserContext);
 
-  const [number, setNumber] = useState(0);
+  const [number, setNumber] = useState("");
 
   const handleKeyDown = (event) => {
     const keyCode = event.which || event.keyCode;
@@ -27,15 +28,26 @@ export default function MBWayPopIn({
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (number > 100000000) {
-      setPaymentInfo({ phoneNumber: number });
-      postTicketBuy()
-    } else {
-      setMessage(t('phoneNumberNotValid'));
+  function handleSubmit(event){
+    event.preventDefault();    // talvez depois retirar para meter como pedido para a back end
+    if(number !== ""){
+
+        console.log(number)
+        if(number.length !== 9){
+            setMessage(t('insertANumberWith9'))
+        }
+        else{
+          postTicketBuy();
+        }
     }
-  };
+    else{
+        setMessage(t('insertPhoneBeforeConfirming'))
+    }
+}
+
+
+
+
 
   function postTicketBuy(){
 
@@ -57,6 +69,7 @@ export default function MBWayPopIn({
       console.log(responseJSON)
       if(responseJSON.confirmed === "true"){
         setPaymentType("");
+        setBlock(true)
         setMessage("Success");
       } 
       else setMessage(t('errorTryAgain'))
@@ -80,7 +93,7 @@ export default function MBWayPopIn({
         <form onSubmit={handleSubmit}>
           <label>
             <input
-              type="tel"
+              type="num"
               className="MBWayInput"
               onKeyDown={handleKeyDown}
             />

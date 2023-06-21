@@ -267,7 +267,7 @@ export default function Event(props){
                                 {user.type === "user" &&
                                     <TicketAlert event={event} setUpdateEvent={setUpdateEvent}/>
                                 }      
-                                <h2 className="marginTop"> {t('tickeTypesHead')}</h2>
+                                <h2 className="marginTop"> {t('tickeTypesHeader')}</h2>
                                 {showTheTicketsTypes}
                             </div>
                         }

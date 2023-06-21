@@ -7,7 +7,8 @@ export default function VisaPopIn({
   setPaymentType,
   setPaymentInfo,
   setMessage,
-  ticketID
+  ticketID,        
+  setBlock
 }) {
   const {t} = useTranslation();
 
@@ -60,6 +61,8 @@ export default function VisaPopIn({
       if(responseJSON.confirmed === "true"){
         setPaymentType("");
         setPaymentInfo({ number: number, ccv: ccv });
+        setBlock(true);
+
         setMessage("Success");
       } 
       else setMessage("There was an error")

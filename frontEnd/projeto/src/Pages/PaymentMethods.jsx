@@ -13,6 +13,7 @@ export default function PaymentMethods(props) {
 	const {t} = useTranslation();
 
 	const {ticketID} = props
+	const [block,setBlock] = useState(false)
 
 	const [paymentType, setPaymentType] = useState("");
 	const [paymentInfo, setPaymentInfo] = useState();
@@ -41,6 +42,7 @@ export default function PaymentMethods(props) {
 				type={"MBWay"}
 				paymentType={paymentType}
 				setPaymentType={setPaymentType}
+				block={block}
 				/>
 				{paymentType === "MBWay" && (
 				<MBWayPopIn
@@ -48,6 +50,8 @@ export default function PaymentMethods(props) {
 					setPaymentInfo={setPaymentInfo}
 					setMessage={setMessage}
 					ticketID={ticketID}
+				setBlock = {setBlock}
+
 				/>
 				)}
 
@@ -55,6 +59,8 @@ export default function PaymentMethods(props) {
 				type={"PayPal"}
 				paymentType={paymentType}
 				setPaymentType={setPaymentType}
+				block={block}
+				
 				/>
 				{paymentType === "PayPal" && (
 				<PayPalPopIn
@@ -62,6 +68,8 @@ export default function PaymentMethods(props) {
 					setPaymentInfo={setPaymentInfo}
 					setMessage={setMessage}
 					ticketID={ticketID}
+				setBlock = {setBlock}
+
 
 				/>
 				)}
@@ -70,6 +78,7 @@ export default function PaymentMethods(props) {
 				type={"Visa"}
 				paymentType={paymentType}
 				setPaymentType={setPaymentType}
+				block={block}
 				/>
 				{paymentType === "Visa" && (
 				<VisaPopIn
@@ -77,6 +86,8 @@ export default function PaymentMethods(props) {
 					setPaymentInfo={setPaymentInfo}
 					setMessage={setMessage}
 					ticketID={ticketID}
+					setBlock = {setBlock}
+
 				/>
 				)}
 			</div>

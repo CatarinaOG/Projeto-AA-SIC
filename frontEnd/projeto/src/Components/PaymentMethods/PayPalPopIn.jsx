@@ -7,7 +7,8 @@ export default function PayPalPopIn({
   setPaymentType,
   setPaymentInfo,
   setMessage,
-  ticketID={ticketID}
+  ticketID,
+  setBlock
 }) {
   const {user} = useContext(UserContext);
   const {t} = useTranslation();
@@ -45,8 +46,10 @@ export default function PayPalPopIn({
     .then(responseJSON => {
       console.log(responseJSON)
       if(responseJSON.confirmed === "true"){
-         setPaymentType("");
-    setPaymentInfo({ email: email });
+        setPaymentType("");
+        setPaymentInfo({ email: email });
+        setMessage("Success");
+        setBlock(true)
       } 
       else setMessage("There was an error")
     })

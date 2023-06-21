@@ -118,7 +118,8 @@ export default function FollowedEvents(props) {
 			<div className="center">
 				<div className="defaultContainer">
 					<h1>{t('followedEvents')}</h1>
-					<div className="eventsContainer">{eventsFiltered}</div>
+					<div className="eventsContainer"> { events.length > 0 ? 
+                            eventsFiltered : <p>{t('dontHaveFollowed')}</p>}</div>
 				</div>
 			</div>
 		</div>

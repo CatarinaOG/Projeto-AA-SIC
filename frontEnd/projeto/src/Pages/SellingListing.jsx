@@ -101,10 +101,9 @@ export default function SellingListing() {
 			<div className="center">
 				<div className="defaultContainer">
 					<h1>{t('ticketsListed')}</h1>
+					<div className="eventsContainer"> { tickets.length > 0 ? 
+                            eventsFiltered : <p>{t('dontHaveSelling')}</p>}</div>
 					
-					<div className="eventsContainer">
-						{eventsFiltered}
-					</div>
 				</div>
 			</div>
 

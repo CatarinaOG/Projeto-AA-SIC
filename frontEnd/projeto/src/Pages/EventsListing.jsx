@@ -70,7 +70,6 @@ export default function EventsListing() {
 		.then(responseJSON => {
 		  console.log(responseJSON.confirmed);
 		  if (responseJSON.confirmed === "true"){
-			console.log("AAAAAAAAAAA")
 			getEvents();
 		  }
 		  else{

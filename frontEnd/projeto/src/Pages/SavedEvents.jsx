@@ -117,11 +117,13 @@ export default function SavedEvents(props) {
 			<div className="center">
 				<div className="defaultContainer">
 					<h1>{t('savedEvents')}</h1>
-					<div className="eventsContainer">{eventsFiltered}</div>
+					<div className="eventsContainer"> { events.length > 0 ? 
+                            eventsFiltered : <p>{t('dontHaveSaved')}</p>}</div>
 				</div>
 			</div>
 		</div>
 
+		
 		</div>
 		
 	);

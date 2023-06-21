@@ -38,6 +38,14 @@ export default function FaseFile(props){
 
 
     function sendSellTicketRequest(url){
+        const log = {
+            event_id: ticket.event.id,
+                type_id: ticket.type.id,
+                price: ticket.price,
+                description: ticket.description,
+                file: url,
+        }
+        console.log(log)
 
         fetch(`${GLOBAL_VARIABLE}/user/sell_ticket`, {
             method: 'POST',
