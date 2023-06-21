@@ -5,9 +5,11 @@ import SmallEvent from "./SmallEvent"
 import Magnifier from "../../Images/magnifier.png"
 import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
+import { useTranslation } from "react-i18next";
 
 
 export default function FaseEvent(props){
+    const {t} = useTranslation();
 
     const {setTicket,setFase} = props
     const {user} = useContext(UserContext);
@@ -102,15 +104,15 @@ export default function FaseEvent(props){
     return(
         <div className="center">
             <div>
-                <h1 ref={toTitleRef}>Select Event</h1>
-                <p className="gray">Which event do you want to sell tickets for?</p>
+                <h1 ref={toTitleRef}>{t('selectEvent')}</h1>
+                <p className="gray">{t('whichEventMessage')}</p>
 
                 <img className="magnifierSelectTicket" src={Magnifier} alt="" />
                 <input className="inputSelectTicket" onKeyDown={handleEnter} type="text" placeholder="Where do you want to go?"/>
             
                 {input === "" && (
                     <div>
-                        <p className="graySmaller">Suggested:</p>
+                        <p className="graySmaller">{t('suggested')}Suggested:</p>
                         <div className="suggestedEvents">
                             {showEventsSuggested}
                         </div>
@@ -119,7 +121,7 @@ export default function FaseEvent(props){
 
                 {input !== "" && (
                     <div>
-                        <p className="graySmaller">Results:</p>
+                        <p className="graySmaller">{t('results')}Results:</p>
                         <div className="searchedEvents">
                             {eventsSearched}
                         </div>

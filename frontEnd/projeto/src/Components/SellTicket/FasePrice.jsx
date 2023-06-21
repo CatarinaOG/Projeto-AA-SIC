@@ -3,10 +3,12 @@ import TicketTypeSelected from "./TicketTypeSelected"
 import TicketPrice from "./TicketPrice"
 
 import { useRef, useEffect } from "react"
+import { useTranslation } from "react-i18next";
 
 export default function FasePrice(props){
 
     const {ticket,setTicket,setFase} = props
+    const {t} = useTranslation();
     
     const toTitleRef = useRef(null)
 
@@ -19,24 +21,24 @@ export default function FasePrice(props){
     return(
         <div className="center">
             <div>
-                <h1>Select Event</h1>
-                <p className="gray">Which event do you want to sell tickets for?</p>
+                <h1>{t('selectEvent')}</h1>
+                <p className="gray">{t('whichEventMessage')}</p>
 
                 <SmallEventSelected 
                     ticket={ticket}
                     setTicket={setTicket}
                     setFase={setFase}/>
 
-                <h1>Select Ticket</h1>
-                <p className="gray">What kind of ticket do you have?</p>
+                <h1>{t('selectTicket')}</h1>
+                <p className="gray">{t('whatKindOfTicket')}</p>
 
                 <TicketTypeSelected
                     ticket={ticket}
                     setTicket={setTicket}
                     setFase={setFase}/>
 
-                <h1 ref={toTitleRef}>Select Price</h1>
-                <p className="gray">For how much would you like to sell the ticket for?</p>
+                <h1 ref={toTitleRef}>{t('selectPrice')}</h1>
+                <p className="gray">{t('forHowMuch')}</p>
 
                 <TicketPrice 
                     ticket={ticket} 

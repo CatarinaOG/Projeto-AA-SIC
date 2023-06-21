@@ -8,8 +8,10 @@ import Out from "../../Images/logout.png"
 import Info from "../../Images/info.png"
 
 import "../../Styles/NavBar.css"
+import { useTranslation } from "react-i18next";
 
 export default function NavBarPromoter(props){
+    const {t} = useTranslation();
 
     const {selected} = props
     const {setUser} = useContext(UserContext);
@@ -32,8 +34,8 @@ export default function NavBarPromoter(props){
                 <div className="navBarRighSide">
                 
                     <Link to="/InformationsUser" className="iconTab"><img src={Info} alt="" /></Link>
-                    <Link to="/Suggestions" className={selected === "suggestions" ? "tabSelected" : "tab"}>Suggestions</Link>
-                    <Link to="/Events" className={selected === "events" ? "tabSelected" : "tab"}>Events</Link>
+                    <Link to="/Suggestions" className={selected === "suggestions" ? "tabSelected" : "tab"}>{t('suggestions')}</Link>
+                    <Link to="/Events" className={selected === "events" ? "tabSelected" : "tab"}>{t('events')}</Link>
                     <Link to="/" className="iconTab"><img src={Out} alt="" onClick={logout} /></Link>
 
                 </div>

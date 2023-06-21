@@ -10,9 +10,11 @@ import UserContext from "../../Contexts/UserContext"
 
 import fileImage from "../../Images/file.png"
 import { GLOBAL_VARIABLE } from '../../backendIP.js';
+import { useTranslation } from "react-i18next";
 
 
 export default function FaseFile(props){
+    const {t} = useTranslation();
 
     const {ticket,setTicket,setFase} = props
     const {user} = useContext(UserContext);
@@ -98,8 +100,8 @@ export default function FaseFile(props){
     return(
         <div className="center">
             <div>
-                <h1>Select Event</h1>
-                <p className="gray">Which event do you want to sell tickets for?</p>
+                <h1>{t('selectEvent')}</h1>
+                <p className="gray">{t('whichEventMessage')}</p>
 
                 <SmallEventSelected 
                     ticket={ticket}
@@ -107,8 +109,8 @@ export default function FaseFile(props){
                     done={done}
                 />
 
-                <h1>Select Ticket</h1>
-                <p className="gray">What kind of ticket do you have?</p>
+                <h1>{t('selectTicket')}</h1>
+                <p className="gray">{t('whatKindOfTicket')}</p>
 
                 <TicketTypeSelected
                     ticket={ticket}
@@ -117,8 +119,8 @@ export default function FaseFile(props){
                     done={done}
                 />
 
-                <h1>Select Price</h1>
-                <p className="gray">For how much would you like to sell the ticket for?</p>
+                <h1>{t('selectPrice')}</h1>
+                <p className="gray">{t('forHowMuch')}</p>
 
                 <TicketPrice 
                     ticket={ticket} 
@@ -127,8 +129,8 @@ export default function FaseFile(props){
                     done={done}
                 />
 
-                <h1>Insert Description (Optional)</h1>
-                <p className="gray">Can you tell us why you want to sell your precious ticket?</p>
+                <h1>{t('insertDesc')}</h1>
+                <p className="gray">{t('canYouTellUsWhy')}</p>
 
                 <TicketDescription 
                     setTicket={setTicket}
@@ -136,12 +138,12 @@ export default function FaseFile(props){
                     done={done}
                 />
 
-                <h1 ref={toTitleRef}>Insert file of Ticket</h1>
+                <h1 ref={toTitleRef}>{t('insertFile')}</h1>
 
                 { !fileSaved && 
                 <div>
                     <div className="file-input-container">
-                        <label className="file-input-label" htmlFor="my-file-input">Choose a file</label>
+                        <label className="file-input-label" htmlFor="my-file-input">{t('chooseFile')}</label>
                         <input className="file-input" onChange={handleFileUpload} type="file" id="my-file-input" />
                     </div>
                 </div>}
@@ -153,7 +155,7 @@ export default function FaseFile(props){
                         </div>
                         
                         <div className="center">
-                            <button className="button" onClick={handleFile}>Confirm</button>
+                            <button className="button" onClick={handleFile}>{t('confirm')}</button>
                         </div>
                     </div>
                 }
@@ -163,12 +165,12 @@ export default function FaseFile(props){
                         <div className="successContainter">
                             <img className="fileSavedSecond" src={fileImage} alt="" />
                             <div>
-                                <h3 className="successFileMsg">Your ticket has been added to the tickets avaiable to purchase!</h3>
+                                <h3 className="successFileMsg">{t('yourTicketWasAdded')}</h3>
                             </div>
                         </div>
                         
                         <div className="center">
-                            <a href="/HomeUser" className="button">Home</a>
+                            <a href="/HomeUser" className="button">{t('returnHome')}</a>
                         </div>
                     </div>
                 }

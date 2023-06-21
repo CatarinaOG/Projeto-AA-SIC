@@ -4,8 +4,10 @@ import SmallEventSelected from "./SmallEventSelected"
 
 import TicketType from "./TicketType"
 import { GLOBAL_VARIABLE } from '../../backendIP.js';
+import { useTranslation } from "react-i18next";
 
 export default function FaseType(props){
+    const {t} = useTranslation();
 
     const {ticket,setTicket,setFase} = props
     const [types,setTypes] = useState([])
@@ -56,8 +58,8 @@ export default function FaseType(props){
 
         <div className="center">
             <div>
-                <h1>Select Event</h1>
-                <p className="gray">Which event do you want to sell tickets for?</p>
+                <h1>{t('selectEvent')}</h1>
+                <p className="gray">{t('whichEventMessage')}</p>
 
                 <SmallEventSelected 
                     ticket={ticket} 
@@ -65,8 +67,8 @@ export default function FaseType(props){
                     setFase={setFase}
                 />
 
-                <h1 ref={toTitleRef}>Select Ticket</h1>
-                <p className="gray">What kind of ticket do you have?</p>
+                <h1 ref={toTitleRef}>{t('selectTicket')}</h1>
+                <p className="gray">{t('whatKindOfTicket')}</p>
 
                 <div className="exsitingTypes">
                     {allTypes}

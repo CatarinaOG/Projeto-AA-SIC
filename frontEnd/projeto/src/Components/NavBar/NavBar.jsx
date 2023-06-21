@@ -7,8 +7,10 @@ import Info from "../../Images/info.png"
 
 import "../../Styles/NavBar.css"
 import { GLOBAL_VARIABLE } from '../../backendIP.js';
+import { useTranslation } from "react-i18next";
 
 export default function NavBar(){
+    const {t} = useTranslation();
 
     const { setUser } = useContext(UserContext);
 	const cookies = new Cookies()
@@ -86,7 +88,7 @@ export default function NavBar(){
         })
         .catch(error => {
             setShowError(1)
-            setError("Email our password incorrect!")
+            setError(t('errorIncorretEmailPass'))
         });
     }
 
@@ -109,7 +111,7 @@ export default function NavBar(){
         })
         .catch(error => {
             setShowError(4)
-            setError("Email given is already in use")
+            setError(t('emailAlreadyInUse'))
         });
     }
 
@@ -117,7 +119,7 @@ export default function NavBar(){
 
         if(inputs.email === "" || inputs.password === ""){
             setShowError(3)
-            setError("Fill all the information")
+            setError(t('fillAllInfo'))
             return
         }
 
@@ -127,13 +129,13 @@ export default function NavBar(){
     function signUp(){
         if(inputs.password !== inputs.password_repeat){
             setShowError(2)
-            setError("Passwords don't match")
+            setError(t('passNoMatch'))
             return
         }
 
         if(inputs.email === "" || inputs.password === "" || inputs.password_repeat === "" || inputs.name === ""){
             setShowError(3)
-            setError("Fill all the information")
+            setError(t('fillAllInfo'))
             return
         }
 
@@ -150,8 +152,8 @@ export default function NavBar(){
                 <div className="navBarRighSide">
 
                     <Link to="/InformationsUser" className="iconTab"><img src={Info} alt="" /></Link>
-                    <Link to="" className="tab" onClick={showLogin}>Login</Link>
-                    <Link to="" className="sellTab" onClick={showLogin}>Sell Tickets!</Link>
+                    <Link to="" className="tab" onClick={showLogin}>{t('login')}</Link>
+                    <Link to="" className="sellTab" onClick={showLogin}>{t('sellTickets')}</Link>
                     
                 </div>
 
@@ -163,12 +165,12 @@ export default function NavBar(){
                     <div className="popup">
                         <div className="centerAll">
                             <div className="displayVertically">
-                                <p className="popupTitle">Login</p>
+                                <p className="popupTitle">{t('login')}</p>
                                 <input className="input" type="text" placeholder="Insert email" name="email" onChange={updateInputs} />
                                 <input className="input" type="password" placeholder="Insert password" name="password" onChange={updateInputs}/>
-                                <p className="popupLoginSignup" onClick={showSignup} >Don't have an account? Sign up here</p>
+                                <p className="popupLoginSignup" onClick={showSignup} >{t('noAccountSignUp')}</p>
                                 <p className={[1, 3].includes(showError) ? "error" : "errorNotVisible"}>{error}</p>
-                                <button className="popupButton" onClick={login}>Confirm</button>
+                                <button className="popupButton" onClick={login}>{t('submit')}</button>
                             </div>
                         </div>
                     </div>

@@ -4,8 +4,10 @@ import TicketPrice from "./TicketPrice"
 import TicketDescription from "./TicketDescription"
 
 import { useRef, useEffect } from "react"
+import { useTranslation } from "react-i18next";
 
 export default function FaseDescription(props){
+    const {t} = useTranslation();
 
     const {ticket,setTicket,setFase} = props
 
@@ -24,39 +26,39 @@ export default function FaseDescription(props){
     return(
         <div className="center">
             <div>
-                <h1>Select Event</h1>
-                <p className="gray">Which event do you want to sell tickets for?</p>
+                <h1>{t('selectEvent')}</h1>
+                <p className="gray">{t('whichEventMessage')}</p>
 
                 <SmallEventSelected 
                     ticket={ticket}
                     setTicket={setTicket}
                     setFase={setFase}/>
 
-                <h1>Select Ticket</h1>
-                <p className="gray">What kind of ticket do you have?</p>
+                <h1>{t('selectTicket')}</h1>
+                <p className="gray">{t('whatKindOfTicket')}</p>
 
                 <TicketTypeSelected
                     ticket={ticket}
                     setTicket={setTicket}
                     setFase={setFase}/>
 
-                <h1>Select Price</h1>
-                <p className="gray">For how much would you like to sell the ticket for?</p>
+                <h1>{t('selectPrice')}</h1>
+                <p className="gray">{t('forHowMuch')}</p>
 
                 <TicketPrice 
                     ticket={ticket} 
                     setTicket={setTicket}
                     setFase={setFase}/>
 
-                <h1 ref={toTitleRef}>Insert Description (Optional)</h1>
-                <p className="gray">Can you tell us why you want to sell your precious ticket?</p>
+                <h1 ref={toTitleRef}>{t('insertDesc')}</h1>
+                <p className="gray">{t('canYouTellUsWhy')}</p>
 
                 <TicketDescription 
                     setTicket={setTicket}
                     setFase={setFase}/>
 
                 <div className="center">
-                    <button className="button" onClick={goToFileFase}>Next</button>
+                    <button className="button" onClick={goToFileFase}>{t('next')}</button>
                 </div>
 
             </div>

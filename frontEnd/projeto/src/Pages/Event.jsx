@@ -53,6 +53,7 @@ export default function Event(props){
             }
         }
 
+        console.log(input)
         fetch(`${GLOBAL_VARIABLE}/event/get_full_event`, {
             method: 'POST',
             headers: {
