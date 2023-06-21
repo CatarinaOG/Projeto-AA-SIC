@@ -175,7 +175,7 @@ public class EventService {
                 }
             }
             if(!filter_place.isEmpty()){
-                if (!e.getLocation().getName().toLowerCase().equals(filter_place)){
+                if (!e.getLocation().getCity().toLowerCase().equals(filter_place)){
                     continue;
                 }
             }

@@ -101,29 +101,39 @@ public class UserService {
         return response;
     }
 
-    private void notify_users(Event e, String op){
+    private void notify_users(Event e, String op, Ad ad){
         List<EventFollowed> userList = e.getUsers_following();
         String title = "";
         String content = "";
         if (op.equals("sell")){
             title = "New Ad in a followed Event!";
             content = "Event " + e.getName() + " has a new Ticket for sale! Check it out!";
+            for(EventFollowed eventFollowed : userList){
+                Notification n = Notification
+                        .builder()
+                        .title(title)
+                        .content(content)
+                        .date(LocalDateTime.now())
+                        .build();
+                n.setUser(eventFollowed.getUser());
+
+                notificationRepo.save(n);
+            }
         }
         else if(op.equals("buy")){
             title = "One of your tickets has been bought!!";
             content = "Your ticket to " + e.getName() + " has been sold! Check it out!";
-        }
-        for(EventFollowed eventFollowed : userList){
             Notification n = Notification
                     .builder()
                     .title(title)
                     .content(content)
                     .date(LocalDateTime.now())
                     .build();
-            n.setUser(eventFollowed.getUser());
+            n.setUser(ad.getUser());
 
             notificationRepo.save(n);
         }
+
     }
 
     public void sell_ticket(SellTicketRequest request, String email) {
@@ -141,7 +151,7 @@ public class UserService {
         ad.setSold(false);
         adRepo.save(ad);
 
-        notify_users(e,"sell");
+        notify_users(e,"sell", ad);
     }
 
     public List<GetTicketsListedByUserResponse> get_tickets_listed_by_user(String email) {
@@ -278,7 +288,7 @@ public class UserService {
         t.setSold(true);
         t.setBuyer(u);
         adRepo.save(t);
-        notify_users(t.getEvent(), "buy");
+        notify_users(t.getEvent(), "buy", t);
         return "{\"confirmed\" : \"true\"}";
     }
 
