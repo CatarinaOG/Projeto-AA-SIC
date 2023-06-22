@@ -11,7 +11,6 @@ export default function FaseType(props){
 
     const {ticket,setTicket,setFase} = props
     const [types,setTypes] = useState([])
-    const {user} = useContext(UserContext);
 
     function sendGetTicketTypesRequest(){
 
@@ -26,7 +25,6 @@ export default function FaseType(props){
         })
         .then(response => response.json())
         .then(responseJSON => {
-            console.log(responseJSON)
             setTypes(responseJSON)
         })
         .catch(error => {

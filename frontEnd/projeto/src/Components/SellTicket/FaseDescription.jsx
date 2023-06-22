@@ -54,6 +54,7 @@ export default function FaseDescription(props){
                 <p className="gray">{t('canYouTellUsWhy')}</p>
 
                 <TicketDescription 
+                    ticket={ticket} 
                     setTicket={setTicket}
                     setFase={setFase}/>
 

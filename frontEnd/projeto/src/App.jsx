@@ -49,10 +49,11 @@ function App() {
 
 	const [cookiesSave,setCookiesSave] = useState({
 		token: cookies.get("token"),
-		type: cookies.get("type")
+		type: cookies.get("type"),
+		event: cookies.get("event_id")
 	})
 	const [user, setUser] = useState({});
-  	const [eventId, setEventId] = useState();
+  	const [eventId, setEventId] = useState(cookiesSave.event);
 	const [suggestedEvent,setSuggestedEvent] = useState({})
 	const [addEventInfo,setAddEventInfo] = useState({})
 	const [searchText,setSearchText] = useState("")

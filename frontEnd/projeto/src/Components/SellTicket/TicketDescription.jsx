@@ -1,18 +1,23 @@
 
 export default function TicketDescription(props){
 
-    const {setTicket,setFase,done} = props
+    const {ticket,setTicket,setFase,done} = props
 
     const handleEnter = (event) => {
         if (event.key === "Enter"){
-            setTicket( oldTicket => ({...oldTicket,description:event.target.value}))
             setFase("file")
         }
     };
 
-    return(
+
+    return done || done === false ? (
         <div>
-            <textarea className="descriptionInput" onKeyDown={handleEnter} name="" id="" cols="30" rows="10" readOnly={done? true : false}></textarea>
+            <textarea className="descriptionInput" name="" id="" cols="30" rows="10" readOnly={true} value={ticket.description}></textarea>
+        </div>
+    ):
+    (
+        <div>
+            <textarea className="descriptionInput" onKeyDown={handleEnter} name="" id="" cols="30" rows="10" value={ticket.description} onChange={(event) => setTicket(old => ({...old,description:event.target.value}))}></textarea>
         </div>
     )
 

@@ -40,14 +40,6 @@ export default function FaseFile(props){
 
 
     function sendSellTicketRequest(url){
-        const log = {
-            event_id: ticket.event.id,
-                type_id: ticket.type.id,
-                price: ticket.price,
-                description: ticket.description,
-                file: url,
-        }
-        console.log(log)
 
         fetch(`${GLOBAL_VARIABLE}/user/sell_ticket`, {
             method: 'POST',
@@ -64,7 +56,6 @@ export default function FaseFile(props){
             })
         })
         .then(response => response.json())
-        .then(responsejson => console.log(responsejson))
         .catch(error => {
             console.log(error)
         });
@@ -95,7 +86,6 @@ export default function FaseFile(props){
         );
 
     }
-
 
     return(
         <div className="center">
@@ -133,12 +123,14 @@ export default function FaseFile(props){
                 <p className="gray">{t('canYouTellUsWhy')}</p>
 
                 <TicketDescription 
+                    ticket={ticket} 
                     setTicket={setTicket}
                     setFase={setFase}
                     done={done}
                 />
 
                 <h1 ref={toTitleRef}>{t('insertFile')}</h1>
+
 
                 { !fileSaved && 
                 <div>

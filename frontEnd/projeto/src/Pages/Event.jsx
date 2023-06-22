@@ -12,6 +12,7 @@ import FullTicket from "../Components/Event/FullTicket"
 import Artist from "../Components/Event/Artist"
 import Map from "../Components/Event/Map"
 import UserContext from "../Contexts/UserContext"
+import { Cookies } from "react-cookie";
 import { useTranslation } from "react-i18next";
 import { GLOBAL_VARIABLE } from '../backendIP.js';
 
@@ -22,6 +23,7 @@ export default function Event(props){
     const {eventId,setTicketID,updateEvent,setUpdateEvent} = props
     const {user} = useContext(UserContext);
 
+	const cookies = new Cookies()
     const [show,setShow] = useState("ticketsType") // ticket / tickets / ticketsType / info
 
     const [event,setEvent] = useState()
@@ -37,6 +39,7 @@ export default function Event(props){
     useEffect(() => {
         sendGetFullEventRequest()
         sendGetTicketTypesRequest()
+        cookies.set('event_id',eventId)
     },[updateEvent])
 
 
@@ -115,8 +118,6 @@ export default function Event(props){
     }
 
     function sendGetTicketsSoldRequest(ticket_id){
-
-        console.log()
 
         fetch(`${GLOBAL_VARIABLE}/user/get_sold_tickets_by_type_and_event`, {
             method: 'POST',
