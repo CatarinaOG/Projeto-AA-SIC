@@ -65,7 +65,6 @@ export default function NavBar(){
         })
         .then(response => response.json())
         .then(userResponse => {
-
             setUser({...userResponse,email: inputs.email})
             
             switch (userResponse.type){
@@ -104,10 +103,17 @@ export default function NavBar(){
         .then(response => response.json())
         .then(userResponse => {
             console.log(userResponse)
-            setUser({...userResponse,email: inputs.email,type:"user"})
-            cookies.set('token',userResponse.token)
-            cookies.set('type',"user")
-            navigate('/HomeUser')
+
+            if(userResponse.token === "Email já utilizado"){
+                setShowError(4)
+                setError(t('emailAlreadyInUse'))               
+            }
+            else{
+                setUser({...userResponse,email: inputs.email,type:"user"})
+                cookies.set('token',userResponse.token)
+                cookies.set('type',"user")
+                navigate('/HomeUser')
+            }
         })
         .catch(error => {
             setShowError(4)
@@ -189,7 +195,7 @@ export default function NavBar(){
                                 <input className="input" type="email" placeholder="Insert email address" name="email" onChange={updateInputs} />
                                 <input className="input" type="password" placeholder="Insert password" name="password" onChange={updateInputs} />
                                 <input className="input" type="password" placeholder="Confirm password" name="password_repeat" onChange={updateInputs} />
-                                <p className={[2, 3, 4].includes(showError) ? "error" : "errorNotVisible"}>{error}</p>
+                                <p className={[2, 3, 4,5].includes(showError) ? "error" : "errorNotVisible"}>{error}</p>
                                 <button className="popupButton" onClick={signUp}>Confirm</button>
                             </div>
                         </div>
