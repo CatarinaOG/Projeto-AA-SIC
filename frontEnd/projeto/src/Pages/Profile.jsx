@@ -13,8 +13,6 @@ import AddBankDetails from "../Components/Profile/AddBankDetails"
 import Plus from "../Images/plus.png"
 
 import "../Styles/Profile.css"
-import { GLOBAL_VARIABLE } from '../backendIP.js';
-
 
 export default function Profile(){
     const { user } = useContext(UserContext);
@@ -88,23 +86,13 @@ export default function Profile(){
                             </div>
                         </div>
 
-                        <div className="editSection">
+                        <div className="lastEditSection">
                             <div className="editContent">
                                 <h3>{t('passwordH3')}</h3>
                                 <div className="displayHorizontally">
                                     <p>**********</p>
                                     <button className="editButton" onClick={editPassword}></button>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div className="lastEditSection">
-                            <div className="editContent">
-                                <h3>{t('languageH3')}</h3>
-                                    <div className="displayHorizontally">
-                                        <p>{user.language}</p>
-                                        <button className="editButton" onClick={editLanguage}></button>
-                                    </div>
                             </div>
                         </div>
                     </div>
