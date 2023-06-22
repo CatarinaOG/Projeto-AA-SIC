@@ -47,9 +47,12 @@ export default function PromotersListing(){
         navigate('/CreatePromoter')
     }
 
+    function reload(){
+        sendGetPromotersRequest();
+	}
 
     const showPromoters = promoters.map((promoter) => 
-        <Promoter key={promoter.id} promoter={promoter} />
+        <Promoter key={promoter.id} promoter={promoter} reload={reload}/>
     )
 
     return(

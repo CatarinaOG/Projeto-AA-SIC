@@ -9,7 +9,7 @@ import { GLOBAL_VARIABLE } from '../../backendIP.js';
 
 export default function Promoter(props){
 
-    const {promoter} = props
+    const {promoter,reload} = props
     const {user} = useContext(UserContext);
     const {t} = useTranslation();
 
@@ -39,6 +39,8 @@ export default function Promoter(props){
         .then(response => response.json())
         .then(userResponse => {
             setShowConfirmation(false)
+            reload()
+
         })
         .catch(error => {
             console.log(error)

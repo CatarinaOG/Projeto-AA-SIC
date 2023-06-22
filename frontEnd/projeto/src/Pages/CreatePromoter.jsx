@@ -22,7 +22,7 @@ export default function CreatePromoter() {
 	const [popUpTrigger, setPopUpTrigger] = useState(false);
 	const [showConfirmation, setShowConfirmation] = useState(false);
 
-
+	
 
 	function handleChangeInput(event){
 
