@@ -65,7 +65,7 @@ export default function AddPictureVenue(props){
                     { !fileSaved && 
                         <div>
                             <div className="file-input-container">
-                                <label className="file-input-label" htmlFor="my-file-input">{t('chooseAPile')}</label>
+                                <label className="file-input-label" htmlFor="my-file-input">{t('chooseFile')}</label>
                                 <input className="file-input" onChange={saveTemp} type="file" id="my-file-input" />
                             </div>
                         </div>
