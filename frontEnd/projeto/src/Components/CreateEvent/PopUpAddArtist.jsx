@@ -60,7 +60,8 @@ export default function PopUpAddArtist(props) {
     }
   };
 
-  const submitArtist = () => {
+  const submitArtist = (event) => {
+    event.preventDefault();
     if (artist === "") {
       setMessage(t('addArtistMessage'));
     }
@@ -83,7 +84,7 @@ export default function PopUpAddArtist(props) {
       <div className="editContainter">
           <img src={BlackClose} className="editClose" alt="" onClick={() => setPopUpTrigger(false)} />
           <h3 className="editTitle">{t('addArtistTitle')}</h3>
-          <form>
+          <form onSubmit={submitArtist}>
           <Select
                 className="inputSelectArtist"
                 value={artist}
@@ -109,8 +110,8 @@ export default function PopUpAddArtist(props) {
                 {t('addArtistNotListed')}
               </h4>
               <h3 className="redH3">{message}</h3>
+              <button className="button" type="submit">{t('submit')}</button>
           </form>
-          <button className="button" onClick={() => submitArtist()}>{t('submit')}</button>
       </div>
   </div>
   ) : ("")

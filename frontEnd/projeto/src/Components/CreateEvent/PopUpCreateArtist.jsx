@@ -25,7 +25,8 @@ export default function PopUpCreateArtist(props) {
     setArtistName(event.target.value);
   };
 
-  const submitType = () => {
+  const submitType = (event) => {
+    event.preventDefault();
     if (artistName === "") {
       setMessage(t('invalidArtistName'));
     } else {
@@ -77,11 +78,11 @@ export default function PopUpCreateArtist(props) {
         <div className="editContainter">
             <img src={BlackClose} className="editClose" alt="" onClick={() => setPopUpTrigger(false)} />
             <h3 className="editTitle">{t('createNewArtist')}</h3>
-            <form>
+            <form onSubmit={submitType}>
                 <input className="editInputNumber" onChange={handleArtistChange}  placeholder="Insert artist name" type="text"/>
                 <p className={message !== "" ? "urlError" : "urlErrorNotVisible"}>{message}</p>
+                <button className="button" type="submit">{t('submit')}</button>
             </form>
-            <button className="button" onClick={submitType}>{t('submit')}</button>
 
         </div>
     </div>

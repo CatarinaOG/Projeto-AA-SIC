@@ -121,7 +121,7 @@ export default function AddVenue() {
 		<div className="center">
 			<div className="defaultContainer">
 			<h1>{t('addVenue')}</h1>
-				<form >
+				<form  onSubmit={handleSubmit} >
 					<div className="smallContainer">
 
 						<div className="smallContainerInputsCreateVenue">
@@ -151,16 +151,16 @@ export default function AddVenue() {
 						</div>
 
 						<h3 className="redH3">{message}</h3>
-            </div>      
-            
-            	</form>    
-              <div className="centerVenueButtons">
+            <div className="centerVenueButtons">
 								<div className="divButtonsCreatePromoter">
-                <button className="buttonAddVenue"   onClick={handleSubmit} >{t('submit')}</button> 
+                <button className="buttonAddVenue"  type="submit" >{t('submit')}</button> 
 								<button className="buttonAddVenue"   onClick={cancel} >{t('cancel')}</button> 
-                <button className="buttonAddVenue"  value="Add Photo" onClick={() => setPopUpTriggers(1)}>{t('addSeatingPlan')}</button>
+                <button className="buttonAddVenue" type="button" value="Add Photo" onClick={() => setPopUpTriggers(1)}>{t('addSeatingPlan')}</button>
 								</div>
 							</div>
+            </div>
+            	</form>    
+ 
         	</div>
       	</div>
     </div>
